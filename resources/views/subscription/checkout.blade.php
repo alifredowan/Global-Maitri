@@ -65,17 +65,17 @@
                 }
              }">
             <div class="text-center mb-6">
-                <span class="px-3.5 py-1 rounded-full text-xs font-black bg-emerald-100 dark:bg-emerald-950/80 text-emerald-800 dark:text-emerald-300 uppercase tracking-wider inline-flex items-center gap-1.5 shadow-xs">
-                    <span>💍</span> Single Marriage Pass
+                <span class="px-3.5 py-1 rounded-full text-xs font-black bg-rose-100 dark:bg-rose-950/80 text-primary-800 dark:text-rose-300 uppercase tracking-wider inline-flex items-center gap-1.5 shadow-xs">
+                    <span>🪷</span> Single Marriage Pass
                 </span>
                 <h1 class="text-2xl font-extrabold text-slate-900 dark:text-white font-heading mt-2">Acquire {{ $planDetails['name'] }}</h1>
-                <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">One-time payment. Valid until your confirmed Nikah milestone.</p>
+                <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">One-time payment. Valid until your confirmed Mangala Vivaha milestone.</p>
             </div>
 
             @if(request()->query('status') === 'cancelled')
                 <div class="mb-4 p-3 rounded-xl bg-amber-50 dark:bg-amber-950/50 border border-amber-200 dark:border-amber-800 text-amber-800 dark:text-amber-200 text-xs flex items-center gap-2">
                     <span>ℹ️</span>
-                    <span>Checkout was cancelled. You have not been charged. Choose your payment method below to complete whenever you're ready.</span>
+                    <span>Checkout was cancelled. You have not been charged. Choose your payment method below whenever you're ready.</span>
                 </div>
             @endif
 
@@ -93,27 +93,27 @@
                 <input type="hidden" name="billing_cycle" value="one_time_marriage">
 
                 <!-- One-Time Single Marriage Guarantee Information Card -->
-                <div class="p-4 rounded-2xl bg-emerald-50/70 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 space-y-2">
+                <div class="p-4 rounded-2xl bg-rose-50/70 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-800 space-y-2">
                     <div class="flex items-center justify-between">
-                        <span class="text-xs font-bold text-emerald-900 dark:text-emerald-200 flex items-center gap-1.5">
+                        <span class="text-xs font-bold text-primary-900 dark:text-rose-200 flex items-center gap-1.5">
                             <span>🛡️</span> Pass Validity & Term
                         </span>
-                        <span class="text-[10px] font-extrabold px-2.5 py-0.5 rounded-full bg-emerald-600 text-white uppercase tracking-wider">
-                            Active Until Nikah
+                        <span class="text-[10px] font-extrabold px-2.5 py-0.5 rounded-full bg-primary-700 text-white uppercase tracking-wider">
+                            Active Until Vivaha
                         </span>
                     </div>
-                    <p class="text-xs text-emerald-800/90 dark:text-emerald-300 leading-relaxed">
-                        This is a single one-time charge of <strong class="font-extrabold">${{ number_format($planDetails['monthly_price'], 2) }}</strong>. You will <strong>never be auto-billed</strong> monthly or annually. Your pass remains active until you register and confirm your marriage on Global Nikkah.
+                    <p class="text-xs text-primary-800/90 dark:text-rose-300 leading-relaxed">
+                        This is a single one-time fee of <strong class="font-extrabold">${{ number_format($planDetails['monthly_price'], 2) }}</strong>. You will <strong>never be auto-billed</strong> monthly. Your pass remains active until you register and confirm your Mangala Vivaha on Global Maitri.
                     </p>
                 </div>
 
-                <!-- Promo Code Box (FR-3.5 with Special User Extra Discount Support) -->
+                <!-- Promo Code Box -->
                 <div>
                     <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">Promotional Discount Code</label>
                     <div class="flex gap-2">
-                        <input type="text" name="promo_code" x-model="promoCode" placeholder="e.g. PRO50, SPECIAL30"
+                        <input type="text" name="promo_code" x-model="promoCode" placeholder="e.g. METTA20, MAITRI50"
                                @keydown.enter.prevent="checkPromo()"
-                               class="flex-1 px-3 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-xs focus:ring-2 focus:ring-emerald-500 outline-none uppercase font-mono font-bold">
+                               class="flex-1 px-3 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-xs focus:ring-2 focus:ring-primary-500 outline-none uppercase font-mono font-bold">
                         <button type="button" @click="checkPromo()" :disabled="promoLoading"
                                 class="px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-black dark:bg-slate-800 dark:hover:bg-slate-700 text-white text-xs font-bold transition cursor-pointer disabled:opacity-50">
                             <span x-show="!promoLoading">Apply</span>
@@ -132,7 +132,7 @@
                         <span x-text="promoError"></span>
                     </div>
 
-                    <span class="text-[10px] text-slate-400 dark:text-slate-500 block mt-1">Special VIP discount codes can be entered here to avail exclusive discounts on eligible packages.</span>
+                    <span class="text-[10px] text-slate-400 dark:text-slate-500 block mt-1">Special Metta discount codes (e.g. METTA20, MAITRI50) can be entered here.</span>
                 </div>
 
                 <!-- Live Order Summary -->
@@ -144,18 +144,18 @@
                         </span>
                     </div>
 
-                    <div x-show="promoApplied" x-cloak class="flex items-center justify-between text-emerald-700 dark:text-emerald-400 font-bold">
-                        <span>Extra Promo Discount (<span x-text="discountPercentage"></span>%):</span>
+                    <div x-show="promoApplied" x-cloak class="flex items-center justify-between text-primary-700 dark:text-rose-400 font-bold">
+                        <span>Metta Promo Discount (<span x-text="discountPercentage"></span>%):</span>
                         <span>-$<span x-text="currentDiscount().toFixed(2)"></span></span>
                     </div>
 
                     <div class="pt-2 border-t border-slate-200 dark:border-slate-700 flex items-center justify-between text-sm font-extrabold text-slate-900 dark:text-white">
                         <span>Total Due Today (1-Time):</span>
-                        <span class="text-base text-emerald-700 dark:text-emerald-400">$<span x-text="currentFinalPrice().toFixed(2)"></span></span>
+                        <span class="text-base text-primary-700 dark:text-rose-400">$<span x-text="currentFinalPrice().toFixed(2)"></span></span>
                     </div>
                 </div>
 
-                <!-- Payment Gateway Selector (Stripe & PayPal) -->
+                <!-- Payment Gateway Selector -->
                 <div>
                     <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-2">
                         Select Payment Method
@@ -165,10 +165,9 @@
 
                     <div class="space-y-3">
                         @if($stripeEnabled ?? true)
-                            <!-- Stripe Card Option -->
                             <div @click="paymentMethod = 'stripe'"
                                  :class="paymentMethod === 'stripe'
-                                    ? 'border-2 border-emerald-600 bg-emerald-50/50 dark:bg-emerald-950/40 ring-2 ring-emerald-500/20'
+                                    ? 'border-2 border-primary-600 bg-rose-50/50 dark:bg-rose-950/40 ring-2 ring-primary-500/20'
                                     : 'border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-850 hover:border-slate-300 dark:hover:border-slate-700'"
                                  class="p-4 rounded-2xl cursor-pointer transition-all duration-200 relative group">
                                 <div class="flex items-center justify-between">
@@ -188,7 +187,7 @@
                                     </div>
                                     <div class="flex items-center">
                                         <span class="w-5 h-5 rounded-full border-2 flex items-center justify-center transition"
-                                              :class="paymentMethod === 'stripe' ? 'border-emerald-600 bg-emerald-600 text-white' : 'border-slate-300 dark:border-slate-600'">
+                                              :class="paymentMethod === 'stripe' ? 'border-primary-600 bg-primary-600 text-white' : 'border-slate-300 dark:border-slate-600'">
                                             <span x-show="paymentMethod === 'stripe'" class="w-2 h-2 rounded-full bg-white"></span>
                                         </span>
                                     </div>
@@ -201,7 +200,6 @@
                         @endif
 
                         @if($paypalEnabled ?? true)
-                            <!-- PayPal Option -->
                             <div @click="paymentMethod = 'paypal'"
                                  :class="paymentMethod === 'paypal'
                                     ? 'border-2 border-sky-600 bg-sky-50/50 dark:bg-sky-950/40 ring-2 ring-sky-500/20'
@@ -217,7 +215,7 @@
                                                 <span class="text-sm font-bold text-slate-900 dark:text-white">PayPal</span>
                                                 <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-sky-100 dark:bg-sky-950 text-sky-700 dark:text-sky-300">Buyer Protection</span>
                                             </div>
-                                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Pay via PayPal balance, bank account, or PayPal credit</p>
+                                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Pay via PayPal balance or debit/credit card</p>
                                         </div>
                                     </div>
                                     <div class="flex items-center">
@@ -235,7 +233,6 @@
                         @endif
 
                         @if($simulatedEnabled ?? true)
-                            <!-- Instant / Test Mode Option (Available in local/testing environment or for instant review) -->
                             <div @click="paymentMethod = 'simulated'"
                                  :class="paymentMethod === 'simulated'
                                     ? 'border-2 border-slate-600 bg-slate-100 dark:bg-slate-800 ring-2 ring-slate-400/20'
@@ -246,7 +243,7 @@
                                         <span class="text-lg">🧪</span>
                                         <div>
                                             <span class="text-xs font-bold text-slate-800 dark:text-slate-200">Developer / Demo Mode</span>
-                                            <p class="text-[11px] text-slate-400">Instantly activate pass without external payment gateway</p>
+                                            <p class="text-[11px] text-slate-400">Instantly activate pass without payment gateway</p>
                                         </div>
                                     </div>
                                     <span class="w-4 h-4 rounded-full border-2 flex items-center justify-center transition"
@@ -256,20 +253,14 @@
                                 </div>
                             </div>
                         @endif
-
-                        @if(!($stripeEnabled ?? true) && !($paypalEnabled ?? true) && !($simulatedEnabled ?? true))
-                            <div class="p-4 rounded-2xl bg-amber-50 dark:bg-amber-950/60 border border-amber-300 dark:border-amber-800 text-amber-900 dark:text-amber-200 text-xs">
-                                ⚠️ Online payment methods are currently being updated by administrators. Please contact support.
-                            </div>
-                        @endif
                     </div>
                 </div>
 
-                <!-- Submit Button with Dynamic Payment Method Label -->
+                <!-- Submit Button -->
                 <button type="submit"
                         :class="{
-                            'bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 shadow-emerald-900/20': paymentMethod === 'stripe',
-                            'bg-gradient-to-r from-[#00457C] to-[#0079C1] hover:from-[#003865] hover:to-[#0068a8] shadow-sky-900/20': paymentMethod === 'paypal',
+                            'bg-primary-700 hover:bg-primary-800 shadow-primary-950/20': paymentMethod === 'stripe',
+                            'bg-[#0079C1] hover:bg-[#00457C] shadow-sky-900/20': paymentMethod === 'paypal',
                             'bg-slate-900 hover:bg-black dark:bg-slate-800 dark:hover:bg-slate-700 shadow-slate-900/20': paymentMethod === 'simulated'
                         }"
                         class="w-full py-4 rounded-2xl text-white font-extrabold text-sm shadow-lg transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer active:scale-[0.99]">
@@ -300,8 +291,8 @@
                         <span class="font-medium">Instant Activation</span>
                     </div>
                     <div class="p-2 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 flex items-center justify-center gap-1.5">
-                        <span>💍</span>
-                        <span class="font-medium">Valid Until Confirmed Nikah</span>
+                        <span>🪷</span>
+                        <span class="font-medium">Valid Until Mangala Vivaha</span>
                     </div>
                 </div>
             </form>

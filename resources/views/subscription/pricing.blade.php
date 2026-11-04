@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'Single Marriage Pass • One-Time Payment Until Nikah - Global Nikkah')
-@section('meta_description', 'Compare Global Nikkah membership plans and choose a one-time marriage pass with premium matrimonial privileges until confirmed Nikah.')
+@section('title', 'Single Marriage Pass • One-Time Payment Until Vivaha - Global Maitri')
+@section('meta_description', 'Compare Global Maitri membership plans and choose a one-time single marriage pass with premium matrimonial privileges until confirmed Mangala Vivaha.')
 @section('canonical_url', route('subscription.pricing'))
 @section('robots', 'index, follow')
 
@@ -11,28 +11,28 @@
 
         <!-- Header / Ethical Philosophy -->
         <div class="text-center max-w-3xl mx-auto space-y-3">
-            <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-100 dark:bg-emerald-950/80 border border-emerald-300 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300 text-xs font-black uppercase tracking-wider shadow-xs">
-                <span>💍</span>
+            <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-rose-100 dark:bg-rose-950/80 border border-rose-300 dark:border-rose-800 text-primary-800 dark:text-rose-300 text-xs font-black uppercase tracking-wider shadow-xs">
+                <span>🪷</span>
                 <span>Membership Plans & Tiers • Single Marriage Pass</span>
             </div>
             <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white font-heading tracking-tight">
-                Single Marriage Pass: Pay Once Until Nikah
+                Single Marriage Pass: Pay Once Until Mangala Vivaha
             </h1>
             <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed max-w-2xl mx-auto">
-                Conventional dating apps profit from keeping users single and paying monthly subscriptions indefinitely.
-                <strong class="text-slate-900 dark:text-slate-200">Global Nikkah aligns directly with your success</strong>: pay a single one-time pass fee and enjoy all premium matrimonial privileges until your marriage is confirmed.
+                Conventional dating platforms profit from keeping users single with endless monthly subscriptions.
+                <strong class="text-slate-900 dark:text-slate-200">Global Maitri aligns completely with your union</strong>: pay a single one-time pass fee and enjoy full matrimonial privileges until your marriage is confirmed.
             </p>
 
             <!-- Three Core Pillars -->
             <div class="pt-2 flex flex-wrap items-center justify-center gap-3 text-[11px] font-bold text-slate-700 dark:text-slate-300">
                 <span class="flex items-center gap-1.5 px-3 py-1 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs">
-                    <span class="text-emerald-600">✓</span> No Monthly Renewals
+                    <span class="text-primary-700">✓</span> No Monthly Renewals
                 </span>
                 <span class="flex items-center gap-1.5 px-3 py-1 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs">
-                    <span class="text-emerald-600">✓</span> Valid Until Confirmed Marriage
+                    <span class="text-primary-700">✓</span> Valid Until Confirmed Mangala Vivaha
                 </span>
                 <span class="flex items-center gap-1.5 px-3 py-1 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs">
-                    <span class="text-emerald-600">✓</span> Shariah Wali Supervision & Privacy
+                    <span class="text-primary-700">✓</span> Family Representative Supervision & Privacy
                 </span>
             </div>
         </div>
@@ -64,9 +64,9 @@
                     $isPopular = (bool) $plan->is_popular;
                 @endphp
 
-                <div class="bg-white dark:bg-slate-900 rounded-3xl p-8 border-2 {{ $isCurrent ? 'border-emerald-600 ring-4 ring-emerald-100 dark:ring-emerald-950/60' : ($isPopular ? 'border-emerald-500 shadow-xl' : 'border-slate-200 dark:border-slate-800 shadow-xs') }} relative flex flex-col justify-between transition">
+                <div class="bg-white dark:bg-slate-900 rounded-3xl p-8 border-2 {{ $isCurrent ? 'border-primary-600 ring-4 ring-rose-100 dark:ring-rose-950/60' : ($isPopular ? 'border-primary-500 shadow-xl' : 'border-slate-200 dark:border-slate-800 shadow-xs') }} relative flex flex-col justify-between transition">
                     @if($plan->badge_text)
-                        <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 px-3.5 py-0.5 rounded-full text-[11px] font-extrabold {{ $isPopular ? 'bg-emerald-600 text-white shadow-xs' : 'bg-amber-500 text-white shadow-xs' }} uppercase tracking-wider">
+                        <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 px-3.5 py-0.5 rounded-full text-[11px] font-extrabold {{ $isPopular ? 'bg-primary-700 text-white shadow-xs' : 'bg-amber-500 text-white shadow-xs' }} uppercase tracking-wider">
                             {{ $plan->badge_text }}
                         </div>
                     @endif
@@ -75,11 +75,11 @@
                         <!-- Header badge -->
                         <div class="mb-2">
                             @if($isCurrent)
-                                <span class="px-3 py-1 rounded-full text-[10px] font-extrabold bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 uppercase tracking-wider">Your Active Pass</span>
+                                <span class="px-3 py-1 rounded-full text-[10px] font-extrabold bg-rose-100 dark:bg-rose-950 text-primary-800 dark:text-rose-300 uppercase tracking-wider">Your Active Pass</span>
                             @elseif($isFree)
                                 <span class="px-3 py-1 rounded-full text-[10px] font-extrabold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 uppercase tracking-wider">Free Forever</span>
                             @else
-                                <span class="px-3 py-1 rounded-full text-[10px] font-extrabold bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 uppercase tracking-wider">One-Time Marriage Pass</span>
+                                <span class="px-3 py-1 rounded-full text-[10px] font-extrabold bg-rose-50 dark:bg-rose-950/60 text-primary-700 dark:text-rose-300 uppercase tracking-wider">One-Time Marriage Pass</span>
                             @endif
                         </div>
 
@@ -93,21 +93,21 @@
                                     <span class="text-4xl font-extrabold text-slate-900 dark:text-white font-heading">$0</span>
                                     <span class="text-xs text-slate-500 dark:text-slate-400 font-semibold">/ forever free</span>
                                 </div>
-                                <span class="text-[11px] text-slate-400 dark:text-slate-500 block mt-1">Always available for seekers on basic matching.</span>
+                                <span class="text-[11px] text-slate-400 dark:text-slate-500 block mt-1">Available to all verified seekers on basic discovery.</span>
                             @else
                                 <div class="space-y-1">
                                     <div class="flex items-baseline gap-2">
                                         <span class="text-4xl font-extrabold text-slate-900 dark:text-white font-heading">${{ number_format($plan->monthly_price, 2) }}</span>
-                                        <span class="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300">
+                                        <span class="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-rose-100 dark:bg-rose-950 text-primary-800 dark:text-rose-300">
                                             Pay 1-Time
                                         </span>
                                     </div>
-                                    <div class="flex items-center gap-1.5 text-xs font-bold text-emerald-700 dark:text-emerald-400">
-                                        <span>🛡️</span>
-                                        <span>Active Until Confirmed Nikah</span>
+                                    <div class="flex items-center gap-1.5 text-xs font-bold text-primary-700 dark:text-primary-300">
+                                        <span>🪷</span>
+                                        <span>Active Until Confirmed Vivaha</span>
                                     </div>
                                     <p class="text-[10px] text-slate-400 dark:text-slate-500">
-                                        No recurring monthly deductions. Automatically completes upon successful marriage.
+                                        No recurring monthly fees. Concludes gracefully upon solemnized marriage.
                                     </p>
                                 </div>
                             @endif
@@ -118,41 +118,41 @@
                             @if(!empty($plan->features) && count($plan->features) > 0)
                                 @foreach($plan->features as $featureItem)
                                     <li class="flex items-start gap-2">
-                                        <span class="text-emerald-600 dark:text-emerald-400 font-bold mt-0.5">✓</span>
+                                        <span class="text-primary-700 dark:text-primary-400 font-bold mt-0.5">✓</span>
                                         <span>{{ $featureItem }}</span>
                                     </li>
                                 @endforeach
                             @else
                                 <li class="flex items-center gap-2">
-                                    <span class="text-emerald-600 font-bold">✓</span>
+                                    <span class="text-primary-700 font-bold">✓</span>
                                     <span>{{ $plan->isUnlimitedViews() ? 'Unlimited daily profile views' : $plan->daily_profile_views . ' daily profile views' }}</span>
                                 </li>
                                 <li class="flex items-center gap-2">
-                                    <span class="text-emerald-600 font-bold">✓</span>
-                                    <span>{{ $plan->isUnlimitedInterests() ? 'Unlimited interest requests' : $plan->daily_interests . ' daily interest requests' }}</span>
+                                    <span class="text-primary-700 font-bold">✓</span>
+                                    <span>{{ $plan->isUnlimitedInterests() ? 'Unlimited proposal requests' : $plan->daily_interests . ' daily proposal requests' }}</span>
                                 </li>
                                 @if($plan->advanced_filters)
                                     <li class="flex items-center gap-2">
-                                        <span class="text-emerald-600 font-bold">✓</span>
-                                        <span>Advanced religious filters (sect, madhhab, diet)</span>
+                                        <span class="text-primary-700 font-bold">✓</span>
+                                        <span>Advanced Dhamma filters (tradition, meditation, precepts, diet)</span>
                                     </li>
                                 @endif
                                 @if($plan->profile_boost)
                                     <li class="flex items-center gap-2 font-bold text-amber-700 dark:text-amber-400">
                                         <span>⚡</span>
-                                        <span>Top profile boost in search discovery</span>
+                                        <span>Top profile boost in discovery search</span>
                                     </li>
                                 @endif
                                 @if($plan->see_who_viewed)
                                     <li class="flex items-center gap-2">
-                                        <span class="text-emerald-600 font-bold">✓</span>
-                                        <span>See who viewed your profile</span>
+                                        <span class="text-primary-700 font-bold">✓</span>
+                                        <span>See who visited your profile</span>
                                     </li>
                                 @endif
                                 @if($plan->dedicated_advisor)
                                     <li class="flex items-center gap-2 font-bold text-purple-700 dark:text-purple-400">
                                         <span>★</span>
-                                        <span>Dedicated marriage advisor contact</span>
+                                        <span>Dedicated family matrimonial advisor contact</span>
                                     </li>
                                 @endif
                             @endif
@@ -179,7 +179,7 @@
                                 </form>
                             @endif
                         @else
-                            <a href="{{ route('subscription.checkout', $plan->slug) }}" class="block text-center w-full py-3.5 rounded-xl {{ $isPopular ? 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-md shadow-emerald-900/20' : 'bg-slate-900 dark:bg-slate-800 hover:bg-black dark:hover:bg-slate-700 text-white' }} text-xs font-bold transition">
+                            <a href="{{ route('subscription.checkout', $plan->slug) }}" class="block text-center w-full py-3.5 rounded-xl {{ $isPopular ? 'bg-primary-700 hover:bg-primary-800 text-white shadow-md shadow-primary-950/20' : 'bg-slate-900 dark:bg-slate-800 hover:bg-black dark:hover:bg-slate-700 text-white' }} text-xs font-bold transition cursor-pointer">
                                 Get {{ $plan->name }} (One-Time)
                             </a>
                         @endif
@@ -191,13 +191,13 @@
         <!-- Ethical Single-Payment Security Guarantee -->
         <div class="max-w-4xl mx-auto mt-12 p-6 sm:p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-4">
             <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-2xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-xl font-bold shrink-0">
+                <div class="w-10 h-10 rounded-2xl bg-rose-50 dark:bg-rose-950/60 text-primary-700 dark:text-primary-300 flex items-center justify-center text-xl font-bold shrink-0">
                     🤝
                 </div>
                 <div>
                     <h3 class="text-sm font-extrabold text-slate-900 dark:text-white">Our Single Marriage Guarantee (One-Time Pass Guarantee)</h3>
                     <p class="text-xs text-slate-500 dark:text-slate-400">
-                        When you purchase a pass, you will never be subjected to unexpected monthly charges. Your account maintains all tier privileges until you and your chosen partner register and confirm your successful Nikah milestone on Global Nikkah.
+                        When you purchase a pass, you will never be subjected to unexpected recurring charges. Your account maintains all privileges until you and your spouse confirm your Mangala Vivaha milestone on Global Maitri.
                     </p>
                 </div>
             </div>
@@ -212,7 +212,7 @@
                     </span>
                 </div>
                 <div class="text-[11px] text-slate-400 dark:text-slate-500">
-                    🔒 Protected with 256-bit SSL encryption. Zero automatic card renewals.
+                    🔒 Protected with 256-bit SSL encryption. Zero automatic card deductions.
                 </div>
             </div>
         </div>

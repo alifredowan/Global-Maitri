@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title', 'Global Nikkah - Muslim Matrimonial Platform')</title>
+    <title>@yield('title', 'Global Maitri - Buddhist Matrimonial Platform')</title>
     <link rel="icon" href="{{ asset('favicon.svg') }}" type="image/svg+xml">
     <link rel="alternate icon" href="{{ asset('favicon.svg') }}" type="image/svg+xml">
-    <meta name="description" content="@yield('meta_description', 'Global Nikkah is an ethical Muslim matrimonial platform for serious marriage with verified profiles, Wali participation, and privacy-first matchmaking.')">
+    <meta name="description" content="@yield('meta_description', 'Global Maitri is a Buddhist matrimonial platform for serious, marriage-oriented Buddhists across traditions, with verified profiles, family involvement, and mindful matchmaking.')">
     <meta name="robots" content="@yield('robots', 'noindex, nofollow')">
     @hasSection('canonical_url')
         <link rel="canonical" href="{{ config('seo.url').(request()->getPathInfo() === '/' ? '/' : request()->getPathInfo()) }}">
@@ -20,14 +20,14 @@
                     [
                         '@type' => 'Organization',
                         '@id' => $seoSiteUrl.'/#organization',
-                        'name' => 'Global Nikkah',
+                        'name' => 'Global Maitri',
                         'url' => $seoSiteUrl.'/',
-                        'description' => 'An ethical Muslim matrimonial platform for serious marriage with verified profiles, Wali participation, and privacy-first matchmaking.',
+                        'description' => 'A Buddhist matrimonial platform for serious, marriage-oriented Buddhists across traditions, with verified profiles, family involvement, and mindful matchmaking.',
                     ],
                     [
                         '@type' => 'WebSite',
                         '@id' => $seoSiteUrl.'/#website',
-                        'name' => 'Global Nikkah',
+                        'name' => 'Global Maitri',
                         'url' => $seoSiteUrl.'/',
                         'publisher' => ['@id' => $seoSiteUrl.'/#organization'],
                     ],
@@ -36,14 +36,14 @@
         @endphp
         <script type="application/ld+json">{!! json_encode($seoSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}</script>
     @endif
-    <meta property="og:title" content="@yield('title', 'Global Nikkah - Muslim Matrimonial Platform')">
-    <meta property="og:description" content="@yield('meta_description', 'Global Nikkah is an ethical Muslim matrimonial platform for serious marriage with verified profiles, Wali participation, and privacy-first matchmaking.')">
+    <meta property="og:title" content="@yield('title', 'Global Maitri - Buddhist Matrimonial Platform')">
+    <meta property="og:description" content="@yield('meta_description', 'Global Maitri is a Buddhist matrimonial platform for serious, marriage-oriented Buddhists across traditions, with verified profiles, family involvement, and mindful matchmaking.')">
     <meta property="og:type" content="website">
 
     <!-- Theme Initialization (Prevent FOUC: 4 Moods Supported) -->
     <script>
         (function() {
-            const savedMood = localStorage.getItem('nikah_theme') || (localStorage.getItem('theme') === 'dark' ? 'dark' : 'light');
+            const savedMood = localStorage.getItem('maitri_theme') || localStorage.getItem('nikah_theme') || (localStorage.getItem('theme') === 'dark' ? 'dark' : 'light');
             document.documentElement.classList.remove('dark', 'theme-emerald', 'theme-sand');
             if (savedMood === 'dark') {
                 document.documentElement.classList.add('dark');
@@ -66,8 +66,8 @@
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
         h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
-        .bg-emerald-gradient {
-            background: linear-gradient(135deg, #064e3b 0%, #065f46 60%, #047857 100%);
+        .bg-emerald-gradient, .bg-rose-gradient {
+            background: linear-gradient(135deg, #881337 0%, #be123c 60%, #e11d48 100%);
         }
         .bg-gold-gradient {
             background: linear-gradient(135deg, #d97706 0%, #f59e0b 100%);
@@ -86,7 +86,7 @@
         [x-cloak] { display: none !important; }
     </style>
 </head>
-<body class="h-full bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 antialiased selection:bg-emerald-500 selection:text-white transition-colors duration-200"
+<body class="h-full bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 antialiased selection:bg-rose-500 selection:text-white transition-colors duration-200"
       x-data="{
           sidebarOpen: (function() {
               try { localStorage.removeItem('sidebar_open'); } catch(e){}
@@ -175,17 +175,15 @@
 
                     <!-- Brand in Mobile Drawer (Clicking closes drawer) -->
                     <div @click="mobileSidebarOpen = false" class="flex items-center gap-3 px-2 mb-6 cursor-pointer select-none" title="Close Drawer">
-                        <div class="w-10 h-10 rounded-xl bg-emerald-gradient flex items-center justify-center text-white shadow-md shadow-emerald-950/50">
-                            <svg class="w-6 h-6 text-amber-300" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                            </svg>
+                        <div class="w-10 h-10 rounded-xl bg-rose-600 flex items-center justify-center text-white shadow-md shadow-rose-950/50">
+                            <span class="text-xl">🌸</span>
                         </div>
                         <div>
                             <span class="font-heading font-extrabold text-lg text-white tracking-tight flex items-center gap-1">
-                                Nikah<span class="text-amber-400">Connect</span>
+                                Global<span class="text-amber-400">Maitri</span>
                             </span>
-                            <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-400 block -mt-0.5">
-                                {{ Auth::user()->isSuperAdmin() ? 'Super Admin' : (Auth::user()->isModerator() ? 'Staff' : (Auth::user()->isWali() ? 'Guardian (Wali)' : 'Seeker')) }}
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-rose-400 block -mt-0.5">
+                                {{ Auth::user()->isSuperAdmin() ? 'Super Admin' : (Auth::user()->isModerator() ? 'Staff' : (Auth::user()->isFamilyRep() ? 'Family Representative' : 'Candidate Seeker')) }}
                             </span>
                         </div>
                     </div>
@@ -198,12 +196,12 @@
                     <!-- Mobile User Card & Logout -->
                     <div class="pt-4 mt-4 border-t border-slate-800">
                         <div class="flex items-center gap-3 px-2 py-2">
-                            <div class="w-9 h-9 rounded-full bg-emerald-900 border border-emerald-600 text-emerald-200 font-bold flex items-center justify-center text-sm">
+                            <div class="w-9 h-9 rounded-full bg-rose-900 border border-rose-600 text-rose-200 font-bold flex items-center justify-center text-sm">
                                 {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
                             </div>
                             <div class="flex-1 min-w-0">
                                 <p class="text-xs font-bold text-white truncate">{{ Auth::user()->name }}</p>
-                                <p class="text-[10px] text-emerald-400 font-medium capitalize">{{ Auth::user()->role }}</p>
+                                <p class="text-[10px] text-rose-400 font-medium capitalize">{{ Auth::user()->role }}</p>
                             </div>
                         </div>
                         <form action="{{ route('logout') }}" method="POST" class="mt-2">
@@ -231,27 +229,25 @@
                     <button type="button"
                             @click="toggleSidebar()"
                             class="flex items-center gap-3 group flex-1 min-w-0 text-left cursor-pointer focus:outline-none"
-                            title="Open / Close Sidebar (Global Nikkah Logo)">
-                        <div class="w-10 h-10 rounded-xl bg-emerald-gradient flex items-center justify-center text-white shadow-lg shadow-emerald-950/50 group-hover:scale-105 transition transform">
-                            <svg class="w-6 h-6 text-amber-300" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                            </svg>
+                            title="Open / Close Sidebar (Global Maitri Logo)">
+                        <div class="w-10 h-10 rounded-xl bg-rose-600 flex items-center justify-center text-white shadow-lg shadow-rose-950/50 group-hover:scale-105 transition transform">
+                            <span class="text-xl">🌸</span>
                         </div>
                         <div>
-                            <div class="font-heading font-extrabold text-base text-white tracking-tight flex items-center gap-1 group-hover:text-emerald-400 transition">
-                                Global<span class="text-amber-400">Nikkah</span>
+                            <div class="font-heading font-extrabold text-base text-white tracking-tight flex items-center gap-1 group-hover:text-rose-400 transition">
+                                Global<span class="text-amber-400">Maitri</span>
                             </div>
                             <div class="flex items-center gap-1.5 mt-0.5">
-                                <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                                <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-400">
+                                <span class="inline-block w-2 h-2 rounded-full bg-rose-400 animate-pulse"></span>
+                                <span class="text-[10px] font-bold uppercase tracking-wider text-rose-400">
                                     @if(Auth::user()->isSuperAdmin())
                                         Super Admin
                                     @elseif(Auth::user()->isModerator())
                                         Staff Admin
-                                    @elseif(Auth::user()->isWali())
-                                        Guardian (Wali)
+                                    @elseif(Auth::user()->isFamilyRep())
+                                        Family Representative
                                     @else
-                                        {{ Auth::user()->gender === 'female' ? 'Sister Portal' : 'Brother Portal' }}
+                                        Candidate Portal
                                     @endif
                                 </span>
                             </div>
@@ -312,18 +308,16 @@
                             </svg>
                         </button>
 
-                        <!-- Global Nikkah Brand Logo & Name (Shown when sidebar is collapsed, or on mobile) -->
+                        <!-- Global Maitri Brand Logo & Name (Shown when sidebar is collapsed, or on mobile) -->
                         <div @click="toggleSidebar()"
                              x-show="!sidebarOpen || window.innerWidth < 1024"
                              class="flex items-center gap-2.5 cursor-pointer select-none group"
-                             title="Open / Close Sidebar (Global Nikkah Logo)">
-                            <div class="w-9 h-9 rounded-xl bg-emerald-gradient flex items-center justify-center text-white shadow-md shadow-emerald-950/20 group-hover:scale-105 transition transform">
-                                <svg class="w-5 h-5 text-amber-300" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                </svg>
+                             title="Open / Close Sidebar (Global Maitri Logo)">
+                            <div class="w-9 h-9 rounded-xl bg-rose-600 flex items-center justify-center text-white shadow-md shadow-rose-950/20 group-hover:scale-105 transition transform">
+                                <span class="text-lg">🌸</span>
                             </div>
-                            <span class="font-heading font-extrabold text-base tracking-tight text-slate-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition">
-                                Global<span class="text-amber-500">Nikkah</span>
+                            <span class="font-heading font-extrabold text-base tracking-tight text-slate-900 dark:text-white group-hover:text-rose-600 dark:group-hover:text-rose-400 transition">
+                                Global<span class="text-amber-500">Maitri</span>
                             </span>
                         </div>
                     </div>
@@ -602,23 +596,23 @@
                     </div>
                 </header>
 
-                <!-- Nikah Milestone Banner if pending -->
+                <!-- Mangala Vivaha Milestone Banner if pending -->
                 @if(Auth::user()->pendingMarriage())
                     @php $pendingM = Auth::user()->pendingMarriage(); @endphp
-                    <div class="bg-gradient-to-r from-amber-500/20 via-emerald-500/15 to-amber-500/20 border-b border-amber-300 dark:border-amber-700/60 px-4 py-3 text-slate-900 dark:text-slate-100 text-xs font-semibold">
+                    <div class="bg-gradient-to-r from-amber-500/20 via-rose-500/15 to-amber-500/20 border-b border-amber-300 dark:border-amber-700/60 px-4 py-3 text-slate-900 dark:text-slate-100 text-xs font-semibold">
                         <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
                             <div class="flex items-center gap-2">
-                                <span class="text-base animate-bounce">💍</span>
+                                <span class="text-base animate-bounce">🌸</span>
                                 <span>
                                     @if(Auth::id() !== $pendingM->initiated_by_user_id)
-                                        <strong>Nikah Declaration Pending:</strong> {{ $pendingM->initiator->name }} declared you have completed your Nikah!
+                                        <strong>Mangala Vivaha Declaration Pending:</strong> {{ $pendingM->initiator->name }} declared your wedding blessing celebration!
                                     @else
-                                        <strong>Nikah Declaration Submitted:</strong> Waiting for spouse confirmation.
+                                        <strong>Mangala Vivaha Declaration Submitted:</strong> Waiting for spouse confirmation.
                                     @endif
                                 </span>
                             </div>
-                            <a href="{{ route('marriages.celebration') }}" class="px-3.5 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-xs shadow-xs transition shrink-0">
-                                View Milestone &rarr;
+                            <a href="{{ route('marriages.celebration') }}" class="px-3.5 py-1.5 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-extrabold text-xs shadow-xs transition shrink-0">
+                                View Celebration &rarr;
                             </a>
                         </div>
                     </div>
@@ -687,16 +681,14 @@
                         <!-- Brand Logo -->
                         <div class="flex items-center gap-3">
                             <a href="{{ route('landing') }}" class="flex items-center gap-2.5 group">
-                                <div class="w-10 h-10 rounded-xl bg-emerald-gradient flex items-center justify-center text-white shadow-md shadow-emerald-900/20 group-hover:scale-105 transition transform">
-                                    <svg class="w-6 h-6 text-amber-300" fill="currentColor" viewBox="0 0 24 24">
-                                        <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                    </svg>
+                                <div class="w-10 h-10 rounded-xl bg-rose-600 flex items-center justify-center text-white shadow-md shadow-rose-900/20 group-hover:scale-105 transition transform">
+                                    <span class="text-xl">🌸</span>
                                 </div>
                                 <div>
-                                    <span class="font-heading font-extrabold text-xl tracking-tight text-emerald-950 dark:text-emerald-100 flex items-center gap-1.5">
-                                        Global<span class="text-amber-500">Nikkah</span>
+                                    <span class="font-heading font-extrabold text-xl tracking-tight text-slate-900 dark:text-slate-100 flex items-center gap-1.5">
+                                        Global<span class="text-amber-500">Maitri</span>
                                     </span>
-                                    <span class="text-[10px] uppercase font-bold tracking-widest text-emerald-700 dark:text-emerald-400 block -mt-1">Halal Matrimonial</span>
+                                    <span class="text-[10px] uppercase font-bold tracking-widest text-rose-600 dark:text-rose-400 block -mt-1">Buddhist Matrimonial</span>
                                 </div>
                             </a>
                         </div>
@@ -704,9 +696,13 @@
                         <!-- Public Controls -->
                         <div class="flex items-center gap-3">
                             <a href="{{ route('how-it-works') }}"
-                               class="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold text-slate-700 dark:text-slate-200 hover:text-emerald-700 dark:hover:text-emerald-400 px-2 py-2 transition {{ request()->routeIs('how-it-works') ? 'text-emerald-700 dark:text-emerald-400' : '' }}">
-                                <span class="text-emerald-500">✦</span>
+                               class="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold text-slate-700 dark:text-slate-200 hover:text-rose-600 dark:hover:text-rose-400 px-2 py-2 transition {{ request()->routeIs('how-it-works') ? 'text-rose-600 dark:text-rose-400' : '' }}">
+                                <span class="text-rose-500">✦</span>
                                 How it works
+                            </a>
+                            <a href="{{ route('subscription.pricing') }}"
+                               class="hidden md:inline-flex items-center gap-1.5 text-xs font-bold text-slate-700 dark:text-slate-200 hover:text-rose-600 dark:hover:text-rose-400 px-2 py-2 transition">
+                                Single Marriage Pass
                             </a>
                             <button type="button"
                                     id="theme-toggle"
@@ -720,10 +716,10 @@
                                 </svg>
                             </button>
 
-                            <a href="{{ route('login') }}" class="text-xs font-bold text-slate-700 dark:text-slate-200 hover:text-emerald-700 dark:hover:text-emerald-400 px-3 py-2">
+                            <a href="{{ route('login') }}" class="text-xs font-bold text-slate-700 dark:text-slate-200 hover:text-rose-600 dark:hover:text-rose-400 px-3 py-2">
                                 Log in
                             </a>
-                            <a href="{{ route('register') }}" class="px-4 py-2 rounded-xl text-xs font-bold text-white bg-emerald-600 hover:bg-emerald-700 shadow-md shadow-emerald-900/10 transition">
+                            <a href="{{ route('register') }}" class="px-4 py-2 rounded-xl text-xs font-bold text-white bg-rose-600 hover:bg-rose-700 shadow-md shadow-rose-900/10 transition">
                                 Create Profile
                             </a>
                         </div>
