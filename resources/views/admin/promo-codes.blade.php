@@ -9,7 +9,7 @@
     targetType: 'all',
     allowedEmails: '',
     generateCode() {
-        const prefixes = ['PRO', 'VIP', 'NIKAH', 'HALAL', 'SPECIAL', 'BARAKAH'];
+        const prefixes = ['PRO', 'VIP', 'MAITRI', 'METTA', 'SPECIAL', 'DHAMMA'];
         const p = prefixes[Math.floor(Math.random() * prefixes.length)];
         const num = Math.floor(100 + Math.random() * 900);
         this.code = p + num;

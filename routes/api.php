@@ -27,7 +27,7 @@ Route::prefix('v1')->group(function () {
         Route::post('/interests/{recipientId}', [InterestApiController::class, 'store'])->middleware('throttle:20,1');
         Route::post('/interests/{id}/respond', [InterestApiController::class, 'respond'])->middleware('throttle:20,1');
 
-        // Halal Messaging
+        // Mindful Messaging
         Route::get('/conversations', [MessageApiController::class, 'conversations']);
         Route::get('/conversations/{id}/messages', [MessageApiController::class, 'messages']);
         Route::post('/conversations/{id}/messages', [MessageApiController::class, 'send'])->middleware('throttle:30,1');

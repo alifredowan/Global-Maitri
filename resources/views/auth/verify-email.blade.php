@@ -1,17 +1,17 @@
 @extends('layouts.app')
 
-@section('title', 'Verify Your Email Address - Global Nikkah')
+@section('title', 'Verify Your Email Address - Global Maitri')
 
 @section('content')
 <div class="py-16 bg-slate-50 dark:bg-slate-950 min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8">
     <div class="max-w-md w-full space-y-6">
 
-        <!-- Top Islamic Calligraphy & Badge -->
+        <!-- Top Buddhist Blessing & Badge -->
         <div class="text-center space-y-2">
-            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800 dark:bg-emerald-900/50 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
-                <span>🛡️</span> Mandatory Email Verification
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-rose-100 text-rose-800 dark:bg-rose-900/50 dark:text-rose-300 border border-rose-200 dark:border-rose-800">
+                <span>🪷</span> Mandatory Email Verification
             </span>
-            <p class="font-arabic text-xl sm:text-2xl text-amber-600 dark:text-amber-400 font-medium">بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</p>
+            <p class="text-base sm:text-lg text-amber-600 dark:text-amber-400 font-medium">☸️ May You Be Happy and Well</p>
             <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white font-heading">
                 Check Your Email to Activate
             </h1>
@@ -55,7 +55,7 @@
             <div class="space-y-3 p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/60 text-xs text-slate-600 dark:text-slate-300">
                 <div class="flex items-start gap-2.5">
                     <span class="w-5 h-5 rounded-full bg-emerald-600 text-white font-bold flex items-center justify-center text-[10px] shrink-0 mt-0.5">1</span>
-                    <p>Open your email inbox (and check spam or junk if needed) for a message from <strong>info@globalnikkah.com</strong>.</p>
+                    <p>Open your email inbox (and check spam or junk if needed) for a message from <strong>info@globalmaitri.com</strong>.</p>
                 </div>
                 <div class="flex items-start gap-2.5">
                     <span class="w-5 h-5 rounded-full bg-emerald-600 text-white font-bold flex items-center justify-center text-[10px] shrink-0 mt-0.5">2</span>
@@ -119,7 +119,7 @@
         </div>
 
         <p class="text-center text-[11px] text-slate-400 dark:text-slate-500">
-            Need assistance? Reach out to our support team at <a href="mailto:info@globalnikkah.com" class="text-emerald-600 dark:text-emerald-400 hover:underline">info@globalnikkah.com</a>
+            Need assistance? Reach out to our support team at <a href="mailto:info@globalmaitri.com" class="text-rose-600 dark:text-rose-400 hover:underline">info@globalmaitri.com</a>
         </p>
 
     </div>

@@ -163,7 +163,7 @@
                                     <span class="text-xs text-slate-500 dark:text-slate-400">/ 1-time pass</span>
                                 </div>
                                 <div class="text-[11px] text-emerald-700 dark:text-emerald-400 font-bold mt-0.5">
-                                    🛡️ Active until confirmed Nikah
+                                    🪷 Active until confirmed Mangala Vivaha
                                 </div>
                             @endif
                         </div>
@@ -351,10 +351,10 @@
 
                 <div>
                     <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">Custom Bullet Points (1 feature per line)</label>
-                    <textarea name="features" rows="4" placeholder="Unlimited daily profile views
-Unlimited interest requests
+                    <textarea name="features" rows="4" placeholder="Unlimited daily biodata views
+Unlimited proposal requests
 Priority ID verification queue
-Halal Chaperoned Chat Support" class="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-xs font-mono outline-none focus:ring-2 focus:ring-emerald-500"></textarea>
+Mindful Chaperoned Chat Support" class="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-xs font-mono outline-none focus:ring-2 focus:ring-emerald-500"></textarea>
                 </div>
 
                 <div class="flex items-center justify-end gap-3 pt-4 border-t border-slate-100 dark:border-slate-800">

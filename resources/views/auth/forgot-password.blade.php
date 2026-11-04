@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Forgot Password - Global Nikkah')
+@section('title', 'Forgot Password - Global Maitri')
 
 @section('content')
 <div class="py-16 bg-slate-50 dark:bg-slate-950 min-h-screen">
