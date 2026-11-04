@@ -31,14 +31,14 @@ class WelcomeVerificationNotification extends Notification
         $verificationUrl = $this->verificationUrl($notifiable);
 
         return (new MailMessage)
-            ->subject('Welcome to Global Nikkah - Verify Your Email Address')
-            ->greeting("Assalamu Alaikum, {$notifiable->name}!")
-            ->line('Alhamdulillah and welcome to **Global Nikkah**, the ethical, Shariah-grounded matrimonial platform designed for sincere Muslim seekers and their families.')
-            ->line('Please confirm your email address to verify your account and begin your blessed journey toward Nikah.')
+            ->subject('Welcome to Global Maitri - Verify Your Email Address')
+            ->greeting("Namaste and Greetings, {$notifiable->name}!")
+            ->line('Sadhu and welcome to **Global Maitri**, the mindful Buddhist matrimonial platform designed for sincere seekers and their families.')
+            ->line('Please confirm your email address to verify your account and begin your auspicious journey toward Mangala Vivaha.')
             ->action('Verify Email & Activate Profile', $verificationUrl)
             ->line('This verification link will remain valid for 48 hours.')
-            ->line('At Global Nikkah, we honor Islamic modesty (Haya), guardian (Wali) supervision, and strict photo privacy controls to protect you every step of the way.')
-            ->salutation('Warm regards, The Global Nikkah Team');
+            ->line('At Global Maitri, we honor Lotus Modesty privacy, Family Representative guidance, and casteless equality to support you every step of the way.')
+            ->salutation('Warm regards, The Global Maitri Team');
     }
 
     /**

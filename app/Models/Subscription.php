@@ -60,9 +60,9 @@ class Subscription extends Model
 
         return match ($plan) {
             'premium_plus' => [
-                'name' => 'VIP Barakah Pass',
+                'name' => 'VIP Maitri Blessing Pass',
                 'slug' => 'premium_plus',
-                'description' => 'Maximum visibility with profile boost and personalized marriage advisor assistance until Nikah.',
+                'description' => 'Maximum visibility with profile boost and personalized marriage advisor assistance until Mangala Vivaha.',
                 'daily_profile_views' => PHP_INT_MAX,
                 'daily_interests' => PHP_INT_MAX,
                 'advanced_filters' => true,
@@ -75,12 +75,12 @@ class Subscription extends Model
                 'one_time_price' => 99.00,
                 'monthly_price' => 99.00,
                 'annual_price' => 99.00,
-                'validity' => 'Active Until Confirmed Nikah',
+                'validity' => 'Active Until Confirmed Mangala Vivaha',
             ],
             'premium' => [
-                'name' => 'Standard Nikah Pass',
+                'name' => 'Single Marriage Pass',
                 'slug' => 'premium',
-                'description' => 'Unlimited discovery, visitor analytics, Shariah biodata, and verified queue until successful marriage.',
+                'description' => 'Unlimited discovery, visitor analytics, Buddhist Dhamma biodata, and verified queue until successful marriage.',
                 'daily_profile_views' => PHP_INT_MAX,
                 'daily_interests' => PHP_INT_MAX,
                 'advanced_filters' => true,
@@ -93,12 +93,12 @@ class Subscription extends Model
                 'one_time_price' => 49.00,
                 'monthly_price' => 49.00,
                 'annual_price' => 49.00,
-                'validity' => 'Active Until Confirmed Nikah',
+                'validity' => 'Active Until Confirmed Mangala Vivaha',
             ],
             default => [
                 'name' => 'Free Explorer',
                 'slug' => 'free',
-                'description' => 'Core Islamic matching features, guardian supervision, and halal messaging are always accessible.',
+                'description' => 'Core Buddhist matching features, Family Representative guidance, and mindful messaging are always accessible.',
                 'daily_profile_views' => 10,
                 'daily_interests' => 5,
                 'advanced_filters' => false,

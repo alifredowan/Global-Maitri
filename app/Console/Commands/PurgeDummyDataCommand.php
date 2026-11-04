@@ -38,9 +38,13 @@ class PurgeDummyDataCommand extends Command
     {
         $this->info('Starting purge of dummy test profiles and fake photos...');
 
-        // Find all dummy users (emails ending with @nikahconnect.test or created during previous seed runs)
-        $dummyUsers = User::where('email', 'like', '%@nikahconnect.test')
+        // Find all dummy users (emails ending with @maitriconnect.test, @globalmaitri.test, or @nikahconnect.test)
+        $dummyUsers = User::where('email', 'like', '%@maitriconnect.test')
+            ->orWhere('email', 'like', '%@globalmaitri.test')
+            ->orWhere('email', 'like', '%@nikahconnect.test')
             ->orWhereIn('email', [
+                'admin@maitriconnect.test',
+                'admin@globalmaitri.test',
                 'admin@nikahconnect.test',
                 'moderator@nikahconnect.test',
                 'wali.father@nikahconnect.test',

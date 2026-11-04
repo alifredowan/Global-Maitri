@@ -53,26 +53,26 @@ class InterestReceivedNotification extends Notification implements ShouldBroadca
         $url = route('interests.index');
 
         if ($this->isWali) {
-            $seekerName = $this->forSeeker?->name ?: 'your ward';
+            $seekerName = $this->forSeeker?->name ?: 'your candidate';
 
             return (new MailMessage)
-                ->subject("New Matrimonial Interest for {$seekerName} - Global Nikkah")
-                ->greeting("Assalamu Alaikum, {$notifiable->name}!")
-                ->line("A candidate suitor, **{$sender->name}**, has sent an expression of interest to your {$seekerName}.")
-                ->line('As their designated Wali, you can review this proposal, inspect religious compatibility, and authorize chaperoned communication.')
-                ->action('Review Proposal on Wali Console', route('wali.dashboard'))
-                ->line('Global Nikkah ensures full modesty and guardian supervision at every stage.')
-                ->salutation('Warm regards, The Global Nikkah Team');
+                ->subject("New Matrimonial Proposal for {$seekerName} - Global Maitri")
+                ->greeting("Namaste, {$notifiable->name}!")
+                ->line("A candidate suitor, **{$sender->name}**, has sent a matrimonial proposal to **{$seekerName}**.")
+                ->line('As their designated Family Representative, you can review this proposal, inspect Dhamma compatibility, and guide the next steps.')
+                ->action('Review Proposal on Representative Console', route('wali.dashboard'))
+                ->line('Global Maitri ensures full Lotus Modesty and family transparency at every stage.')
+                ->salutation('Warm regards, The Global Maitri Team');
         }
 
         return (new MailMessage)
-            ->subject("New Halal Expression of Interest from {$sender->name} - Global Nikkah")
-            ->greeting("Assalamu Alaikum, {$notifiable->name}!")
-            ->line("**{$sender->name}** has expressed serious matrimonial interest in your profile on Global Nikkah.")
-            ->line('You can review their biodata, religious practice, and family background.')
-            ->action('View Interest Request', $url)
-            ->line('Your privacy and blurred photo controls remain strictly protected until mutual acceptance.')
-            ->salutation('Warm regards, The Global Nikkah Team');
+            ->subject("New Mindful Proposal from {$sender->name} - Global Maitri")
+            ->greeting("Namaste, {$notifiable->name}!")
+            ->line("**{$sender->name}** has expressed serious matrimonial interest in your biodata on Global Maitri.")
+            ->line('You can review their Dhamma practice, Five Precepts observance, and family background.')
+            ->action('View Proposal', $url)
+            ->line('Your Lotus Modesty photo shelter remains strictly protected until mutual acceptance.')
+            ->salutation('Warm regards, The Global Maitri Team');
     }
 
     /**

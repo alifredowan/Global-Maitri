@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Profile Visitors & Activity - Global Nikkah')
+@section('title', 'Profile Visitors & Activity - Global Maitri')
 
 @section('content')
 <div class="py-10 bg-slate-50 dark:bg-slate-950 min-h-screen">
@@ -194,23 +194,23 @@
 
         @else
             <!-- Free Member Upgrade Teaser Card -->
-            <div class="relative overflow-hidden bg-gradient-to-br from-emerald-950 via-slate-900 to-emerald-900 rounded-3xl p-8 sm:p-12 text-white shadow-xl border border-emerald-800/50">
+            <div class="relative overflow-hidden bg-gradient-to-br from-slate-950 via-rose-950 to-slate-900 rounded-3xl p-8 sm:p-12 text-white shadow-xl border border-rose-800/50">
                 <div class="max-w-2xl space-y-5 relative z-10">
                     <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-400/30 text-xs font-extrabold uppercase tracking-wider">
-                        <span>🔒</span> Seeker Premium Feature
+                        <span>🪷</span> Maitri Pass Feature
                     </div>
 
                     <h2 class="text-3xl sm:text-4xl font-extrabold font-heading leading-tight">
-                        {{ $uniqueVisitorsCount }} Candidates Viewed Your Profile!
+                        {{ $uniqueVisitorsCount }} Candidates Viewed Your Biodata!
                     </h2>
 
                     <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                        Don't miss out on potential righteous life partners who have reviewed your matrimonial profile. Upgrade to Seeker Premium to unlock their identity, deen compatibility scores, and send instant halal interests!
+                        Don't miss out on potential mindful life companions who have reviewed your matrimonial biodata. Upgrade to Single Marriage Pass to unlock visitor details, Dhamma compatibility scores, and send instant proposals!
                     </p>
 
                     <div class="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
                         <a href="{{ route('subscription.pricing') }}" class="px-7 py-3.5 rounded-2xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold text-xs shadow-lg transition flex items-center justify-center gap-2 font-heading tracking-wide">
-                            <span>⭐</span> Upgrade to Seeker Premium
+                            <span>⭐</span> Upgrade to Single Marriage Pass
                         </a>
                         <a href="{{ route('discovery.index') }}" class="px-6 py-3.5 rounded-2xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs backdrop-blur-md transition text-center">
                             Continue Browsing

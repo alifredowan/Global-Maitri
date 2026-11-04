@@ -111,7 +111,7 @@ class ChatController extends Controller
         }
 
         return redirect()->route('discovery.show', $targetUser->id)
-            ->with('info', 'Halal messaging unlocks once an Interest request is mutually accepted.');
+            ->with('info', 'Mindful messaging unlocks once a matrimonial proposal is mutually accepted.');
     }
 
     public function show(int $conversationId): View|RedirectResponse
@@ -326,7 +326,7 @@ class ChatController extends Controller
                 ]);
             }
 
-            return back()->with('warning', 'Notice: Global Nikkah privacy filters detected potential contact information or prohibited keywords ('.$scanResult['flag_reason'].'). Sharing external contacts before platform verification is restricted (FR-4.4).');
+            return back()->with('warning', 'Notice: Global Maitri safety filters detected potential contact information or prohibited keywords ('.$scanResult['flag_reason'].'). Sharing external contacts before platform verification is restricted (FR-4.4).');
         }
 
         if ($request->wantsJson() || $request->ajax()) {

@@ -58,22 +58,22 @@ class InterestRespondedNotification extends Notification implements ShouldBroadc
 
         if ($isAccepted) {
             return (new MailMessage)
-                ->subject("Alhamdulillah! Interest Accepted by {$recipient->name} - Global Nikkah")
-                ->greeting("Assalamu Alaikum, {$notifiable->name}!")
-                ->line("Alhamdulillah! **{$recipient->name}** has accepted your matrimonial expression of interest.")
-                ->line('Your halal chaperoned conversation has been unlocked. Please maintain Islamic modesty and noble character in all discussions.')
-                ->action('Open Chaperoned Chat', $chatUrl)
-                ->line('May Allah (SWT) grant peace and guidance in your communication.')
-                ->salutation('Warm regards, The Global Nikkah Team');
+                ->subject("Sadhu! Proposal Accepted by {$recipient->name} - Global Maitri")
+                ->greeting("Namaste, {$notifiable->name}!")
+                ->line("Sadhu! **{$recipient->name}** has accepted your matrimonial proposal.")
+                ->line('Your mindful conversation has been unlocked. Please maintain Metta, respect, and noble character in all discussions.')
+                ->action('Open Mindful Chat', $chatUrl)
+                ->line('May you be happy and well in your communication.')
+                ->salutation('Warm regards, The Global Maitri Team');
         }
 
         return (new MailMessage)
-            ->subject('Matrimonial Interest Update - Global Nikkah')
-            ->greeting("Assalamu Alaikum, {$notifiable->name}!")
-            ->line("The expression of interest sent to **{$recipient->name}** was politely declined.")
-            ->line('Do not be disheartened. We believe Allah (SWT) has written the best match for you at the appointed time. Keep exploring with patience and dua.')
+            ->subject('Matrimonial Proposal Update - Global Maitri')
+            ->greeting("Namaste, {$notifiable->name}!")
+            ->line("The proposal sent to **{$recipient->name}** was politely declined.")
+            ->line('Do not be disheartened. We believe you will find the right Dhamma companion at the auspicious time. Keep exploring with patience and Metta.')
             ->action('Discover More Matches', route('discovery.index'))
-            ->salutation('Warm regards, The Global Nikkah Team');
+            ->salutation('Warm regards, The Global Maitri Team');
     }
 
     /**
@@ -104,7 +104,7 @@ class InterestRespondedNotification extends Notification implements ShouldBroadc
             return [
                 'type' => 'interest_accepted',
                 'title' => 'Interest Request Accepted!',
-                'message' => "{$recipient->name} accepted your interest request! You may now begin halal conversation.",
+                'message' => "{$recipient->name} accepted your proposal request! You may now begin mindful conversation.",
                 'interest_id' => $this->interest->id,
                 'recipient_id' => $recipient->id,
                 'recipient_name' => $recipient->name,

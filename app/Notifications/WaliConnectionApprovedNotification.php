@@ -36,19 +36,19 @@ class WaliConnectionApprovedNotification extends Notification
      */
     public function toMail(object $notifiable): MailMessage
     {
-        $waliName = $this->waliLink->wali_name ?: 'Your Guardian';
+        $waliName = $this->waliLink->wali_name ?: 'Your Family Representative';
         $relationship = ucfirst(str_replace('_', ' ', $this->waliLink->relationship_type));
 
         return (new MailMessage)
-            ->subject('Alhamdulillah! Guardian (Wali) Connection Approved - Global Nikkah')
-            ->greeting("Assalamu Alaikum, {$notifiable->name}!")
-            ->line("Alhamdulillah! Your {$relationship}, **{$waliName}**, has officially approved your Guardian (Wali) connection request on Global Nikkah.")
-            ->line('Your account is now fully protected under Shariah guardian supervision:')
-            ->line('• Inbound and outbound matrimonial interests will be chaperoned with their knowledge.')
-            ->line('• Your guardian can review candidate profiles and support you in family consultations.')
-            ->action('View Guardian Settings', route('wali.link'))
-            ->line('May Allah (SWT) grant barakah in your journey and guide you to a pious, loving spouse.')
-            ->salutation('Warm regards, The Global Nikkah Team');
+            ->subject('Family Representative Connection Approved - Global Maitri')
+            ->greeting("Namaste, {$notifiable->name}!")
+            ->line("Sadhu! Your {$relationship}, **{$waliName}**, has officially approved your Family Representative connection request on Global Maitri.")
+            ->line('Your account now has active family guidance:')
+            ->line('• Inbound and outbound matrimonial proposals will be shared with their knowledge.')
+            ->line('• Your representative can review candidate biodata and advise you in decisions.')
+            ->action('View Family Representative Settings', route('wali.link'))
+            ->line('May you be blessed with harmony, Metta, and an auspicious life companion.')
+            ->salutation('Warm regards, The Global Maitri Team');
     }
 
     /**
@@ -58,14 +58,14 @@ class WaliConnectionApprovedNotification extends Notification
      */
     public function toArray(object $notifiable): array
     {
-        $waliName = $this->waliLink->wali_name ?: 'Your Guardian';
+        $waliName = $this->waliLink->wali_name ?: 'Your Family Representative';
 
         return [
             'type' => 'wali_connection_approved',
-            'title' => '🛡️ Guardian (Wali) Connection Active',
-            'message' => "{$waliName} has approved your Guardian connection request. Your profile is now under active Wali supervision.",
+            'title' => '👨‍👩‍👧 Family Representative Active',
+            'message' => "{$waliName} has approved your Family Representative connection request. Your profile now has active family guidance.",
             'wali_link_id' => $this->waliLink->id,
-            'icon' => '🛡️',
+            'icon' => '👨‍👩‍👧',
             'action_url' => route('wali.link'),
         ];
     }

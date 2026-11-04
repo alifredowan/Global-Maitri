@@ -254,7 +254,7 @@ class InterestController extends Controller
                 ));
             }
 
-            return redirect()->route('chat.show', $conversation->id)->with('success', 'Mutual interest confirmed! You may now begin halal conversation (FR-4.2).');
+            return redirect()->route('chat.show', $conversation->id)->with('success', 'Mutual proposal confirmed! You may now begin mindful conversation (FR-4.2).');
         }
 
         if ($action === 'decline') {

@@ -113,7 +113,7 @@ class SubscriptionPlan extends Model
             'one_time_price' => (float) $this->monthly_price,
             'monthly_price' => (float) $this->monthly_price,
             'annual_price' => (float) $this->annual_price,
-            'validity' => 'Active Until Confirmed Nikah',
+            'validity' => 'Active Until Confirmed Mangala Vivaha',
         ];
     }
 }

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Admin Dashboard - Global Nikkah')
+@section('title', 'Admin Dashboard - Global Maitri')
 @section('page_title', 'Dashboard Overview')
 
 @section('content')

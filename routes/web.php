@@ -219,8 +219,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         ->name('reports.store');
 
     // Mangala Vivaha & Marriage Completion Milestone (FR-11.1 to FR-11.4)
-    Route::get('/mangala-vivaha', [MarriageController::class, 'celebration'])->name('marriages.mangala-vivaha');
-    Route::get('/nikah-mubarak', [MarriageController::class, 'celebration'])->name('marriages.celebration');
+    Route::get('/mangala-vivaha', [MarriageController::class, 'celebration'])->name('marriages.celebration');
+    Route::get('/nikah-mubarak', fn () => redirect()->route('marriages.celebration'));
     Route::get('/marriages/{id}/certificate', [MarriageController::class, 'certificate'])->name('marriages.certificate');
     Route::post('/marriages/initiate', [MarriageController::class, 'initiate'])
         ->middleware('throttle:10,10')

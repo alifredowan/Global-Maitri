@@ -398,11 +398,11 @@ class AuthController extends Controller
             Auth::login($user);
         }
 
-        if ($user->isWali()) {
-            return redirect()->route('wali.link')->with('success', 'Alhamdulillah! Your email address has been approved and verified. Welcome to Global Nikkah!');
+        if ($user->isWali() || $user->isFamilyRep()) {
+            return redirect()->route('wali.dashboard')->with('success', 'Sadhu! Your email address has been verified. Welcome to Global Maitri!');
         }
 
-        return redirect()->route('profile.edit')->with('success', 'Alhamdulillah! Your email address has been approved and verified. Welcome to Global Nikkah! You can now proceed to set up your profile.');
+        return redirect()->route('profile.edit')->with('success', 'Sadhu! Your email address has been verified. Welcome to Global Maitri! You can now proceed to set up your biodata.');
     }
 
     /**

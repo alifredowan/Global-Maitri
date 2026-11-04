@@ -54,6 +54,7 @@ class SitemapController extends Controller
             ."Disallow: /settings\n"
             ."Disallow: /subscription/\n"
             ."Disallow: /wali/\n"
+            ."Disallow: /mangala-vivaha\n"
             ."Disallow: /nikah-mubarak\n"
             ."Disallow: /photos/\n"
             .'Sitemap: '.$this->publicUrl('sitemap')."\n";

@@ -45,23 +45,23 @@ class NikahMilestoneNotification extends Notification implements ShouldBroadcast
 
         if ($this->event === 'confirmed') {
             return (new MailMessage)
-                ->subject('Nikah Mubarak! Your Marriage Milestone is Confirmed - Global Nikkah')
-                ->greeting("Assalamu Alaikum, {$notifiable->name}!")
-                ->line('Alhamdulillah wa Shukrulillah! Your Nikah milestone has been officially confirmed on Global Nikkah.')
-                ->line('May Allah (SWT) bless your marriage, shower His barakah upon you both, and unite you in goodness and piety.')
-                ->action('View Celebration & Marriage Certificate', $url)
-                ->line('Your Single Marriage Pass has successfully concluded. Jazakum Allahu Khairan for honoring us to be a part of your journey.')
-                ->salutation('With warmest duas, The Global Nikkah Team');
+                ->subject('Mangala Vivaha! Your Auspicious Marriage Milestone is Confirmed - Global Maitri')
+                ->greeting("Namaste and Mangalam, {$notifiable->name}!")
+                ->line('Sadhu! Your Mangala Vivaha milestone has been officially confirmed on Global Maitri.')
+                ->line('May the Triple Gem bless your union, and may your lives together be filled with Metta, harmony, and mutual respect.')
+                ->action('View Celebration & Blessing Certificate', $url)
+                ->line('Your Single Marriage Pass has successfully concluded. Anumodana for honoring us to be a part of your auspicious journey.')
+                ->salutation('With warmest Metta, The Global Maitri Team');
         }
 
         return (new MailMessage)
-            ->subject('Nikah Milestone Declared - Action Required on Global Nikkah')
-            ->greeting("Assalamu Alaikum, {$notifiable->name}!")
-            ->line("**{$initiator->name}** has declared that your Nikah (marriage) has been completed!")
-            ->line('Please review and confirm this blessed milestone to finalize your matrimonial journey.')
-            ->action('Review & Confirm Nikah', $url)
+            ->subject('Mangala Vivaha Milestone Declared - Action Required on Global Maitri')
+            ->greeting("Namaste, {$notifiable->name}!")
+            ->line("**{$initiator->name}** has declared that your Mangala Vivaha (marriage) has been solemnized!")
+            ->line('Please review and confirm this auspicious milestone to finalize your matrimonial journey.')
+            ->action('Review & Confirm Mangala Vivaha', $url)
             ->line('Upon mutual confirmation, all third-party suitors and ongoing discovery requests will be gracefully concluded.')
-            ->salutation('Warm regards, The Global Nikkah Team');
+            ->salutation('Warm regards, The Global Maitri Team');
     }
 
     /**
@@ -76,8 +76,8 @@ class NikahMilestoneNotification extends Notification implements ShouldBroadcast
         if ($this->event === 'initiated') {
             return [
                 'type' => 'nikah_milestone_initiated',
-                'title' => '💍 Nikah Milestone Declared',
-                'message' => "{$initiator->name} has declared that you have completed your Nikah! Please review and confirm this milestone.",
+                'title' => '💍 Mangala Vivaha Declared',
+                'message' => "{$initiator->name} has declared that you have solemnized your Mangala Vivaha! Please review and confirm this auspicious milestone.",
                 'marriage_id' => $this->marriage->id,
                 'icon' => '💍',
                 'url' => route('marriages.celebration'),
@@ -87,8 +87,8 @@ class NikahMilestoneNotification extends Notification implements ShouldBroadcast
         if ($this->event === 'confirmed') {
             return [
                 'type' => 'nikah_milestone_confirmed',
-                'title' => '🎉 Nikah Mubarak!',
-                'message' => 'Alhamdulillah! Your Nikah milestone is confirmed. May Allah bless your union with peace and barakah.',
+                'title' => '🎉 Mangala Vivaha Confirmed!',
+                'message' => 'Sadhu! Your Mangala Vivaha milestone is confirmed. May the Triple Gem bless your union with peace and harmony.',
                 'marriage_id' => $this->marriage->id,
                 'icon' => '🎉',
                 'url' => route('marriages.celebration'),
@@ -97,8 +97,8 @@ class NikahMilestoneNotification extends Notification implements ShouldBroadcast
 
         return [
             'type' => 'nikah_milestone_declined',
-            'title' => 'Nikah Declaration Status',
-            'message' => 'The Nikah milestone confirmation request was declined.',
+            'title' => 'Mangala Vivaha Declaration Status',
+            'message' => 'The Mangala Vivaha milestone confirmation request was declined.',
             'marriage_id' => $this->marriage->id,
             'icon' => 'ℹ️',
             'url' => route('chat.index'),

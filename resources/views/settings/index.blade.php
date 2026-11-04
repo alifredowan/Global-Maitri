@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Account Settings - Global Nikkah')
+@section('title', 'Account Settings - Global Maitri')
 @section('page_title', 'Account Settings')
 
 @section('content')
@@ -16,7 +16,7 @@
                 <div class="flex items-center gap-2">
                     <h1 class="text-2xl font-extrabold text-slate-900 dark:text-white font-heading">{{ $user->name }}</h1>
                     <span class="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider {{ $user->isSuperAdmin() ? 'bg-purple-100 text-purple-700 dark:bg-purple-950/60 dark:text-purple-300' : ($user->isModerator() ? 'bg-blue-100 text-blue-700 dark:bg-blue-950/60 dark:text-blue-300' : 'bg-emerald-100 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300') }}">
-                        {{ $user->isSuperAdmin() ? '👑 Super Admin' : ($user->isModerator() ? '🛡️ Moderator' : ($user->isWali() ? '🛡️ Guardian (Wali)' : '🧔 Seeker')) }}
+                        {{ $user->isSuperAdmin() ? '👑 Super Admin' : ($user->isModerator() ? '🛡️ Moderator' : ($user->isWali() ? '🛡️ Family Rep' : '🪷 Candidate')) }}
                     </span>
                 </div>
                 <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Manage your personal credentials, contact details, security password, and privacy preferences.</p>
@@ -434,9 +434,9 @@
                         'email_notifications' => 'Email notifications',
                         'interest_notifications' => 'Interest requests and responses',
                         'message_notifications' => 'New chaperoned messages',
-                        'wali_notifications' => 'Wali and guardian updates',
+                        'wali_notifications' => 'Family representative updates',
                         'saved_search_notifications' => 'Saved-search matches',
-                        'marriage_notifications' => 'Nikah milestone updates',
+                        'marriage_notifications' => 'Mangala Vivaha milestone updates',
                     ] as $preferenceKey => $preferenceLabel)
                         <label class="flex items-center justify-between gap-3 text-xs font-semibold text-slate-700 dark:text-slate-300">
                             <span>{{ $preferenceLabel }}</span>

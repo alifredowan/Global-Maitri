@@ -21,8 +21,8 @@ class SubscriptionController extends Controller
     {
         $user = Auth::user();
 
-        if ($user?->isWali()) {
-            return redirect()->route('wali.dashboard')->with('info', 'Guardian (Wali) accounts are 100% free on Global Nikkah. You do not require a paid subscription.');
+        if ($user?->isWali() || $user?->isFamilyRep()) {
+            return redirect()->route('wali.dashboard')->with('info', 'Family Representative accounts are 100% free on Global Maitri. You do not require a paid subscription.');
         }
 
         $plans = SubscriptionPlan::where('is_active', true)
@@ -50,8 +50,8 @@ class SubscriptionController extends Controller
     ): View|RedirectResponse {
         $user = Auth::user();
 
-        if ($user?->isWali()) {
-            return redirect()->route('wali.dashboard')->with('info', 'Guardian (Wali) accounts are 100% free on Global Nikkah. You do not require a paid subscription.');
+        if ($user?->isWali() || $user?->isFamilyRep()) {
+            return redirect()->route('wali.dashboard')->with('info', 'Family Representative accounts are 100% free on Global Maitri. You do not require a paid subscription.');
         }
 
         $planModel = SubscriptionPlan::where('slug', $plan)
@@ -148,8 +148,8 @@ class SubscriptionController extends Controller
         $billingCycle = $request->input('billing_cycle', 'one_time_marriage') ?: 'one_time_marriage';
         $user = Auth::user();
 
-        if ($user?->isWali()) {
-            return redirect()->route('wali.dashboard')->with('info', 'Guardian (Wali) accounts are 100% free on Global Nikkah. You do not require a paid subscription.');
+        if ($user?->isWali() || $user?->isFamilyRep()) {
+            return redirect()->route('wali.dashboard')->with('info', 'Family Representative accounts are 100% free on Global Maitri. You do not require a paid subscription.');
         }
 
         $planModel = SubscriptionPlan::where('slug', $request->plan)
