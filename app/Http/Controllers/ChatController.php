@@ -1,0 +1,388 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Events\MessageSentEvent;
+use App\Models\AuditLog;
+use App\Models\Conversation;
+use App\Models\ConversationParticipant;
+use App\Models\Interest;
+use App\Models\Marriage;
+use App\Models\Message;
+use App\Models\Report;
+use App\Models\User;
+use App\Models\WaliLink;
+use App\Notifications\NewChatMessageNotification;
+use App\Services\MessageModerationService;
+use App\Services\WaliWorkflowService;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\Rule;
+use Illuminate\View\View;
+
+class ChatController extends Controller
+{
+    public function __construct(
+        protected MessageModerationService $moderationService,
+        protected WaliWorkflowService $waliService
+    ) {}
+
+    public function index(): View
+    {
+        $user = Auth::user();
+
+        // If current user is a Wali, ensure they are synced as chaperone to all of their wards' conversations
+        $wardIds = WaliLink::where(function ($q) use ($user) {
+            $q->where('wali_user_id', $user->id)
+                ->orWhere('wali_email', $user->email);
+        })
+            ->where('status', 'active')
+            ->pluck('seeker_user_id');
+
+        if ($wardIds->isNotEmpty()) {
+            $wardConversations = Conversation::whereHas('participants', function ($q) use ($wardIds) {
+                $q->whereIn('conversation_participants.user_id', $wardIds);
+            })->get();
+
+            foreach ($wardConversations as $wc) {
+                ConversationParticipant::firstOrCreate([
+                    'conversation_id' => $wc->id,
+                    'user_id' => $user->id,
+                ], [
+                    'role' => 'wali_chaperone',
+                ]);
+            }
+        }
+
+        $conversations = Conversation::whereHas('participants', function ($q) use ($user) {
+            $q->where('conversation_participants.user_id', $user->id);
+        })->with(['participants.profile.primaryPhoto', 'latestMessage', 'interest.recipient.profile', 'interest.sender.profile'])
+            ->latest('updated_at')
+            ->get();
+
+        $conversations = $conversations->reject(
+            fn (Conversation $conversation): bool => $this->hasBlockedParticipant($conversation, $user)
+        )->values();
+
+        return view('chat.index', compact('conversations'));
+    }
+
+    public function openWithUser(int $userId): RedirectResponse
+    {
+        $currentUser = Auth::user();
+        $targetUser = User::findOrFail($userId);
+
+        if ($currentUser->id === $targetUser->id) {
+            return redirect()->route('dashboard');
+        }
+
+        if ($currentUser->hasBlockedRelationshipWith($targetUser)) {
+            return redirect()->route('discovery.index')->with('error', 'Communication is unavailable because of a block.');
+        }
+
+        // Check if an existing conversation exists between these two users
+        $conversation = Conversation::whereHas('participants', function ($q) use ($currentUser) {
+            $q->where('conversation_participants.user_id', $currentUser->id);
+        })->whereHas('participants', function ($q) use ($targetUser) {
+            $q->where('conversation_participants.user_id', $targetUser->id);
+        })->first();
+
+        if (! $conversation) {
+            // Find accepted mutual interest
+            $interest = Interest::where('status', 'accepted')
+                ->where(function ($q) use ($currentUser, $targetUser) {
+                    $q->where(function ($sub) use ($currentUser, $targetUser) {
+                        $sub->where('sender_id', $currentUser->id)->where('recipient_id', $targetUser->id);
+                    })->orWhere(function ($sub) use ($currentUser, $targetUser) {
+                        $sub->where('sender_id', $targetUser->id)->where('recipient_id', $currentUser->id);
+                    });
+                })->first();
+
+            if ($interest) {
+                $conversation = $this->waliService->createOrUnlockConversation($interest);
+            }
+        }
+
+        if ($conversation) {
+            return redirect()->route('chat.show', $conversation->id);
+        }
+
+        return redirect()->route('discovery.show', $targetUser->id)
+            ->with('info', 'Halal messaging unlocks once an Interest request is mutually accepted.');
+    }
+
+    public function show(int $conversationId): View|RedirectResponse
+    {
+        $user = Auth::user();
+
+        $conversation = Conversation::with([
+            'participants.profile.primaryPhoto',
+            'messages.sender',
+            'interest',
+        ])->findOrFail($conversationId);
+
+        // Ensure active Walis of all seekers in this conversation are added as chaperone participants
+        $this->waliService->ensureWaliParticipants($conversation);
+        $conversation->load('participants.profile.primaryPhoto');
+
+        // Security check: must be a direct participant, active Wali of a participant, or admin/mod
+        $isParticipant = $conversation->participants->contains('id', $user->id);
+        if (! $isParticipant) {
+            $participantIds = $conversation->participants->pluck('id');
+            $isWaliOfParticipant = WaliLink::whereIn('seeker_user_id', $participantIds)
+                ->where(function ($q) use ($user) {
+                    $q->where('wali_user_id', $user->id)
+                        ->orWhere('wali_email', $user->email);
+                })
+                ->where('status', 'active')
+                ->exists();
+
+            if ($isWaliOfParticipant) {
+                ConversationParticipant::firstOrCreate([
+                    'conversation_id' => $conversation->id,
+                    'user_id' => $user->id,
+                ], [
+                    'role' => 'wali_chaperone',
+                ]);
+                $conversation->load('participants.profile.primaryPhoto');
+                $isParticipant = true;
+            }
+        }
+
+        if (! $isParticipant && ! $user->isAdmin() && ! $user->isModerator()) {
+            return redirect()->route('chat.index')->with('error', 'You are not a participant in this conversation.');
+        }
+
+        if ($this->hasBlockedParticipant($conversation, $user)) {
+            return redirect()->route('chat.index')->with('error', 'This conversation is unavailable because one of the profiles has been blocked.');
+        }
+
+        // Mark messages as read for this participant
+        ConversationParticipant::where('conversation_id', $conversationId)
+            ->where('user_id', $user->id)
+            ->update(['last_read_at' => now()]);
+
+        // Check if there is a Wali chaperone observer in this conversation
+        $waliObserver = $conversation->participants->firstWhere('pivot.role', 'wali_chaperone');
+        $otherUser = $conversation->getOtherParticipant($user);
+
+        $marriage = null;
+        if ($otherUser) {
+            $marriage = Marriage::where(function ($q) use ($user, $otherUser) {
+                $q->where('groom_id', $user->id)->where('bride_id', $otherUser->id);
+            })->orWhere(function ($q) use ($user, $otherUser) {
+                $q->where('groom_id', $otherUser->id)->where('bride_id', $user->id);
+            })->first();
+        }
+
+        return view('chat.show', compact('conversation', 'otherUser', 'waliObserver', 'marriage'));
+    }
+
+    public function sendMessage(Request $request, int $conversationId): RedirectResponse|JsonResponse
+    {
+        $request->validate([
+            'body' => ['required', 'string', 'max:2000'],
+        ]);
+
+        $user = Auth::user();
+        $conversation = Conversation::with('participants')->findOrFail($conversationId);
+
+        // Ensure active Walis are attached as chaperone participants
+        $this->waliService->ensureWaliParticipants($conversation);
+        $conversation->load('participants');
+
+        // Security check: must be a participant, authorized wali, or admin
+        $isParticipant = $conversation->participants->contains('id', $user->id);
+        if (! $isParticipant) {
+            $participantIds = $conversation->participants->pluck('id');
+            $isWaliOfParticipant = WaliLink::whereIn('seeker_user_id', $participantIds)
+                ->where(function ($q) use ($user) {
+                    $q->where('wali_user_id', $user->id)
+                        ->orWhere('wali_email', $user->email);
+                })
+                ->where('status', 'active')
+                ->exists();
+
+            if ($isWaliOfParticipant) {
+                ConversationParticipant::firstOrCreate([
+                    'conversation_id' => $conversation->id,
+                    'user_id' => $user->id,
+                ], [
+                    'role' => 'wali_chaperone',
+                ]);
+                $conversation->load('participants');
+                $isParticipant = true;
+            }
+        }
+
+        if (! $isParticipant && ! $user->isAdmin() && ! $user->isModerator()) {
+            if ($request->wantsJson() || $request->ajax()) {
+                return response()->json(['error' => 'You are not a participant in this conversation.'], 403);
+            }
+
+            return redirect()->route('chat.index')->with('error', 'You are not a participant in this conversation.');
+        }
+
+        if ($this->hasBlockedParticipant($conversation, $user)) {
+            $message = 'This conversation is unavailable because one of the profiles has been blocked.';
+            if ($request->wantsJson() || $request->ajax()) {
+                return response()->json(['error' => $message], 403);
+            }
+
+            return redirect()->route('chat.index')->with('error', $message);
+        }
+
+        // Prevent sending messages in locked/archived conversations
+        if ($conversation->status === 'locked') {
+            $msg = 'This conversation is locked ('.($conversation->locked_reason ? str_replace('_', ' ', $conversation->locked_reason) : 'closed').').';
+            if ($request->wantsJson() || $request->ajax()) {
+                return response()->json(['error' => $msg], 403);
+            }
+
+            return back()->with('error', $msg);
+        }
+
+        // If Wali has view_only permission, prevent them from sending
+        $myPivot = $conversation->participants->firstWhere('id', $user->id)?->pivot;
+        if ($myPivot && $myPivot->role === 'wali_chaperone') {
+            $waliLink = WaliLink::where('wali_user_id', $user->id)
+                ->whereIn('seeker_user_id', $conversation->participants->pluck('id'))
+                ->where('permission_level', 'view_only')
+                ->first();
+
+            if ($waliLink) {
+                if ($request->wantsJson() || $request->ajax()) {
+                    return response()->json(['error' => 'Your guardian permission is set to View Only.'], 403);
+                }
+
+                return back()->with('error', 'Your guardian permission is set to View Only.');
+            }
+        }
+
+        if ($conversation->isLocked()) {
+            if ($request->wantsJson() || $request->ajax()) {
+                return response()->json(['error' => 'This conversation has been locked.'], 403);
+            }
+
+            return back()->with('error', 'This conversation has been locked.');
+        }
+
+        // Run through safety and contact scanning (FR-4.4, 6.5)
+        $scanResult = $this->moderationService->scan($request->body);
+
+        $message = Message::create([
+            'conversation_id' => $conversation->id,
+            'sender_id' => $user->id,
+            'body' => $scanResult['sanitized_body'],
+            'is_flagged' => $scanResult['is_flagged'],
+            'flag_reason' => $scanResult['flag_reason'],
+        ]);
+
+        $conversation->touch();
+
+        // 1. Broadcast MessageSentEvent over Reverb WebSocket (safeguarded)
+        try {
+            broadcast(new MessageSentEvent($message))->toOthers();
+        } catch (\Throwable $e) {
+            Log::warning('Reverb message broadcast failed: '.$e->getMessage());
+        }
+
+        // 2. Dispatch notifications to all other participants (seekers & chaperone walis)
+        foreach ($conversation->participants as $participant) {
+            if ($participant->id !== $user->id) {
+                try {
+                    $isChaperone = ($participant->pivot->role === 'wali_chaperone');
+                    $participant->notify(new NewChatMessageNotification(
+                        message: $message,
+                        targetUserId: $participant->id,
+                        isWali: $isChaperone
+                    ));
+                } catch (\Throwable $e) {
+                    Log::warning('Chat message notification failed: '.$e->getMessage());
+                }
+            }
+        }
+
+        if ($scanResult['is_flagged']) {
+            AuditLog::record($user->id, 'message_flagged', 'Message', $message->id, [
+                'reason' => $scanResult['flag_reason'],
+            ]);
+
+            if ($request->wantsJson() || $request->ajax()) {
+                return response()->json([
+                    'success' => true,
+                    'is_flagged' => true,
+                    'flag_reason' => $scanResult['flag_reason'],
+                    'message' => [
+                        'id' => $message->id,
+                        'sender_id' => $message->sender_id,
+                        'sender_name' => $user->name,
+                        'body' => $message->body,
+                        'created_at' => $message->created_at->format('g:i A'),
+                    ],
+                ]);
+            }
+
+            return back()->with('warning', 'Notice: Global Nikkah privacy filters detected potential contact information or prohibited keywords ('.$scanResult['flag_reason'].'). Sharing external contacts before platform verification is restricted (FR-4.4).');
+        }
+
+        if ($request->wantsJson() || $request->ajax()) {
+            return response()->json([
+                'success' => true,
+                'is_flagged' => false,
+                'message' => [
+                    'id' => $message->id,
+                    'sender_id' => $message->sender_id,
+                    'sender_name' => $user->name,
+                    'body' => $message->body,
+                    'created_at' => $message->created_at->format('g:i A'),
+                ],
+            ]);
+        }
+
+        return back();
+    }
+
+    private function hasBlockedParticipant(Conversation $conversation, User $user): bool
+    {
+        return $conversation->participants
+            ->filter(fn (User $participant): bool => $participant->isSeeker() && $participant->id !== $user->id)
+            ->contains(fn (User $participant): bool => $user->hasBlockedRelationshipWith($participant));
+    }
+
+    public function reportUser(Request $request): RedirectResponse
+    {
+        $user = Auth::user();
+
+        $request->validate([
+            'reported_id' => ['required', 'exists:users,id', Rule::notIn([$user->id])],
+            'reason' => ['required', 'string', 'max:100'],
+            'details' => ['nullable', 'string', 'max:1000'],
+            'conversation_id' => [
+                'nullable',
+                Rule::exists('conversation_participants', 'conversation_id')->where('user_id', $user->id),
+            ],
+        ], [
+            'reported_id.not_in' => 'You cannot report yourself.',
+            'conversation_id.exists' => 'That conversation could not be found.',
+        ]);
+
+        Report::create([
+            'reporter_id' => $user->id,
+            'reported_id' => $request->reported_id,
+            'conversation_id' => $request->conversation_id,
+            'reason' => $request->reason,
+            'details' => $request->details,
+            'status' => 'pending',
+        ]);
+
+        AuditLog::record($user->id, 'user_reported', 'User', $request->reported_id, [
+            'reason' => $request->reason,
+        ]);
+
+        return back()->with('success', 'User report submitted to platform moderation team (FR-4.6, 7.2). We will review this report within 24 hours.');
+    }
+}

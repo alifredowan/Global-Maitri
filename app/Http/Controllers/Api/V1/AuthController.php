@@ -1,0 +1,175 @@
+<?php
+
+namespace App\Http\Controllers\Api\V1;
+
+use App\Http\Controllers\Controller;
+use App\Models\AuditLog;
+use App\Models\Profile;
+use App\Models\Subscription;
+use App\Models\User;
+use Carbon\Carbon;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Password;
+use Propaganistas\LaravelPhone\Rules\Phone;
+
+class AuthController extends Controller
+{
+    public function register(Request $request): JsonResponse
+    {
+        $maxBirthDate = Carbon::now()->subYears(18)->toDateString();
+
+        $normalizedEmail = strtolower(trim((string) $request->input('email')));
+        $normalizedPhone = $request->filled('phone') ? trim((string) $request->input('phone')) : null;
+
+        $request->merge([
+            'email' => $normalizedEmail,
+            'phone' => $normalizedPhone,
+        ]);
+
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => [
+                'required',
+                'email',
+                Rule::unique('users', 'email')->where(function ($query) use ($normalizedEmail) {
+                    return $query->whereRaw('LOWER(email) = ?', [$normalizedEmail]);
+                }),
+            ],
+            'phone' => ['nullable', 'string', (new Phone)->international(), 'unique:users,phone'],
+            'gender' => ['required', 'in:male,female'],
+            'dob' => ['required', function (string $attribute, mixed $value, \Closure $fail): void {
+                if (! $value) {
+                    $fail('The date of birth field is required.');
+
+                    return;
+                }
+                try {
+                    $parsed = str_contains((string) $value, '/')
+                        ? Carbon::createFromFormat('d/m/Y', (string) $value)->startOfDay()
+                        : Carbon::parse((string) $value)->startOfDay();
+                } catch (\Throwable) {
+                    $fail('Please enter the date of birth in dd/mm/yyyy format.');
+
+                    return;
+                }
+
+                if ($parsed->gt(Carbon::now()->subYears(18)->startOfDay())) {
+                    $fail('You must be at least 18 years old to register.');
+                }
+            }],
+            'marital_status' => ['required', 'in:never_married,divorced,widowed,annulled'],
+            'password' => ['required', Password::defaults()],
+        ], [
+            'email.unique' => 'An account with this email address already exists. Please sign in or use forgot password.',
+        ]);
+
+        $normalizedPhoneNumber = $validated['phone'] ? phone($validated['phone'])->formatE164() : null;
+
+        $user = User::create([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'phone' => $normalizedPhoneNumber,
+            'gender' => $validated['gender'],
+            'dob' => str_contains((string) $validated['dob'], '/')
+                ? Carbon::createFromFormat('d/m/Y', (string) $validated['dob'])->toDateString()
+                : Carbon::parse((string) $validated['dob'])->toDateString(),
+            'marital_status' => $validated['marital_status'],
+            'password' => Hash::make($validated['password']),
+            'role' => 'seeker',
+            'is_active' => true,
+            'email_verified_at' => now(),
+        ]);
+
+        Profile::create([
+            'user_id' => $user->id,
+            'wali_required' => ($validated['gender'] === 'female'),
+        ]);
+
+        Subscription::create([
+            'user_id' => $user->id,
+            'plan' => 'free',
+            'status' => 'active',
+            'starts_at' => now(),
+        ]);
+
+        $token = $user->createToken('auth-token')->plainTextToken;
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'User registered successfully',
+            'token' => $token,
+            'user' => $user->load('profile'),
+        ], 201);
+    }
+
+    public function login(Request $request): JsonResponse
+    {
+        $normalizedEmail = strtolower(trim((string) $request->input('email')));
+        $request->merge(['email' => $normalizedEmail]);
+
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
+
+        $user = User::whereRaw('LOWER(email) = ?', [$normalizedEmail])->first();
+
+        if (! $user || ! Hash::check($credentials['password'], $user->password)) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Invalid email or password',
+            ], 401);
+        }
+
+        if (! $user->is_active) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Account deactivated or suspended',
+            ], 403);
+        }
+
+        $token = $user->createToken('auth-token')->plainTextToken;
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Login successful',
+            'token' => $token,
+            'user' => $user->load('profile'),
+        ]);
+    }
+
+    public function me(Request $request): JsonResponse
+    {
+        return response()->json([
+            'status' => 'success',
+            'user' => $request->user()->load(['profile.photos', 'activeSubscription']),
+        ]);
+    }
+
+    public function logout(Request $request): JsonResponse
+    {
+        $user = $request->user();
+        AuditLog::record($user->id, 'api_session_revoked');
+        $request->user()->currentAccessToken()?->delete();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Logged out successfully',
+        ]);
+    }
+
+    public function logoutAll(Request $request): JsonResponse
+    {
+        $user = $request->user();
+        $user->tokens()->delete();
+        AuditLog::record($user->id, 'api_sessions_revoked');
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'All API sessions have been revoked',
+        ]);
+    }
+}

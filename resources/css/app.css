@@ -1,0 +1,192 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../views/**/*.blade.php';
+
+@theme {
+    --font-sans: 'Outfit', 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+    --color-rose-950: #4c0519;
+    --color-rose-900: #881337;
+    --color-rose-800: #9f1239;
+    --color-rose-700: #be123c;
+    --color-rose-600: #e11d48;
+    --color-rose-500: #f43f5e;
+    --color-rose-100: #ffe4e6;
+    --color-rose-50: #fff1f2;
+
+    --color-gold-900: #78350f;
+    --color-gold-700: #b45309;
+    --color-gold-600: #d97706;
+    --color-gold-500: #f59e0b;
+    --color-gold-400: #fbbf24;
+    --color-gold-100: #fef3c7;
+    --color-gold-50: #fffbeb;
+}
+
+[x-cloak] {
+    display: none !important;
+}
+
+/* Smooth UI & Mindful Transitions for Global Maitri */
+html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #e11d48;
+}
+.dark ::-webkit-scrollbar-thumb {
+    background: #334155;
+}
+.dark ::-webkit-scrollbar-thumb:hover {
+    background: #f43f5e;
+}
+
+.smooth-card {
+    transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease;
+}
+.smooth-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 16px 32px -10px rgba(225, 29, 72, 0.16), 0 4px 10px -2px rgba(0, 0, 0, 0.04);
+}
+.dark .smooth-card:hover {
+    box-shadow: 0 16px 32px -10px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(244, 63, 94, 0.25);
+}
+
+.smooth-badge {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.lotus-pattern {
+    background-color: #881337;
+    background-image: radial-gradient(#f43f5e 0.75px, transparent 0.75px), radial-gradient(#fb7185 0.75px, #881337 0.75px);
+    background-size: 30px 30px;
+    background-position: 0 0, 15px 15px;
+}
+
+.lotus-pattern-light {
+    background-color: #fdf2f8;
+    background-image: radial-gradient(#fbcfe8 0.75px, transparent 0.75px), radial-gradient(#fce7f3 0.75px, #fdf2f8 0.75px);
+    background-size: 24px 24px;
+    background-position: 0 0, 12px 12px;
+}
+
+/* ==========================================================================
+   4 MINDFUL MOODS (THEMES):
+   1. Lotus Dawn (Metta)      - Clean Slate, Lotus Pink & Rose
+   2. Bodhi Night (Shanti)    - Deep Midnight Slate (.dark)
+   3. Saffron Sangha (Dhamma) - Warm Saffron Gold & Burgundy (.theme-emerald)
+   4. Zen Sand (Mindfulness)  - Warm Parchment, Bamboo & Stone (.theme-sand)
+   ========================================================================== */
+
+/* 3. SAFFRON SANGHA MOOD */
+html.theme-emerald {
+    color-scheme: dark;
+}
+html.theme-emerald body {
+    background-color: #26130b !important;
+    color: #fef3c7 !important;
+}
+html.theme-emerald header.sticky {
+    background-color: rgba(43, 21, 12, 0.95) !important;
+    border-color: #5c2d18 !important;
+}
+html.theme-emerald aside {
+    background-color: #1f0e08 !important;
+    border-color: #5c2d18 !important;
+}
+html.theme-emerald .bg-white,
+html.theme-emerald .dark\:bg-slate-900,
+html.theme-emerald .bg-slate-900 {
+    background-color: #3b1b0e !important;
+    border-color: #69331c !important;
+}
+html.theme-emerald .bg-slate-50,
+html.theme-emerald .dark\:bg-slate-950,
+html.theme-emerald .bg-slate-950 {
+    background-color: #26130b !important;
+}
+html.theme-emerald .bg-slate-100,
+html.theme-emerald .dark\:bg-slate-800,
+html.theme-emerald .bg-slate-800 {
+    background-color: #4a2312 !important;
+    border-color: #78391f !important;
+}
+html.theme-emerald .border-slate-200,
+html.theme-emerald .border-slate-700,
+html.theme-emerald .border-slate-800,
+html.theme-emerald .dark\:border-slate-800,
+html.theme-emerald .dark\:border-slate-700 {
+    border-color: #69331c !important;
+}
+html.theme-emerald .text-slate-900,
+html.theme-emerald .dark\:text-white,
+html.theme-emerald .text-slate-800,
+html.theme-emerald .dark\:text-slate-100 {
+    color: #ffffff !important;
+}
+html.theme-emerald .text-slate-600,
+html.theme-emerald .text-slate-500,
+html.theme-emerald .text-slate-400,
+html.theme-emerald .dark\:text-slate-400,
+html.theme-emerald .dark\:text-slate-300 {
+    color: #fed7aa !important;
+}
+
+/* 4. ZEN SAND & PARCHMENT MOOD */
+html.theme-sand {
+    color-scheme: light;
+}
+html.theme-sand body {
+    background-color: #faf6ee !important;
+    color: #2b2016 !important;
+}
+html.theme-sand header.sticky {
+    background-color: rgba(255, 255, 255, 0.96) !important;
+    border-color: #e5dac7 !important;
+}
+html.theme-sand aside {
+    background-color: #211913 !important;
+    border-color: #382c23 !important;
+}
+html.theme-sand aside .text-slate-300 {
+    color: #d6c5b4 !important;
+}
+html.theme-sand .bg-white {
+    background-color: #ffffff !important;
+    border-color: #e6dbcb !important;
+}
+html.theme-sand .bg-slate-50 {
+    background-color: #faf6ee !important;
+}
+html.theme-sand .bg-slate-100 {
+    background-color: #f3ece0 !important;
+    border-color: #e3d7c5 !important;
+}
+html.theme-sand .border-slate-200,
+html.theme-sand .border-slate-100 {
+    border-color: #e6dbcb !important;
+}
+html.theme-sand .text-slate-900,
+html.theme-sand .text-slate-800 {
+    color: #241b13 !important;
+}
+html.theme-sand .text-slate-600 {
+    color: #5c4a3b !important;
+}

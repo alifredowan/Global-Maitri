@@ -1,0 +1,225 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\AuditLog;
+use App\Models\PlatformSetting;
+use App\Models\Profile;
+use App\Models\User;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Password;
+use Illuminate\View\View;
+
+class SettingsController extends Controller
+{
+    /**
+     * Display the settings management view for Super Admins and Normal Users.
+     */
+    public function index(): View
+    {
+        /** @var User $user */
+        $user = Auth::user();
+        $profile = null;
+
+        if ($user->isSeeker() || $user->isWali()) {
+            $profile = $user->profile ?? Profile::firstOrCreate(['user_id' => $user->id]);
+        }
+
+        $platformSettings = null;
+        if ($user->isSuperAdmin() || $user->hasPermission('manage_settings')) {
+            $platformSettings = PlatformSetting::all();
+        }
+
+        return view('settings.index', compact('user', 'profile', 'platformSettings'));
+    }
+
+    /**
+     * Update account and profile data (Name, Email, Phone, Demographics).
+     */
+    public function updateProfile(Request $request): RedirectResponse
+    {
+        /** @var User $user */
+        $user = Auth::user();
+
+        $rules = [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => [
+                'required',
+                'string',
+                'email:rfc',
+                'max:255',
+                Rule::unique('users', 'email')->ignore($user->id),
+            ],
+            'phone' => ['nullable', 'string', 'max:25'],
+        ];
+
+        if ($user->isSeeker()) {
+            $rules['gender'] = ['nullable', 'in:male,female'];
+            $rules['dob'] = ['nullable', function (string $attribute, mixed $value, \Closure $fail): void {
+                if (! $value) {
+                    return;
+                }
+                try {
+                    $parsed = str_contains((string) $value, '/')
+                        ? Carbon::createFromFormat('d/m/Y', (string) $value)->startOfDay()
+                        : Carbon::parse((string) $value)->startOfDay();
+                } catch (\Throwable) {
+                    $fail('Please enter the date of birth in dd/mm/yyyy format.');
+
+                    return;
+                }
+
+                if ($parsed->gt(Carbon::now()->subYears(18)->startOfDay())) {
+                    $fail('You must be at least 18 years old to use this platform.');
+                }
+            }];
+            $rules['marital_status'] = ['nullable', 'string', 'in:never_married,divorced,widowed,annulled'];
+            $rules['bio'] = ['nullable', 'string', 'max:1000'];
+            $rules['city'] = ['nullable', 'string', 'max:100'];
+            $rules['country'] = ['nullable', 'string', 'max:100'];
+        }
+
+        $validated = $request->validate($rules, [
+            'email.unique' => 'This email address is already in use by another account.',
+        ]);
+
+        $userData = [
+            'name' => $validated['name'],
+            'email' => strtolower(trim($validated['email'])),
+            'phone' => $validated['phone'] ?? null,
+        ];
+        $emailChanged = $user->email !== $userData['email'];
+
+        if ($emailChanged) {
+            $userData['email_verified_at'] = null;
+        }
+
+        if ($user->isSeeker()) {
+            if (isset($validated['gender'])) {
+                $userData['gender'] = $validated['gender'];
+            }
+            if (array_key_exists('dob', $validated)) {
+                if ($validated['dob']) {
+                    $userData['dob'] = str_contains((string) $validated['dob'], '/')
+                        ? Carbon::createFromFormat('d/m/Y', (string) $validated['dob'])->toDateString()
+                        : Carbon::parse((string) $validated['dob'])->toDateString();
+                } else {
+                    $userData['dob'] = null;
+                }
+            }
+            if (isset($validated['marital_status'])) {
+                $userData['marital_status'] = $validated['marital_status'];
+            }
+
+            // Update seeker profile fields
+            $profile = $user->profile ?? Profile::create(['user_id' => $user->id]);
+            $profile->update([
+                'bio' => $validated['bio'] ?? $profile->bio,
+                'city' => $validated['city'] ?? $profile->city,
+                'country' => $validated['country'] ?? $profile->country,
+            ]);
+            $profile->updateCompleteness();
+        }
+
+        $user->update($userData);
+
+        if ($emailChanged) {
+            $user->tokens()->delete();
+            $user->sendEmailVerificationNotification();
+        }
+
+        AuditLog::record($user->id, 'account_data_updated', 'User', $user->id, [
+            'name' => $user->name,
+            'email' => $user->email,
+        ]);
+
+        $message = $emailChanged
+            ? 'Your account details were updated. Please verify your new email address to continue using the platform.'
+            : 'Your personal account information has been updated successfully.';
+
+        return back()->with('success', $message);
+    }
+
+    /**
+     * Update user password with current password verification.
+     */
+    public function updatePassword(Request $request): RedirectResponse
+    {
+        /** @var User $user */
+        $user = Auth::user();
+
+        $request->validate([
+            'current_password' => ['required', 'string', 'current_password'],
+            'password' => ['required', 'confirmed', Password::defaults()],
+        ], [
+            'current_password.current_password' => 'The provided current password does not match our records.',
+            'password.confirmed' => 'The new password confirmation does not match.',
+        ]);
+
+        $user->update([
+            'password' => Hash::make($request->password),
+        ]);
+        $user->tokens()->delete();
+
+        AuditLog::record($user->id, 'account_password_updated', 'User', $user->id);
+
+        return back()->with('success', 'Your password has been changed successfully.');
+    }
+
+    public function revokeApiSessions(): RedirectResponse
+    {
+        /** @var User $user */
+        $user = Auth::user();
+        $user->tokens()->delete();
+
+        AuditLog::record($user->id, 'api_sessions_revoked');
+
+        return back()->with('success', 'All API sessions have been revoked.');
+    }
+
+    /**
+     * Update user privacy and matrimonial preferences.
+     */
+    public function updatePreferences(Request $request): RedirectResponse
+    {
+        /** @var User $user */
+        $user = Auth::user();
+
+        $section = $request->string('section', 'privacy')->toString();
+        $notificationPreferenceKeys = [
+            'email_notifications',
+            'interest_notifications',
+            'message_notifications',
+            'wali_notifications',
+            'saved_search_notifications',
+            'marriage_notifications',
+        ];
+        $notificationPreferences = collect($notificationPreferenceKeys)
+            ->mapWithKeys(fn (string $key): array => [$key => $request->boolean($key)])
+            ->all();
+
+        if ($section === 'notifications') {
+            $user->update(['notification_preferences' => $notificationPreferences]);
+        } else {
+            $isIncognito = $request->boolean('is_incognito');
+            $user->update(['is_incognito' => $isIncognito]);
+
+            if ($user->isSeeker() && $user->profile) {
+                $user->profile->update([
+                    'wali_required' => $request->boolean('wali_required'),
+                ]);
+            }
+        }
+
+        AuditLog::record($user->id, 'account_preferences_updated', 'User', $user->id, $section === 'notifications'
+            ? ['notification_preferences' => $notificationPreferences]
+            : ['is_incognito' => $user->is_incognito]);
+
+        return back()->with('success', 'Your preferences have been saved successfully.');
+    }
+}

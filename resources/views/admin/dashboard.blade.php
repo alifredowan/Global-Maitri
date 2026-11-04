@@ -1,0 +1,234 @@
+@extends('layouts.app')
+
+@section('title', 'Admin Dashboard - Global Nikkah')
+@section('page_title', 'Dashboard Overview')
+
+@section('content')
+<div class="py-6 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-8">
+
+        <!-- Top Atmospheric Banner (Vivah Style) -->
+        <div class="bg-gradient-to-r from-emerald-950 via-emerald-900 to-slate-950 rounded-3xl p-6 sm:p-8 text-white shadow-md border border-emerald-900/40 relative overflow-hidden">
+            <div class="absolute inset-0 opacity-15 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>
+            <div class="relative flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div>
+                    <div class="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-semibold uppercase tracking-wider mb-2">
+                        <span>🛡️</span>
+                        <span>Trust & Operations Center</span>
+                    </div>
+                    <h1 class="font-heading font-extrabold text-2xl sm:text-3xl text-white">
+                        Administrative & Safety Operations
+                    </h1>
+                    <p class="text-xs text-emerald-100/80 mt-1 max-w-2xl">
+                        Platform governance, KYC verification queue, reports handling, and immutable audit logs (FR-7.1 - 7.5).
+                    </p>
+                </div>
+                <div class="flex items-center gap-2 self-start sm:self-center shrink-0">
+                    <span class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-white/10 backdrop-blur-md text-emerald-200 border border-white/15">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                        System Operational
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Metrics Grid (FR-7.4) -->
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+            <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xs">
+                <span class="text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider block mb-1">Total Users</span>
+                <span class="text-2xl font-extrabold text-slate-900 dark:text-white font-heading">{{ $metrics['total_users'] }}</span>
+                <span class="text-[10px] text-slate-500 dark:text-slate-400 block mt-1">{{ $metrics['seekers'] }} Seekers • {{ $metrics['walis'] }} Walis</span>
+            </div>
+
+            <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xs">
+                <span class="text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider block mb-1">KYC Verified</span>
+                <span class="text-2xl font-extrabold text-blue-600 dark:text-blue-400 font-heading">{{ $metrics['verified_users'] }}</span>
+                <span class="text-[10px] text-slate-500 dark:text-slate-400 block mt-1">{{ $metrics['pending_verifications'] }} pending review</span>
+            </div>
+
+            <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xs">
+                <span class="text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider block mb-1">Active Chats</span>
+                <span class="text-2xl font-extrabold text-emerald-600 dark:text-emerald-400 font-heading">{{ $metrics['active_conversations'] }}</span>
+                <span class="text-[10px] text-slate-500 dark:text-slate-400 block mt-1">Chaperoned sessions</span>
+            </div>
+
+            <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xs">
+                <span class="text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider block mb-1">Active Reports</span>
+                <span class="text-2xl font-extrabold text-rose-600 dark:text-rose-400 font-heading">{{ $metrics['pending_reports'] }}</span>
+                <span class="text-[10px] text-slate-500 dark:text-slate-400 block mt-1">&lt; 24hr SLA target</span>
+            </div>
+
+            <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xs">
+                <span class="text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider block mb-1">Paid Members</span>
+                <span class="text-2xl font-extrabold text-amber-600 dark:text-amber-400 font-heading">{{ $metrics['paying_subscribers'] }}</span>
+                <span class="text-[10px] text-slate-500 dark:text-slate-400 block mt-1">Premium / VIP</span>
+            </div>
+
+            <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xs">
+                <span class="text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider block mb-1">Total Revenue</span>
+                <span class="text-2xl font-extrabold text-slate-900 dark:text-white font-heading">${{ number_format($metrics['total_revenue'], 2) }}</span>
+                <span class="text-[10px] text-slate-500 dark:text-slate-400 block mt-1">Stripe tokenized</span>
+            </div>
+        </div>
+
+        <!-- Subscription Packages & Promo Codes Quick Access (Super Admin) -->
+        <div class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-6 shadow-xs space-y-4">
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-3 border-b border-slate-100 dark:border-slate-800">
+                <div>
+                    <h2 class="text-base font-bold text-slate-900 dark:text-white font-heading flex items-center gap-2">
+                        <span>💎 Subscription Packaging & Promo System</span>
+                    </h2>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Manage live subscription tiers, configure daily limits & feature flags, and create promo codes with special VIP user discounts.</p>
+                </div>
+                <div class="flex items-center gap-2 flex-wrap">
+                    <a href="{{ route('admin.packages.index') }}" class="px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs transition shadow-sm flex items-center gap-1.5">
+                        <span>💳</span> Setup Packages ({{ $metrics['active_packages'] ?? 0 }} Active)
+                    </a>
+                    <a href="{{ route('admin.promo-codes.index') }}" class="px-3.5 py-2 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs transition shadow-sm flex items-center gap-1.5">
+                        <span>🏷️</span> Generate Promo Codes ({{ $metrics['active_promo_codes'] ?? 0 }} Active)
+                    </a>
+                    <a href="{{ route('admin.payment-settings') }}" class="px-3.5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs transition shadow-sm flex items-center gap-1.5">
+                        <span>💰</span> Payment Gateways
+                    </a>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- Dynamic Package Setup Box -->
+                <div class="p-4 rounded-2xl bg-emerald-50/60 dark:bg-emerald-950/30 border border-emerald-200/80 dark:border-emerald-800/60 flex flex-col justify-between space-y-3">
+                    <div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-extrabold text-emerald-800 dark:text-emerald-300 uppercase tracking-wider">Dynamic Package Generator</span>
+                            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 dark:bg-emerald-900/60 text-emerald-800 dark:text-emerald-200">{{ $metrics['active_packages'] ?? 0 }} Live Tiers</span>
+                        </div>
+                        <p class="text-xs text-slate-600 dark:text-slate-300 mt-1.5">
+                            Super admin can setup custom packages with monthly/annual pricing, custom daily limits (views, interests), search boost, and custom highlight badges.
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-2 pt-2 border-t border-emerald-200/60 dark:border-emerald-900/40">
+                        <a href="{{ route('admin.packages.index') }}" class="text-xs font-bold text-emerald-700 dark:text-emerald-400 hover:underline flex items-center gap-1">
+                            Go to Package Setup Screen &rarr;
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Targeted Promo Code Box -->
+                <div class="p-4 rounded-2xl bg-amber-50/60 dark:bg-amber-950/30 border border-amber-200/80 dark:border-amber-800/60 flex flex-col justify-between space-y-3">
+                    <div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-extrabold text-amber-800 dark:text-amber-300 uppercase tracking-wider">Promo Codes & VIP Discounts</span>
+                            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 dark:bg-amber-900/60 text-amber-800 dark:text-amber-200">{{ $metrics['active_promo_codes'] ?? 0 }} Live Codes</span>
+                        </div>
+                        <p class="text-xs text-slate-600 dark:text-slate-300 mt-1.5">
+                            Generate promo codes for specific packages (e.g. Pro package) and assign extra discounts for designated special users (by email) with instant AJAX checkout validation.
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-2 pt-2 border-t border-amber-200/60 dark:border-amber-900/40">
+                        <a href="{{ route('admin.promo-codes.index') }}" class="text-xs font-bold text-amber-700 dark:text-amber-400 hover:underline flex items-center gap-1">
+                            Go to Promo Code Generator Screen &rarr;
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Pending KYC Verification Queue (FR-7.1) -->
+            <div class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-6 shadow-xs space-y-4">
+                <div class="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
+                    <h2 class="text-base font-bold text-slate-900 dark:text-white font-heading">Pending KYC Verifications</h2>
+                    <a href="{{ route('admin.verifications') }}" class="text-xs text-blue-600 dark:text-blue-400 font-bold hover:underline">View All &rarr;</a>
+                </div>
+
+                <div class="space-y-3">
+                    @forelse($recentVerifications as $v)
+                        <div class="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 flex items-center justify-between gap-3 text-xs">
+                            <div>
+                                <strong class="text-slate-900 dark:text-white block font-bold">{{ $v->user->name }}</strong>
+                                <span class="text-slate-500 dark:text-slate-400 capitalize">{{ str_replace('_', ' ', $v->document_type) }} • Submitted {{ $v->created_at->diffForHumans() }}</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <form action="{{ route('admin.verifications.approve', $v->id) }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="px-3 py-1.5 rounded-lg bg-emerald-600 text-white font-bold text-[11px] hover:bg-emerald-700">
+                                        Approve
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    @empty
+                        <p class="text-xs text-slate-400 dark:text-slate-500 text-center py-6">No pending KYC verifications in the queue.</p>
+                    @endforelse
+                </div>
+            </div>
+
+            <!-- Pending User Reports Queue (FR-7.2) -->
+            <div class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-6 shadow-xs space-y-4">
+                <div class="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
+                    <h2 class="text-base font-bold text-slate-900 dark:text-white font-heading">User Reports & Moderation Queue</h2>
+                    <a href="{{ route('admin.reports') }}" class="text-xs text-rose-600 dark:text-rose-400 font-bold hover:underline">View All &rarr;</a>
+                </div>
+
+                <div class="space-y-3">
+                    @forelse($recentReports as $r)
+                        <div class="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 flex items-center justify-between gap-3 text-xs">
+                            <div>
+                                <span class="font-bold text-slate-900 dark:text-white">{{ $r->reported->name }}</span> reported by <span class="text-slate-600 dark:text-slate-400">{{ $r->reporter->name }}</span>
+                                <span class="text-rose-700 dark:text-rose-400 block font-semibold capitalize">{{ str_replace('_', ' ', $r->reason) }}</span>
+                            </div>
+                            <a href="{{ route('admin.reports') }}" class="px-3 py-1.5 rounded-lg bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-200 font-bold text-[11px] hover:bg-slate-300 dark:hover:bg-slate-600">
+                                Review
+                            </a>
+                        </div>
+                    @empty
+                        <p class="text-xs text-slate-400 dark:text-slate-500 text-center py-6">No user reports pending moderation.</p>
+                    @endforelse
+                </div>
+            </div>
+        </div>
+
+        <!-- Immutable Audit Log Summary (FR-7.5) -->
+        <div class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-6 shadow-xs space-y-4">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
+                <div>
+                    <h2 class="text-base font-bold text-slate-900 dark:text-white font-heading">Immutable Platform Audit Trail (FR-7.5)</h2>
+                    <p class="text-xs text-slate-400 dark:text-slate-500">Chronological records of all administrative, moderation, and verification decisions.</p>
+                </div>
+                <a href="{{ route('admin.audit-logs') }}" class="text-xs text-emerald-700 dark:text-emerald-400 font-bold hover:underline">Full Audit Log &rarr;</a>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-xs text-slate-600 dark:text-slate-300">
+                    <thead class="bg-slate-50 dark:bg-slate-800/60 text-slate-700 dark:text-slate-300 uppercase font-bold text-[10px]">
+                        <tr>
+                            <th class="p-3 rounded-l-xl">Timestamp</th>
+                            <th class="p-3">User / Actor</th>
+                            <th class="p-3">Action</th>
+                            <th class="p-3">Target</th>
+                            <th class="p-3">IP Address</th>
+                            <th class="p-3 rounded-r-xl">Details</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+                        @foreach($recentAuditLogs as $log)
+                            <tr class="hover:bg-slate-50/60 dark:hover:bg-slate-800/40">
+                                <td class="p-3 font-mono text-slate-400">{{ $log->created_at->format('d/m/Y H:i') }}</td>
+                                <td class="p-3 font-bold text-slate-900 dark:text-white">{{ $log->user?->name ?? 'System' }}</td>
+                                <td class="p-3">
+                                    <span class="px-2 py-0.5 rounded-md font-mono text-[11px] bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700">
+                                        {{ $log->action }}
+                                    </span>
+                                </td>
+                                <td class="p-3">{{ $log->target_type }} #{{ $log->target_id ?? '-' }}</td>
+                                <td class="p-3 font-mono text-slate-400">{{ $log->ip_address ?? '127.0.0.1' }}</td>
+                                <td class="p-3 truncate max-w-xs text-slate-500 dark:text-slate-400 font-mono text-[10px]">
+                                    {{ $log->details ? json_encode($log->details) : '-' }}
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+@endsection

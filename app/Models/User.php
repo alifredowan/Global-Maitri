@@ -1,0 +1,429 @@
+<?php
+
+namespace App\Models;
+
+use App\Notifications\ResetPasswordNotification;
+use App\Notifications\WelcomeVerificationNotification;
+use Carbon\Carbon;
+use Database\Factories\UserFactory;
+use Illuminate\Auth\MustVerifyEmail as MustVerifyEmailTrait;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
+
+class User extends Authenticatable implements MustVerifyEmail
+{
+    /** @use HasFactory<UserFactory> */
+    use HasApiTokens, HasFactory, MustVerifyEmailTrait, Notifiable, SoftDeletes;
+
+    protected $fillable = [
+        'name',
+        'email',
+        'phone',
+        'phone_verified_at',
+        'email_verified_at',
+        'password',
+        'role',
+        'created_by_role',
+        'country_code',
+        'permissions',
+        'notification_preferences',
+        'gender',
+        'dob',
+        'marital_status',
+        'is_verified',
+        'is_active',
+        'is_incognito',
+        'two_factor_enabled',
+        'two_factor_secret',
+        'deactivation_reason',
+    ];
+
+    protected $hidden = [
+        'password',
+        'remember_token',
+        'two_factor_secret',
+    ];
+
+    protected function casts(): array
+    {
+        return [
+            'email_verified_at' => 'datetime',
+            'phone_verified_at' => 'datetime',
+            'dob' => 'date',
+            'is_verified' => 'boolean',
+            'is_active' => 'boolean',
+            'is_incognito' => 'boolean',
+            'two_factor_enabled' => 'boolean',
+            'permissions' => 'array',
+            'notification_preferences' => 'array',
+            'password' => 'hashed',
+        ];
+    }
+
+    /**
+     * Always lowercase and trim email to prevent duplicate accounts.
+     */
+    protected function email(): Attribute
+    {
+        return Attribute::make(
+            get: fn (?string $value) => $value !== null ? strtolower(trim($value)) : null,
+            set: fn (?string $value) => $value !== null ? strtolower(trim($value)) : null,
+        );
+    }
+
+    public function profile(): HasOne
+    {
+        return $this->hasOne(Profile::class);
+    }
+
+    public function photos(): HasManyThrough
+    {
+        return $this->hasManyThrough(Photo::class, Profile::class);
+    }
+
+    public function sentInterests(): HasMany
+    {
+        return $this->hasMany(Interest::class, 'sender_id');
+    }
+
+    public function receivedInterests(): HasMany
+    {
+        return $this->hasMany(Interest::class, 'recipient_id');
+    }
+
+    public function waliLinksAsSeeker(): HasMany
+    {
+        return $this->hasMany(WaliLink::class, 'seeker_user_id');
+    }
+
+    public function waliLinksAsWali(): HasMany
+    {
+        return $this->hasMany(WaliLink::class, 'wali_user_id');
+    }
+
+    public function familyLinksAsSeeker(): HasMany
+    {
+        return $this->waliLinksAsSeeker();
+    }
+
+    public function familyLinksAsRep(): HasMany
+    {
+        return $this->waliLinksAsWali();
+    }
+
+    /**
+     * Get active linked Family Representative / Wali user if seeker is dependent.
+     */
+    public function getActiveWaliUser(): ?self
+    {
+        $link = $this->waliLinksAsSeeker()
+            ->where('status', 'active')
+            ->whereNotNull('wali_user_id')
+            ->with('wali')
+            ->first();
+
+        return $link?->wali;
+    }
+
+    public function getActiveFamilyRepUser(): ?self
+    {
+        return $this->getActiveWaliUser();
+    }
+
+    /**
+     * Check if user is Family Representative dependent (active link or family_rep_required flag).
+     */
+    public function isWaliDependent(): bool
+    {
+        return $this->waliLinksAsSeeker()->where('status', 'active')->exists()
+            || (bool) ($this->profile?->family_rep_required ?? false)
+            || (bool) ($this->profile?->wali_required ?? false);
+    }
+
+    public function isFamilyDependent(): bool
+    {
+        return $this->isWaliDependent();
+    }
+
+    public function conversations(): BelongsToMany
+    {
+        return $this->belongsToMany(Conversation::class, 'conversation_participants')
+            ->withPivot('role', 'last_read_at', 'is_typing')
+            ->withTimestamps();
+    }
+
+    public function subscriptions(): HasMany
+    {
+        return $this->hasMany(Subscription::class);
+    }
+
+    public function activeSubscription(): HasOne
+    {
+        return $this->hasOne(Subscription::class)
+            ->where('status', 'active')
+            ->latestOfMany();
+    }
+
+    public function verificationRequests(): HasMany
+    {
+        return $this->hasMany(VerificationRequest::class);
+    }
+
+    public function reportsMade(): HasMany
+    {
+        return $this->hasMany(Report::class, 'reporter_id');
+    }
+
+    public function reportsReceived(): HasMany
+    {
+        return $this->hasMany(Report::class, 'reported_id');
+    }
+
+    public function savedSearches(): HasMany
+    {
+        return $this->hasMany(SavedSearch::class);
+    }
+
+    public function blockedUsers(): BelongsToMany
+    {
+        return $this->belongsToMany(self::class, 'blocked_users', 'blocker_id', 'blocked_id')
+            ->withTimestamps();
+    }
+
+    public function blockedByUsers(): BelongsToMany
+    {
+        return $this->belongsToMany(self::class, 'blocked_users', 'blocked_id', 'blocker_id')
+            ->withTimestamps();
+    }
+
+    public function isBlockedBy(self $user): bool
+    {
+        return $user->blockedUsers()->where('blocked_id', $this->id)->exists();
+    }
+
+    public function hasBlocked(self $user): bool
+    {
+        return $this->blockedUsers()->where('blocked_id', $user->id)->exists();
+    }
+
+    public function hasBlockedRelationshipWith(self $user): bool
+    {
+        return $this->hasBlocked($user) || $this->isBlockedBy($user);
+    }
+
+    public function notificationPreferences(): array
+    {
+        return array_merge([
+            'email_notifications' => true,
+            'interest_notifications' => true,
+            'message_notifications' => true,
+            'family_notifications' => true,
+            'wali_notifications' => true,
+            'saved_search_notifications' => true,
+            'marriage_notifications' => true,
+        ], $this->notification_preferences ?? []);
+    }
+
+    public function allowsNotification(string $category): bool
+    {
+        return (bool) ($this->notificationPreferences()[$category] ?? true);
+    }
+
+    public function profileViewsGiven(): HasMany
+    {
+        return $this->hasMany(ProfileView::class, 'viewer_id');
+    }
+
+    public function profileViewsReceived(): HasMany
+    {
+        return $this->hasMany(ProfileView::class, 'viewed_id');
+    }
+
+    public function bookmarks(): HasMany
+    {
+        return $this->hasMany(Bookmark::class, 'user_id');
+    }
+
+    public function bookmarkedBy(): HasMany
+    {
+        return $this->hasMany(Bookmark::class, 'bookmarked_user_id');
+    }
+
+    public function hasBookmarked(int $targetUserId): bool
+    {
+        return $this->bookmarks()->where('bookmarked_user_id', $targetUserId)->exists();
+    }
+
+    public function marriagesAsGroom(): HasMany
+    {
+        return $this->hasMany(Marriage::class, 'groom_id');
+    }
+
+    public function marriagesAsBride(): HasMany
+    {
+        return $this->hasMany(Marriage::class, 'bride_id');
+    }
+
+    public function activeMarriage(): ?Marriage
+    {
+        return Marriage::with(['groom.profile', 'bride.profile'])
+            ->where(function ($q) {
+                $q->where('groom_id', $this->id)->orWhere('bride_id', $this->id);
+            })
+            ->where('status', 'confirmed')
+            ->latest('confirmed_at')
+            ->first();
+    }
+
+    public function pendingMarriage(): ?Marriage
+    {
+        return Marriage::with(['groom.profile', 'bride.profile', 'initiator'])
+            ->where(function ($q) {
+                $q->where('groom_id', $this->id)->orWhere('bride_id', $this->id);
+            })
+            ->where('status', 'pending_confirmation')
+            ->latest()
+            ->first();
+    }
+
+    public function spouse(): ?self
+    {
+        $marriage = $this->activeMarriage();
+
+        return $marriage ? $marriage->spouseOf($this) : null;
+    }
+
+    public function isMarried(): bool
+    {
+        return $this->marital_status === 'married' || $this->activeMarriage() !== null;
+    }
+
+    // Role helpers
+    public function isSuperAdmin(): bool
+    {
+        return in_array($this->role, ['super_admin', 'admin'], true);
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->isSuperAdmin();
+    }
+
+    public function isModerator(): bool
+    {
+        return in_array($this->role, ['moderator', 'admin', 'super_admin'], true);
+    }
+
+    public function isFamilyRep(): bool
+    {
+        return in_array($this->role, ['family_rep', 'wali'], true);
+    }
+
+    public function isMonkAdvisor(): bool
+    {
+        return $this->role === 'monk_advisor';
+    }
+
+    public function isWali(): bool
+    {
+        return $this->isFamilyRep();
+    }
+
+    public function isSeeker(): bool
+    {
+        return $this->role === 'seeker';
+    }
+
+    /**
+     * Determine if the user has verified their email address.
+     * Administrative staff (super_admin, moderator) are exempt; candidates/family reps must verify.
+     */
+    public function hasVerifiedEmail(): bool
+    {
+        if ($this->isSuperAdmin() || $this->isModerator()) {
+            return true;
+        }
+
+        return ! is_null($this->email_verified_at);
+    }
+
+    public function hasPermission(string $permission): bool
+    {
+        if ($this->isSuperAdmin()) {
+            return true;
+        }
+
+        $permissions = $this->permissions ?? [];
+
+        return in_array($permission, $permissions, true);
+    }
+
+    public function getAgeAttribute(): ?int
+    {
+        return $this->dob ? Carbon::parse($this->dob)->age : null;
+    }
+
+    public function getPlanAttribute(): string
+    {
+        $sub = $this->activeSubscription;
+
+        return $sub ? $sub->plan : 'free';
+    }
+
+    public function isPremium(): bool
+    {
+        if ($this->plan === 'free') {
+            return false;
+        }
+
+        $sub = $this->activeSubscription;
+        if (! $sub || ! $sub->isActive()) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public function isPro(): bool
+    {
+        return $this->isPremium();
+    }
+
+    public function isPremiumPlus(): bool
+    {
+        if ($this->plan === 'premium_plus') {
+            return true;
+        }
+
+        $planDetails = Subscription::getPlanDetails($this->plan);
+
+        return ! empty($planDetails['profile_boost']);
+    }
+
+    /**
+     * Send password reset notification.
+     *
+     * @param  string  $token
+     */
+    public function sendPasswordResetNotification($token): void
+    {
+        $this->notify(new ResetPasswordNotification($token));
+    }
+
+    /**
+     * Send email verification notification.
+     */
+    public function sendEmailVerificationNotification(): void
+    {
+        $this->notify(new WelcomeVerificationNotification);
+    }
+}
