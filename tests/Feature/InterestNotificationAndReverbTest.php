@@ -402,8 +402,8 @@ class InterestNotificationAndReverbTest extends TestCase
         $profilePage = $this->actingAs($recipient)->get(route('discovery.show', $sender->id));
         $profilePage->assertOk();
         $profilePage->assertSee('Priya Candidate');
-        $profilePage->assertSee('has expressed Halal Interest in you!');
-        $profilePage->assertSee('Accept Interest');
+        $profilePage->assertSee('has expressed sincere matrimonial interest in you!');
+        $profilePage->assertSee('Accept Proposal');
         $profilePage->assertSee('Decline');
 
         // 4. Recipient accepts interest directly
@@ -428,7 +428,7 @@ class InterestNotificationAndReverbTest extends TestCase
         $notifPageAfter->assertSee('Interest Accepted');
         $notifPageAfter->assertDontSee('✓ Accept Interest');
 
-        // 5. Check Halal Interests dashboard view profile links
+        // 5. Check Matrimonial Proposals dashboard view profile links
         $interestsPage = $this->actingAs($recipient)->get(route('interests.index'));
         $interestsPage->assertOk();
         $interestsPage->assertSee('View Profile');

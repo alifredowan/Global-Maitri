@@ -195,29 +195,42 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function blockedUsers(): BelongsToMany
     {
-        return $this->belongsToMany(self::class, 'blocked_users', 'blocker_id', 'blocked_id')
+        return $this->belongsToMany(self::class, 'blocked_users', 'blocker_user_id', 'blocked_user_id')
             ->withTimestamps();
     }
 
     public function blockedByUsers(): BelongsToMany
     {
-        return $this->belongsToMany(self::class, 'blocked_users', 'blocked_id', 'blocker_id')
+        return $this->belongsToMany(self::class, 'blocked_users', 'blocked_user_id', 'blocker_user_id')
             ->withTimestamps();
     }
 
     public function isBlockedBy(self $user): bool
     {
-        return $user->blockedUsers()->where('blocked_id', $this->id)->exists();
+        return $user->blockedUsers()->where('blocked_user_id', $this->id)->exists();
     }
 
     public function hasBlocked(self $user): bool
     {
-        return $this->blockedUsers()->where('blocked_id', $user->id)->exists();
+        return $this->blockedUsers()->where('blocked_user_id', $user->id)->exists();
     }
 
     public function hasBlockedRelationshipWith(self $user): bool
     {
         return $this->hasBlocked($user) || $this->isBlockedBy($user);
+    }
+
+    public function unreadMessagesCount(): int
+    {
+        return Message::query()
+            ->join('conversation_participants', 'conversation_participants.conversation_id', '=', 'messages.conversation_id')
+            ->where('conversation_participants.user_id', $this->id)
+            ->where('messages.sender_id', '!=', $this->id)
+            ->where(function ($query) {
+                $query->whereNull('conversation_participants.last_read_at')
+                    ->orWhereColumn('messages.created_at', '>', 'conversation_participants.last_read_at');
+            })
+            ->count('messages.id');
     }
 
     public function notificationPreferences(): array

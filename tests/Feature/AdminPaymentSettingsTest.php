@@ -166,7 +166,7 @@ class AdminPaymentSettingsTest extends TestCase
         $response->assertStatus(200);
         $response->assertDontSee('/ month');
         $response->assertSee('Pay 1-Time');
-        $response->assertSee('Active Until Confirmed Nikah');
+        $response->assertSee('Active Until Confirmed Mangala Vivaha');
     }
 
     public function test_admin_can_test_stripe_gateway_connection_success(): void

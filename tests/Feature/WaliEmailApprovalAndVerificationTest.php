@@ -193,8 +193,8 @@ class WaliEmailApprovalAndVerificationTest extends TestCase
         $response->assertStatus(200);
         $response->assertSee('Amina Seeker');
         $response->assertSee('Father');
-        $response->assertSee('Global Nikkah');
-        $response->assertSeeText('Accept & Confirm Guardian Connection');
+        $response->assertSee('Global Maitri');
+        $response->assertSeeText('Accept & Confirm Family Connection');
     }
 
     public function test_wali_accepting_invitation_activates_link_and_notifies_seeker(): void
@@ -244,13 +244,13 @@ class WaliEmailApprovalAndVerificationTest extends TestCase
         $this->assertEquals('declined', $link->status);
     }
 
-    public function test_landing_page_renders_global_nikkah_branding(): void
+    public function test_landing_page_renders_global_maitri_branding(): void
     {
         $response = $this->get('/');
 
         $response->assertStatus(200);
         $response->assertSee('Global');
-        $response->assertSee('Nikkah');
-        $response->assertDontSee('Nikah Connect');
+        $response->assertSee('Maitri');
+        $response->assertDontSee('Global Nikkah');
     }
 }

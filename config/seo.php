@@ -1,9 +1,9 @@
 <?php
 
-$seoUrl = rtrim((string) env('SEO_URL', 'https://globalnikkah.com'), '/');
+$seoUrl = rtrim((string) env('SEO_URL', 'https://globalmaitri.com'), '/');
 
-if (parse_url($seoUrl, PHP_URL_HOST) === 'globalnikkah.com') {
-    $seoUrl = 'https://globalnikah.com';
+if (parse_url($seoUrl, PHP_URL_HOST) === 'globalmaitri.com') {
+    $seoUrl = 'https://globalmaitri.com';
 }
 
 return [

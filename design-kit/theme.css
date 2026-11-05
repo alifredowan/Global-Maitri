@@ -1,0 +1,111 @@
+/**
+ * Theme Tokens (Buddhist Matrimonial Platform: Global Maitri)
+ *
+ * PALETTE:
+ * - Accent: #A67C00 (Muted ochre / Buddhist monastic robe gold)
+ * - Accent Hover: #856300 (Darker shade of the same hue)
+ * - Accent Active: #664C00
+ * - Accent Subtle: #FAF6E9 (Muted ochre wash)
+ * - Background Canvas Tint: #F4F2EE (Calm stone-grey)
+ * - Card/Surface: #FFFFFF
+ * - Secondary Accent: #7D5B28 (Dignified temple bronze / teak)
+ * - Semantic Signals: Muted green (#1B6848) strictly for validation/status. No green brand colors.
+ */
+
+:root {
+  /* =======================================================================
+   * 1. CANVAS & BACKGROUND TINTS (Calm stone-grey base)
+   * ======================================================================= */
+  --bg-canvas: #f4f2ee;
+  --bg-surface: #ffffff;
+  --bg-subtle: #ece9e3;
+  --bg-muted: #e2dfd7;
+  --bg-inset: #e8e5dd;
+
+  /* =======================================================================
+   * 2. TYPOGRAPHY INK & CONTRAST
+   * ======================================================================= */
+  --text-primary: #1f1e1b;
+  --text-secondary: #524f47;
+  --text-muted: #78746b;
+  --text-inverse: #ffffff;
+
+  /* =======================================================================
+   * 3. HAIRLINE BORDER HUES
+   * ======================================================================= */
+  --border-subtle: #e6e3db;
+  --border-default: #d6d2c8;
+  --border-strong: #aca699;
+
+  /* =======================================================================
+   * 4. PRIMARY ACCENT (Muted Ochre — Buddhist Monastic Robe Gold)
+   * ======================================================================= */
+  --accent-primary: #a67c00;
+  --accent-hover: #856300;
+  --accent-active: #664c00;
+  --accent-subtle: #faf6e9;
+  --accent-subtle-hover: #f3ecce;
+  --accent-border: #dfd1a5;
+  --accent-text: #6b5000;
+  --accent-contrast: #ffffff;
+
+  /* =======================================================================
+   * 5. SECONDARY ACCENT (Dignified Temple Bronze / Teak)
+   * ======================================================================= */
+  --secondary-primary: #7d5b28;
+  --secondary-hover: #63471c;
+  --secondary-subtle: #fbf6ee;
+  --secondary-border: #ebdcc8;
+  --secondary-text: #573c14;
+
+  /* =======================================================================
+   * 6. KEYBOARD ACCESSIBILITY FOCUS RING
+   * ======================================================================= */
+  --focus-ring: 0 0 0 2px var(--bg-surface), 0 0 0 4px var(--accent-primary);
+  --focus-ring-offset: 2px;
+
+  /* =======================================================================
+   * 7. GEOMETRIC BACKGROUND PATTERN (Restrained 3-5% opacity)
+   * ======================================================================= */
+  --pattern-faint: radial-gradient(circle, rgba(166, 124, 0, 0.05) 1px, transparent 1px);
+  --pattern-faint-size: 24px 24px;
+}
+
+/* =======================================================================
+ * DARK THEME (Serene, deep stone-charcoal night palette with warm ochre)
+ * ======================================================================= */
+.dark {
+  --bg-canvas: #141412;
+  --bg-surface: #1c1c18;
+  --bg-subtle: #242420;
+  --bg-muted: #2f2f2a;
+  --bg-inset: #181815;
+
+  --text-primary: #f5f4f0;
+  --text-secondary: #c4c1b6;
+  --text-muted: #8c887d;
+  --text-inverse: #141412;
+
+  --border-subtle: #292924;
+  --border-default: #383832;
+  --border-strong: #525047;
+
+  --accent-primary: #d4a625;
+  --accent-hover: #e6b738;
+  --accent-active: #c2951b;
+  --accent-subtle: #2b2310;
+  --accent-subtle-hover: #382e14;
+  --accent-border: #574519;
+  --accent-text: #f0c550;
+  --accent-contrast: #181406;
+
+  --secondary-primary: #d99a4e;
+  --secondary-hover: #e5ab66;
+  --secondary-subtle: #291e10;
+  --secondary-border: #4d391c;
+  --secondary-text: #f5be7e;
+
+  --focus-ring: 0 0 0 2px var(--bg-surface), 0 0 0 4px var(--accent-primary);
+  --pattern-faint: radial-gradient(circle, rgba(212, 166, 37, 0.04) 1px, transparent 1px);
+  --pattern-faint-size: 24px 24px;
+}

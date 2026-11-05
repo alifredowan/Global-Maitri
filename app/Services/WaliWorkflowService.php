@@ -85,6 +85,16 @@ class WaliWorkflowService
     }
 
     /**
+     * Decline a Family Representative link invitation.
+     */
+    public function declineWaliLink(WaliLink $link): bool
+    {
+        $link->status = 'declined';
+
+        return $link->save();
+    }
+
+    /**
      * Reject or revoke a Family Representative link.
      */
     public function revokeWaliLink(WaliLink $link): bool
@@ -153,20 +163,7 @@ class WaliWorkflowService
             $interest->save();
 
             // Unlock chat conversation
-            $conversation = Conversation::firstOrCreate(
-                ['interest_id' => $interest->id],
-                ['status' => 'active']
-            );
-
-            ConversationParticipant::firstOrCreate([
-                'conversation_id' => $conversation->id,
-                'user_id' => $interest->sender_id,
-            ], ['role' => 'seeker']);
-
-            ConversationParticipant::firstOrCreate([
-                'conversation_id' => $conversation->id,
-                'user_id' => $interest->recipient_id,
-            ], ['role' => 'seeker']);
+            $conversation = $this->createOrUnlockConversation($interest);
 
             // Add Family Representative as chaperone participant
             ConversationParticipant::firstOrCreate([
@@ -203,5 +200,129 @@ class WaliWorkflowService
         }
 
         return false;
+    }
+
+    /**
+     * Create conversation between participants and add Family Representative as chaperone observer.
+     */
+    public function createOrUnlockConversation(Interest $interest): Conversation
+    {
+        $conversation = Conversation::firstOrCreate([
+            'interest_id' => $interest->id,
+        ], [
+            'status' => 'active',
+        ]);
+
+        // Ensure both seekers are participants
+        ConversationParticipant::firstOrCreate([
+            'conversation_id' => $conversation->id,
+            'user_id' => $interest->sender_id,
+        ], [
+            'role' => 'seeker',
+        ]);
+
+        ConversationParticipant::firstOrCreate([
+            'conversation_id' => $conversation->id,
+            'user_id' => $interest->recipient_id,
+        ], [
+            'role' => 'seeker',
+        ]);
+
+        // If recipient has an active Family Representative, add as chaperone observer
+        $recipientWaliLink = WaliLink::where('seeker_user_id', $interest->recipient_id)
+            ->where('status', 'active')
+            ->whereNotNull('wali_user_id')
+            ->first();
+
+        if ($recipientWaliLink && $recipientWaliLink->wali_user_id) {
+            ConversationParticipant::firstOrCreate([
+                'conversation_id' => $conversation->id,
+                'user_id' => $recipientWaliLink->wali_user_id,
+            ], [
+                'role' => 'wali_chaperone',
+            ]);
+        }
+
+        // If sender has an active Family Representative, add sender's Rep as chaperone observer too
+        $senderWaliLink = WaliLink::where('seeker_user_id', $interest->sender_id)
+            ->where('status', 'active')
+            ->whereNotNull('wali_user_id')
+            ->first();
+
+        if ($senderWaliLink && $senderWaliLink->wali_user_id) {
+            ConversationParticipant::firstOrCreate([
+                'conversation_id' => $conversation->id,
+                'user_id' => $senderWaliLink->wali_user_id,
+            ], [
+                'role' => 'wali_chaperone',
+            ]);
+        }
+
+        return $conversation;
+    }
+
+    /**
+     * Synchronize a Family Representative to all existing conversations of their ward.
+     */
+    public function syncWaliToConversations(User $seeker, User $wali): void
+    {
+        $conversations = Conversation::whereHas('participants', function ($q) use ($seeker) {
+            $q->where('conversation_participants.user_id', $seeker->id);
+        })->get();
+
+        foreach ($conversations as $conversation) {
+            ConversationParticipant::firstOrCreate([
+                'conversation_id' => $conversation->id,
+                'user_id' => $wali->id,
+            ], [
+                'role' => 'wali_chaperone',
+            ]);
+        }
+    }
+
+    /**
+     * Ensure any active Family Representatives of the seekers are attached as participants to the conversation.
+     */
+    public function ensureWaliParticipants(Conversation $conversation): void
+    {
+        $conversation->loadMissing('participants');
+        $seekerIds = $conversation->participants
+            ->filter(fn ($p) => $p->pivot->role !== 'wali_chaperone')
+            ->pluck('id');
+
+        $activeWaliLinks = WaliLink::whereIn('seeker_user_id', $seekerIds)
+            ->where('status', 'active')
+            ->whereNotNull('wali_user_id')
+            ->get();
+
+        foreach ($activeWaliLinks as $link) {
+            ConversationParticipant::firstOrCreate([
+                'conversation_id' => $conversation->id,
+                'user_id' => $link->wali_user_id,
+            ], [
+                'role' => 'wali_chaperone',
+            ]);
+        }
+    }
+
+    /**
+     * Auto link existing or newly registered/logged in user to pending Family Representative links by email.
+     */
+    public function autoLinkWaliUser(User $user): void
+    {
+        $pendingLinks = WaliLink::where('wali_email', strtolower($user->email))
+            ->whereNull('wali_user_id')
+            ->get();
+
+        foreach ($pendingLinks as $link) {
+            $link->update([
+                'wali_user_id' => $user->id,
+                'status' => 'active',
+            ]);
+
+            if ($link->seeker) {
+                $this->syncWaliToConversations($link->seeker, $user);
+            }
+        }
     }
 }

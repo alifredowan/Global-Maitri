@@ -29,7 +29,7 @@ class ImageOptimizationService
         imagesavealpha($canvas, true);
         imagecopyresampled($canvas, $image, 0, 0, 0, 0, $targetWidth, $targetHeight, $sourceWidth, $sourceHeight);
 
-        $temporaryPath = tempnam(sys_get_temp_dir(), 'global-nikkah-image-');
+        $temporaryPath = tempnam(sys_get_temp_dir(), 'global-maitri-image-');
         if ($temporaryPath === false || ! imagewebp($canvas, $temporaryPath, 82)) {
             imagedestroy($image);
             imagedestroy($canvas);

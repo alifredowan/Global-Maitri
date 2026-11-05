@@ -54,15 +54,15 @@ class SingleMarriagePassTest extends TestCase
         $response = $this->get(route('subscription.pricing'));
 
         $response->assertStatus(200);
-        $response->assertSee('Single Marriage Pass: Pay Once Until Nikah');
-        $response->assertSee('Standard Nikah Pass');
-        $response->assertSee('VIP Barakah Pass');
-        $response->assertSee('Free Seeker');
+        $response->assertSee('Single Marriage Pass: Pay Once Until Mangala Vivaha');
+        $response->assertSee('Pro Single Marriage Pass');
+        $response->assertSee('VIP Maitri Blessing Pass');
+        $response->assertSee('Free Explorer');
         $response->assertSee('Free Forever');
         $response->assertSee('$49.00');
         $response->assertSee('$99.00');
         $response->assertSee('Pay 1-Time');
-        $response->assertSee('Active Until Confirmed Nikah');
+        $response->assertSee('Active Until Confirmed Mangala Vivaha');
         $response->assertDontSee('/ month');
     }
 
@@ -97,7 +97,7 @@ class SingleMarriagePassTest extends TestCase
         $seeker = $this->createSeeker('female');
 
         $discount = DiscountCode::create([
-            'code' => 'NIKAH20',
+            'code' => 'METTA20',
             'discount_percentage' => 20,
             'max_uses' => 10,
             'times_used' => 0,
@@ -105,7 +105,7 @@ class SingleMarriagePassTest extends TestCase
         ]);
 
         $response = $this->actingAs($seeker)->postJson(route('subscription.validate-promo'), [
-            'promo_code' => 'NIKAH20',
+            'promo_code' => 'METTA20',
             'plan' => 'premium',
             'billing_cycle' => 'one_time_marriage',
         ]);
@@ -113,7 +113,7 @@ class SingleMarriagePassTest extends TestCase
         $response->assertStatus(200)
             ->assertJson([
                 'valid' => true,
-                'code' => 'NIKAH20',
+                'code' => 'METTA20',
                 'discount_percentage' => 20,
                 'original_price' => 49.00,
                 'discount_amount' => 9.80,
@@ -178,8 +178,8 @@ class SingleMarriagePassTest extends TestCase
         $groomSub->refresh();
         $brideSub->refresh();
 
-        $this->assertEquals('completed_nikah', $groomSub->status);
-        $this->assertEquals('completed_nikah', $brideSub->status);
+        $this->assertEquals('completed_marriage', $groomSub->status);
+        $this->assertEquals('completed_marriage', $brideSub->status);
 
         $this->assertFalse($groomSub->isActive(), 'Pass should no longer be active once Nikah is completed');
         $this->assertFalse($brideSub->isActive(), 'Pass should no longer be active once Nikah is completed');

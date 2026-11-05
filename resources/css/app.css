@@ -1,4 +1,6 @@
 @import 'tailwindcss';
+@import '../../design-kit/design-tokens.css';
+@import '../../design-kit/theme.css';
 
 @custom-variant dark (&:where(.dark, .dark *));
 

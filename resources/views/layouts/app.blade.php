@@ -86,7 +86,7 @@
         [x-cloak] { display: none !important; }
     </style>
 </head>
-<body class="h-full bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 antialiased selection:bg-rose-500 selection:text-white transition-colors duration-200"
+<body class="h-full bg-[var(--bg-canvas)] text-[var(--text-primary)] antialiased selection:bg-[var(--accent-primary)] selection:text-white transition-colors duration-200"
       x-data="{
           sidebarOpen: (function() {
               try { localStorage.removeItem('sidebar_open'); } catch(e){}
@@ -113,18 +113,22 @@
          aria-modal="false"
          aria-labelledby="cookie-consent-title"
          aria-describedby="cookie-consent-description">
-        <div class="rounded-2xl border border-emerald-200 bg-white/95 p-4 shadow-2xl backdrop-blur-xl dark:border-emerald-900/80 dark:bg-slate-900/95 sm:p-5">
+        <div class="rounded-[6px] border border-[var(--border-default)] bg-[var(--bg-surface)] p-4 shadow-xl sm:p-5">
             <div class="flex items-start gap-3">
-                <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-emerald-100 text-lg text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300" aria-hidden="true">🍪</div>
+                <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-[4px] bg-[var(--accent-subtle)] text-[var(--accent-primary)]" aria-hidden="true">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/>
+                    </svg>
+                </div>
                 <div class="min-w-0 flex-1">
-                    <h2 id="cookie-consent-title" class="font-heading text-sm font-extrabold text-slate-900 dark:text-white">Your privacy, your choice</h2>
-                    <p id="cookie-consent-description" class="mt-1 text-xs leading-5 text-slate-600 dark:text-slate-300">
-                        We use essential cookies to keep you signed in, protect forms, and remember your privacy preference. We do not use advertising cookies. <a href="{{ route('privacy') }}#cookies" class="font-bold text-emerald-700 underline underline-offset-2 dark:text-emerald-400">Read our cookie policy</a>.
+                    <h2 id="cookie-consent-title" class="font-heading text-sm font-bold text-[var(--text-primary)]">Your privacy, your choice</h2>
+                    <p id="cookie-consent-description" class="mt-1 text-xs leading-5 text-[var(--text-secondary)]">
+                        We use essential cookies to keep you signed in, protect forms, and remember your privacy preference. We do not use advertising cookies. <a href="{{ route('privacy') }}#cookies" class="font-semibold text-[var(--accent-primary)] underline underline-offset-2 hover:text-[var(--accent-hover)]">Read our cookie policy</a>.
                     </p>
                     <div class="mt-4 flex flex-wrap items-center gap-2">
-                        <button type="button" data-cookie-consent="accepted" class="rounded-xl bg-emerald-600 px-4 py-2 text-xs font-bold text-white shadow-sm transition hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 dark:focus:ring-offset-slate-900">Accept all</button>
-                        <button type="button" data-cookie-consent="essential" class="rounded-xl border border-slate-300 bg-white px-4 py-2 text-xs font-bold text-slate-700 transition hover:border-emerald-400 hover:text-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:border-emerald-700 dark:hover:text-emerald-400 dark:focus:ring-offset-slate-900">Essential only</button>
-                        <a href="{{ route('contact') }}" class="ml-auto text-[11px] font-bold text-slate-500 hover:text-emerald-700 hover:underline dark:text-slate-400 dark:hover:text-emerald-400">Questions?</a>
+                        <button type="button" data-cookie-consent="accepted" class="btn-primary text-xs !py-1.5 !px-3.5">Accept all</button>
+                        <button type="button" data-cookie-consent="essential" class="btn-secondary text-xs !py-1.5 !px-3.5">Essential only</button>
+                        <a href="{{ route('contact') }}" class="ml-auto text-[11px] font-semibold text-[var(--text-muted)] hover:text-[var(--accent-primary)] hover:underline">Questions?</a>
                     </div>
                 </div>
             </div>
@@ -175,14 +179,18 @@
 
                     <!-- Brand in Mobile Drawer (Clicking closes drawer) -->
                     <div @click="mobileSidebarOpen = false" class="flex items-center gap-3 px-2 mb-6 cursor-pointer select-none" title="Close Drawer">
-                        <div class="w-10 h-10 rounded-xl bg-rose-600 flex items-center justify-center text-white shadow-md shadow-rose-950/50">
-                            <span class="text-xl">🌸</span>
+                        <div class="w-10 h-10 rounded-[4px] bg-[var(--accent-primary)] flex items-center justify-center text-white shadow-xs">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24">
+                                <circle cx="12" cy="12" r="9"/>
+                                <circle cx="12" cy="12" r="3"/>
+                                <path d="M12 3v6m0 6v6M3 12h6m6 0h6M5.636 5.636l4.243 4.243m4.242 4.242l4.243 4.243M5.636 18.364l4.243-4.243m4.242-4.242l4.243-4.243"/>
+                            </svg>
                         </div>
                         <div>
                             <span class="font-heading font-extrabold text-lg text-white tracking-tight flex items-center gap-1">
-                                Global<span class="text-amber-400">Maitri</span>
+                                Global<span class="text-[var(--accent-primary)]">Maitri</span>
                             </span>
-                            <span class="text-[10px] font-bold uppercase tracking-wider text-rose-400 block -mt-0.5">
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-[var(--accent-primary)] block -mt-0.5">
                                 {{ Auth::user()->isSuperAdmin() ? 'Super Admin' : (Auth::user()->isModerator() ? 'Staff' : (Auth::user()->isFamilyRep() ? 'Family Representative' : 'Candidate Seeker')) }}
                             </span>
                         </div>
@@ -230,16 +238,20 @@
                             @click="toggleSidebar()"
                             class="flex items-center gap-3 group flex-1 min-w-0 text-left cursor-pointer focus:outline-none"
                             title="Open / Close Sidebar (Global Maitri Logo)">
-                        <div class="w-10 h-10 rounded-xl bg-rose-600 flex items-center justify-center text-white shadow-lg shadow-rose-950/50 group-hover:scale-105 transition transform">
-                            <span class="text-xl">🌸</span>
+                        <div class="w-10 h-10 rounded-[4px] bg-[var(--accent-primary)] flex items-center justify-center text-white shadow-xs group-hover:bg-[var(--accent-hover)] transition">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24">
+                                <circle cx="12" cy="12" r="9"/>
+                                <circle cx="12" cy="12" r="3"/>
+                                <path d="M12 3v6m0 6v6M3 12h6m6 0h6M5.636 5.636l4.243 4.243m4.242 4.242l4.243 4.243M5.636 18.364l4.243-4.243m4.242-4.242l4.243-4.243"/>
+                            </svg>
                         </div>
                         <div>
-                            <div class="font-heading font-extrabold text-base text-white tracking-tight flex items-center gap-1 group-hover:text-rose-400 transition">
-                                Global<span class="text-amber-400">Maitri</span>
+                            <div class="font-heading font-extrabold text-base text-white tracking-tight flex items-center gap-1 group-hover:text-[var(--accent-primary)] transition">
+                                Global<span class="text-[var(--accent-primary)]">Maitri</span>
                             </div>
                             <div class="flex items-center gap-1.5 mt-0.5">
-                                <span class="inline-block w-2 h-2 rounded-full bg-rose-400 animate-pulse"></span>
-                                <span class="text-[10px] font-bold uppercase tracking-wider text-rose-400">
+                                <span class="inline-block w-2 h-2 rounded-full bg-[var(--accent-primary)] animate-pulse"></span>
+                                <span class="text-[10px] font-bold uppercase tracking-wider text-[var(--accent-primary)]">
                                     @if(Auth::user()->isSuperAdmin())
                                         Super Admin
                                     @elseif(Auth::user()->isModerator())
@@ -262,23 +274,23 @@
 
                 <!-- Sidebar Footer User Card with Integrated Arrow Logout -->
                 <div class="p-4 border-t border-slate-800/80 bg-slate-950/40">
-                    <div class="flex items-center justify-between gap-2 p-2.5 rounded-2xl bg-slate-800/50 border border-slate-700/60">
+                    <div class="flex items-center justify-between gap-2 p-2.5 rounded-[6px] bg-slate-800/50 border border-slate-700/60">
                         <div class="flex items-center gap-2.5 min-w-0">
-                            <div class="w-8 h-8 rounded-full bg-emerald-900 border border-emerald-500 text-emerald-200 font-bold flex items-center justify-center text-xs shrink-0">
+                            <div class="w-8 h-8 rounded-full bg-[var(--accent-primary)] text-white font-bold flex items-center justify-center text-xs shrink-0">
                                 {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
                             </div>
                             <div class="min-w-0 flex-1">
                                 <p class="text-xs font-bold text-white truncate">{{ Auth::user()->name }}</p>
                                 <p class="text-[10px] text-slate-400 truncate">{{ Auth::user()->email }}</p>
-                                <span class="inline-flex items-center gap-1 text-[9px] font-bold text-emerald-400 uppercase tracking-wider">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                                <span class="inline-flex items-center gap-1 text-[9px] font-bold text-[var(--accent-primary)] uppercase tracking-wider">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-[var(--accent-primary)]"></span>
                                     {{ Auth::user()->isSuperAdmin() ? 'Super Admin' : (Auth::user()->isModerator() ? 'Staff' : (Auth::user()->isWali() ? 'Wali' : 'Seeker')) }}
                                 </span>
                             </div>
                         </div>
                         <form action="{{ route('logout') }}" method="POST">
                             @csrf
-                            <button type="submit" title="Sign Out" class="p-2 text-slate-400 hover:text-rose-400 hover:bg-slate-700/60 rounded-xl transition cursor-pointer">
+                            <button type="submit" title="Sign Out" class="p-2 text-slate-400 hover:text-[var(--accent-primary)] hover:bg-slate-700/60 rounded-[4px] transition cursor-pointer">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
                                 </svg>
@@ -293,7 +305,7 @@
 
                 <!-- Clean Top Navigation Header (NO TABS) -->
                 <header class="sticky top-0 z-40 h-16 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800 flex items-center justify-between px-4 sm:px-6 lg:px-8">
-                    <!-- Left: Single 3-Dots Button AND NikahConnect Logo (Both trigger open/close) -->
+                    <!-- Left: Single 3-Dots Button AND Global Maitri Logo (Both trigger open/close) -->
                     <div class="flex items-center gap-3">
                         <!-- 3-Dots Toggle Button (The ONE 3-Dots Button) -->
                         <button type="button"
@@ -313,11 +325,15 @@
                              x-show="!sidebarOpen || window.innerWidth < 1024"
                              class="flex items-center gap-2.5 cursor-pointer select-none group"
                              title="Open / Close Sidebar (Global Maitri Logo)">
-                            <div class="w-9 h-9 rounded-xl bg-rose-600 flex items-center justify-center text-white shadow-md shadow-rose-950/20 group-hover:scale-105 transition transform">
-                                <span class="text-lg">🌸</span>
+                            <div class="w-9 h-9 rounded-[4px] bg-[var(--accent-primary)] flex items-center justify-center text-white shadow-xs group-hover:bg-[var(--accent-hover)] transition">
+                                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24">
+                                    <circle cx="12" cy="12" r="9"/>
+                                    <circle cx="12" cy="12" r="3"/>
+                                    <path d="M12 3v6m0 6v6M3 12h6m6 0h6M5.636 5.636l4.243 4.243m4.242 4.242l4.243 4.243M5.636 18.364l4.243-4.243m4.242-4.242l4.243-4.243"/>
+                                </svg>
                             </div>
-                            <span class="font-heading font-extrabold text-base tracking-tight text-slate-900 dark:text-white group-hover:text-rose-600 dark:group-hover:text-rose-400 transition">
-                                Global<span class="text-amber-500">Maitri</span>
+                            <span class="font-heading font-extrabold text-base tracking-tight text-[var(--text-primary)] group-hover:text-[var(--accent-primary)] transition">
+                                Global<span class="text-[var(--accent-primary)]">Maitri</span>
                             </span>
                         </div>
                     </div>
@@ -326,15 +342,15 @@
                     <div class="hidden md:flex flex-1 max-w-sm mx-4">
                         <button type="button"
                                 @click="commandPaletteOpen = true"
-                                class="w-full flex items-center justify-between gap-3 px-3.5 py-1.5 rounded-xl border border-slate-200/90 dark:border-slate-800 bg-slate-100/60 dark:bg-slate-800/40 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:border-slate-300 dark:hover:border-slate-700 transition cursor-pointer text-xs group"
+                                class="w-full flex items-center justify-between gap-3 px-3.5 py-1.5 rounded-[4px] border border-[var(--border-default)] bg-[var(--bg-subtle)] text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:border-[var(--accent-primary)] transition cursor-pointer text-xs group"
                                 title="Quick Command Palette & Search (Ctrl + K)">
                             <div class="flex items-center gap-2 min-w-0">
-                                <svg class="w-4 h-4 text-emerald-500 shrink-0 group-hover:scale-110 transition transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg class="w-4 h-4 text-[var(--accent-primary)] shrink-0 group-hover:scale-105 transition transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                                 </svg>
-                                <span class="font-medium text-slate-500 dark:text-slate-400 truncate">Quick search & navigation...</span>
+                                <span class="font-medium text-[var(--text-secondary)] truncate">Quick search & navigation...</span>
                             </div>
-                            <div class="flex items-center gap-1 font-mono text-[10px] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 rounded-md px-1.5 py-0.5 shadow-xs shrink-0">
+                            <div class="flex items-center gap-1 font-mono text-[10px] bg-[var(--bg-surface)] border border-[var(--border-default)] text-[var(--text-muted)] rounded px-1.5 py-0.5 shadow-xs shrink-0">
                                 <kbd>Ctrl</kbd>+<kbd>K</kbd>
                             </div>
                         </button>
@@ -351,15 +367,16 @@
                         <!-- 4-Mood Visual Theme Picker Dropdown -->
                         <div class="relative" x-data="{
                             moodOpen: false,
-                            currentMood: localStorage.getItem('nikah_theme') || (localStorage.getItem('theme') === 'dark' ? 'dark' : 'light'),
+                            currentMood: localStorage.getItem('maitri_theme') || localStorage.getItem('nikah_theme') || (localStorage.getItem('theme') === 'dark' ? 'dark' : 'light'),
                             moods: [
-                                { id: 'light', name: 'Daylight', icon: '☀️', desc: 'Crisp daylight & emerald', dot: 'bg-emerald-400 border-amber-300' },
-                                { id: 'dark', name: 'Midnight', icon: '🌙', desc: 'Deep slate dark mode', dot: 'bg-slate-900 border-slate-700' },
-                                { id: 'emerald', name: 'Royal Emerald', icon: '💎', desc: 'Deep Islamic forest & gold', dot: 'bg-emerald-800 border-amber-400' },
-                                { id: 'sand', name: 'Desert Sand', icon: '🏜️', desc: 'Warm sand, coffee & cream', dot: 'bg-amber-100 border-amber-600' }
+                                { id: 'light', name: 'Daylight', icon: '☀️', desc: 'Serene lotus & rose', dot: 'bg-rose-400 border-amber-300' },
+                                { id: 'dark', name: 'Midnight', icon: '🌙', desc: 'Deep calm slate mode', dot: 'bg-slate-900 border-slate-700' },
+                                { id: 'emerald', name: 'Sacred Lotus', icon: '🪷', desc: 'Deep lotus rose & gold', dot: 'bg-rose-800 border-amber-400' },
+                                { id: 'sand', name: 'Monastic Saffron', icon: '☸️', desc: 'Warm saffron gold & cream', dot: 'bg-amber-100 border-amber-600' }
                             ],
                             selectMood(mood) {
                                 this.currentMood = mood;
+                                localStorage.setItem('maitri_theme', mood);
                                 localStorage.setItem('nikah_theme', mood);
                                 localStorage.setItem('theme', (mood === 'light' || mood === 'sand') ? 'light' : 'dark');
                                 document.documentElement.classList.remove('dark', 'theme-emerald', 'theme-sand');
@@ -371,6 +388,7 @@
                                     document.documentElement.classList.add('theme-sand');
                                 }
                                 this.moodOpen = false;
+                                window.dispatchEvent(new CustomEvent('maitri-mood-changed', { detail: { mood } }));
                                 window.dispatchEvent(new CustomEvent('nikah-mood-changed', { detail: { mood } }));
                             },
                             get activeMood() {
@@ -403,7 +421,7 @@
                                  class="absolute right-0 mt-2 w-64 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-2xl p-2 z-50">
                                 <div class="px-3 py-2 border-b border-slate-100 dark:border-slate-800 mb-1 flex items-center justify-between">
                                     <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">Visual Mood (4 Available)</span>
-                                    <span class="text-[10px] font-bold text-emerald-600 dark:text-emerald-400">Halal Aesthetics</span>
+                                    <span class="text-[10px] font-bold text-rose-600 dark:text-rose-400">Mindful Aesthetics</span>
                                 </div>
                                 <div class="space-y-1">
                                     <template x-for="mood in moods" :key="mood.id">
@@ -675,20 +693,24 @@
         {{-- ========================================================= --}}
         <div class="min-h-full flex flex-col">
             <!-- Public Header -->
-            <header class="sticky top-0 z-40 border-b border-slate-200/80 dark:border-slate-800 glass-header shadow-xs">
+            <header class="sticky top-0 z-40 border-b border-[var(--border-default)] bg-[var(--bg-surface)] shadow-xs">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="flex items-center justify-between h-16">
                         <!-- Brand Logo -->
                         <div class="flex items-center gap-3">
                             <a href="{{ route('landing') }}" class="flex items-center gap-2.5 group">
-                                <div class="w-10 h-10 rounded-xl bg-rose-600 flex items-center justify-center text-white shadow-md shadow-rose-900/20 group-hover:scale-105 transition transform">
-                                    <span class="text-xl">🌸</span>
+                                <div class="w-9 h-9 rounded-[4px] bg-[var(--accent-primary)] flex items-center justify-center text-white shadow-xs group-hover:bg-[var(--accent-hover)] transition">
+                                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24">
+                                        <circle cx="12" cy="12" r="9"/>
+                                        <circle cx="12" cy="12" r="3"/>
+                                        <path d="M12 3v6m0 6v6M3 12h6m6 0h6M5.636 5.636l4.243 4.243m4.242 4.242l4.243 4.243M5.636 18.364l4.243-4.243m4.242-4.242l4.243-4.243"/>
+                                    </svg>
                                 </div>
                                 <div>
-                                    <span class="font-heading font-extrabold text-xl tracking-tight text-slate-900 dark:text-slate-100 flex items-center gap-1.5">
-                                        Global<span class="text-amber-500">Maitri</span>
+                                    <span class="font-heading font-extrabold text-xl tracking-tight text-[var(--text-primary)] flex items-center gap-1.5">
+                                        Global<span class="text-[var(--accent-primary)]">Maitri</span>
                                     </span>
-                                    <span class="text-[10px] uppercase font-bold tracking-widest text-rose-600 dark:text-rose-400 block -mt-1">Buddhist Matrimonial</span>
+                                    <span class="text-[10px] uppercase font-bold tracking-widest text-[var(--accent-primary)] block -mt-1">Buddhist Matrimonial</span>
                                 </div>
                             </a>
                         </div>
@@ -696,30 +718,30 @@
                         <!-- Public Controls -->
                         <div class="flex items-center gap-3">
                             <a href="{{ route('how-it-works') }}"
-                               class="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold text-slate-700 dark:text-slate-200 hover:text-rose-600 dark:hover:text-rose-400 px-2 py-2 transition {{ request()->routeIs('how-it-works') ? 'text-rose-600 dark:text-rose-400' : '' }}">
-                                <span class="text-rose-500">✦</span>
+                               class="hidden sm:inline-flex items-center gap-1.5 text-xs font-semibold text-[var(--text-secondary)] hover:text-[var(--accent-primary)] px-2 py-2 transition {{ request()->routeIs('how-it-works') ? 'text-[var(--accent-primary)]' : '' }}">
+                                <span class="text-[var(--accent-primary)]">✦</span>
                                 How it works
                             </a>
                             <a href="{{ route('subscription.pricing') }}"
-                               class="hidden md:inline-flex items-center gap-1.5 text-xs font-bold text-slate-700 dark:text-slate-200 hover:text-rose-600 dark:hover:text-rose-400 px-2 py-2 transition">
+                               class="hidden md:inline-flex items-center gap-1.5 text-xs font-semibold text-[var(--text-secondary)] hover:text-[var(--accent-primary)] px-2 py-2 transition">
                                 Single Marriage Pass
                             </a>
                             <button type="button"
                                     id="theme-toggle"
                                     aria-label="Toggle Dark / Light Mode"
-                                    class="p-2 rounded-xl text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800 transition">
-                                <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
+                                    class="p-2 rounded-[4px] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-subtle)] transition">
+                                <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-amber-500" fill="currentColor" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"/>
                                 </svg>
-                                <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-slate-600 dark:text-slate-300" fill="currentColor" viewBox="0 0 20 20">
+                                <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-[var(--text-secondary)]" fill="currentColor" viewBox="0 0 20 20">
                                     <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/>
                                 </svg>
                             </button>
 
-                            <a href="{{ route('login') }}" class="text-xs font-bold text-slate-700 dark:text-slate-200 hover:text-rose-600 dark:hover:text-rose-400 px-3 py-2">
+                            <a href="{{ route('login') }}" class="btn-secondary text-xs !py-1.5 !px-3.5">
                                 Log in
                             </a>
-                            <a href="{{ route('register') }}" class="px-4 py-2 rounded-xl text-xs font-bold text-white bg-rose-600 hover:bg-rose-700 shadow-md shadow-rose-900/10 transition">
+                            <a href="{{ route('register') }}" class="btn-primary text-xs !py-1.5 !px-4">
                                 Create Profile
                             </a>
                         </div>
@@ -789,7 +811,7 @@
                              { name: 'Interests & Requests', cat: 'Matches', icon: '💌', url: '{{ route('interests.index') }}' },
                              { name: 'Shortlisted Biodatas', cat: 'Matches', icon: '⭐', url: '{{ route('bookmarks.index') }}' },
                              { name: 'Chaperoned Messages & Chat', cat: 'Chat', icon: '💬', url: '{{ route('chat.index') }}' },
-                             { name: 'My Profile & Halal Photos', cat: 'Biodata', icon: '👤', url: '{{ route('profile.show') }}' },
+                             { name: 'My Biodata & Lotus Photos', cat: 'Biodata', icon: '🪷', url: '{{ route('profile.show') }}' },
                              { name: 'Edit Deen & Partner Preferences', cat: 'Biodata', icon: '📝', url: '{{ route('profile.edit') }}' },
                              { name: 'Printable Biodata PDF', cat: 'Biodata', icon: '🖨️', url: '{{ route('profile.biodata') }}' },
                              { name: 'Subscription Plans & Upgrades', cat: 'Billing', icon: '💎', url: '{{ route('subscription.pricing') }}' },
@@ -876,7 +898,8 @@
     <!-- Theme & Real-Time Broadcasting Scripts -->
     <script>
         // Global 4-Mood Switching Helper Function
-        window.setNikahMood = function(mood) {
+        window.setMaitriMood = window.setNikahMood = function(mood) {
+            localStorage.setItem('maitri_theme', mood);
             localStorage.setItem('nikah_theme', mood);
             localStorage.setItem('theme', (mood === 'light' || mood === 'sand') ? 'light' : 'dark');
             document.documentElement.classList.remove('dark', 'theme-emerald', 'theme-sand');
@@ -887,11 +910,12 @@
             } else if (mood === 'sand') {
                 document.documentElement.classList.add('theme-sand');
             }
+            window.dispatchEvent(new CustomEvent('maitri-mood-changed', { detail: { mood } }));
             window.dispatchEvent(new CustomEvent('nikah-mood-changed', { detail: { mood } }));
         };
 
         // Play gentle notification sound via Web Audio API
-        function playHalalNotificationSound() {
+        window.playMaitriNotificationSound = window.playHalalNotificationSound = function() {
             try {
                 const AudioContext = window.AudioContext || window.webkitAudioContext;
                 if (!AudioContext) return;
@@ -914,11 +938,11 @@
             } catch (e) {
                 // Audio autoplay might be restricted by browser policy
             }
-        }
+        };
 
         // Show toast notification with strict duplicate guard
         const recentToastSignatures = new Set();
-        function showHalalNotificationToast(data) {
+        window.showMaitriNotificationToast = window.showHalalNotificationToast = function(data) {
             const container = document.getElementById('reverb-toast-container');
             if (!container || !data) return;
 
@@ -975,7 +999,7 @@
 
         // Initialize Laravel Reverb Echo Listener
         document.addEventListener('DOMContentLoaded', function() {
-            const cookieConsentKey = 'global_nikkah_cookie_consent';
+            const cookieConsentKey = 'global_maitri_cookie_consent';
             const cookieConsentBanner = document.getElementById('cookie-consent-banner');
 
             try {

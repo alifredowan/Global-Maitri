@@ -191,8 +191,8 @@ class MarriageMilestoneTest extends TestCase
         $this->assertTrue($groom->fresh()->isMarried());
         $this->assertTrue($bride->fresh()->isMarried());
 
-        // Subscription transitioned to completed_nikah
-        $this->assertEquals('completed_nikah', $subscription->fresh()->status);
+        // Subscription transitioned to completed_marriage
+        $this->assertEquals('completed_marriage', $subscription->fresh()->status);
 
         // Third party interest closed
         $this->assertEquals('closed_married', $thirdPartyInterest->fresh()->status);
@@ -218,7 +218,7 @@ class MarriageMilestoneTest extends TestCase
             ->assertDontSee($marriedFemale->name);
     }
 
-    public function test_couple_can_submit_and_save_barakah_story(): void
+    public function test_couple_can_submit_and_save_metta_story(): void
     {
         $groom = $this->createSeeker('male', 'married');
         $bride = $this->createSeeker('female', 'married');
@@ -233,8 +233,8 @@ class MarriageMilestoneTest extends TestCase
         ]);
 
         $response = $this->actingAs($groom)->post(route('marriages.story', $marriage->id), [
-            'story_title' => 'Our Blessed Journey on the Sunnah',
-            'story_body' => 'Alhamdulillah, through Istikhara and righteous Wali involvement, Allah united our hearts in Taqwa.',
+            'story_title' => 'Our Blessed Journey of Loving-Kindness',
+            'story_body' => 'Sadhu, through Dhamma compatibility and family guidance, we found mutual harmony and lifelong companionship.',
             'story_is_public' => '1',
         ]);
 
@@ -242,7 +242,7 @@ class MarriageMilestoneTest extends TestCase
 
         $this->assertDatabaseHas('marriages', [
             'id' => $marriage->id,
-            'story_title' => 'Our Blessed Journey on the Sunnah',
+            'story_title' => 'Our Blessed Journey of Loving-Kindness',
             'story_is_public' => true,
         ]);
     }

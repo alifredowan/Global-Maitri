@@ -3,42 +3,42 @@
 @section('title', 'Conversation - Global Maitri')
 
 @section('content')
-<div class="py-6 bg-slate-50 dark:bg-slate-950 min-h-screen">
+<div class="py-6 bg-[var(--bg-canvas)] min-h-screen">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 space-y-4">
 
         <!-- Top Navigation & Details -->
-        <div class="bg-white dark:bg-slate-900 p-4 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xs flex items-center justify-between">
+        <div class="card-ledger bg-[var(--bg-surface)] p-4 border border-[var(--border-default)] flex items-center justify-between">
             <div class="flex items-center gap-3">
-                <a href="{{ route('chat.index') }}" class="text-xs font-bold text-slate-500 dark:text-slate-400 hover:text-primary-700 dark:hover:text-primary-400">
-                    &larr; Inbox
+                <a href="{{ route('chat.index') }}" class="text-xs font-bold text-[var(--text-secondary)] hover:text-[var(--accent-primary)] inline-flex items-center gap-1">
+                    <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
+                    <span>Inbox</span>
                 </a>
-                <div class="h-4 w-px bg-slate-200 dark:bg-slate-800"></div>
+                <div class="h-4 w-px bg-[var(--border-default)]"></div>
                 <div>
-                    <h2 class="font-bold text-sm text-slate-900 dark:text-white flex items-center gap-2 flex-wrap">
+                    <h2 class="font-bold text-sm text-[var(--text-primary)] flex items-center gap-2 flex-wrap">
                         @if($waliObserver && Auth::id() === $waliObserver->id)
                             {{ $conversation->participants->where('pivot.role', 'seeker')->pluck('name')->join(' & ') }}
-                            <span class="text-[10px] px-2 py-0.5 rounded-full bg-purple-100 dark:bg-purple-950/70 text-purple-800 dark:text-purple-300 font-bold border border-purple-200 dark:border-purple-800/60">Observing as Family Rep</span>
+                            <span class="badge-status text-[10px] bg-[var(--accent-subtle)] text-[var(--accent-primary)] border border-[var(--accent-primary)]/30">Observing as Family Rep</span>
                         @else
                             {{ $otherUser?->name ?? 'Candidate' }}
                             @if($otherUser?->is_verified)
-                                <span class="text-blue-500 text-xs" title="Verified">✓</span>
+                                <span class="badge-verified text-[10px]">✓</span>
                             @endif
                             @if($waliObserver)
-                                <span class="text-[10px] px-2 py-0.5 rounded-full bg-purple-100 dark:bg-purple-950/70 text-purple-800 dark:text-purple-300 font-bold border border-purple-200 dark:border-purple-800/60 flex items-center gap-1">
-                                    🛡️ Family Rep: {{ $waliObserver->name }}
+                                <span class="badge-status text-[10px] bg-[var(--accent-subtle)] text-[var(--accent-primary)] border border-[var(--accent-primary)]/30">
+                                    Family Rep: {{ $waliObserver->name }}
                                 </span>
                             @endif
                         @endif
                     </h2>
-                    <p class="text-[11px] text-slate-500 dark:text-slate-400">Mindful Matrimonial Communication</p>
+                    <p class="text-[11px] text-[var(--text-muted)]">Mindful Matrimonial Communication</p>
                 </div>
             </div>
 
             <!-- Action Buttons -->
             <div class="flex items-center gap-2">
                 @if($marriage)
-                    <a href="{{ route('marriages.celebration') }}" class="px-3 py-1.5 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 border border-amber-400/50 text-amber-800 dark:text-amber-300 text-xs font-bold flex items-center gap-1 transition">
-                        <span>🪷</span>
+                    <a href="{{ route('marriages.celebration') }}" class="btn-secondary text-xs !py-1.5 !px-3 text-[var(--accent-primary)]">
                         @if($marriage->isConfirmed())
                             <span>Mangala Vivaha ↗</span>
                         @else
@@ -46,40 +46,40 @@
                         @endif
                     </a>
                 @elseif($otherUser && !Auth::user()->isMarried() && !$otherUser->isMarried() && $conversation->status !== 'locked' && (!$waliObserver || Auth::id() !== $waliObserver->id))
-                    <button type="button" onclick="document.getElementById('declareVivahaModal').classList.remove('hidden')" class="px-3 py-1.5 rounded-xl bg-rose-50 dark:bg-rose-950/70 hover:bg-rose-100 dark:hover:bg-rose-900/70 border border-rose-300 dark:border-rose-700 text-primary-800 dark:text-primary-200 text-xs font-bold flex items-center gap-1 transition cursor-pointer">
-                        <span>🪷</span> Mangala Vivaha Milestone
+                    <button type="button" onclick="document.getElementById('declareVivahaModal').classList.remove('hidden')" class="btn-primary text-xs !py-1.5 !px-3">
+                        <span>Mangala Vivaha Milestone</span>
                     </button>
                 @endif
 
                 <!-- Report User Button -->
-                <button type="button" onclick="document.getElementById('reportChatModal').classList.remove('hidden')" class="text-xs font-semibold text-rose-600 dark:text-rose-400 hover:text-rose-800 dark:hover:text-rose-300 cursor-pointer">
-                    🚩 Report
+                <button type="button" onclick="document.getElementById('reportChatModal').classList.remove('hidden')" class="text-xs font-semibold text-[var(--color-danger)] hover:underline cursor-pointer">
+                    Report
                 </button>
             </div>
         </div>
 
         <!-- Chaperone Banner (FR-4.3, 6.2) -->
         @if($waliObserver)
-            <div class="bg-purple-50 dark:bg-purple-950/40 border border-purple-200 dark:border-purple-900/60 rounded-3xl p-4 flex items-center gap-3">
-                <div class="w-10 h-10 rounded-2xl bg-purple-100 dark:bg-purple-900/60 text-purple-800 dark:text-purple-300 flex items-center justify-center text-xl shrink-0">
-                    🛡️
+            <div class="card-ledger bg-[var(--accent-subtle)] border border-[var(--accent-primary)]/30 p-3.5 flex items-center gap-3">
+                <div class="w-8 h-8 rounded-[var(--radius-sm)] bg-[var(--accent-primary)] text-white flex items-center justify-center text-sm shrink-0">
+                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
                 </div>
-                <div class="text-xs text-purple-900 dark:text-purple-300">
-                    <strong class="font-bold block text-purple-950 dark:text-purple-200">Family Representative Observer Active</strong>
-                    <span>{{ $waliObserver->name }} is present as a family representative to offer mindful guidance and respectful communication support (FR-4.3).</span>
+                <div class="text-xs text-[var(--text-primary)]">
+                    <strong class="font-bold block">Family Representative Observer Active</strong>
+                    <span class="text-[var(--text-secondary)]">{{ $waliObserver->name }} is present as a family representative to offer mindful guidance and respectful communication support (FR-4.3).</span>
                 </div>
             </div>
         @endif
 
         <!-- Message Scanning Reminder Notice (FR-4.4, 7.4) -->
-        <div class="bg-amber-50/80 dark:bg-amber-950/40 border border-amber-200/80 dark:border-amber-900/60 rounded-2xl px-4 py-2.5 text-[11px] text-amber-800 dark:text-amber-300 flex items-center gap-2">
-            <span class="text-base">⚠️</span>
-            <span><strong>Safety & Anti-Dowry Scanner Active:</strong> Sharing phone numbers or personal handles is restricted until verified. Zero tolerance for dowry or financial demands (FR-7.4).</span>
+        <div class="card-ledger bg-[var(--bg-subtle)] border border-[var(--border-default)] px-4 py-2.5 text-[11px] text-[var(--text-secondary)] flex items-center gap-2">
+            <svg class="w-4 h-4 text-[var(--accent-primary)] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" x2="12" y1="9" y2="13"/><line x1="12" x2="12.01" y1="17" y2="17"/></svg>
+            <span><strong>Safety &amp; Anti-Dowry Scanner Active:</strong> Sharing phone numbers or personal handles is restricted until verified. Zero tolerance for dowry or financial demands (FR-7.4).</span>
         </div>
 
         <!-- Message Thread Box -->
-        <div class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xs p-6 min-h-[420px] flex flex-col justify-between">
-            <div id="chat-messages-container" class="space-y-4 mb-6 overflow-y-auto max-h-[500px] pr-2 scroll-smooth">
+        <div class="card-ledger bg-[var(--bg-surface)] border border-[var(--border-default)] p-5 min-h-[420px] flex flex-col justify-between">
+            <div id="chat-messages-container" class="space-y-4 mb-4 overflow-y-auto max-h-[500px] pr-2 scroll-smooth">
                 @forelse($conversation->messages as $msg)
                     @php
                         $isMe = $msg->sender_id === Auth::id();
@@ -87,26 +87,26 @@
                     @endphp
 
                     <div class="flex flex-col {{ $isMe ? 'items-end' : 'items-start' }}" data-message-id="{{ $msg->id }}">
-                        <div class="flex items-center gap-1 text-[11px] text-slate-400 dark:text-slate-500 mb-1 px-1">
-                            <span class="font-bold text-slate-700 dark:text-slate-300">{{ $msg->sender->name }}</span>
+                        <div class="flex items-center gap-1 text-[11px] text-[var(--text-muted)] mb-1 px-1">
+                            <span class="font-bold text-[var(--text-primary)]">{{ $msg->sender->name }}</span>
                             @if($isWali)
-                                <span class="bg-purple-100 dark:bg-purple-950/70 text-purple-800 dark:text-purple-300 px-1.5 py-0.2 rounded font-bold text-[9px] border border-purple-200 dark:border-purple-800/60">🛡️ Family Rep</span>
+                                <span class="badge-status text-[9px] bg-[var(--accent-subtle)] text-[var(--accent-primary)] border border-[var(--accent-primary)]/30">Family Rep</span>
                             @endif
-                            <span>• {{ $msg->created_at->format('h:i A') }}</span>
+                            <span>&bull; {{ $msg->created_at->format('h:i A') }}</span>
                         </div>
 
-                        <div class="max-w-md rounded-2xl px-4 py-3 text-xs leading-relaxed shadow-2xs {{ $isMe ? 'bg-primary-700 text-white rounded-br-none' : ($isWali ? 'bg-purple-50 dark:bg-purple-950/50 border border-purple-200 dark:border-purple-800 text-purple-950 dark:text-purple-200 rounded-bl-none' : 'bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 rounded-bl-none') }}">
+                        <div class="max-w-md rounded-[var(--radius-md)] px-4 py-2.5 text-xs leading-relaxed {{ $isMe ? 'bg-[var(--accent-primary)] text-white rounded-br-none' : ($isWali ? 'bg-[var(--accent-subtle)] border border-[var(--accent-primary)]/30 text-[var(--text-primary)] rounded-bl-none' : 'bg-[var(--bg-subtle)] border border-[var(--border-default)] text-[var(--text-primary)] rounded-bl-none') }}">
                             <p class="whitespace-pre-line">{{ $msg->body }}</p>
                         </div>
 
                         @if($msg->is_flagged)
-                            <div class="text-[10px] text-amber-700 dark:text-amber-400 font-semibold mt-1 flex items-center gap-1">
-                                <span>⚠️ Filtered:</span> {{ $msg->flag_reason }}
+                            <div class="text-[10px] text-[var(--color-warning)] font-semibold mt-1 flex items-center gap-1">
+                                <span>Filtered:</span> {{ $msg->flag_reason }}
                             </div>
                         @endif
                     </div>
                 @empty
-                    <div id="chat-empty-state" class="py-12 text-center text-slate-400 dark:text-slate-500 text-xs">
+                    <div id="chat-empty-state" class="py-12 text-center text-[var(--text-muted)] text-xs">
                         No messages yet. Send an opening greeting with loving-kindness (Metta)!
                     </div>
                 @endforelse
@@ -124,25 +124,25 @@
             @endphp
 
             @if($conversation->status === 'locked')
-                <div class="pt-4 border-t border-slate-100 dark:border-slate-800 text-center py-3 px-4 text-xs text-slate-600 dark:text-slate-300 bg-slate-100/70 dark:bg-slate-800/60 rounded-xl flex items-center justify-center gap-2">
-                    <span>🔒</span>
+                <div class="pt-4 border-t border-[var(--border-subtle)] text-center py-3 px-4 text-xs text-[var(--text-muted)] bg-[var(--bg-subtle)] rounded-[var(--radius-sm)] flex items-center justify-center gap-2">
+                    <svg class="w-4 h-4 text-[var(--text-muted)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
                     <span>This conversation is locked ({{ $conversation->locked_reason === 'candidate_married' ? 'Participant completed Mangala Vivaha milestone' : 'Archived' }}). Messages are read-only.</span>
                 </div>
             @elseif($isViewOnlyWali)
-                <div class="pt-4 border-t border-slate-100 dark:border-slate-800 text-center py-3 text-xs text-purple-700 dark:text-purple-300 bg-purple-50/50 dark:bg-purple-950/20 rounded-xl">
-                    🛡️ You are observing this conversation with <strong>View Only</strong> representative permissions.
+                <div class="pt-4 border-t border-[var(--border-subtle)] text-center py-3 text-xs text-[var(--accent-primary)] bg-[var(--accent-subtle)] rounded-[var(--radius-sm)]">
+                    You are observing this conversation with <strong>View Only</strong> representative permissions.
                 </div>
             @else
                 <!-- Send Message Input Form -->
-                <form id="chat-send-form" action="{{ route('chat.send', $conversation->id) }}" method="POST" class="pt-4 border-t border-slate-100 dark:border-slate-800">
+                <form id="chat-send-form" action="{{ route('chat.send', $conversation->id) }}" method="POST" class="pt-3 border-t border-[var(--border-subtle)]">
                     @csrf
                     <div class="flex items-end gap-3">
                         <div class="flex-1">
                             <textarea id="chat-message-input" name="body" rows="2" required
-                                      class="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 text-xs focus:ring-2 focus:ring-primary-500 outline-none resize-none"
+                                      class="input-field text-xs w-full resize-none"
                                       placeholder="Type your message with mindfulness and Metta (Press Enter to send)..."></textarea>
                         </div>
-                        <button type="submit" id="chat-submit-btn" class="px-5 py-2.5 rounded-xl bg-primary-700 hover:bg-primary-800 text-white font-bold text-xs shadow-xs transition shrink-0 flex items-center gap-1 cursor-pointer">
+                        <button type="submit" id="chat-submit-btn" class="btn-primary text-xs !py-2.5 !px-4 shrink-0 flex items-center gap-1.5">
                             <span>Send</span>
                             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
@@ -158,28 +158,28 @@
 
 <!-- Report Modal -->
 <div id="reportChatModal" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
-    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl max-w-md w-full p-6 shadow-2xl">
-        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2 font-heading">Report Conversation</h3>
-        <form action="{{ route('reports.store') }}" method="POST">
+    <div class="card-ledger bg-[var(--bg-surface)] border border-[var(--border-default)] max-w-md w-full p-6 shadow-2xl space-y-4">
+        <h3 class="text-base font-bold text-[var(--text-primary)] font-heading">Report Conversation</h3>
+        <form action="{{ route('reports.store') }}" method="POST" class="space-y-4">
             @csrf
             <input type="hidden" name="reported_id" value="{{ $otherUser?->id }}">
             <input type="hidden" name="conversation_id" value="{{ $conversation->id }}">
-            <div class="mb-4">
-                <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Reason</label>
-                <select name="reason" required class="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-xs focus:ring-2 focus:ring-primary-500 outline-none">
+            <div>
+                <label class="block text-xs font-bold text-[var(--text-primary)] mb-1">Reason</label>
+                <select name="reason" required class="input-field text-xs w-full">
                     <option value="dowry_demand">Dowry demand / financial demand (Strict Zero Tolerance)</option>
                     <option value="inappropriate_language">Vulgar / disrespectful language</option>
                     <option value="unsolicited_contact_push">Pushing for external off-platform contact</option>
                     <option value="harassment">Harassment or coercion</option>
                 </select>
             </div>
-            <div class="mb-4">
-                <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Details</label>
-                <textarea name="details" rows="3" class="w-full p-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 text-xs focus:ring-2 focus:ring-primary-500 outline-none" placeholder="Explain the issue..."></textarea>
+            <div>
+                <label class="block text-xs font-bold text-[var(--text-primary)] mb-1">Details</label>
+                <textarea name="details" rows="3" class="input-field text-xs w-full" placeholder="Explain the issue..."></textarea>
             </div>
-            <div class="flex items-center justify-end gap-2">
-                <button type="button" onclick="document.getElementById('reportChatModal').classList.add('hidden')" class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800">Cancel</button>
-                <button type="submit" class="px-4 py-2 rounded-xl text-xs font-bold bg-rose-600 text-white hover:bg-rose-700 cursor-pointer">Submit Report</button>
+            <div class="flex items-center justify-end gap-2 pt-1">
+                <button type="button" onclick="document.getElementById('reportChatModal').classList.add('hidden')" class="btn-secondary text-xs !py-1.5 !px-3.5">Cancel</button>
+                <button type="submit" class="btn-primary text-xs !py-1.5 !px-4 !bg-[var(--color-danger)] !text-white">Submit Report</button>
             </div>
         </form>
     </div>
@@ -188,16 +188,16 @@
 @if($otherUser && !Auth::user()->isMarried() && !$otherUser->isMarried() && $conversation->status !== 'locked')
 <!-- Declare Mangala Vivaha Modal -->
 <div id="declareVivahaModal" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
-    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl space-y-5">
+    <div class="card-ledger bg-[var(--bg-surface)] border border-[var(--border-default)] max-w-lg w-full p-6 shadow-2xl space-y-4">
         <div class="flex items-start justify-between">
             <div>
-                <span class="text-[11px] font-extrabold uppercase tracking-wider text-amber-600 dark:text-amber-400">Auspicious Milestone</span>
-                <h3 class="text-lg font-bold text-slate-900 dark:text-white font-heading mt-0.5">Declare Mangala Vivaha Milestone</h3>
-                <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">
+                <span class="text-[10px] font-bold uppercase tracking-wider text-[var(--accent-primary)]">Auspicious Milestone</span>
+                <h3 class="text-base font-bold text-[var(--text-primary)] font-heading mt-0.5">Declare Mangala Vivaha Milestone</h3>
+                <p class="text-xs text-[var(--text-secondary)] mt-0.5">
                     Declare that you and {{ $otherUser->name }} have completed or scheduled your Mangala Vivaha (Wedding Milestone).
                 </p>
             </div>
-            <button type="button" onclick="document.getElementById('declareVivahaModal').classList.add('hidden')" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-lg cursor-pointer">✕</button>
+            <button type="button" onclick="document.getElementById('declareVivahaModal').classList.add('hidden')" class="text-[var(--text-muted)] hover:text-[var(--text-primary)] text-lg cursor-pointer leading-none">&times;</button>
         </div>
 
         <form action="{{ route('marriages.initiate') }}" method="POST" class="space-y-4">
@@ -205,47 +205,47 @@
             <input type="hidden" name="spouse_id" value="{{ $otherUser->id }}">
 
             <div>
-                <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Marriage Date (dd/mm/yyyy)</label>
+                <label class="block text-xs font-bold text-[var(--text-primary)] mb-1">Marriage Date (dd/mm/yyyy)</label>
                 <input type="text" name="marriage_date" value="{{ date('d/m/Y') }}" required
                        inputmode="numeric" placeholder="dd/mm/yyyy" maxlength="10"
                        pattern="\d{2}/\d{2}/\d{4}"
                        x-data
                        x-on:input="$el.value = $el.value.replace(/[^0-9]/g, '').replace(/^(\d{2})(\d)/, '$1/$2').replace(/^(\d{2})\/(\d{2})(\d)/, '$1/$2/$3').slice(0, 10)"
-                       class="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-xs focus:ring-2 focus:ring-primary-500 outline-none">
+                       class="input-field text-xs w-full">
             </div>
 
             <div>
-                <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Blessing Theme</label>
-                <select name="blessing_theme" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-xs focus:ring-2 focus:ring-primary-500 outline-none">
-                    <option value="metta_blessing">Metta & Loving-kindness Blessing</option>
+                <label class="block text-xs font-bold text-[var(--text-primary)] mb-1">Blessing Theme</label>
+                <select name="blessing_theme" class="input-field text-xs w-full">
+                    <option value="metta_blessing">Metta &amp; Loving-kindness Blessing</option>
                     <option value="traditional">Traditional Buddhist Ceremony</option>
                     <option value="simple">Simple Mindful Union</option>
                 </select>
             </div>
 
             <div>
-                <label class="flex items-center gap-2 text-xs text-slate-700 dark:text-slate-300 cursor-pointer">
-                    <input type="checkbox" name="monk_blessing_requested" value="1" class="rounded text-primary-600 focus:ring-primary-500">
+                <label class="flex items-center gap-2 text-xs text-[var(--text-secondary)] cursor-pointer select-none">
+                    <input type="checkbox" name="monk_blessing_requested" value="1" class="rounded-[2px] text-[var(--accent-primary)] focus:ring-[var(--accent-primary)]">
                     <span>Request Sangha / Monk Blessing facilitation</span>
                 </label>
             </div>
 
             <div>
-                <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Personal Note / Details (Optional)</label>
+                <label class="block text-xs font-bold text-[var(--text-primary)] mb-1">Personal Note / Details (Optional)</label>
                 <textarea name="confirmation_notes" rows="3" placeholder="Share your wedding celebration date and words of loving-kindness..."
-                          class="w-full p-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-xs focus:ring-2 focus:ring-primary-500 outline-none"></textarea>
+                          class="input-field text-xs w-full"></textarea>
             </div>
 
-            <div class="p-3.5 rounded-2xl bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-900/60 text-[11px] text-amber-800 dark:text-amber-200">
-                ⚠️ Once submitted, a confirmation prompt will be sent to <strong>{{ $otherUser->name }}</strong>. Upon their confirmation, both accounts will be transitioned to Married and past inquiries closed with Metta.
+            <div class="p-3 rounded-[var(--radius-sm)] bg-[var(--accent-subtle)] border border-[var(--accent-primary)]/30 text-[11px] text-[var(--text-secondary)]">
+                Once submitted, a confirmation prompt will be sent to <strong>{{ $otherUser->name }}</strong>. Upon their confirmation, both accounts will be transitioned to Married and past inquiries closed with Metta.
             </div>
 
-            <div class="flex items-center justify-end gap-2 pt-2">
-                <button type="button" onclick="document.getElementById('declareVivahaModal').classList.add('hidden')" class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer">
+            <div class="flex items-center justify-end gap-2 pt-1">
+                <button type="button" onclick="document.getElementById('declareVivahaModal').classList.add('hidden')" class="btn-secondary text-xs !py-1.5 !px-3.5">
                     Cancel
                 </button>
-                <button type="submit" class="px-5 py-2.5 rounded-xl text-xs font-extrabold bg-primary-700 hover:bg-primary-800 text-white shadow-xs transition cursor-pointer">
-                    🪷 Submit Vivaha Declaration
+                <button type="submit" class="btn-primary text-xs !py-2 !px-4">
+                    Submit Vivaha Declaration
                 </button>
             </div>
         </form>
@@ -296,24 +296,24 @@ document.addEventListener('DOMContentLoaded', function() {
 
         let waliBadge = '';
         if (isWali) {
-            waliBadge = '<span class="bg-purple-100 dark:bg-purple-950/70 text-purple-800 dark:text-purple-300 px-1.5 py-0.2 rounded font-bold text-[9px] border border-purple-200 dark:border-purple-800/60">🛡️ Family Rep</span>';
+            waliBadge = '<span class="badge-status text-[9px] bg-[var(--accent-subtle)] text-[var(--accent-primary)] border border-[var(--accent-primary)]/30">Family Rep</span>';
         }
 
-        const headerHtml = '<div class="flex items-center gap-1 text-[11px] text-slate-400 dark:text-slate-500 mb-1 px-1">' +
-            '<span class="font-bold text-slate-700 dark:text-slate-300">' + senderName + '</span>' +
+        const headerHtml = '<div class="flex items-center gap-1 text-[11px] text-[var(--text-muted)] mb-1 px-1">' +
+            '<span class="font-bold text-[var(--text-primary)]">' + senderName + '</span>' +
             waliBadge +
-            '<span>• ' + timeStr + '</span>' +
+            '<span>&bull; ' + timeStr + '</span>' +
             '</div>';
 
-        let bubbleClass = 'bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 rounded-bl-none';
+        let bubbleClass = 'bg-[var(--bg-subtle)] border border-[var(--border-default)] text-[var(--text-primary)] rounded-bl-none';
         if (isMe) {
-            bubbleClass = 'bg-primary-700 text-white rounded-br-none';
+            bubbleClass = 'bg-[var(--accent-primary)] text-white rounded-br-none';
         } else if (isWali) {
-            bubbleClass = 'bg-purple-50 dark:bg-purple-950/50 border border-purple-200 dark:border-purple-800 text-purple-950 dark:text-purple-200 rounded-bl-none';
+            bubbleClass = 'bg-[var(--accent-subtle)] border border-[var(--accent-primary)]/30 text-[var(--text-primary)] rounded-bl-none';
         }
 
         const bubbleDiv = document.createElement('div');
-        bubbleDiv.className = 'max-w-md rounded-2xl px-4 py-3 text-xs leading-relaxed shadow-2xs ' + bubbleClass;
+        bubbleDiv.className = 'max-w-md rounded-[var(--radius-md)] px-4 py-2.5 text-xs leading-relaxed ' + bubbleClass;
 
         const p = document.createElement('p');
         p.className = 'whitespace-pre-line';
@@ -325,8 +325,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (message.is_flagged) {
             const flagNotice = document.createElement('div');
-            flagNotice.className = 'text-[10px] text-amber-700 dark:text-amber-400 font-semibold mt-1 flex items-center gap-1';
-            flagNotice.innerHTML = '<span>⚠️ Filtered:</span> ' + (message.flag_reason || 'Policy filter');
+            flagNotice.className = 'text-[10px] text-[var(--color-warning)] font-semibold mt-1 flex items-center gap-1';
+            flagNotice.innerHTML = '<span>Filtered:</span> ' + (message.flag_reason || 'Policy filter');
             msgDiv.appendChild(flagNotice);
         }
 
@@ -402,7 +402,6 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!window.Echo) return;
         const handleIncoming = function(e) {
             if (!e) return;
-            // Only render if sent by another participant
             if (parseInt(e.sender_id) !== currentUserId) {
                 const isWali = Boolean(e.is_wali) || (waliObserverId !== null && parseInt(e.sender_id) === waliObserverId);
                 appendMessageBubble(e, false, isWali);

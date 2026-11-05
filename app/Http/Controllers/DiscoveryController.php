@@ -164,11 +164,18 @@ class DiscoveryController extends Controller
         }
 
         $savedSearches = $currentUser->savedSearches()->latest()->get();
+        $quotaStats = $this->quotaService->getUsageStats($currentUser);
+        $bookmarkedUserIds = $currentUser->bookmarks()->pluck('bookmarked_user_id')->all();
+        $dailyRecommendations = $this->matchingEngine->getDailyMatches($currentUser, 6);
 
         return view('discovery.index', [
             'profiles' => $profiles,
             'currentUser' => $currentUser,
+            'quotaStats' => $quotaStats,
+            'bookmarkedUserIds' => $bookmarkedUserIds,
+            'dailyRecommendations' => $dailyRecommendations,
             'savedSearches' => $savedSearches,
+            'sort' => $sort,
             'traditions' => config('buddhist.traditions'),
             'meditationFrequencies' => config('buddhist.meditation_frequencies'),
             'pancaSilaOptions' => config('buddhist.panca_sila_adherence'),
@@ -189,6 +196,10 @@ class DiscoveryController extends Controller
         ])->findOrFail($userId);
 
         $profile = $targetUser->profile;
+
+        if ($currentUser->hasBlockedRelationshipWith($targetUser)) {
+            return redirect()->route('discovery.index')->with('error', 'This profile is blocked from your discovery experience.');
+        }
 
         if (! $profile || ! $targetUser->is_active || $targetUser->role !== 'seeker') {
             return redirect()->route('discovery.index')->with('error', 'Candidate profile is unavailable or inactive.');
@@ -283,12 +294,15 @@ class DiscoveryController extends Controller
                 'city',
                 'marital_status',
                 'tradition',
+                'sect',
                 'meditation_frequency',
+                'prayer_frequency',
                 'panca_sila_adherence',
                 'dietary_preference',
                 'ethnic_community',
                 'education_level',
                 'family_rep_required',
+                'wali_required',
             ]),
             fn ($value): bool => filled($value)
         );

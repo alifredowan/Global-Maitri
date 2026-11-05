@@ -99,8 +99,8 @@ class ProFeaturesTest extends TestCase
 
         $response->assertOk()
             ->assertSee('Who Viewed My Profile')
-            ->assertSee('Seeker Premium Feature')
-            ->assertSee('Upgrade to Seeker Premium');
+            ->assertSee('Maitri Pass Feature')
+            ->assertSee('Upgrade to Single Marriage Pass');
     }
 
     public function test_pro_user_sees_actual_visitors_list(): void
@@ -207,13 +207,13 @@ class ProFeaturesTest extends TestCase
         // User can always view their own biodata
         $response = $this->actingAs($freeUser)->get(route('profile.biodata'));
         $response->assertOk()
-            ->assertSee('Shariah Matrimonial Biodata')
+            ->assertSee('Dhamma Matrimonial Biodata')
             ->assertSee($freeUser->name);
 
         // Pro user can view candidate's printable biodata
         $response = $this->actingAs($proUser)->get(route('profile.biodata.show', $candidate->id));
         $response->assertOk()
-            ->assertSee('Shariah Matrimonial Biodata')
+            ->assertSee('Dhamma Matrimonial Biodata')
             ->assertSee($candidate->name);
 
         // Free user without accepted interest is redirected to pricing

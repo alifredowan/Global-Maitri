@@ -14,15 +14,14 @@ class HowItWorksPageTest extends TestCase
         $response = $this->get(route('how-it-works'));
 
         $response->assertOk()
-            ->assertSee('Three hearts.')
-            ->assertSee('Seeker A')
-            ->assertSee('Seeker B')
-            ->assertSee('Wali / Family')
-            ->assertSee('From first profile to family conversation')
+            ->assertSee('Two hearts.')
+            ->assertSee('Candidate A')
+            ->assertSee('Candidate B')
+            ->assertSee('Family Rep / Elder')
             ->assertSee('Choose your perspective')
-            ->assertSee('For the seeker')
-            ->assertSee('For the Wali')
-            ->assertSee('For the family')
+            ->assertSee('For the Candidate')
+            ->assertSee('For the Family Representative')
+            ->assertSee('For the Family')
             ->assertSee(route('how-it-works'));
     }
 }

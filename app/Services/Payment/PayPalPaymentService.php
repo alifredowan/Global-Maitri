@@ -190,7 +190,7 @@ class PayPalPaymentService
                     'purchase_units' => [
                         [
                             'reference_id' => "sub_{$user->id}_".time(),
-                            'description' => "Global Nikkah: {$planName} ({$billingCycle})",
+                            'description' => "Global Maitri: {$planName} ({$billingCycle})",
                             'custom_id' => $customMetadata,
                             'amount' => [
                                 'currency_code' => $this->currency,
@@ -216,7 +216,7 @@ class PayPalPaymentService
                         ],
                     ],
                     'application_context' => [
-                        'brand_name' => config('app.name', 'Global Nikkah'),
+                        'brand_name' => config('app.name', 'Global Maitri'),
                         'locale' => 'en-US',
                         'landing_page' => 'NO_PREFERENCE',
                         'user_action' => 'PAY_NOW',

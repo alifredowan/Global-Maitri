@@ -10,7 +10,6 @@ use App\Models\User;
 use App\Models\VerificationRequest;
 use App\Services\ImageOptimizationService;
 use App\Services\SavedSearchAlertService;
-use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -373,10 +372,10 @@ class ProfileController extends Controller
             $isPhotoVisible = $profile->isPhotoVisibleTo($currentUser);
         }
 
-        $activeFamilyLink = $targetUser->waliLinksAsSeeker()
+        $activeWaliLink = $activeFamilyLink = $targetUser->waliLinksAsSeeker()
             ->where('status', 'active')
             ->first();
 
-        return view('profile.biodata', compact('targetUser', 'profile', 'isOwner', 'isPhotoVisible', 'activeFamilyLink', 'currentUser'));
+        return view('profile.biodata', compact('targetUser', 'profile', 'isOwner', 'isPhotoVisible', 'activeWaliLink', 'activeFamilyLink', 'currentUser'));
     }
 }

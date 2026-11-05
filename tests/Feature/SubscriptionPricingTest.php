@@ -21,9 +21,9 @@ class SubscriptionPricingTest extends TestCase
         $response = $this->get(route('subscription.pricing'));
 
         $response->assertSee('Membership Plans & Tiers', false)
-            ->assertSee('Free Seeker')
-            ->assertSee('Standard Nikah Pass')
-            ->assertSee('VIP Barakah Pass')
+            ->assertSee('Free Explorer')
+            ->assertSee('Pro Single Marriage Pass')
+            ->assertSee('VIP Maitri Blessing Pass')
             ->assertSee('Our Single Marriage Guarantee (One-Time Pass Guarantee)')
             ->assertDontSee('সাবস্ক্রিপশন গ্যারান্টি')
             ->assertSee('href="'.route('register').'"', false)

@@ -76,12 +76,12 @@ class UnifiedSidebarTest extends TestCase
         $response->assertSee('Platform Policies');
         // Matchmaking & Portal for Super Admin
         $response->assertSee('Find Matches');
-        $response->assertSee('Interests & Requests', false);
+        $response->assertSee('Proposals & Interests', false);
         $response->assertSee('Messages');
         $response->assertSee('Shortlist');
-        // Guardian Console for Super Admin
-        $response->assertSee('Wali Dashboard');
-        $response->assertSee('Link Ward');
+        // Family Representative Console for Super Admin
+        $response->assertSee('Family Dashboard');
+        $response->assertSee('Link Candidate Ward');
         // Settings & Public
         $response->assertSee('Account Settings');
         $response->assertSee('Public Home');
@@ -91,7 +91,7 @@ class UnifiedSidebarTest extends TestCase
         $response->assertDontSee('🛡️ Moderator Console');
         // Topbar must have 3-dots toggle and clickable logo
         $response->assertSee('Open / Close Sidebar (3 Dots)');
-        $response->assertSee('Open / Close Sidebar (Global Nikkah Logo)');
+        $response->assertSee('Open / Close Sidebar (Global Maitri Logo)');
     }
 
     public function test_seeker_sidebar_shows_only_seeker_links_and_no_admin_links(): void
@@ -103,11 +103,11 @@ class UnifiedSidebarTest extends TestCase
         $response->assertStatus(200);
         // Seeker links MUST be present
         $response->assertSee('Find Matches');
-        $response->assertSee('Interests & Requests', false);
+        $response->assertSee('Proposals & Interests', false);
         $response->assertSee('Messages');
         $response->assertSee('Shortlist');
-        $response->assertSee('View Profile & Photos', false);
-        $response->assertSee('Edit Deen & Preferences', false);
+        $response->assertSee('View Biodata & Photos', false);
+        $response->assertSee('Edit Dhamma & Practice', false);
         $response->assertSee('Printable Biodata');
         $response->assertSee('Plans & Pricing', false);
         $response->assertSee('Account Settings');
@@ -130,10 +130,10 @@ class UnifiedSidebarTest extends TestCase
         $response = $this->actingAs($wali)->get(route('wali.dashboard'));
 
         $response->assertStatus(200);
-        // Wali links
-        $response->assertSee('Guardian Console');
-        $response->assertSee('Wali Dashboard');
-        $response->assertSee('Link Ward');
+        // Wali / Family Rep links
+        $response->assertSee('Family Console');
+        $response->assertSee('Family Dashboard');
+        $response->assertSee('Link Candidate Ward');
         $response->assertSee('Account Settings');
 
         // Subscription & Pro links MUST NOT be present for Wali
@@ -149,8 +149,8 @@ class UnifiedSidebarTest extends TestCase
         $response->assertDontSee('Platform Policies');
 
         // Seeker biodata links MUST NOT be present
-        $response->assertDontSee('View Profile &amp; Photos', false);
-        $response->assertDontSee('Edit Deen &amp; Preferences', false);
+        $response->assertDontSee('View Biodata &amp; Photos', false);
+        $response->assertDontSee('Edit Dhamma &amp; Practice', false);
     }
 
     public function test_settings_page_accessible_and_renders_for_both_super_admin_and_normal_user(): void
@@ -168,7 +168,7 @@ class UnifiedSidebarTest extends TestCase
         $responseSeeker->assertSee('Account Settings');
         $responseSeeker->assertSee('Personal & Account Information', false);
         $responseSeeker->assertSee('Password & Security', false);
-        $responseSeeker->assertSee('Privacy & Haya Preferences', false);
+        $responseSeeker->assertSee('Privacy & Lotus Modesty Preferences', false);
     }
 
     public function test_wali_accessing_subscription_pricing_is_redirected_to_wali_dashboard(): void

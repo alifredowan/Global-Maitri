@@ -6,7 +6,7 @@
 @section('robots', 'index, follow')
 
 @section('content')
-<div class="min-h-screen overflow-hidden bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100">
+<div class="min-h-screen overflow-hidden bg-[var(--bg-canvas)] text-[var(--text-primary)] transition-colors">
     <style>
         @keyframes how-it-works-pulse {
             0%, 100% { opacity: .45; transform: scale(.92); }
@@ -22,12 +22,12 @@
 
         @keyframes how-it-works-float {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
+            50% { transform: translateY(-6px); }
         }
 
         @keyframes how-it-works-beacon {
-            0%, 100% { box-shadow: 0 0 0 0 rgba(244, 63, 94, .28); }
-            50% { box-shadow: 0 0 0 14px rgba(244, 63, 94, 0); }
+            0%, 100% { box-shadow: 0 0 0 0 rgba(166, 124, 0, .28); }
+            50% { box-shadow: 0 0 0 12px rgba(166, 124, 0, 0); }
         }
 
         @keyframes how-it-works-draw-line {
@@ -46,27 +46,18 @@
         .how-it-works-draw-line { stroke-dasharray: 420; animation: how-it-works-draw-line 2.8s ease-out both; }
 
         .how-it-works-map-card {
-            box-shadow: 0 18px 45px rgba(2, 6, 23, .28), inset 0 1px 0 rgba(255, 255, 255, .08);
+            box-shadow: 0 16px 36px rgba(20, 20, 18, .24), inset 0 1px 0 rgba(255, 255, 255, .08);
             transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease;
         }
 
         .how-it-works-map-card:hover {
-            border-color: rgba(251, 113, 133, .5);
-            box-shadow: 0 24px 55px rgba(2, 6, 23, .38), inset 0 1px 0 rgba(255, 255, 255, .12);
-            transform: translateY(-5px);
+            border-color: rgba(166, 124, 0, .5);
+            box-shadow: 0 20px 45px rgba(20, 20, 18, .34), inset 0 1px 0 rgba(255, 255, 255, .12);
+            transform: translateY(-4px);
         }
 
         .how-it-works-map-node {
-            box-shadow: 0 0 0 1px rgba(251, 113, 133, .2), 0 0 0 14px rgba(244, 63, 94, .06), 0 22px 55px rgba(2, 6, 23, .42);
-        }
-
-        .how-it-works-map-spark {
-            animation: how-it-works-map-spark 3s ease-in-out infinite;
-        }
-
-        @keyframes how-it-works-map-spark {
-            0%, 100% { transform: scale(.96) rotate(0deg); opacity: .85; }
-            50% { transform: scale(1.08) rotate(8deg); opacity: 1; }
+            box-shadow: 0 0 0 1px rgba(166, 124, 0, .25), 0 0 0 12px rgba(166, 124, 0, .08), 0 20px 45px rgba(20, 20, 18, .38);
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -92,172 +83,294 @@
             'magnifying-glass' => 'm21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z',
             'chat-bubble-left-right' => 'M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 0 1-.825-.242m9.345-8.334a2.126 2.126 0 0 0-.476-.095 48.64 48.64 0 0 0-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0 0 11.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155',
             'hand-raised' => 'M10.05 4.575a1.575 1.575 0 1 0-3.15 0v3m3.15-3v-1.5a1.575 1.575 0 0 1 3.15 0v1.5m-3.15 0 .075 5.925m3.075.75V4.575m0 0a1.575 1.575 0 0 1 3.15 0V15M6.9 7.575a1.575 1.575 0 1 0-3.15 0v8.175a6.75 6.75 0 0 0 6.75 6.75h2.018a5.25 5.25 0 0 0 3.712-1.538l1.732-1.732a5.25 5.25 0 0 0 1.538-3.712l.003-2.024a.668.668 0 0 1 .198-.471 1.575 1.575 0 1 0-2.228-2.228 3.818 3.818 0 0 0-1.12 2.687M6.9 7.575V12m6.27 4.318A4.49 4.49 0 0 1 16.35 15m.002 0h-.002',
+            'dharmachakra' => 'M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8zm0-14a6 6 0 1 0 6 6 6 6 0 0 0-6-6zm0 2a4 4 0 1 1-4 4 4 4 0 0 1 4-4z',
         ];
         $hiwIcon = function (string $name, string $class = 'h-6 w-6') use ($hiwIconPaths): string {
             $d = $hiwIconPaths[$name] ?? '';
-
             return '<svg class="'.$class.'" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="'.$d.'" /></svg>';
         };
     @endphp
 
-    <!-- Hero -->
-    <section class="relative isolate overflow-hidden bg-slate-900 py-16 text-white sm:py-24">
-        <div class="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_15%_20%,rgba(244,63,94,.18),transparent_30%),radial-gradient(circle_at_85%_80%,rgba(245,158,11,.15),transparent_28%)]"></div>
-        <div class="absolute -left-20 top-16 h-72 w-72 rounded-full border border-rose-400/10"></div>
-        <div class="absolute -right-24 bottom-0 h-96 w-96 rounded-full border border-amber-300/10"></div>
+    <!-- Hero Section -->
+    <section class="relative isolate overflow-hidden bg-[#141412] py-16 text-[#f4f2ee] sm:py-24 border-b border-[#2d2b27]">
+        <div class="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_15%_20%,rgba(166,124,0,.15),transparent_35%),radial-gradient(circle_at_85%_80%,rgba(166,124,0,.12),transparent_30%)]"></div>
+        <div class="absolute -left-20 top-16 h-72 w-72 rounded-full border border-[var(--accent-primary)]/10"></div>
+        <div class="absolute -right-24 bottom-0 h-96 w-96 rounded-full border border-[var(--accent-primary)]/10"></div>
 
         <div class="mx-auto grid max-w-7xl items-center gap-14 px-4 sm:px-6 lg:grid-cols-12 lg:px-8">
             <div class="lg:col-span-5">
-                <div class="mb-5 inline-flex items-center gap-2 rounded-full border border-rose-400/30 bg-rose-950/60 px-3.5 py-1.5 text-xs font-bold uppercase tracking-[.18em] text-rose-200">
-                    <span class="text-amber-300">🪷</span>
+                <div class="mb-5 inline-flex items-center gap-2 rounded-full border border-[var(--accent-primary)]/30 bg-[var(--accent-primary)]/10 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[.18em] text-[#e0b84c]">
+                    <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="9"/>
+                        <circle cx="12" cy="12" r="3"/>
+                        <path d="M12 3v6m0 6v6M3 12h6m6 0h6"/>
+                    </svg>
                     A Clear Path to Mangala Vivaha
                 </div>
-                <h1 class="font-heading text-4xl font-extrabold leading-[1.08] tracking-tight sm:text-6xl">
+                <h1 class="font-heading text-4xl font-extrabold leading-[1.08] tracking-tight sm:text-6xl text-white">
                     Two hearts.<br>
-                    <span class="text-amber-300">One mindful circle.</span>
+                    <span class="text-[#e0b84c]">One mindful circle.</span>
                 </h1>
-                <p class="mt-6 max-w-xl text-sm leading-7 text-rose-100/75 sm:text-base">
+                <p class="mt-6 max-w-xl text-sm leading-7 text-[#d6d2c8] sm:text-base">
                     Global Maitri connects earnest Buddhist seekers through a respectful, family-aware process—so an auspicious introduction can flourish with clarity, Dhamma compatibility, and loving-kindness.
                 </p>
                 <div class="mt-8 flex flex-wrap gap-3">
-                    <a href="{{ route('register') }}" class="rounded-xl bg-amber-400 px-5 py-3 text-sm font-extrabold text-slate-950 shadow-xl shadow-amber-950/30 transition hover:-translate-y-0.5 hover:bg-amber-300">Start your profile &rarr;</a>
-                    <a href="#journey" class="rounded-xl border border-white/20 bg-white/10 px-5 py-3 text-sm font-bold text-white transition hover:bg-white/15">Explore the journey</a>
+                    <a href="{{ route('register') }}" class="btn-primary inline-flex items-center gap-2 text-sm">
+                        <span>Start your profile</span>
+                        <span aria-hidden="true">&rarr;</span>
+                    </a>
+                    <a href="#journey" class="btn-secondary inline-flex items-center gap-2 text-sm">
+                        <span>Explore the journey</span>
+                    </a>
                 </div>
             </div>
 
             <!-- Animated relationship map -->
             <div class="relative lg:col-span-7" aria-label="Animated diagram showing two seekers and a Family Representative connected through Global Maitri">
-                <div class="relative mx-auto aspect-[1.08] max-w-2xl overflow-hidden rounded-[2rem] border border-rose-200/15 bg-gradient-to-br from-slate-950/80 via-rose-950/30 to-amber-950/30 p-4 shadow-2xl shadow-rose-950/50 ring-1 ring-white/5 backdrop-blur sm:aspect-[1.25] sm:p-8">
-                    <div class="absolute inset-0 opacity-50 [background-image:linear-gradient(rgba(244,63,94,.08)_1px,transparent_1px),linear-gradient(90deg,rgba(244,63,94,.08)_1px,transparent_1px)] [background-size:32px_32px]"></div>
-                    <div class="absolute -left-24 top-1/3 h-72 w-72 rounded-full bg-rose-400/10 blur-3xl"></div>
-                    <div class="absolute -right-24 bottom-0 h-72 w-72 rounded-full bg-amber-400/10 blur-3xl"></div>
-                    <div class="absolute left-1/2 top-1/2 h-52 w-52 -translate-x-1/2 -translate-y-1/2 rounded-full bg-rose-400/10 blur-3xl"></div>
+                <div class="relative mx-auto aspect-[1.08] max-w-2xl overflow-hidden rounded-[4px] border border-[#3d3a33] bg-[#1a1916]/90 p-4 shadow-2xl backdrop-blur sm:aspect-[1.25] sm:p-8">
+                    <div class="absolute inset-0 opacity-40 [background-image:linear-gradient(rgba(166,124,0,.08)_1px,transparent_1px),linear-gradient(90deg,rgba(166,124,0,.08)_1px,transparent_1px)] [background-size:32px_32px]"></div>
+                    <div class="absolute -left-24 top-1/3 h-72 w-72 rounded-full bg-[var(--accent-primary)]/10 blur-3xl"></div>
+                    <div class="absolute -right-24 bottom-0 h-72 w-72 rounded-full bg-[var(--accent-primary)]/10 blur-3xl"></div>
+                    <div class="absolute left-1/2 top-1/2 h-52 w-52 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--accent-primary)]/10 blur-3xl"></div>
                     <svg class="pointer-events-none absolute inset-0 z-0 h-full w-full" viewBox="0 0 700 560" fill="none" role="img" aria-labelledby="relationship-map-title">
                         <title id="relationship-map-title">Two seekers and their Family Representative connected through a trusted matrimonial process</title>
-                        <path d="M153 166 C235 210 270 238 325 274" stroke="rgba(251,113,133,.36)" stroke-width="2" stroke-linecap="round" />
-                        <path d="M547 166 C465 210 430 238 375 274" stroke="rgba(251,113,133,.36)" stroke-width="2" stroke-linecap="round" />
-                        <path d="M350 450 C350 393 350 362 350 318" stroke="rgba(251,191,36,.42)" stroke-width="2" stroke-linecap="round" />
-                        <path class="how-it-works-packet" d="M153 166 C235 210 270 238 325 274" stroke="#fb7185" stroke-width="4" stroke-linecap="round" />
-                        <path class="how-it-works-packet delay-1" d="M547 166 C465 210 430 238 375 274" stroke="#fb7185" stroke-width="4" stroke-linecap="round" />
-                        <path class="how-it-works-packet delay-2" d="M350 450 C350 393 350 362 350 318" stroke="#fbbf24" stroke-width="4" stroke-linecap="round" />
-                        <circle class="how-it-works-orbit" cx="350" cy="295" r="76" stroke="rgba(251,113,133,.26)" stroke-width="1" stroke-dasharray="3 9" />
+                        <path d="M153 166 C235 210 270 238 325 274" stroke="rgba(166,124,0,.36)" stroke-width="2" stroke-linecap="round" />
+                        <path d="M547 166 C465 210 430 238 375 274" stroke="rgba(166,124,0,.36)" stroke-width="2" stroke-linecap="round" />
+                        <path d="M350 450 C350 393 350 362 350 318" stroke="rgba(166,124,0,.42)" stroke-width="2" stroke-linecap="round" />
+                        <path class="how-it-works-packet" d="M153 166 C235 210 270 238 325 274" stroke="var(--accent-primary)" stroke-width="4" stroke-linecap="round" />
+                        <path class="how-it-works-packet delay-1" d="M547 166 C465 210 430 238 375 274" stroke="var(--accent-primary)" stroke-width="4" stroke-linecap="round" />
+                        <path class="how-it-works-packet delay-2" d="M350 450 C350 393 350 362 350 318" stroke="var(--accent-primary)" stroke-width="4" stroke-linecap="round" />
+                        <circle class="how-it-works-orbit" cx="350" cy="295" r="76" stroke="rgba(166,124,0,.26)" stroke-width="1" stroke-dasharray="3 9" />
                     </svg>
 
-                    <div class="how-it-works-float how-it-works-map-card absolute left-[3%] top-[10%] z-10 w-[43%] max-w-52 rounded-2xl border border-rose-300/25 bg-slate-950/80 p-3 backdrop-blur-xl sm:left-[8%] sm:top-[8%] sm:w-48 sm:p-4">
+                    <!-- Candidate A -->
+                    <div class="how-it-works-float how-it-works-map-card absolute left-[3%] top-[10%] z-10 w-[43%] max-w-52 rounded-[4px] border border-[#3d3a33] bg-[#22211c]/90 p-3 backdrop-blur-xl sm:left-[8%] sm:top-[8%] sm:w-48 sm:p-4">
                         <div class="flex items-center gap-3">
-                            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-rose-400/15 text-rose-200">{!! $hiwIcon('user', 'h-5 w-5') !!}</div>
-                            <div><p class="text-xs font-extrabold text-white">Candidate A</p><p class="mt-0.5 text-[10px] text-rose-200/60">Verified intention</p></div>
+                            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-[4px] bg-[var(--accent-primary)]/20 text-[#e0b84c]">{!! $hiwIcon('user', 'h-5 w-5') !!}</div>
+                            <div>
+                                <p class="text-xs font-bold text-white">Candidate A</p>
+                                <p class="mt-0.5 text-[10px] text-[#a8a49c]">Verified intention</p>
+                            </div>
                         </div>
-                        <div class="mt-3 flex items-center gap-1.5 text-[10px] font-bold text-rose-300"><span class="h-1.5 w-1.5 rounded-full bg-rose-400"></span> Profile ready</div>
+                        <div class="mt-3 flex items-center gap-1.5 text-[10px] font-semibold text-[#e0b84c]">
+                            <span class="h-1.5 w-1.5 rounded-full bg-[var(--accent-primary)]"></span> Profile ready
+                        </div>
                     </div>
 
-                    <div class="how-it-works-float delay-1 how-it-works-map-card absolute right-[3%] top-[10%] z-10 w-[43%] max-w-52 rounded-2xl border border-amber-300/25 bg-slate-950/80 p-3 backdrop-blur-xl sm:right-[8%] sm:top-[8%] sm:w-48 sm:p-4">
+                    <!-- Candidate B -->
+                    <div class="how-it-works-float delay-1 how-it-works-map-card absolute right-[3%] top-[10%] z-10 w-[43%] max-w-52 rounded-[4px] border border-[#3d3a33] bg-[#22211c]/90 p-3 backdrop-blur-xl sm:right-[8%] sm:top-[8%] sm:w-48 sm:p-4">
                         <div class="flex items-center gap-3">
-                            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-amber-400/15 text-amber-200">{!! $hiwIcon('user', 'h-5 w-5') !!}</div>
-                            <div><p class="text-xs font-extrabold text-white">Candidate B</p><p class="mt-0.5 text-[10px] text-rose-200/60">Dhamma aligned</p></div>
+                            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-[4px] bg-[var(--accent-primary)]/20 text-[#e0b84c]">{!! $hiwIcon('user', 'h-5 w-5') !!}</div>
+                            <div>
+                                <p class="text-xs font-bold text-white">Candidate B</p>
+                                <p class="mt-0.5 text-[10px] text-[#a8a49c]">Dhamma aligned</p>
+                            </div>
                         </div>
-                        <div class="mt-3 flex items-center gap-1.5 text-[10px] font-bold text-amber-300"><span class="h-1.5 w-1.5 rounded-full bg-amber-300"></span> Mutual interest</div>
+                        <div class="mt-3 flex items-center gap-1.5 text-[10px] font-semibold text-[#e0b84c]">
+                            <span class="h-1.5 w-1.5 rounded-full bg-[var(--accent-primary)]"></span> Mutual interest
+                        </div>
                     </div>
 
+                    <!-- Center Hub -->
                     <div class="absolute left-1/2 top-[49%] z-10 flex w-40 -translate-x-1/2 -translate-y-1/2 flex-col items-center text-center sm:w-48">
-                        <div class="how-it-works-map-node relative flex h-24 w-24 items-center justify-center rounded-full border border-rose-300/60 bg-slate-900/90 sm:h-28 sm:w-28">
-                            <div class="absolute inset-2 rounded-full border border-dashed border-rose-300/35"></div>
-                            <span class="how-it-works-map-spark relative text-2xl text-amber-300 sm:text-3xl">🪷</span>
+                        <div class="how-it-works-map-node relative flex h-24 w-24 items-center justify-center rounded-full border border-[var(--accent-primary)]/60 bg-[#141412] sm:h-28 sm:w-28">
+                            <div class="absolute inset-2 rounded-full border border-dashed border-[var(--accent-primary)]/35"></div>
+                            <svg class="relative h-8 w-8 text-[#e0b84c]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                                <circle cx="12" cy="12" r="9"/>
+                                <circle cx="12" cy="12" r="3"/>
+                                <path d="M12 3v6m0 6v6M3 12h6m6 0h6"/>
+                            </svg>
                         </div>
-                        <p class="mt-4 text-[9px] font-extrabold uppercase tracking-[.22em] text-rose-200/70">Global Maitri</p>
-                        <p class="mt-1 text-sm font-extrabold text-white sm:text-base">Auspicious union</p>
-                        <span class="mt-2 rounded-full border border-rose-300/20 bg-rose-300/10 px-2.5 py-1 text-[9px] font-bold uppercase tracking-wider text-rose-200">Respect before closeness</span>
+                        <p class="mt-4 text-[9px] font-bold uppercase tracking-[.22em] text-[#a8a49c]">Global Maitri</p>
+                        <p class="mt-1 text-sm font-bold text-white sm:text-base">Auspicious union</p>
+                        <span class="mt-2 rounded-full border border-[var(--accent-primary)]/30 bg-[var(--accent-primary)]/10 px-2.5 py-1 text-[9px] font-semibold uppercase tracking-wider text-[#e0b84c]">Respect before closeness</span>
                     </div>
 
-                    <div class="how-it-works-float delay-2 how-it-works-map-card absolute bottom-[4%] left-1/2 z-10 w-[58%] max-w-56 -translate-x-1/2 rounded-2xl border border-amber-300/30 bg-slate-950/85 p-3 backdrop-blur-xl sm:bottom-[7%] sm:w-56 sm:p-4">
+                    <!-- Family Rep -->
+                    <div class="how-it-works-float delay-2 how-it-works-map-card absolute bottom-[4%] left-1/2 z-10 w-[58%] max-w-56 -translate-x-1/2 rounded-[4px] border border-[#3d3a33] bg-[#22211c]/90 p-3 backdrop-blur-xl sm:bottom-[7%] sm:w-56 sm:p-4">
                         <div class="flex items-center gap-3">
-                            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-amber-400/15 text-amber-200">{!! $hiwIcon('shield-check', 'h-5 w-5') !!}</div>
-                            <div><p class="text-xs font-extrabold text-white">Family Rep / Elder</p><p class="mt-0.5 text-[10px] text-rose-200/60">Visible when chosen</p></div>
+                            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-[4px] bg-[var(--accent-primary)]/20 text-[#e0b84c]">{!! $hiwIcon('shield-check', 'h-5 w-5') !!}</div>
+                            <div>
+                                <p class="text-xs font-bold text-white">Family Rep / Elder</p>
+                                <p class="mt-0.5 text-[10px] text-[#a8a49c]">Visible when chosen</p>
+                            </div>
                         </div>
-                        <div class="mt-3 flex items-center gap-1.5 text-[10px] font-bold text-amber-300"><span class="h-1.5 w-1.5 rounded-full bg-amber-300"></span> Family guidance</div>
+                        <div class="mt-3 flex items-center gap-1.5 text-[10px] font-semibold text-[#e0b84c]">
+                            <span class="h-1.5 w-1.5 rounded-full bg-[var(--accent-primary)]"></span> Family guidance
+                        </div>
                     </div>
 
-                    <div class="absolute left-1/2 top-3 z-10 -translate-x-1/2 rounded-full border border-rose-200/20 bg-slate-950/70 px-3.5 py-1.5 text-[9px] font-extrabold uppercase tracking-[.18em] text-rose-100/80 shadow-lg shadow-slate-950/20 sm:top-5">Intent &amp; Metta layer</div>
+                    <div class="absolute left-1/2 top-3 z-10 -translate-x-1/2 rounded-full border border-[#3d3a33] bg-[#141412]/80 px-3.5 py-1.5 text-[9px] font-bold uppercase tracking-[.18em] text-[#d6d2c8] shadow-lg sm:top-5">Intent &amp; Metta layer</div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Interactive system walkthrough -->
-    <section class="relative overflow-hidden border-b border-slate-200 bg-white py-16 dark:border-slate-800 dark:bg-slate-950 sm:py-24"
+    <section class="relative overflow-hidden border-b border-[var(--border-default)] bg-[var(--bg-surface)] py-16 sm:py-24"
              x-data="{ activeStage: 1, timer: null }"
              x-init="timer = setInterval(() => { activeStage = activeStage === 6 ? 1 : activeStage + 1 }, 4800)"
              x-on:mouseenter="clearInterval(timer)"
              x-on:mouseleave="timer = setInterval(() => { activeStage = activeStage === 6 ? 1 : activeStage + 1 }, 4800)">
-        <div class="absolute -right-32 top-20 h-80 w-80 rounded-full bg-rose-100/60 blur-3xl dark:bg-rose-950/30"></div>
         <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div class="mx-auto max-w-3xl text-center">
-                <span class="text-xs font-extrabold uppercase tracking-[.2em] text-rose-700 dark:text-rose-400">See the system in motion</span>
-                <h2 class="mt-3 font-heading text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white sm:text-5xl">A mindful path, never a guessing game.</h2>
-                <p class="mx-auto mt-4 max-w-2xl text-sm leading-6 text-slate-600 dark:text-slate-400">Follow each signal as it moves through the platform. Select a stage to see who acts, what unlocks, and how the Family Representative supports the journey.</p>
+                <span class="text-xs font-bold uppercase tracking-[.2em] text-[var(--accent-primary)]">See the system in motion</span>
+                <h2 class="mt-3 font-heading text-3xl font-extrabold tracking-tight text-[var(--text-primary)] sm:text-5xl">A mindful path, never a guessing game.</h2>
+                <p class="mx-auto mt-4 max-w-2xl text-sm leading-6 text-[var(--text-secondary)]">Follow each signal as it moves through the platform. Select a stage to see who acts, what unlocks, and how the Family Representative supports the journey.</p>
             </div>
 
-            <div class="mt-12 overflow-hidden rounded-[2rem] border border-slate-200 bg-slate-50 shadow-2xl shadow-slate-900/5 dark:border-slate-800 dark:bg-slate-900/70">
+            <div class="mt-12 overflow-hidden card-ledger">
                 <div class="grid lg:grid-cols-[1.25fr_.75fr]">
                     <!-- Visual flow canvas -->
-                    <div class="relative min-h-[520px] overflow-hidden border-b border-slate-200 p-5 dark:border-slate-800 sm:p-8 lg:border-b-0 lg:border-r">
-                        <div class="absolute inset-0 opacity-60 [background-image:linear-gradient(rgba(244,63,94,.08)_1px,transparent_1px),linear-gradient(90deg,rgba(244,63,94,.08)_1px,transparent_1px)] [background-size:28px_28px] dark:opacity-30"></div>
+                    <div class="relative min-h-[520px] overflow-hidden border-b border-[var(--border-default)] p-5 sm:p-8 lg:border-b-0 lg:border-r">
+                        <div class="absolute inset-0 opacity-40 [background-image:linear-gradient(rgba(166,124,0,.08)_1px,transparent_1px),linear-gradient(90deg,rgba(166,124,0,.08)_1px,transparent_1px)] [background-size:28px_28px]"></div>
                         <div class="relative flex items-center justify-between">
-                            <div><p class="text-[10px] font-extrabold uppercase tracking-[.18em] text-slate-500 dark:text-slate-400">Live journey map</p><p class="mt-1 text-sm font-bold text-slate-900 dark:text-white">Trust builds one mindful signal at a time</p></div>
-                            <div class="flex items-center gap-1.5 rounded-full border border-rose-200 bg-rose-50 px-2.5 py-1 text-[10px] font-bold text-rose-700 dark:border-rose-900 dark:bg-rose-950/50 dark:text-rose-300"><span class="h-1.5 w-1.5 rounded-full bg-rose-500"></span> Process active</div>
+                            <div>
+                                <p class="text-[10px] font-bold uppercase tracking-[.18em] text-[var(--text-muted)]">Live journey map</p>
+                                <p class="mt-1 text-sm font-bold text-[var(--text-primary)]">Trust builds one mindful signal at a time</p>
+                            </div>
+                            <div class="flex items-center gap-1.5 rounded-[4px] border border-[var(--border-default)] bg-[var(--bg-subtle)] px-2.5 py-1 text-[10px] font-bold text-[var(--accent-primary)]">
+                                <span class="h-1.5 w-1.5 rounded-full bg-[var(--accent-primary)]"></span> Process active
+                            </div>
                         </div>
 
                         <div class="relative mx-auto mt-10 max-w-2xl">
                             <svg class="absolute inset-x-0 top-11 h-32 w-full" viewBox="0 0 720 140" fill="none" preserveAspectRatio="none" aria-hidden="true">
-                                <path d="M70 70 C190 70 200 70 320 70 S520 70 650 70" stroke="rgba(148,163,184,.35)" stroke-width="3" stroke-linecap="round" />
-                                <path class="how-it-works-draw-line" d="M70 70 C190 70 200 70 320 70 S520 70 650 70" stroke="#f43f5e" stroke-width="4" stroke-linecap="round" />
-                                <circle cx="70" cy="70" r="7" fill="#f43f5e" /><circle cx="200" cy="70" r="7" fill="#f59e0b" /><circle cx="330" cy="70" r="7" fill="#0ea5e9" /><circle cx="460" cy="70" r="7" fill="#8b5cf6" /><circle cx="650" cy="70" r="7" fill="#f59e0b" />
+                                <path d="M70 70 C190 70 200 70 320 70 S520 70 650 70" stroke="var(--border-default)" stroke-width="3" stroke-linecap="round" />
+                                <path class="how-it-works-draw-line" d="M70 70 C190 70 200 70 320 70 S520 70 650 70" stroke="var(--accent-primary)" stroke-width="4" stroke-linecap="round" />
+                                <circle cx="70" cy="70" r="7" fill="var(--accent-primary)" />
+                                <circle cx="200" cy="70" r="7" fill="var(--accent-primary)" />
+                                <circle cx="330" cy="70" r="7" fill="var(--accent-primary)" />
+                                <circle cx="460" cy="70" r="7" fill="var(--accent-primary)" />
+                                <circle cx="650" cy="70" r="7" fill="var(--accent-primary)" />
                             </svg>
 
                             <div class="relative grid grid-cols-3 gap-3 sm:grid-cols-6 sm:gap-2">
                                 @foreach([
-                                    1 => ['icon' => 'identification', 'label' => 'Biodata', 'tone' => 'rose'],
-                                    2 => ['icon' => 'shield-check', 'label' => 'Verify', 'tone' => 'amber'],
-                                    3 => ['icon' => 'sparkles', 'label' => 'Dhamma', 'tone' => 'sky'],
-                                    4 => ['icon' => 'heart', 'label' => 'Interest', 'tone' => 'purple'],
-                                    5 => ['icon' => 'user-group', 'label' => 'Family Rep', 'tone' => 'amber'],
-                                    6 => ['icon' => 'users', 'label' => 'Vivaha', 'tone' => 'rose'],
+                                    1 => ['icon' => 'identification', 'label' => 'Biodata'],
+                                    2 => ['icon' => 'shield-check', 'label' => 'Verify'],
+                                    3 => ['icon' => 'sparkles', 'label' => 'Dhamma'],
+                                    4 => ['icon' => 'heart', 'label' => 'Interest'],
+                                    5 => ['icon' => 'user-group', 'label' => 'Family Rep'],
+                                    6 => ['icon' => 'users', 'label' => 'Vivaha'],
                                 ] as $stage => $item)
                                     <button type="button"
                                             @click="activeStage = {{ $stage }}"
                                             :aria-current="activeStage === {{ $stage }} ? 'step' : false"
-                                            class="group flex flex-col items-center gap-2 text-center focus:outline-none">
-                                        <span class="how-it-works-beacon relative flex h-14 w-14 items-center justify-center rounded-2xl border-4 border-slate-50 bg-white text-rose-700 shadow-lg transition duration-300 group-hover:-translate-y-1 dark:border-slate-900 dark:bg-slate-800 dark:text-rose-400 sm:h-16 sm:w-16"
-                                              :class="activeStage === {{ $stage }} ? 'ring-4 ring-rose-300/60 dark:ring-rose-800/80' : 'opacity-70 grayscale-[.35]'">{!! $hiwIcon($item['icon'], 'h-6 w-6 sm:h-7 sm:w-7') !!}</span>
-                                        <span class="text-[10px] font-extrabold uppercase tracking-wider transition sm:text-xs"
-                                              :class="activeStage === {{ $stage }} ? 'text-rose-700 dark:text-rose-400' : 'text-slate-500 dark:text-slate-400'">{{ $item['label'] }}</span>
+                                            class="group flex flex-col items-center gap-2 text-center focus:outline-none cursor-pointer">
+                                        <span class="how-it-works-beacon relative flex h-14 w-14 items-center justify-center rounded-[4px] border border-[var(--border-default)] bg-[var(--bg-surface)] text-[var(--accent-primary)] shadow-sm transition duration-200 group-hover:-translate-y-0.5 sm:h-16 sm:w-16"
+                                              :class="activeStage === {{ $stage }} ? 'ring-2 ring-[var(--accent-primary)] bg-[var(--accent-primary)]/10' : 'opacity-70'">{!! $hiwIcon($item['icon'], 'h-6 w-6 sm:h-7 sm:w-7') !!}</span>
+                                        <span class="text-[10px] font-bold uppercase tracking-wider transition sm:text-xs"
+                                              :class="activeStage === {{ $stage }} ? 'text-[var(--accent-primary)]' : 'text-[var(--text-secondary)]'">{{ $item['label'] }}</span>
                                     </button>
                                 @endforeach
                             </div>
                         </div>
 
                         <div class="relative mx-auto mt-10 grid max-w-2xl gap-3 sm:grid-cols-3">
-                            <div class="rounded-2xl border border-rose-200 bg-rose-50/80 p-4 dark:border-rose-900/60 dark:bg-rose-950/30"><p class="text-[10px] font-extrabold uppercase tracking-wider text-rose-700 dark:text-rose-400">Always protected</p><p class="mt-2 text-xs font-bold text-slate-800 dark:text-slate-200">Lotus Modesty Shield</p><p class="mt-1 text-[11px] leading-5 text-slate-500 dark:text-slate-400">Photos sheltered by default until mutual acceptance.</p></div>
-                            <div class="rounded-2xl border border-amber-200 bg-amber-50/80 p-4 dark:border-amber-900/60 dark:bg-amber-950/30"><p class="text-[10px] font-extrabold uppercase tracking-wider text-amber-700 dark:text-amber-400">Only when mutual</p><p class="mt-2 text-xs font-bold text-slate-800 dark:text-slate-200">Mindful Interest &amp; Chat</p><p class="mt-1 text-[11px] leading-5 text-slate-500 dark:text-slate-400">No unsolicited calls, cold messages, or pressure.</p></div>
-                            <div class="rounded-2xl border border-sky-200 bg-sky-50/80 p-4 dark:border-sky-900/60 dark:bg-sky-950/30"><p class="text-[10px] font-extrabold uppercase tracking-wider text-sky-700 dark:text-sky-400">When it matters</p><p class="mt-2 text-xs font-bold text-slate-800 dark:text-slate-200">Family Representative Clarity</p><p class="mt-1 text-[11px] leading-5 text-slate-500 dark:text-slate-400">Parents and trusted elders guide with peace.</p></div>
+                            <div class="rounded-[4px] border border-[var(--border-default)] bg-[var(--bg-subtle)] p-4">
+                                <p class="text-[10px] font-bold uppercase tracking-wider text-[var(--accent-primary)]">Always protected</p>
+                                <p class="mt-2 text-xs font-bold text-[var(--text-primary)]">Lotus Modesty Shield</p>
+                                <p class="mt-1 text-[11px] leading-5 text-[var(--text-secondary)]">Photos sheltered by default until mutual acceptance.</p>
+                            </div>
+                            <div class="rounded-[4px] border border-[var(--border-default)] bg-[var(--bg-subtle)] p-4">
+                                <p class="text-[10px] font-bold uppercase tracking-wider text-[var(--accent-primary)]">Only when mutual</p>
+                                <p class="mt-2 text-xs font-bold text-[var(--text-primary)]">Mindful Interest &amp; Chat</p>
+                                <p class="mt-1 text-[11px] leading-5 text-[var(--text-secondary)]">No unsolicited calls, cold messages, or pressure.</p>
+                            </div>
+                            <div class="rounded-[4px] border border-[var(--border-default)] bg-[var(--bg-subtle)] p-4">
+                                <p class="text-[10px] font-bold uppercase tracking-wider text-[var(--accent-primary)]">When it matters</p>
+                                <p class="mt-2 text-xs font-bold text-[var(--text-primary)]">Family Representative Clarity</p>
+                                <p class="mt-1 text-[11px] leading-5 text-[var(--text-secondary)]">Parents and trusted elders guide with peace.</p>
+                            </div>
                         </div>
                     </div>
 
                     <!-- Dynamic stage explanation -->
-                    <div class="relative bg-white p-6 dark:bg-slate-950 sm:p-8">
-                        <div class="flex items-center justify-between"><p class="text-[10px] font-extrabold uppercase tracking-[.18em] text-slate-500 dark:text-slate-400">What happens now</p><span class="rounded-full bg-slate-100 px-2.5 py-1 text-[10px] font-bold text-slate-500 dark:bg-slate-800 dark:text-slate-400"><span x-text="activeStage"></span> / 6</span></div>
-
-                        <div class="mt-8 min-h-[235px]">
-                            <div x-show="activeStage === 1" x-transition.opacity><span class="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-rose-100 text-rose-700 dark:bg-rose-950 dark:text-rose-400">{!! $hiwIcon('identification') !!}</span><h3 class="mt-5 font-heading text-2xl font-extrabold text-slate-900 dark:text-white">Start with your biodata</h3><p class="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-400">A candidate shares their Buddhist tradition, meditation practice, Five Precepts adherence, lifestyle, and marriage aspirations.</p><div class="mt-5 space-y-2 text-xs font-semibold text-slate-700 dark:text-slate-300"><p>✓ Buddhist tradition &amp; lineage details</p><p>✓ Five Precepts &amp; meditation rhythm</p><p>✓ Casteless community &amp; partner preferences</p></div></div>
-                            <div x-show="activeStage === 2" x-transition.opacity><span class="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-amber-100 text-amber-700 dark:bg-amber-950 dark:text-amber-400">{!! $hiwIcon('shield-check') !!}</span><h3 class="mt-5 font-heading text-2xl font-extrabold text-slate-900 dark:text-white">Build a trusted identity</h3><p class="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-400">Document verification and moderation ensure real seekers connect in an authentic environment designed for accountability.</p><div class="mt-5 space-y-2 text-xs font-semibold text-slate-700 dark:text-slate-300"><p>✓ Government ID review</p><p>✓ Human moderator verification</p><p>✓ Zero fake accounts or bots</p></div></div>
-                            <div x-show="activeStage === 3" x-transition.opacity><span class="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-sky-100 text-sky-700 dark:bg-sky-950 dark:text-sky-400">{!! $hiwIcon('sparkles') !!}</span><h3 class="mt-5 font-heading text-2xl font-extrabold text-slate-900 dark:text-white">Discover with Dhamma compatibility</h3><p class="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-400">Our matching algorithm weights Buddhist tradition, meditation, diet, and lifestyle values over superficial metrics.</p><div class="mt-5 space-y-2 text-xs font-semibold text-slate-700 dark:text-slate-300"><p>✓ Dhamma practice compatibility score</p><p>✓ Optional Sinhalese Porondam / Horoscope charts</p><p>✓ Filters for real-life values</p></div></div>
-                            <div x-show="activeStage === 4" x-transition.opacity><span class="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-purple-100 text-purple-700 dark:bg-purple-950 dark:text-purple-400">{!! $hiwIcon('heart') !!}</span><h3 class="mt-5 font-heading text-2xl font-extrabold text-slate-900 dark:text-white">Send a mindful proposal</h3><p class="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-400">A proposal signal indicates earnest intent. The recipient can accept or politely decline without any uncomfortable pressure.</p><div class="mt-5 space-y-2 text-xs font-semibold text-slate-700 dark:text-slate-300"><p>✓ Consent before messaging begins</p><p>✓ Mutual acceptance unlocks conversation</p><p>✓ Lotus blur reveals gracefully upon agreement</p></div></div>
-                            <div x-show="activeStage === 5" x-transition.opacity><span class="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-amber-100 text-amber-700 dark:bg-amber-950 dark:text-amber-400">{!! $hiwIcon('user-group') !!}</span><h3 class="mt-5 font-heading text-2xl font-extrabold text-slate-900 dark:text-white">Engage Family Representatives</h3><p class="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-400">Parents, elder siblings, or trusted mentors can oversee discovery, review proposals, or chaperone conversations.</p><div class="mt-5 space-y-2 text-xs font-semibold text-slate-700 dark:text-slate-300"><p>✓ Granular permissions (view-only to approval)</p><p>✓ Open to both grooms and brides</p><p>✓ Harmonious family involvement</p></div></div>
-                            <div x-show="activeStage === 6" x-transition.opacity><span class="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-rose-100 text-rose-700 dark:bg-rose-950 dark:text-rose-400">{!! $hiwIcon('users') !!}</span><h3 class="mt-5 font-heading text-2xl font-extrabold text-slate-900 dark:text-white">Solemnize Mangala Vivaha</h3><p class="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-400">When mutual alignment is found, take the joyful step toward marriage with family blessings and a printable digital certificate.</p><div class="mt-5 space-y-2 text-xs font-semibold text-slate-700 dark:text-slate-300"><p>✓ Mindful and anti-dowry protected chat</p><p>✓ Mangala Vivaha celebration &amp; Pali blessings</p><p>✓ Digital Blessing Certificate with Sangha homage</p></div></div>
+                    <div class="relative bg-[var(--bg-surface)] p-6 sm:p-8">
+                        <div class="flex items-center justify-between">
+                            <p class="text-[10px] font-bold uppercase tracking-[.18em] text-[var(--text-muted)]">What happens now</p>
+                            <span class="rounded-[4px] bg-[var(--bg-subtle)] border border-[var(--border-default)] px-2.5 py-1 text-[10px] font-bold text-[var(--text-secondary)]"><span x-text="activeStage"></span> / 6</span>
                         </div>
 
-                        <div class="border-t border-slate-200 pt-5 dark:border-slate-800">
-                            <div class="flex items-center justify-between gap-3"><button type="button" @click="activeStage = activeStage === 1 ? 6 : activeStage - 1" class="rounded-xl border border-slate-200 px-3 py-2 text-xs font-bold text-slate-600 transition hover:border-rose-300 hover:text-rose-700 dark:border-slate-800 dark:text-slate-300 dark:hover:border-rose-700 dark:hover:text-rose-400">&larr; Previous</button><div class="flex gap-1.5" aria-label="Journey stage selector">@for($stage = 1; $stage <= 6; $stage++)<button type="button" @click="activeStage = {{ $stage }}" class="h-2 rounded-full transition-all" :class="activeStage === {{ $stage }} ? 'w-7 bg-rose-500' : 'w-2 bg-slate-200 dark:bg-slate-700'" aria-label="Go to stage {{ $stage }}"></button>@endfor</div><button type="button" @click="activeStage = activeStage === 6 ? 1 : activeStage + 1" class="rounded-xl border border-slate-200 px-3 py-2 text-xs font-bold text-slate-600 transition hover:border-rose-300 hover:text-rose-700 dark:border-slate-800 dark:text-slate-300 dark:hover:border-rose-700 dark:hover:text-rose-400">Next &rarr;</button></div>
+                        <div class="mt-8 min-h-[235px]">
+                            <div x-show="activeStage === 1" x-transition.opacity>
+                                <span class="inline-flex h-11 w-11 items-center justify-center rounded-[4px] bg-[var(--accent-primary)]/10 text-[var(--accent-primary)]">{!! $hiwIcon('identification') !!}</span>
+                                <h3 class="mt-5 font-heading text-2xl font-extrabold text-[var(--text-primary)]">Start with your biodata</h3>
+                                <p class="mt-3 text-sm leading-6 text-[var(--text-secondary)]">A candidate shares their Buddhist tradition, meditation practice, Five Precepts adherence, lifestyle, and marriage aspirations.</p>
+                                <div class="mt-5 space-y-2 text-xs font-semibold text-[var(--text-primary)]">
+                                    <p>✓ Buddhist tradition &amp; lineage details</p>
+                                    <p>✓ Five Precepts &amp; meditation rhythm</p>
+                                    <p>✓ Casteless community &amp; partner preferences</p>
+                                </div>
+                            </div>
+
+                            <div x-show="activeStage === 2" x-transition.opacity>
+                                <span class="inline-flex h-11 w-11 items-center justify-center rounded-[4px] bg-[var(--accent-primary)]/10 text-[var(--accent-primary)]">{!! $hiwIcon('shield-check') !!}</span>
+                                <h3 class="mt-5 font-heading text-2xl font-extrabold text-[var(--text-primary)]">Build a trusted identity</h3>
+                                <p class="mt-3 text-sm leading-6 text-[var(--text-secondary)]">Document verification and moderation ensure real seekers connect in an authentic environment designed for accountability.</p>
+                                <div class="mt-5 space-y-2 text-xs font-semibold text-[var(--text-primary)]">
+                                    <p>✓ Government ID review</p>
+                                    <p>✓ Human moderator verification</p>
+                                    <p>✓ Zero fake accounts or bots</p>
+                                </div>
+                            </div>
+
+                            <div x-show="activeStage === 3" x-transition.opacity>
+                                <span class="inline-flex h-11 w-11 items-center justify-center rounded-[4px] bg-[var(--accent-primary)]/10 text-[var(--accent-primary)]">{!! $hiwIcon('sparkles') !!}</span>
+                                <h3 class="mt-5 font-heading text-2xl font-extrabold text-[var(--text-primary)]">Discover with Dhamma compatibility</h3>
+                                <p class="mt-3 text-sm leading-6 text-[var(--text-secondary)]">Our matching algorithm weights Buddhist tradition, meditation, diet, and lifestyle values over superficial metrics.</p>
+                                <div class="mt-5 space-y-2 text-xs font-semibold text-[var(--text-primary)]">
+                                    <p>✓ Dhamma practice compatibility score</p>
+                                    <p>✓ Optional Sinhalese Porondam / Horoscope charts</p>
+                                    <p>✓ Filters for real-life values</p>
+                                </div>
+                            </div>
+
+                            <div x-show="activeStage === 4" x-transition.opacity>
+                                <span class="inline-flex h-11 w-11 items-center justify-center rounded-[4px] bg-[var(--accent-primary)]/10 text-[var(--accent-primary)]">{!! $hiwIcon('heart') !!}</span>
+                                <h3 class="mt-5 font-heading text-2xl font-extrabold text-[var(--text-primary)]">Send a mindful proposal</h3>
+                                <p class="mt-3 text-sm leading-6 text-[var(--text-secondary)]">A proposal signal indicates earnest intent. The recipient can accept or politely decline without any uncomfortable pressure.</p>
+                                <div class="mt-5 space-y-2 text-xs font-semibold text-[var(--text-primary)]">
+                                    <p>✓ Consent before messaging begins</p>
+                                    <p>✓ Mutual acceptance unlocks conversation</p>
+                                    <p>✓ Lotus blur reveals gracefully upon agreement</p>
+                                </div>
+                            </div>
+
+                            <div x-show="activeStage === 5" x-transition.opacity>
+                                <span class="inline-flex h-11 w-11 items-center justify-center rounded-[4px] bg-[var(--accent-primary)]/10 text-[var(--accent-primary)]">{!! $hiwIcon('user-group') !!}</span>
+                                <h3 class="mt-5 font-heading text-2xl font-extrabold text-[var(--text-primary)]">Engage Family Representatives</h3>
+                                <p class="mt-3 text-sm leading-6 text-[var(--text-secondary)]">Parents, elder siblings, or trusted mentors can oversee discovery, review proposals, or chaperone conversations.</p>
+                                <div class="mt-5 space-y-2 text-xs font-semibold text-[var(--text-primary)]">
+                                    <p>✓ Granular permissions (view-only to approval)</p>
+                                    <p>✓ Open to both grooms and brides</p>
+                                    <p>✓ Harmonious family involvement</p>
+                                </div>
+                            </div>
+
+                            <div x-show="activeStage === 6" x-transition.opacity>
+                                <span class="inline-flex h-11 w-11 items-center justify-center rounded-[4px] bg-[var(--accent-primary)]/10 text-[var(--accent-primary)]">{!! $hiwIcon('users') !!}</span>
+                                <h3 class="mt-5 font-heading text-2xl font-extrabold text-[var(--text-primary)]">Solemnize Mangala Vivaha</h3>
+                                <p class="mt-3 text-sm leading-6 text-[var(--text-secondary)]">When mutual alignment is found, take the joyful step toward marriage with family blessings and a printable digital certificate.</p>
+                                <div class="mt-5 space-y-2 text-xs font-semibold text-[var(--text-primary)]">
+                                    <p>✓ Mindful and anti-dowry protected chat</p>
+                                    <p>✓ Mangala Vivaha celebration &amp; Pali blessings</p>
+                                    <p>✓ Digital Blessing Certificate with Sangha homage</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="border-t border-[var(--border-default)] pt-5">
+                            <div class="flex items-center justify-between gap-3">
+                                <button type="button" @click="activeStage = activeStage === 1 ? 6 : activeStage - 1" class="btn-secondary text-xs px-3 py-2 cursor-pointer">&larr; Previous</button>
+                                <div class="flex gap-1.5" aria-label="Journey stage selector">
+                                    @for($stage = 1; $stage <= 6; $stage++)
+                                        <button type="button" @click="activeStage = {{ $stage }}" class="h-2 rounded-[2px] transition-all cursor-pointer" :class="activeStage === {{ $stage }} ? 'w-7 bg-[var(--accent-primary)]' : 'w-2 bg-[var(--border-default)]'" aria-label="Go to stage {{ $stage }}"></button>
+                                    @endfor
+                                </div>
+                                <button type="button" @click="activeStage = activeStage === 6 ? 1 : activeStage + 1" class="btn-secondary text-xs px-3 py-2 cursor-pointer">Next &rarr;</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -266,96 +379,261 @@
     </section>
 
     <!-- Role clarity -->
-    <section class="border-b border-slate-200 bg-white py-16 dark:border-slate-800 dark:bg-slate-950 sm:py-20">
+    <section class="border-b border-[var(--border-default)] bg-[var(--bg-canvas)] py-16 sm:py-20">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div class="mx-auto max-w-2xl text-center">
-                <span class="text-xs font-extrabold uppercase tracking-[.2em] text-rose-700 dark:text-rose-400">Every role has a place</span>
-                <h2 class="mt-3 font-heading text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white sm:text-4xl">A shared journey, clear responsibilities</h2>
-                <p class="mt-4 text-sm leading-6 text-slate-600 dark:text-slate-400">The process stays respectful and calm because everyone knows when to step forward—and when to protect personal space.</p>
+                <span class="text-xs font-bold uppercase tracking-[.2em] text-[var(--accent-primary)]">Every role has a place</span>
+                <h2 class="mt-3 font-heading text-3xl font-extrabold tracking-tight text-[var(--text-primary)] sm:text-4xl">A shared journey, clear responsibilities</h2>
+                <p class="mt-4 text-sm leading-6 text-[var(--text-secondary)]">The process stays respectful and calm because everyone knows when to step forward—and when to protect personal space.</p>
             </div>
 
             <div class="mt-12 grid gap-5 md:grid-cols-3">
-                <div class="group rounded-3xl border border-rose-200 bg-rose-50/70 p-6 transition hover:-translate-y-1 hover:shadow-xl hover:shadow-rose-900/10 dark:border-rose-900/60 dark:bg-rose-950/30">
-                    <div class="flex items-start justify-between"><div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-rose-600 text-white shadow-lg shadow-rose-900/20">{!! $hiwIcon('user', 'h-6 w-6') !!}</div><span class="rounded-full bg-white/80 px-2.5 py-1 text-[10px] font-extrabold uppercase tracking-wider text-rose-700 dark:bg-rose-900/60 dark:text-rose-300">Candidate</span></div>
-                    <h3 class="mt-6 font-heading text-xl font-extrabold text-slate-900 dark:text-white">Bring honest intention</h3>
-                    <p class="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300">Create a thoughtful profile, share your Dhamma practice, and approach every candidate with kindness and Metta.</p>
-                    <div class="mt-5 border-t border-rose-200/70 pt-4 text-xs font-bold text-rose-800 dark:border-rose-800/60 dark:text-rose-300">Biodata · Dhamma values · Mutual consent</div>
+                <div class="card-ledger p-6 transition hover:-translate-y-0.5">
+                    <div class="flex items-start justify-between">
+                        <div class="flex h-12 w-12 items-center justify-center rounded-[4px] bg-[var(--accent-primary)]/10 text-[var(--accent-primary)]">{!! $hiwIcon('user', 'h-6 w-6') !!}</div>
+                        <span class="rounded-[4px] border border-[var(--border-default)] bg-[var(--bg-subtle)] px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-[var(--accent-primary)]">Candidate</span>
+                    </div>
+                    <h3 class="mt-6 font-heading text-xl font-extrabold text-[var(--text-primary)]">Bring honest intention</h3>
+                    <p class="mt-3 text-sm leading-6 text-[var(--text-secondary)]">Create a thoughtful profile, share your Dhamma practice, and approach every candidate with kindness and Metta.</p>
+                    <div class="mt-5 border-t border-[var(--border-subtle)] pt-4 text-xs font-semibold text-[var(--accent-primary)]">Biodata · Dhamma values · Mutual consent</div>
                 </div>
 
-                <div class="group rounded-3xl border border-amber-200 bg-amber-50/70 p-6 transition hover:-translate-y-1 hover:shadow-xl hover:shadow-amber-900/10 dark:border-amber-900/60 dark:bg-amber-950/20">
-                    <div class="flex items-start justify-between"><div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-amber-500 text-white shadow-lg shadow-amber-900/20">{!! $hiwIcon('shield-check', 'h-6 w-6') !!}</div><span class="rounded-full bg-white/80 px-2.5 py-1 text-[10px] font-extrabold uppercase tracking-wider text-amber-700 dark:bg-amber-900/60 dark:text-amber-300">Family Rep</span></div>
-                    <h3 class="mt-6 font-heading text-xl font-extrabold text-slate-900 dark:text-white">Bring elder wisdom</h3>
-                    <p class="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300">A parent, sibling, or trusted mentor can oversee and advise candidates with custom permissions.</p>
-                    <div class="mt-5 border-t border-amber-200/70 pt-4 text-xs font-bold text-amber-800 dark:border-amber-800/60 dark:text-amber-300">Support · Guidance · Auspicious blessings</div>
+                <div class="card-ledger p-6 transition hover:-translate-y-0.5">
+                    <div class="flex items-start justify-between">
+                        <div class="flex h-12 w-12 items-center justify-center rounded-[4px] bg-[var(--accent-primary)]/10 text-[var(--accent-primary)]">{!! $hiwIcon('shield-check', 'h-6 w-6') !!}</div>
+                        <span class="rounded-[4px] border border-[var(--border-default)] bg-[var(--bg-subtle)] px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-[var(--accent-primary)]">Family Rep</span>
+                    </div>
+                    <h3 class="mt-6 font-heading text-xl font-extrabold text-[var(--text-primary)]">Bring elder wisdom</h3>
+                    <p class="mt-3 text-sm leading-6 text-[var(--text-secondary)]">A parent, sibling, or trusted mentor can oversee and advise candidates with custom permissions.</p>
+                    <div class="mt-5 border-t border-[var(--border-subtle)] pt-4 text-xs font-semibold text-[var(--accent-primary)]">Support · Guidance · Auspicious blessings</div>
                 </div>
 
-                <div class="group rounded-3xl border border-sky-200 bg-sky-50/70 p-6 transition hover:-translate-y-1 hover:shadow-xl hover:shadow-sky-900/10 dark:border-sky-900/60 dark:bg-sky-950/20">
-                    <div class="flex items-start justify-between"><div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-sky-600 text-white shadow-lg shadow-sky-900/20">{!! $hiwIcon('scale', 'h-6 w-6') !!}</div><span class="rounded-full bg-white/80 px-2.5 py-1 text-[10px] font-extrabold uppercase tracking-wider text-sky-700 dark:bg-sky-900/60 dark:text-sky-300">Maitri Platform</span></div>
-                    <h3 class="mt-6 font-heading text-xl font-extrabold text-slate-900 dark:text-white">Maintain mindful safety</h3>
-                    <p class="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300">Verification, anti-dowry filters, Lotus modesty shields, and moderation keep the environment sacred.</p>
-                    <div class="mt-5 border-t border-sky-200/70 pt-4 text-xs font-bold text-sky-800 dark:border-sky-800/60 dark:text-sky-300">Trust · Anti-Dowry · Non-Caste Equality</div>
+                <div class="card-ledger p-6 transition hover:-translate-y-0.5">
+                    <div class="flex items-start justify-between">
+                        <div class="flex h-12 w-12 items-center justify-center rounded-[4px] bg-[var(--accent-primary)]/10 text-[var(--accent-primary)]">{!! $hiwIcon('scale', 'h-6 w-6') !!}</div>
+                        <span class="rounded-[4px] border border-[var(--border-default)] bg-[var(--bg-subtle)] px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-[var(--accent-primary)]">Maitri Platform</span>
+                    </div>
+                    <h3 class="mt-6 font-heading text-xl font-extrabold text-[var(--text-primary)]">Maintain mindful safety</h3>
+                    <p class="mt-3 text-sm leading-6 text-[var(--text-secondary)]">Verification, anti-dowry filters, Lotus modesty shields, and moderation keep the environment sacred.</p>
+                    <div class="mt-5 border-t border-[var(--border-subtle)] pt-4 text-xs font-semibold text-[var(--accent-primary)]">Trust · Anti-Dowry · Non-Caste Equality</div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Role-based walkthrough -->
-    <section class="bg-slate-100 py-16 dark:bg-slate-900 sm:py-24" x-data="{ role: 'seeker' }">
+    <section class="bg-[var(--bg-subtle)] py-16 sm:py-24" x-data="{ role: 'seeker' }">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div class="mx-auto max-w-3xl text-center">
-                <span class="text-xs font-extrabold uppercase tracking-[.2em] text-rose-700 dark:text-rose-400">Choose your perspective</span>
-                <h2 class="mt-3 font-heading text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white sm:text-4xl">See where you fit in.</h2>
-                <p class="mt-4 text-sm leading-6 text-slate-600 dark:text-slate-400">Select a perspective to see the actions, visibility, and milestones tailored to your matrimonial role.</p>
+                <span class="text-xs font-bold uppercase tracking-[.2em] text-[var(--accent-primary)]">Choose your perspective</span>
+                <h2 class="mt-3 font-heading text-3xl font-extrabold tracking-tight text-[var(--text-primary)] sm:text-4xl">See where you fit in.</h2>
+                <p class="mt-4 text-sm leading-6 text-[var(--text-secondary)]">Select a perspective to see the actions, visibility, and milestones tailored to your matrimonial role.</p>
             </div>
 
-            <div class="mx-auto mt-10 flex max-w-xl rounded-2xl border border-slate-200 bg-white p-1.5 shadow-sm dark:border-slate-800 dark:bg-slate-950" role="tablist" aria-label="Choose your role">
-                <button type="button" @click="role = 'seeker'" :aria-selected="role === 'seeker'" class="flex flex-1 items-center justify-center gap-1.5 rounded-xl px-3 py-3 text-xs font-extrabold transition" :class="role === 'seeker' ? 'bg-rose-600 text-white shadow-md shadow-rose-900/20' : 'text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-900'" role="tab">{!! $hiwIcon('user', 'h-4 w-4') !!} Candidate</button>
-                <button type="button" @click="role = 'wali'" :aria-selected="role === 'wali'" class="flex flex-1 items-center justify-center gap-1.5 rounded-xl px-3 py-3 text-xs font-extrabold transition" :class="role === 'wali' ? 'bg-amber-500 text-white shadow-md shadow-amber-900/20' : 'text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-900'" role="tab">{!! $hiwIcon('shield-check', 'h-4 w-4') !!} Family Rep</button>
-                <button type="button" @click="role = 'family'" :aria-selected="role === 'family'" class="flex flex-1 items-center justify-center gap-1.5 rounded-xl px-3 py-3 text-xs font-extrabold transition" :class="role === 'family' ? 'bg-sky-600 text-white shadow-md shadow-sky-900/20' : 'text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-900'" role="tab">{!! $hiwIcon('home', 'h-4 w-4') !!} Family Elders</button>
+            <div class="mx-auto mt-10 flex max-w-xl rounded-[4px] border border-[var(--border-default)] bg-[var(--bg-surface)] p-1.5 shadow-xs" role="tablist" aria-label="Choose your role">
+                <button type="button" @click="role = 'seeker'" :aria-selected="role === 'seeker'" class="flex flex-1 items-center justify-center gap-1.5 rounded-[3px] px-3 py-2.5 text-xs font-bold transition cursor-pointer" :class="role === 'seeker' ? 'bg-[var(--accent-primary)] text-white shadow-xs' : 'text-[var(--text-secondary)] hover:bg-[var(--bg-subtle)]'" role="tab">{!! $hiwIcon('user', 'h-4 w-4') !!} Candidate</button>
+                <button type="button" @click="role = 'wali'" :aria-selected="role === 'wali'" class="flex flex-1 items-center justify-center gap-1.5 rounded-[3px] px-3 py-2.5 text-xs font-bold transition cursor-pointer" :class="role === 'wali' ? 'bg-[var(--accent-primary)] text-white shadow-xs' : 'text-[var(--text-secondary)] hover:bg-[var(--bg-subtle)]'" role="tab">{!! $hiwIcon('shield-check', 'h-4 w-4') !!} Family Rep</button>
+                <button type="button" @click="role = 'family'" :aria-selected="role === 'family'" class="flex flex-1 items-center justify-center gap-1.5 rounded-[3px] px-3 py-2.5 text-xs font-bold transition cursor-pointer" :class="role === 'family' ? 'bg-[var(--accent-primary)] text-white shadow-xs' : 'text-[var(--text-secondary)] hover:bg-[var(--bg-subtle)]'" role="tab">{!! $hiwIcon('home', 'h-4 w-4') !!} Family Elders</button>
             </div>
 
-            <div class="mx-auto mt-8 max-w-5xl overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-xl shadow-slate-900/5 dark:border-slate-800 dark:bg-slate-950">
+            <div class="mx-auto mt-8 max-w-5xl overflow-hidden card-ledger">
+                <!-- Seeker / Candidate -->
                 <div x-show="role === 'seeker'" x-transition.opacity class="grid lg:grid-cols-[.8fr_1.2fr]">
-                    <div class="bg-slate-900 p-7 text-white sm:p-10"><span class="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-rose-400/15 text-rose-300">{!! $hiwIcon('user', 'h-7 w-7') !!}</span><p class="mt-8 text-[10px] font-extrabold uppercase tracking-[.2em] text-rose-300">For the Candidate</p><h3 class="mt-3 font-heading text-3xl font-extrabold">You bring the intention.</h3><p class="mt-4 text-sm leading-6 text-rose-100/70">Your profile is your respectful introduction. You decide what to share, who to approach, and when a conversation moves toward marriage.</p><a href="{{ route('register') }}" class="mt-8 inline-flex rounded-xl bg-amber-400 px-4 py-3 text-xs font-extrabold text-slate-950 transition hover:bg-amber-300">Build my biodata &rarr;</a></div>
-                    <div class="p-7 sm:p-10"><p class="text-xs font-extrabold uppercase tracking-wider text-rose-700 dark:text-rose-400">Your four moments</p><div class="mt-6 space-y-5"><div class="flex gap-4"><span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-rose-100 text-xs font-extrabold text-rose-700 dark:bg-rose-950 dark:text-rose-300">01</span><div><h4 class="text-sm font-extrabold text-slate-900 dark:text-white">Complete your biodata</h4><p class="mt-1 text-xs leading-5 text-slate-500 dark:text-slate-400">Add your tradition, meditation rhythm, Five Precepts, and partner preferences.</p></div></div><div class="flex gap-4"><span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-rose-100 text-xs font-extrabold text-rose-700 dark:bg-rose-950 dark:text-rose-300">02</span><div><h4 class="text-sm font-extrabold text-slate-900 dark:text-white">Explore compatible candidates</h4><p class="mt-1 text-xs leading-5 text-slate-500 dark:text-slate-400">Review Dhamma compatibility indicators before photos or chatting.</p></div></div><div class="flex gap-4"><span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-rose-100 text-xs font-extrabold text-rose-700 dark:bg-rose-950 dark:text-rose-300">03</span><div><h4 class="text-sm font-extrabold text-slate-900 dark:text-white">Send one respectful proposal</h4><p class="mt-1 text-xs leading-5 text-slate-500 dark:text-slate-400">The recipient chooses whether the door opens gracefully.</p></div></div><div class="flex gap-4"><span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-rose-100 text-xs font-extrabold text-rose-700 dark:bg-rose-950 dark:text-rose-300">04</span><div><h4 class="text-sm font-extrabold text-slate-900 dark:text-white">Move toward Mangala Vivaha</h4><p class="mt-1 text-xs leading-5 text-slate-500 dark:text-slate-400">Mindful chat and family involvement facilitate lifelong companionship.</p></div></div></div></div>
+                    <div class="bg-[#141412] p-7 text-[#f4f2ee] sm:p-10 border-b lg:border-b-0 lg:border-r border-[#2d2b27]">
+                        <span class="inline-flex h-14 w-14 items-center justify-center rounded-[4px] bg-[var(--accent-primary)]/20 text-[#e0b84c]">{!! $hiwIcon('user', 'h-7 w-7') !!}</span>
+                        <p class="mt-8 text-[10px] font-bold uppercase tracking-[.2em] text-[#e0b84c]">For the Candidate</p>
+                        <h3 class="mt-3 font-heading text-3xl font-extrabold text-white">You bring the intention.</h3>
+                        <p class="mt-4 text-sm leading-6 text-[#d6d2c8]">Your profile is your respectful introduction. You decide what to share, who to approach, and when a conversation moves toward marriage.</p>
+                        <a href="{{ route('register') }}" class="btn-primary mt-8 inline-flex items-center gap-2 text-xs">Build my biodata &rarr;</a>
+                    </div>
+                    <div class="p-7 sm:p-10 bg-[var(--bg-surface)]">
+                        <p class="text-xs font-bold uppercase tracking-wider text-[var(--accent-primary)]">Your four moments</p>
+                        <div class="mt-6 space-y-5">
+                            <div class="flex gap-4">
+                                <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-[4px] bg-[var(--accent-primary)]/10 text-xs font-extrabold text-[var(--accent-primary)]">01</span>
+                                <div>
+                                    <h4 class="text-sm font-bold text-[var(--text-primary)]">Complete your biodata</h4>
+                                    <p class="mt-1 text-xs leading-5 text-[var(--text-secondary)]">Add your tradition, meditation rhythm, Five Precepts, and partner preferences.</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4">
+                                <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-[4px] bg-[var(--accent-primary)]/10 text-xs font-extrabold text-[var(--accent-primary)]">02</span>
+                                <div>
+                                    <h4 class="text-sm font-bold text-[var(--text-primary)]">Explore compatible candidates</h4>
+                                    <p class="mt-1 text-xs leading-5 text-[var(--text-secondary)]">Review Dhamma compatibility indicators before photos or chatting.</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4">
+                                <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-[4px] bg-[var(--accent-primary)]/10 text-xs font-extrabold text-[var(--accent-primary)]">03</span>
+                                <div>
+                                    <h4 class="text-sm font-bold text-[var(--text-primary)]">Send one respectful proposal</h4>
+                                    <p class="mt-1 text-xs leading-5 text-[var(--text-secondary)]">The recipient chooses whether the door opens gracefully.</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4">
+                                <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-[4px] bg-[var(--accent-primary)]/10 text-xs font-extrabold text-[var(--accent-primary)]">04</span>
+                                <div>
+                                    <h4 class="text-sm font-bold text-[var(--text-primary)]">Move toward Mangala Vivaha</h4>
+                                    <p class="mt-1 text-xs leading-5 text-[var(--text-secondary)]">Mindful chat and family involvement facilitate lifelong companionship.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
+                <!-- Family Rep -->
                 <div x-show="role === 'wali'" x-transition.opacity class="grid lg:grid-cols-[.8fr_1.2fr]">
-                    <div class="bg-amber-950 p-7 text-white sm:p-10"><span class="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-amber-400/15 text-amber-300">{!! $hiwIcon('shield-check', 'h-7 w-7') !!}</span><p class="mt-8 text-[10px] font-extrabold uppercase tracking-[.2em] text-amber-300">For the Family Representative</p><h3 class="mt-3 font-heading text-3xl font-extrabold">You bring family confidence.</h3><p class="mt-4 text-sm leading-6 text-amber-100/70">Parents and trusted relatives participate actively with full clarity and permission controls for both male and female candidates.</p><a href="{{ route('register') }}" class="mt-8 inline-flex rounded-xl bg-amber-400 px-4 py-3 text-xs font-extrabold text-amber-950 transition hover:bg-amber-300">Representative Access &rarr;</a></div>
-                    <div class="p-7 sm:p-10"><p class="text-xs font-extrabold uppercase tracking-wider text-amber-700 dark:text-amber-400">Your four moments</p><div class="mt-6 space-y-5"><div class="flex gap-4"><span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-amber-100 text-xs font-extrabold text-amber-700 dark:bg-amber-950 dark:text-amber-300">01</span><div><h4 class="text-sm font-extrabold text-slate-900 dark:text-white">Receive candidate link</h4><p class="mt-1 text-xs leading-5 text-slate-500 dark:text-slate-400">The seeker connects your profile with custom relation roles.</p></div></div><div class="flex gap-4"><span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-amber-100 text-xs font-extrabold text-amber-700 dark:bg-amber-950 dark:text-amber-300">02</span><div><h4 class="text-sm font-extrabold text-slate-900 dark:text-white">Choose permission level</h4><p class="mt-1 text-xs leading-5 text-slate-500 dark:text-slate-400">View-only, proposal approval, or active chaperone support.</p></div></div><div class="flex gap-4"><span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-amber-100 text-xs font-extrabold text-amber-700 dark:bg-amber-950 dark:text-amber-300">03</span><div><h4 class="text-sm font-extrabold text-slate-900 dark:text-white">Review candidate background</h4><p class="mt-1 text-xs leading-5 text-slate-500 dark:text-slate-400">Examine Dhamma practice, lifestyle, and family compatibility.</p></div></div><div class="flex gap-4"><span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-amber-100 text-xs font-extrabold text-amber-700 dark:bg-amber-950 dark:text-amber-300">04</span><div><h4 class="text-sm font-extrabold text-slate-900 dark:text-white">Bless the union</h4><p class="mt-1 text-xs leading-5 text-slate-500 dark:text-slate-400">Guide the families toward an auspicious Mangala Vivaha celebration.</p></div></div></div></div>
+                    <div class="bg-[#141412] p-7 text-[#f4f2ee] sm:p-10 border-b lg:border-b-0 lg:border-r border-[#2d2b27]">
+                        <span class="inline-flex h-14 w-14 items-center justify-center rounded-[4px] bg-[var(--accent-primary)]/20 text-[#e0b84c]">{!! $hiwIcon('shield-check', 'h-7 w-7') !!}</span>
+                        <p class="mt-8 text-[10px] font-bold uppercase tracking-[.2em] text-[#e0b84c]">For the Family Representative</p>
+                        <h3 class="mt-3 font-heading text-3xl font-extrabold text-white">You bring family confidence.</h3>
+                        <p class="mt-4 text-sm leading-6 text-[#d6d2c8]">Parents and trusted relatives participate actively with full clarity and permission controls for both male and female candidates.</p>
+                        <a href="{{ route('register') }}" class="btn-primary mt-8 inline-flex items-center gap-2 text-xs">Representative Access &rarr;</a>
+                    </div>
+                    <div class="p-7 sm:p-10 bg-[var(--bg-surface)]">
+                        <p class="text-xs font-bold uppercase tracking-wider text-[var(--accent-primary)]">Your four moments</p>
+                        <div class="mt-6 space-y-5">
+                            <div class="flex gap-4">
+                                <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-[4px] bg-[var(--accent-primary)]/10 text-xs font-extrabold text-[var(--accent-primary)]">01</span>
+                                <div>
+                                    <h4 class="text-sm font-bold text-[var(--text-primary)]">Receive candidate link</h4>
+                                    <p class="mt-1 text-xs leading-5 text-[var(--text-secondary)]">The seeker connects your profile with custom relation roles.</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4">
+                                <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-[4px] bg-[var(--accent-primary)]/10 text-xs font-extrabold text-[var(--accent-primary)]">02</span>
+                                <div>
+                                    <h4 class="text-sm font-bold text-[var(--text-primary)]">Choose permission level</h4>
+                                    <p class="mt-1 text-xs leading-5 text-[var(--text-secondary)]">View-only, proposal approval, or active chaperone support.</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4">
+                                <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-[4px] bg-[var(--accent-primary)]/10 text-xs font-extrabold text-[var(--accent-primary)]">03</span>
+                                <div>
+                                    <h4 class="text-sm font-bold text-[var(--text-primary)]">Review candidate background</h4>
+                                    <p class="mt-1 text-xs leading-5 text-[var(--text-secondary)]">Examine Dhamma practice, lifestyle, and family compatibility.</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4">
+                                <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-[4px] bg-[var(--accent-primary)]/10 text-xs font-extrabold text-[var(--accent-primary)]">04</span>
+                                <div>
+                                    <h4 class="text-sm font-bold text-[var(--text-primary)]">Bless the union</h4>
+                                    <p class="mt-1 text-xs leading-5 text-[var(--text-secondary)]">Guide the families toward an auspicious Mangala Vivaha celebration.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
+                <!-- Family Elders -->
                 <div x-show="role === 'family'" x-transition.opacity class="grid lg:grid-cols-[.8fr_1.2fr]">
-                    <div class="bg-slate-900 p-7 text-white sm:p-10"><span class="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-sky-400/15 text-sky-300">{!! $hiwIcon('home', 'h-7 w-7') !!}</span><p class="mt-8 text-[10px] font-extrabold uppercase tracking-[.2em] text-sky-300">For the Family</p><h3 class="mt-3 font-heading text-3xl font-extrabold">You nurture the new chapter.</h3><p class="mt-4 text-sm leading-6 text-sky-100/70">The platform assists families in seeing a respectful path from first introduction to real-world celebration and temple blessings.</p><a href="{{ route('about') }}" class="mt-8 inline-flex rounded-xl bg-sky-400 px-4 py-3 text-xs font-extrabold text-slate-950 transition hover:bg-sky-300">Learn our principles &rarr;</a></div>
-                    <div class="p-7 sm:p-10"><p class="text-xs font-extrabold uppercase tracking-wider text-sky-700 dark:text-sky-400">Your four moments</p><div class="mt-6 space-y-5"><div class="flex gap-4"><span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-sky-100 text-xs font-extrabold text-sky-700 dark:bg-sky-950 dark:text-sky-300">01</span><div><h4 class="text-sm font-extrabold text-slate-900 dark:text-white">Start with context</h4><p class="mt-1 text-xs leading-5 text-slate-500 dark:text-slate-400">Understand the candidate's Dhamma practice and family background.</p></div></div><div class="flex gap-4"><span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-sky-100 text-xs font-extrabold text-sky-700 dark:bg-sky-950 dark:text-sky-300">02</span><div><h4 class="text-sm font-extrabold text-slate-900 dark:text-white">Respect mutual signals</h4><p class="mt-1 text-xs leading-5 text-slate-500 dark:text-slate-400">Communication begins only after both seekers agree.</p></div></div><div class="flex gap-4"><span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-sky-100 text-xs font-extrabold text-sky-700 dark:bg-sky-950 dark:text-sky-300">03</span><div><h4 class="text-sm font-extrabold text-slate-900 dark:text-white">Meet with dignity</h4><p class="mt-1 text-xs leading-5 text-slate-500 dark:text-slate-400">Representative supervision creates a serene first step.</p></div></div><div class="flex gap-4"><span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-sky-100 text-xs font-extrabold text-sky-700 dark:bg-sky-950 dark:text-sky-300">04</span><div><h4 class="text-sm font-extrabold text-slate-900 dark:text-white">Celebrate Mangala Vivaha</h4><p class="mt-1 text-xs leading-5 text-slate-500 dark:text-slate-400">Transition from platform introduction to joyous matrimony and Sangha blessings.</p></div></div></div></div>
+                    <div class="bg-[#141412] p-7 text-[#f4f2ee] sm:p-10 border-b lg:border-b-0 lg:border-r border-[#2d2b27]">
+                        <span class="inline-flex h-14 w-14 items-center justify-center rounded-[4px] bg-[var(--accent-primary)]/20 text-[#e0b84c]">{!! $hiwIcon('home', 'h-7 w-7') !!}</span>
+                        <p class="mt-8 text-[10px] font-bold uppercase tracking-[.2em] text-[#e0b84c]">For the Family</p>
+                        <h3 class="mt-3 font-heading text-3xl font-extrabold text-white">You nurture the new chapter.</h3>
+                        <p class="mt-4 text-sm leading-6 text-[#d6d2c8]">The platform assists families in seeing a respectful path from first introduction to real-world celebration and temple blessings.</p>
+                        <a href="{{ route('about') }}" class="btn-primary mt-8 inline-flex items-center gap-2 text-xs">Learn our principles &rarr;</a>
+                    </div>
+                    <div class="p-7 sm:p-10 bg-[var(--bg-surface)]">
+                        <p class="text-xs font-bold uppercase tracking-wider text-[var(--accent-primary)]">Your four moments</p>
+                        <div class="mt-6 space-y-5">
+                            <div class="flex gap-4">
+                                <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-[4px] bg-[var(--accent-primary)]/10 text-xs font-extrabold text-[var(--accent-primary)]">01</span>
+                                <div>
+                                    <h4 class="text-sm font-bold text-[var(--text-primary)]">Start with context</h4>
+                                    <p class="mt-1 text-xs leading-5 text-[var(--text-secondary)]">Understand the candidate's Dhamma practice and family background.</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4">
+                                <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-[4px] bg-[var(--accent-primary)]/10 text-xs font-extrabold text-[var(--accent-primary)]">02</span>
+                                <div>
+                                    <h4 class="text-sm font-bold text-[var(--text-primary)]">Respect mutual signals</h4>
+                                    <p class="mt-1 text-xs leading-5 text-[var(--text-secondary)]">Communication begins only after both seekers agree.</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4">
+                                <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-[4px] bg-[var(--accent-primary)]/10 text-xs font-extrabold text-[var(--accent-primary)]">03</span>
+                                <div>
+                                    <h4 class="text-sm font-bold text-[var(--text-primary)]">Meet with dignity</h4>
+                                    <p class="mt-1 text-xs leading-5 text-[var(--text-secondary)]">Representative supervision creates a serene first step.</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4">
+                                <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-[4px] bg-[var(--accent-primary)]/10 text-xs font-extrabold text-[var(--accent-primary)]">04</span>
+                                <div>
+                                    <h4 class="text-sm font-bold text-[var(--text-primary)]">Celebrate Mangala Vivaha</h4>
+                                    <p class="mt-1 text-xs leading-5 text-[var(--text-secondary)]">Transition from platform introduction to joyous matrimony and Sangha blessings.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Journey -->
-    <section id="journey" class="bg-slate-50 py-16 dark:bg-slate-900 sm:py-24">
+    <!-- Journey Steps -->
+    <section id="journey" class="bg-[var(--bg-canvas)] py-16 sm:py-24">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
-                <div class="max-w-2xl"><span class="text-xs font-extrabold uppercase tracking-[.2em] text-rose-700 dark:text-rose-400">The journey</span><h2 class="mt-3 font-heading text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white sm:text-4xl">From first biodata to Mangala Vivaha</h2></div>
-                <p class="max-w-sm text-sm leading-6 text-slate-600 dark:text-slate-400">A measured process ensures sincere intentions stay clear from the first signal to the sacred marriage ceremony.</p>
+                <div class="max-w-2xl">
+                    <span class="text-xs font-bold uppercase tracking-[.2em] text-[var(--accent-primary)]">The journey</span>
+                    <h2 class="mt-3 font-heading text-3xl font-extrabold tracking-tight text-[var(--text-primary)] sm:text-4xl">From first biodata to Mangala Vivaha</h2>
+                </div>
+                <p class="max-w-sm text-sm leading-6 text-[var(--text-secondary)]">A measured process ensures sincere intentions stay clear from the first signal to the sacred marriage ceremony.</p>
             </div>
 
             <div class="relative mt-12 grid gap-5 md:grid-cols-4">
-                <div class="absolute left-[10%] right-[10%] top-8 hidden h-px bg-gradient-to-r from-rose-300 via-amber-300 to-sky-300 dark:from-rose-800 dark:via-amber-800 dark:to-sky-800 md:block"></div>
-                <div class="relative rounded-3xl border border-slate-200 bg-white p-5 dark:border-slate-800 dark:bg-slate-950"><div class="relative z-10 flex h-16 w-16 items-center justify-center rounded-2xl border-4 border-slate-50 bg-rose-100 text-rose-700 dark:border-slate-900 dark:bg-rose-950 dark:text-rose-400">{!! $hiwIcon('identification', 'h-7 w-7') !!}</div><span class="mt-5 block text-[10px] font-extrabold uppercase tracking-wider text-rose-700 dark:text-rose-400">Step 01</span><h3 class="mt-2 font-heading text-lg font-extrabold text-slate-900 dark:text-white">Build your biodata</h3><p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Share tradition, meditation practice, lifestyle, and marriage hopes with clarity.</p></div>
-                <div class="relative rounded-3xl border border-slate-200 bg-white p-5 dark:border-slate-800 dark:bg-slate-950"><div class="relative z-10 flex h-16 w-16 items-center justify-center rounded-2xl border-4 border-slate-50 bg-amber-100 text-amber-700 dark:border-slate-900 dark:bg-amber-950 dark:text-amber-400">{!! $hiwIcon('magnifying-glass', 'h-7 w-7') !!}</div><span class="mt-5 block text-[10px] font-extrabold uppercase tracking-wider text-amber-700 dark:text-amber-400">Step 02</span><h3 class="mt-2 font-heading text-lg font-extrabold text-slate-900 dark:text-white">Discover mindfully</h3><p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Use Dhamma compatibility scoring to explore candidates beyond superficial appearance.</p></div>
-                <div class="relative rounded-3xl border border-slate-200 bg-white p-5 dark:border-slate-800 dark:bg-slate-950"><div class="relative z-10 flex h-16 w-16 items-center justify-center rounded-2xl border-4 border-slate-50 bg-sky-100 text-sky-700 dark:border-slate-900 dark:bg-sky-950 dark:text-sky-400">{!! $hiwIcon('chat-bubble-left-right', 'h-7 w-7') !!}</div><span class="mt-5 block text-[10px] font-extrabold uppercase tracking-wider text-sky-700 dark:text-sky-400">Step 03</span><h3 class="mt-2 font-heading text-lg font-extrabold text-slate-900 dark:text-white">Signal mutual interest</h3><p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">No unsolicited messaging. Conversation unlocks upon mutual interest and representative approvals.</p></div>
-                <div class="relative rounded-3xl border border-slate-200 bg-white p-5 dark:border-slate-800 dark:bg-slate-950"><div class="relative z-10 flex h-16 w-16 items-center justify-center rounded-2xl border-4 border-slate-50 bg-purple-100 text-purple-700 dark:border-slate-900 dark:bg-purple-950 dark:text-purple-400">{!! $hiwIcon('hand-raised', 'h-7 w-7') !!}</div><span class="mt-5 block text-[10px] font-extrabold uppercase tracking-wider text-purple-700 dark:text-purple-400">Step 04</span><h3 class="mt-2 font-heading text-lg font-extrabold text-slate-900 dark:text-white">Move with Metta</h3><p class="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">Involve families with joy and take the next step toward a lifelong Mangala Vivaha.</p></div>
+                <div class="absolute left-[10%] right-[10%] top-8 hidden h-px bg-[var(--border-default)] md:block"></div>
+                
+                <div class="card-ledger relative p-5">
+                    <div class="relative z-10 flex h-14 w-14 items-center justify-center rounded-[4px] border border-[var(--border-default)] bg-[var(--bg-subtle)] text-[var(--accent-primary)]">
+                        {!! $hiwIcon('identification', 'h-6 w-6') !!}
+                    </div>
+                    <span class="mt-5 block text-[10px] font-bold uppercase tracking-wider text-[var(--accent-primary)]">Step 01</span>
+                    <h3 class="mt-2 font-heading text-lg font-extrabold text-[var(--text-primary)]">Build your biodata</h3>
+                    <p class="mt-2 text-xs leading-5 text-[var(--text-secondary)]">Share tradition, meditation practice, lifestyle, and marriage hopes with clarity.</p>
+                </div>
+
+                <div class="card-ledger relative p-5">
+                    <div class="relative z-10 flex h-14 w-14 items-center justify-center rounded-[4px] border border-[var(--border-default)] bg-[var(--bg-subtle)] text-[var(--accent-primary)]">
+                        {!! $hiwIcon('magnifying-glass', 'h-6 w-6') !!}
+                    </div>
+                    <span class="mt-5 block text-[10px] font-bold uppercase tracking-wider text-[var(--accent-primary)]">Step 02</span>
+                    <h3 class="mt-2 font-heading text-lg font-extrabold text-[var(--text-primary)]">Discover mindfully</h3>
+                    <p class="mt-2 text-xs leading-5 text-[var(--text-secondary)]">Use Dhamma compatibility scoring to explore candidates beyond superficial appearance.</p>
+                </div>
+
+                <div class="card-ledger relative p-5">
+                    <div class="relative z-10 flex h-14 w-14 items-center justify-center rounded-[4px] border border-[var(--border-default)] bg-[var(--bg-subtle)] text-[var(--accent-primary)]">
+                        {!! $hiwIcon('chat-bubble-left-right', 'h-6 w-6') !!}
+                    </div>
+                    <span class="mt-5 block text-[10px] font-bold uppercase tracking-wider text-[var(--accent-primary)]">Step 03</span>
+                    <h3 class="mt-2 font-heading text-lg font-extrabold text-[var(--text-primary)]">Signal mutual interest</h3>
+                    <p class="mt-2 text-xs leading-5 text-[var(--text-secondary)]">No unsolicited messaging. Conversation unlocks upon mutual interest and representative approvals.</p>
+                </div>
+
+                <div class="card-ledger relative p-5">
+                    <div class="relative z-10 flex h-14 w-14 items-center justify-center rounded-[4px] border border-[var(--border-default)] bg-[var(--bg-subtle)] text-[var(--accent-primary)]">
+                        {!! $hiwIcon('hand-raised', 'h-6 w-6') !!}
+                    </div>
+                    <span class="mt-5 block text-[10px] font-bold uppercase tracking-wider text-[var(--accent-primary)]">Step 04</span>
+                    <h3 class="mt-2 font-heading text-lg font-extrabold text-[var(--text-primary)]">Move with Metta</h3>
+                    <p class="mt-2 text-xs leading-5 text-[var(--text-secondary)]">Involve families with joy and take the next step toward a lifelong Mangala Vivaha.</p>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Closing CTA -->
-    <section class="bg-slate-900 py-16 text-white sm:py-20">
+    <section class="bg-[#141412] py-16 text-[#f4f2ee] sm:py-20 border-t border-[#2d2b27]">
         <div class="mx-auto flex max-w-5xl flex-col items-center justify-between gap-8 px-4 text-center sm:px-6 lg:flex-row lg:text-left lg:px-8">
-            <div><span class="text-xs font-extrabold uppercase tracking-[.2em] text-amber-300">Ready when you are</span><h2 class="mt-3 font-heading text-3xl font-extrabold tracking-tight sm:text-4xl">Start with a sincere intention.</h2><p class="mt-3 max-w-xl text-sm leading-6 text-rose-100/70">Your auspicious journey begins with a biodata that reflects who you are, your Dhamma values, and the mindful union you wish to build.</p></div>
-            <a href="{{ route('register') }}" class="shrink-0 rounded-xl bg-amber-400 px-6 py-3.5 text-sm font-extrabold text-slate-950 shadow-xl shadow-amber-950/30 transition hover:-translate-y-0.5 hover:bg-amber-300">Create your biodata &rarr;</a>
+            <div>
+                <span class="text-xs font-bold uppercase tracking-[.2em] text-[#e0b84c]">Ready when you are</span>
+                <h2 class="mt-3 font-heading text-3xl font-extrabold tracking-tight text-white sm:text-4xl">Start with a sincere intention.</h2>
+                <p class="mt-3 max-w-xl text-sm leading-6 text-[#d6d2c8]">Your auspicious journey begins with a biodata that reflects who you are, your Dhamma values, and the mindful union you wish to build.</p>
+            </div>
+            <a href="{{ route('register') }}" class="btn-primary shrink-0 text-sm px-6 py-3.5">Create your biodata &rarr;</a>
         </div>
     </section>
 </div>

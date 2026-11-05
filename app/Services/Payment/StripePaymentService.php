@@ -88,7 +88,7 @@ class StripePaymentService
                                 'currency' => strtolower($this->currency),
                                 'unit_amount' => $amountInCents,
                                 'product_data' => [
-                                    'name' => "Global Nikkah: {$planName} ({$billingCycle})",
+                                    'name' => "Global Maitri: {$planName} ({$billingCycle})",
                                     'description' => "Membership subscription upgrade for {$user->name}",
                                 ],
                             ],

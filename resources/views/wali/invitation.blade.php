@@ -3,29 +3,32 @@
 @section('title', 'Family Representative Invitation - Global Maitri')
 
 @section('content')
-<div class="py-12 bg-slate-50 dark:bg-slate-950 min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8">
+<div class="py-12 bg-[var(--bg-canvas)] min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 transition-colors">
     <div class="max-w-2xl w-full space-y-6">
 
         <!-- Header Banner -->
         <div class="text-center space-y-2">
-            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-rose-100 text-primary-800 dark:bg-rose-900/50 dark:text-rose-300 border border-rose-200 dark:border-rose-800">
-                <span>🛡️</span> Buddhist Matrimonial Family Guidance
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-[4px] text-xs font-semibold bg-[var(--accent-primary)]/10 text-[var(--accent-primary)] border border-[var(--accent-primary)]/20">
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                </svg>
+                <span>Buddhist Matrimonial Family Guidance</span>
             </span>
-            <p class="font-serif text-lg sm:text-xl text-amber-700 dark:text-amber-400 font-semibold">Namo Buddhaya</p>
-            <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white font-heading">
+            <p class="font-serif text-lg sm:text-xl text-[var(--accent-primary)] font-semibold">Namo Buddhaya</p>
+            <h1 class="text-2xl sm:text-3xl font-extrabold text-[var(--text-primary)] font-heading">
                 Family Representative Connection Request
             </h1>
-            <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 max-w-lg mx-auto">
-                You have been invited to act as a Family Representative & Advisor on <strong class="text-slate-900 dark:text-white">Global Maitri</strong>.
+            <p class="text-xs sm:text-sm text-[var(--text-secondary)] max-w-lg mx-auto">
+                You have been invited to act as a Family Representative &amp; Advisor on <strong class="text-[var(--text-primary)]">Global Maitri</strong>.
             </p>
         </div>
 
         <!-- Main Card -->
-        <div class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl overflow-hidden p-6 sm:p-8 space-y-6">
+        <div class="card-ledger p-6 sm:p-8 space-y-6">
 
             <!-- Seeker Profile Preview -->
-            <div class="flex flex-col sm:flex-row items-center gap-5 p-5 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/60">
-                <div class="relative w-20 h-20 rounded-2xl overflow-hidden bg-rose-100 dark:bg-rose-950 flex items-center justify-center text-3xl font-bold text-primary-700 dark:text-primary-400 border-2 border-primary-500/20 shadow-xs flex-shrink-0">
+            <div class="flex flex-col sm:flex-row items-center gap-5 p-5 rounded-[4px] bg-[var(--bg-subtle)] border border-[var(--border-default)]">
+                <div class="relative w-20 h-20 rounded-[4px] overflow-hidden bg-[#141412] flex items-center justify-center text-3xl font-bold text-[#e0b84c] border border-[var(--border-default)] shrink-0">
                     @if($link->seeker->profile?->primaryPhoto)
                         <img src="{{ $link->seeker->profile->primaryPhoto->displayUrl() }}" alt="{{ $link->seeker->name }}" class="w-full h-full object-cover" loading="lazy" decoding="async">
                     @else
@@ -35,27 +38,31 @@
 
                 <div class="text-center sm:text-left flex-1 min-w-0">
                     <div class="flex flex-wrap items-center justify-center sm:justify-start gap-2 mb-1">
-                        <h2 class="text-lg font-bold text-slate-900 dark:text-white font-heading truncate">{{ $link->seeker->name }}</h2>
-                        <span class="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-rose-100 text-primary-800 dark:bg-rose-900/60 dark:text-rose-300">
+                        <h2 class="text-lg font-bold text-[var(--text-primary)] font-heading truncate">{{ $link->seeker->name }}</h2>
+                        <span class="px-2.5 py-0.5 rounded-[4px] text-[11px] font-semibold bg-[var(--accent-primary)]/10 text-[var(--accent-primary)] border border-[var(--accent-primary)]/20">
                             {{ ucfirst($link->seeker->gender) }}
                         </span>
                         @if($link->seeker->profile?->age)
-                            <span class="px-2 py-0.5 rounded-full text-[11px] font-medium bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">
+                            <span class="px-2.5 py-0.5 rounded-[4px] text-[11px] font-medium bg-[var(--bg-canvas)] text-[var(--text-secondary)] border border-[var(--border-default)]">
                                 {{ $link->seeker->profile->age }} yrs old
                             </span>
                         @endif
                     </div>
 
-                    <p class="text-xs text-slate-600 dark:text-slate-400">
+                    <p class="text-xs text-[var(--text-secondary)]">
                         Designated Relationship:
-                        <strong class="text-amber-600 dark:text-amber-400 uppercase tracking-wide font-bold">
+                        <strong class="text-[var(--accent-primary)] uppercase tracking-wide font-bold">
                             {{ ucfirst(str_replace('_', ' ', $link->relationship_type)) }}
                         </strong>
                     </p>
 
                     @if($link->seeker->profile?->city || $link->seeker->profile?->country)
-                        <p class="text-[11px] text-slate-500 dark:text-slate-500 mt-0.5 flex items-center justify-center sm:justify-start gap-1">
-                            <span>📍</span> {{ $link->seeker->profile->city ? $link->seeker->profile->city . ', ' : '' }}{{ $link->seeker->profile->country ?? '' }}
+                        <p class="text-[11px] text-[var(--text-muted)] mt-0.5 flex items-center justify-center sm:justify-start gap-1">
+                            <svg class="w-3.5 h-3.5 text-[var(--text-muted)] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                            </svg>
+                            <span>{{ $link->seeker->profile->city ? $link->seeker->profile->city . ', ' : '' }}{{ $link->seeker->profile->country ?? '' }}</span>
                         </p>
                     @endif
                 </div>
@@ -63,13 +70,15 @@
 
             <!-- Permission & Role Details -->
             <div class="space-y-3">
-                <h3 class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Representative Privileges & Supervision Level</h3>
-                <div class="p-4 rounded-2xl bg-amber-500/5 border border-amber-500/20 text-xs space-y-2">
+                <h3 class="text-xs font-bold uppercase tracking-wider text-[var(--text-secondary)]">Representative Privileges &amp; Supervision Level</h3>
+                <div class="p-4 rounded-[4px] bg-[var(--bg-subtle)] border border-[var(--border-default)] text-xs space-y-2.5">
                     <div class="flex items-start gap-2.5">
-                        <span class="text-amber-600 dark:text-amber-400 text-sm mt-0.5">🔒</span>
+                        <svg class="w-4 h-4 text-[var(--accent-primary)] shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v4a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                        </svg>
                         <div>
-                            <span class="font-bold text-slate-900 dark:text-white">Permission Level:</span>
-                            <span class="text-slate-700 dark:text-slate-300 ml-1">
+                            <span class="font-bold text-[var(--text-primary)]">Permission Level:</span>
+                            <span class="text-[var(--text-secondary)] ml-1">
                                 @if($link->permission_level === 'approve_required')
                                     <strong>Approval Required</strong> — Suitors cannot chat with {{ $link->seeker->name }} until you review and grant explicit approval.
                                 @elseif($link->permission_level === 'full_proxy')
@@ -81,47 +90,58 @@
                         </div>
                     </div>
                     <div class="flex items-start gap-2.5">
-                        <span class="text-amber-600 dark:text-amber-400 text-sm mt-0.5">✉️</span>
+                        <svg class="w-4 h-4 text-[var(--accent-primary)] shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                        </svg>
                         <div>
-                            <span class="font-bold text-slate-900 dark:text-white">Representative Email:</span>
-                            <span class="text-slate-700 dark:text-slate-300 ml-1">{{ $link->wali_email ?: 'Not specified' }}</span>
+                            <span class="font-bold text-[var(--text-primary)]">Representative Email:</span>
+                            <span class="text-[var(--text-secondary)] ml-1">{{ $link->wali_email ?: 'Not specified' }}</span>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- Buddhist Family Principle Note -->
-            <div class="p-4 rounded-2xl bg-rose-500/5 border border-rose-500/20 text-xs text-slate-600 dark:text-slate-400 space-y-1.5">
-                <p class="font-semibold text-primary-800 dark:text-primary-300 flex items-center gap-1.5">
-                    <span>🪷</span> Blessing of the Elders (Mangala Sutta)
+            <div class="p-4 rounded-[4px] bg-[var(--accent-primary)]/5 border border-[var(--accent-primary)]/20 text-xs text-[var(--text-secondary)] space-y-1.5">
+                <p class="font-semibold text-[var(--accent-primary)] flex items-center gap-1.5">
+                    <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="9"/>
+                        <circle cx="12" cy="12" r="3"/>
+                        <path d="M12 3v6m0 6v6M3 12h6m6 0h6"/>
+                    </svg>
+                    Blessing of the Elders (Mangala Sutta)
                 </p>
-                <p class="italic text-slate-600 dark:text-slate-300">
+                <p class="italic text-[var(--text-primary)]">
                     &ldquo;Honoring those who are worthy of honor — this is the supreme blessing.&rdquo;
                 </p>
-                <p class="text-[11px] text-slate-500 dark:text-slate-400">
+                <p class="text-[11px] text-[var(--text-muted)]">
                     Global Maitri honors the role of parents and respected elders in fostering mindful, harmonious marriages.
                 </p>
             </div>
 
             <!-- Action Status / Buttons -->
             @if($link->status === 'active')
-                <div class="p-4 rounded-2xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 text-center space-y-2">
-                    <span class="text-2xl">✅</span>
-                    <h4 class="text-sm font-bold text-emerald-800 dark:text-emerald-200">Representative Connection Active</h4>
-                    <p class="text-xs text-emerald-700 dark:text-emerald-400">
+                <div class="p-4 rounded-[4px] bg-[var(--bg-subtle)] border border-[var(--color-success)] text-center space-y-2">
+                    <svg class="w-8 h-8 text-[var(--color-success)] mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <h4 class="text-sm font-bold text-[var(--color-success)]">Representative Connection Active</h4>
+                    <p class="text-xs text-[var(--text-secondary)]">
                         You are active as the verified family representative for {{ $link->seeker->name }}.
                     </p>
                     <div class="pt-2">
-                        <a href="{{ route('wali.dashboard') }}" class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-primary-700 hover:bg-primary-800 text-white font-semibold text-xs transition shadow-xs">
+                        <a href="{{ route('wali.dashboard') }}" class="btn-primary inline-flex items-center justify-center gap-2 text-xs py-2.5 px-5">
                             Go to Representative Dashboard &rarr;
                         </a>
                     </div>
                 </div>
             @elseif($link->status === 'declined')
-                <div class="p-4 rounded-2xl bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-800 text-center space-y-1">
-                    <span class="text-2xl">❌</span>
-                    <h4 class="text-sm font-bold text-rose-800 dark:text-rose-200">Connection Declined</h4>
-                    <p class="text-xs text-rose-600 dark:text-rose-400">
+                <div class="p-4 rounded-[4px] bg-[var(--bg-subtle)] border border-[var(--color-danger)] text-center space-y-1">
+                    <svg class="w-8 h-8 text-[var(--color-danger)] mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <h4 class="text-sm font-bold text-[var(--color-danger)]">Connection Declined</h4>
+                    <p class="text-xs text-[var(--text-secondary)]">
                         This family representative connection request was declined.
                     </p>
                 </div>
@@ -129,14 +149,17 @@
                 <div class="space-y-3 pt-2">
                     <form action="{{ route('wali.invite.accept', $link->invite_token) }}" method="POST">
                         @csrf
-                        <button type="submit" class="w-full py-3.5 px-6 rounded-2xl bg-primary-700 hover:bg-primary-800 text-white font-bold text-sm shadow-lg shadow-primary-950/20 transition-all flex items-center justify-center gap-2 cursor-pointer">
-                            <span>🛡️</span> Accept & Confirm Family Connection
+                        <button type="submit" class="btn-primary w-full py-3.5 px-6 text-sm font-bold flex items-center justify-center gap-2 cursor-pointer" style="min-height: 48px;">
+                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                            </svg>
+                            <span>Accept & Confirm Family Connection</span>
                         </button>
                     </form>
 
                     <form action="{{ route('wali.invite.decline', $link->invite_token) }}" method="POST">
                         @csrf
-                        <button type="submit" onclick="return confirm('Are you sure you want to decline this connection request?');" class="w-full py-2.5 px-4 rounded-xl text-xs font-semibold text-slate-500 dark:text-slate-400 hover:text-rose-600 dark:hover:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/20 transition cursor-pointer text-center">
+                        <button type="submit" onclick="return confirm('Are you sure you want to decline this connection request?');" class="btn-secondary w-full py-2.5 px-4 text-xs font-semibold text-[var(--text-secondary)] hover:text-[var(--color-danger)] cursor-pointer text-center">
                             Decline Request
                         </button>
                     </form>
@@ -146,8 +169,8 @@
         </div>
 
         <!-- Footer Help -->
-        <p class="text-center text-xs text-slate-500 dark:text-slate-400">
-            Need help? Reach out to our family support team at <a href="mailto:info@globalmaitri.com" class="text-primary-700 dark:text-primary-400 hover:underline">info@globalmaitri.com</a>
+        <p class="text-center text-xs text-[var(--text-muted)]">
+            Need help? Reach out to our family support team at <a href="mailto:info@globalmaitri.com" class="text-[var(--accent-primary)] hover:underline">info@globalmaitri.com</a>
         </p>
 
     </div>

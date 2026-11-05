@@ -3,40 +3,47 @@
 @section('title', 'Discover Buddhist Matches - Global Maitri')
 
 @section('content')
-<div class="py-8 bg-slate-50 dark:bg-slate-950 min-h-screen">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+<div class="py-6 min-h-screen bg-[var(--bg-canvas)]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6" x-data="{ mobileFilterOpen: false }">
 
         <!-- Top Header & Usage Quota Indicator -->
-        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xs">
+        <div class="card-ledger p-5 sm:p-6 bg-[var(--bg-surface)] border border-[var(--border-default)] flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
             <div>
-                <div class="inline-flex items-center gap-1.5 text-[10px] font-extrabold uppercase tracking-widest text-primary-700 dark:text-primary-300 mb-1">
-                    <span>🪷</span>
+                <div class="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-[var(--accent-primary)] mb-1">
+                    <svg class="w-3.5 h-3.5 text-[var(--accent-primary)]" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="9"/>
+                        <circle cx="12" cy="12" r="3"/>
+                        <path d="M12 3v6m0 6v6M3 12h6m6 0h6"/>
+                    </svg>
                     <span>Metta Matchmaking</span>
                 </div>
-                <h1 class="text-2xl font-extrabold text-slate-900 dark:text-white font-heading">Buddhist Match Discovery</h1>
-                <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Discover practicing Buddhist candidates based on Dhamma values, meditation, precepts, and mindful life goals.</p>
+                <h1 class="text-xl sm:text-2xl font-extrabold text-[var(--text-primary)] font-heading">Buddhist Match Discovery</h1>
+                <p class="text-xs text-[var(--text-secondary)] mt-0.5">Discover practicing Buddhist candidates based on Dhamma values, meditation, precepts, and mindful life goals.</p>
             </div>
+
             <!-- Quick Pro Shortcuts & Quota Badge -->
             <div class="flex flex-wrap items-center gap-2 sm:gap-3">
-                <a href="{{ route('profile.visitors') }}" class="px-3 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-bold transition flex items-center gap-1.5 border border-slate-200 dark:border-slate-700">
-                    <span>👁️</span> Visitors
+                <a href="{{ route('profile.visitors') }}" class="btn-secondary text-xs !py-1.5 !px-3 flex items-center gap-1.5">
+                    <svg class="w-3.5 h-3.5 text-[var(--text-muted)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+                    <span>Visitors</span>
                 </a>
-                <a href="{{ route('bookmarks.index') }}" class="px-3 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-bold transition flex items-center gap-1.5 border border-slate-200 dark:border-slate-700">
-                    <span>⭐</span> Shortlist
+                <a href="{{ route('bookmarks.index') }}" class="btn-secondary text-xs !py-1.5 !px-3 flex items-center gap-1.5">
+                    <svg class="w-3.5 h-3.5 text-[var(--accent-primary)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    <span>Shortlist</span>
                 </a>
-                <div class="flex items-center gap-3 bg-rose-50 dark:bg-rose-950/60 border border-rose-200/80 dark:border-rose-800/80 px-4 py-2.5 rounded-xl text-xs">
+                <div class="flex items-center gap-2.5 bg-[var(--bg-subtle)] border border-[var(--border-default)] px-3.5 py-1.5 rounded-[var(--radius-sm)] text-xs">
                     <div>
-                        <span class="font-bold text-primary-950 dark:text-primary-200">Pass:</span>
+                        <span class="font-bold text-[var(--text-primary)]">Pass:</span>
                         @if($quotaStats['views_limit'] === 'Unlimited')
-                            <span class="text-primary-700 dark:text-primary-300 font-semibold ml-1">Single Marriage Pass (Unlimited)</span>
+                            <span class="text-[var(--accent-primary)] font-semibold ml-1">Single Marriage Pass (Unlimited)</span>
                         @else
-                            <span class="text-primary-800 dark:text-primary-300 font-medium ml-1">
+                            <span class="text-[var(--text-secondary)] font-medium ml-1">
                                 {{ $quotaStats['views_remaining'] }} / {{ $quotaStats['views_limit'] }} daily views
                             </span>
                         @endif
                     </div>
                     @if($quotaStats['plan'] === 'free')
-                        <a href="{{ route('subscription.pricing') }}" class="px-2.5 py-1 rounded-lg bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-[11px] shadow-xs transition">
+                        <a href="{{ route('subscription.pricing') }}" class="btn-primary text-[10px] !py-1 !px-2.5">
                             Upgrade
                         </a>
                     @endif
@@ -49,372 +56,411 @@
             <div class="space-y-3">
                 <div class="flex items-center justify-between">
                     <div class="flex items-center gap-2">
-                        <span class="w-2 h-2 rounded-full bg-amber-500"></span>
-                        <h2 class="text-lg font-bold text-slate-900 dark:text-white font-heading">Ranked Daily Suggestions (Dhamma Compatibility)</h2>
+                        <span class="w-2 h-2 rounded-full bg-[var(--accent-primary)]"></span>
+                        <h2 class="text-base font-bold text-[var(--text-primary)] font-heading">Ranked Daily Suggestions (Dhamma Compatibility)</h2>
                     </div>
-                    <span class="text-xs text-slate-500 dark:text-slate-400 font-medium">Dhamma-weighted compatibility matching (FR-6.4)</span>
+                    <span class="text-xs text-[var(--text-muted)] font-medium hidden sm:inline">Dhamma-weighted compatibility matching (FR-6.4)</span>
                 </div>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                     @foreach($dailyRecommendations as $match)
-                        <div class="bg-white dark:bg-slate-900 rounded-3xl border-2 border-rose-100 dark:border-rose-900/60 p-5 shadow-xs hover:shadow-md transition flex flex-col justify-between">
+                        <article class="card-ledger p-4 bg-[var(--bg-surface)] border border-[var(--border-default)] flex flex-col justify-between hover:border-[var(--accent-primary)] transition">
                             <div>
                                 <!-- Top Card Header with Avatar, Info & Badges -->
-                                <div class="flex items-start justify-between gap-2.5 mb-3.5">
+                                <div class="flex items-start justify-between gap-2.5 mb-3">
                                     <div class="flex items-center gap-3 min-w-0">
-                                        <div class="relative w-14 h-14 rounded-2xl overflow-hidden bg-slate-800 shrink-0">
+                                        <div class="relative w-12 h-12 rounded-[var(--radius-sm)] overflow-hidden bg-[var(--neutral-900)] shrink-0 border border-[var(--border-default)]">
                                             @if($match->primaryPhoto)
-                                                <img src="{{ $match->primaryPhoto->displayUrl() }}" alt="{{ $match->user->name }}" class="w-full h-full object-cover photo-blur" loading="lazy" decoding="async">
+                                                <img src="{{ $match->primaryPhoto->displayUrl() }}" alt="{{ $match->user->name }}" class="w-full h-full object-cover photo-shield" loading="lazy" decoding="async">
                                             @else
-                                                <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-rose-950 to-slate-900 text-amber-200 font-bold text-xl">
+                                                <div class="w-full h-full flex items-center justify-center bg-[var(--bg-subtle)] text-[var(--accent-primary)] font-bold text-lg">
                                                     {{ substr($match->user->name, 0, 1) }}
                                                 </div>
                                             @endif
-                                            <span class="absolute inset-0 flex items-center justify-center bg-black/40 text-[9px] text-white font-bold">🔒 Shielded</span>
+                                            <span class="absolute inset-0 flex items-center justify-center bg-black/40 text-[9px] text-white font-bold">🔒 Shield</span>
                                         </div>
                                         <div class="min-w-0">
                                             <div class="flex items-center gap-1.5 min-w-0">
-                                                <h3 class="font-bold text-sm text-slate-900 dark:text-white truncate">{{ $match->user->name }}</h3>
+                                                <h3 class="font-bold text-sm text-[var(--text-primary)] truncate">{{ $match->user->name }}</h3>
                                                 @if($match->user->is_verified)
-                                                    <svg class="w-3.5 h-3.5 text-blue-500 fill-current shrink-0" viewBox="0 0 20 20" title="Verified Member">
-                                                        <path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
-                                                    </svg>
+                                                    <span class="badge-verified text-[10px] !py-0 !px-1.5">Verified</span>
                                                 @endif
                                             </div>
-                                            <p class="text-xs text-slate-500 dark:text-slate-400 truncate">{{ $match->user->age }} yrs • {{ $match->city }}, {{ $match->country }}</p>
-                                            <p class="text-[11px] text-primary-700 dark:text-primary-400 font-semibold truncate">{{ $match->tradition_label }}</p>
+                                            <p class="text-xs text-[var(--text-muted)] truncate">{{ $match->user->age }} yrs &bull; {{ $match->city }}, {{ $match->country }}</p>
+                                            <p class="text-[11px] text-[var(--accent-primary)] font-semibold truncate">{{ $match->tradition_label }}</p>
                                         </div>
                                     </div>
-                                    <div class="shrink-0 flex flex-col items-end gap-1.5">
-                                        <span class="px-2.5 py-0.5 rounded-full text-xs font-black bg-rose-100 dark:bg-rose-950 text-rose-800 dark:text-rose-300 border border-rose-200 dark:border-rose-800 whitespace-nowrap">
+                                    <div class="shrink-0 flex flex-col items-end gap-1">
+                                        <span class="badge-status text-[11px] font-bold bg-[var(--accent-subtle)] text-[var(--accent-primary)] border border-[var(--accent-primary)]/30 whitespace-nowrap">
                                             {{ $match->compatibility_score }}% Match
                                         </span>
                                         @if($match->user->isPro())
-                                            <span class="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-amber-500 text-slate-950 shadow-xs flex items-center gap-1 whitespace-nowrap" title="Single Marriage Pass">
-                                                👑 PRO
+                                            <span class="text-[9px] font-extrabold uppercase px-1.5 py-0.5 rounded-[var(--radius-sm)] bg-[var(--accent-primary)] text-white" title="Single Marriage Pass">
+                                                PRO
                                             </span>
                                         @endif
                                     </div>
                                 </div>
-                                <div class="bg-slate-50 dark:bg-slate-800/60 p-2.5 rounded-xl text-xs leading-relaxed text-slate-600 dark:text-slate-300 line-clamp-2 overflow-hidden mb-3">
+                                <div class="bg-[var(--bg-subtle)] p-2.5 rounded-[var(--radius-sm)] text-xs text-[var(--text-secondary)] line-clamp-2 overflow-hidden mb-3">
                                     {{ $match->bio ?? 'Committed to Dhamma practice, mindfulness, and building a peaceful family.' }}
                                 </div>
                                 @if(!empty($match->compatibility_highlights))
                                     <div class="flex flex-wrap gap-1.5 mb-3">
                                         @foreach(array_slice($match->compatibility_highlights, 0, 2) as $highlight)
-                                            <span class="inline-flex items-center gap-1 rounded-lg bg-amber-50 px-2 py-1 text-[10px] font-semibold text-amber-800 dark:bg-amber-950/60 dark:text-amber-300" title="{{ $highlight['detail'] }}">
-                                                {{ $highlight['icon'] }} {{ $highlight['label'] }}
+                                            <span class="inline-flex items-center gap-1 rounded-[var(--radius-sm)] bg-[var(--bg-subtle)] border border-[var(--border-subtle)] px-2 py-0.5 text-[10px] font-semibold text-[var(--text-secondary)]" title="{{ $highlight['detail'] }}">
+                                                {{ $highlight['label'] }}
                                             </span>
                                         @endforeach
                                     </div>
                                 @endif
                             </div>
-                            <div class="flex items-center gap-2 pt-2 border-t border-slate-100 dark:border-slate-800">
-                                <a href="{{ route('discovery.show', $match->user_id) }}" class="flex-1 py-2 rounded-xl bg-primary-700 hover:bg-primary-800 text-white text-xs font-bold text-center shadow-xs transition cursor-pointer">
+                            <div class="flex items-center gap-2 pt-2 border-t border-[var(--border-subtle)]">
+                                <a href="{{ route('discovery.show', $match->user_id) }}" class="btn-primary flex-1 text-xs !py-1.5 text-center">
                                     View Full Profile
                                 </a>
                                 @php $isBookmarkedMatch = in_array($match->user_id, $bookmarkedUserIds ?? [], true); @endphp
                                 <form action="{{ route('bookmarks.toggle', $match->user_id) }}" method="POST" class="inline">
                                     @csrf
                                     <button type="submit" title="{{ $isBookmarkedMatch ? 'Remove from shortlist' : 'Shortlist candidate for family review' }}"
-                                            class="p-2 rounded-xl border {{ $isBookmarkedMatch ? 'bg-amber-100 border-amber-300 text-amber-700 dark:bg-amber-950 dark:border-amber-700 dark:text-amber-300' : 'border-slate-200 dark:border-slate-700 text-slate-400 hover:text-amber-600 hover:bg-slate-50 dark:hover:bg-slate-800' }} transition cursor-pointer text-xs">
-                                        ⭐
+                                            class="btn-secondary !py-1.5 !px-2.5 text-xs {{ $isBookmarkedMatch ? 'text-[var(--accent-primary)] border-[var(--accent-primary)]' : '' }}">
+                                        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="{{ $isBookmarkedMatch ? 'currentColor' : 'none' }}" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                                     </button>
-                                </form>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
-        @endif
-
-        <!-- Filter & Search Controls (FR-3.1, 6.2) -->
-        <div class="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xs" x-data="{ advancedOpen: false }">
-            <form action="{{ route('discovery.index') }}" method="GET" class="space-y-4">
-                <div class="flex flex-col gap-2 border-b border-slate-100 pb-4 dark:border-slate-800 sm:flex-row sm:items-center sm:justify-between">
-                    <div>
-                        <p class="text-xs font-bold text-slate-700 dark:text-slate-200">Refine Your Search</p>
-                        <p class="mt-0.5 text-[11px] text-slate-500 dark:text-slate-400">Order candidate profiles by compatibility, verification status, or registration recency.</p>
-                    </div>
-                    <select name="sort" aria-label="Sort candidate profiles" class="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-700 outline-none focus:ring-2 focus:ring-primary-500 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 sm:w-56">
-                        <option value="newest" {{ $sort === 'newest' ? 'selected' : '' }}>Newest profiles</option>
-                        <option value="compatibility" {{ $sort === 'compatibility' ? 'selected' : '' }}>Highest Dhamma compatibility</option>
-                        <option value="verified" {{ $sort === 'verified' ? 'selected' : '' }}>Verified first</option>
-                        <option value="complete" {{ $sort === 'complete' ? 'selected' : '' }}>Most complete profiles</option>
-                    </select>
-                </div>
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                    <div>
-                        <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider mb-1">Age Range</label>
-                        <div class="flex items-center gap-2">
-                            <input type="number" name="age_min" value="{{ request('age_min') }}" placeholder="Min (18)" min="18" max="80"
-                                   class="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-xs focus:ring-2 focus:ring-primary-500 outline-none">
-                            <span class="text-slate-400 text-xs">-</span>
-                            <input type="number" name="age_max" value="{{ request('age_max') }}" placeholder="Max (50)" min="18" max="80"
-                                   class="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-xs focus:ring-2 focus:ring-primary-500 outline-none">
-                        </div>
-                    </div>
-
-                    <div>
-                        <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider mb-1">Country</label>
-                        <input type="text" name="country" value="{{ request('country') }}" placeholder="e.g. Sri Lanka, Thailand, United Kingdom"
-                               class="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-xs focus:ring-2 focus:ring-primary-500 outline-none">
-                    </div>
-
-                    <div>
-                        <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider mb-1">Buddhist Tradition</label>
-                        <select name="tradition" class="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-xs focus:ring-2 focus:ring-primary-500 outline-none">
-                            <option value="">Any Tradition</option>
-                            @foreach(config('buddhist.traditions') as $code => $label)
-                                <option value="{{ $code }}" {{ request('tradition') === $code ? 'selected' : '' }}>{{ $label }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <div class="flex items-end gap-2">
-                        <button type="submit" class="flex-1 py-2 px-4 rounded-xl bg-primary-700 hover:bg-primary-800 text-white font-bold text-xs shadow-xs transition cursor-pointer">
-                            Apply Filters
-                        </button>
-                        <button type="button" @click="advancedOpen = !advancedOpen" class="py-2 px-3 rounded-xl border border-slate-300 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-semibold transition cursor-pointer">
-                            ⚙️ More
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Advanced Filters Collapsible (FR-6.2) -->
-                <div x-show="advancedOpen" x-cloak class="pt-4 border-t border-slate-100 dark:border-slate-800 grid grid-cols-1 sm:grid-cols-4 gap-4">
-                    <div>
-                        <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider mb-1">Meditation Frequency</label>
-                        <select name="meditation_frequency" class="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-xs focus:ring-2 focus:ring-primary-500 outline-none">
-                            <option value="">Any Meditation Level</option>
-                            @foreach(config('buddhist.meditation_frequencies') as $code => $label)
-                                <option value="{{ $code }}" {{ request('meditation_frequency') === $code ? 'selected' : '' }}>{{ $label }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <div>
-                        <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider mb-1">Five Precepts (Panca Sila)</label>
-                        <select name="panca_sila_adherence" class="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-xs focus:ring-2 focus:ring-primary-500 outline-none">
-                            <option value="">Any Adherence</option>
-                            @foreach(config('buddhist.panca_sila_adherence') as $code => $label)
-                                <option value="{{ $code }}" {{ request('panca_sila_adherence') === $code ? 'selected' : '' }}>{{ $label }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <div>
-                        <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider mb-1">Dietary Preference</label>
-                        <select name="dietary_preference" class="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-xs focus:ring-2 focus:ring-primary-500 outline-none">
-                            <option value="">Any Diet</option>
-                            @foreach(config('buddhist.dietary_preferences') as $code => $label)
-                                <option value="{{ $code }}" {{ request('dietary_preference') === $code ? 'selected' : '' }}>{{ $label }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <div>
-                        <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider mb-1">Community Background</label>
-                        <select name="ethnic_community" class="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-xs focus:ring-2 focus:ring-primary-500 outline-none">
-                            <option value="">Any Community (No preference)</option>
-                            @foreach(config('buddhist.ethnic_communities') as $code => $label)
-                                <option value="{{ $code }}" {{ request('ethnic_community') === $code ? 'selected' : '' }}>{{ $label }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <div class="sm:col-span-2 flex items-center pt-2">
-                        <label class="flex items-center gap-2 text-xs font-semibold text-slate-700 dark:text-slate-300 cursor-pointer">
-                            <input type="checkbox" name="family_rep_required" value="1" {{ request('family_rep_required') ? 'checked' : '' }} class="rounded text-primary-600 focus:ring-primary-500">
-                            <span>🛡️ Family Representative Linked Only</span>
-                        </label>
-                    </div>
-                </div>
-            </form>
-        </div>
-
-        <!-- Saved Search Workspace -->
-        <section class="rounded-3xl border border-rose-100 dark:border-rose-900/50 bg-gradient-to-br from-rose-50 via-white to-amber-50 dark:from-rose-950/50 dark:via-slate-900 dark:to-amber-950/20 p-5 sm:p-6 shadow-xs">
-            <div class="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-                <div class="flex items-start gap-3">
-                    <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-primary-700 text-lg text-white shadow-md shadow-primary-950/15">⌕</div>
-                    <div>
-                        <p class="text-[10px] font-extrabold uppercase tracking-[0.18em] text-primary-700 dark:text-primary-300">Your Search Workspace</p>
-                        <h2 class="mt-1 font-heading text-lg font-extrabold text-slate-900 dark:text-white">Saved Searches & Alerts</h2>
-                        <p class="mt-1 max-w-2xl text-xs leading-relaxed text-slate-600 dark:text-slate-300">Preserve your family's criteria. Receive email alerts when matching candidates join.</p>
-                    </div>
-                </div>
-                <span class="inline-flex w-fit items-center rounded-full border border-rose-200 bg-white/70 px-3 py-1 text-[11px] font-bold text-primary-800 dark:border-rose-800 dark:bg-slate-900/70 dark:text-primary-300">
-                    {{ $savedSearches->count() }} {{ $savedSearches->count() === 1 ? 'search' : 'searches' }}
-                </span>
-            </div>
-
-            @if($savedSearches->isNotEmpty())
-                <div class="mt-5 grid grid-cols-1 gap-3 md:grid-cols-2">
-                    @foreach($savedSearches as $savedSearch)
-                        @php
-                            $searchFilters = collect($savedSearch->filters ?? [])->filter(fn ($value) => filled($value));
-                            $searchUrl = route('discovery.index', $searchFilters->all());
-                        @endphp
-                        <article class="rounded-2xl border border-white/80 bg-white/80 p-4 shadow-xs dark:border-slate-700/80 dark:bg-slate-900/70">
-                            <div class="flex items-start justify-between gap-3">
-                                <div class="min-w-0">
-                                    <h3 class="truncate text-sm font-bold text-slate-900 dark:text-white">{{ $savedSearch->title }}</h3>
-                                    <p class="mt-1 text-[11px] text-slate-500 dark:text-slate-400">Saved {{ $savedSearch->created_at->diffForHumans() }}</p>
-                                </div>
-                                <span class="inline-flex shrink-0 items-center gap-1 rounded-full px-2 py-1 text-[10px] font-bold {{ $savedSearch->alerts_enabled ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300' : 'bg-slate-100 text-slate-500 dark:bg-slate-800 dark:text-slate-400' }}">
-                                    <span class="h-1.5 w-1.5 rounded-full {{ $savedSearch->alerts_enabled ? 'bg-emerald-500' : 'bg-slate-400' }}"></span>
-                                    {{ $savedSearch->alerts_enabled ? 'Alerts on' : 'Paused' }}
-                                </span>
-                            </div>
-                            <div class="mt-3 flex flex-wrap gap-1.5">
-                                @forelse($searchFilters->take(4) as $filterName => $filterValue)
-                                    <span class="rounded-md bg-slate-100 px-2 py-1 text-[10px] font-semibold text-slate-600 dark:bg-slate-800 dark:text-slate-300">{{ str($filterName)->replace('_', ' ')->title() }}: {{ str($filterValue)->replace('_', ' ')->title() }}</span>
-                                @empty
-                                    <span class="text-[11px] text-slate-500 dark:text-slate-400">All active candidates</span>
-                                @endforelse
-                            </div>
-                            <div class="mt-4 flex items-center gap-2 border-t border-slate-100 pt-3 dark:border-slate-800">
-                                <a href="{{ $searchUrl }}" class="flex-1 rounded-xl bg-primary-700 px-3 py-2 text-center text-[11px] font-bold text-white transition hover:bg-primary-800">Run search</a>
-                                <form action="{{ route('discovery.saved-searches.toggle-alerts', $savedSearch->id) }}" method="POST">
-                                    @csrf
-                                    <button type="submit" class="rounded-xl border border-slate-200 px-3 py-2 text-[11px] font-bold text-slate-600 transition hover:border-primary-300 hover:text-primary-700 dark:border-slate-700 dark:text-slate-300 dark:hover:border-primary-700 dark:hover:text-primary-300">{{ $savedSearch->alerts_enabled ? 'Pause' : 'Resume' }}</button>
-                                </form>
-                                <form action="{{ route('discovery.saved-searches.destroy', $savedSearch->id) }}" method="POST" onsubmit="return confirm('Remove this saved search?')">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" aria-label="Remove {{ $savedSearch->title }}" class="rounded-xl border border-rose-200 px-3 py-2 text-[11px] font-bold text-rose-600 transition hover:bg-rose-50 dark:border-rose-900/60 dark:text-rose-300 dark:hover:bg-rose-950/40">Remove</button>
                                 </form>
                             </div>
                         </article>
                     @endforeach
                 </div>
-            @else
-                <div class="mt-5 flex flex-col items-start gap-3 rounded-2xl border border-dashed border-rose-200 bg-white/60 p-4 dark:border-rose-900 dark:bg-slate-900/50 sm:flex-row sm:items-center sm:justify-between">
-                    <p class="text-xs text-slate-600 dark:text-slate-300">No saved searches yet. Apply your preferences above, then save them for quick access.</p>
-                    <button type="button" onclick="document.getElementById('saveSearchModal').classList.remove('hidden')" class="shrink-0 rounded-xl bg-primary-700 px-3 py-2 text-[11px] font-bold text-white transition hover:bg-primary-800">Save current search</button>
+            </div>
+        @endif
+
+        <!-- Active Filter Chips & Reset Bar (Visible if filters applied) -->
+        @php
+            $activeFilters = collect([
+                'age_min' => request('age_min') ? 'Min Age: ' . request('age_min') : null,
+                'age_max' => request('age_max') ? 'Max Age: ' . request('age_max') : null,
+                'country' => request('country') ? 'Country: ' . request('country') : null,
+                'tradition' => request('tradition') ? 'Tradition: ' . ucfirst(request('tradition')) : null,
+                'meditation_frequency' => request('meditation_frequency') ? 'Meditation: ' . ucfirst(str_replace('_', ' ', request('meditation_frequency'))) : null,
+                'panca_sila_adherence' => request('panca_sila_adherence') ? 'Precepts: ' . ucfirst(str_replace('_', ' ', request('panca_sila_adherence'))) : null,
+                'dietary_preference' => request('dietary_preference') ? 'Diet: ' . ucfirst(request('dietary_preference')) : null,
+                'ethnic_community' => request('ethnic_community') ? 'Community: ' . ucfirst(request('ethnic_community')) : null,
+                'family_rep_required' => request('family_rep_required') ? 'Family Rep Linked' : null,
+            ])->filter();
+        @endphp
+
+        @if($activeFilters->isNotEmpty())
+            <div class="card-ledger p-3 bg-[var(--bg-surface)] border border-[var(--border-default)] flex flex-wrap items-center justify-between gap-3">
+                <div class="flex items-center gap-2 flex-wrap">
+                    <span class="text-xs font-bold text-[var(--text-secondary)]">Active Filters:</span>
+                    @foreach($activeFilters as $key => $filterLabel)
+                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[var(--radius-sm)] bg-[var(--accent-subtle)] text-[var(--accent-primary)] border border-[var(--accent-primary)]/30 text-xs font-medium">
+                            <span>{{ $filterLabel }}</span>
+                            @php
+                                $removeParams = request()->except($key);
+                            @endphp
+                            <a href="{{ route('discovery.index', $removeParams) }}" class="hover:text-[var(--text-primary)] cursor-pointer" aria-label="Remove filter">&times;</a>
+                        </span>
+                    @endforeach
                 </div>
-            @endif
-        </section>
-
-        <!-- Search Results Grid -->
-        <div class="space-y-4">
-            <div class="flex items-center justify-between">
-                <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">Found {{ $profiles->total() }} matching candidate profiles</p>
-                <!-- Save Search Modal Trigger -->
-                <button type="button" onclick="document.getElementById('saveSearchModal').classList.remove('hidden')" class="text-xs font-bold text-primary-700 dark:text-primary-400 hover:text-primary-800 dark:hover:text-primary-300 flex items-center gap-1 cursor-pointer">
-                    💾 Save this Search (FR-3.3)
-                </button>
+                <a href="{{ route('discovery.index') }}" class="text-xs font-semibold text-[var(--color-danger)] hover:underline">
+                    Reset all filters
+                </a>
             </div>
+        @endif
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                @forelse($profiles as $p)
-                    <div class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200/80 dark:border-slate-800/80 shadow-xs hover:border-primary-500/50 smooth-card overflow-hidden flex flex-col justify-between transition-all duration-300">
-                        <div>
-                            <!-- Photo Header & Badges with Gradient Overlay -->
-                            <div class="relative h-56 bg-slate-900 overflow-hidden group">
-                                @if($p->primaryPhoto)
-                                    <img src="{{ $p->primaryPhoto->displayUrl() }}" alt="{{ $p->user->name }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500 ease-out photo-blur" loading="lazy" decoding="async">
-                                @else
-                                    <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-rose-950 to-slate-900 text-amber-200 font-bold text-4xl group-hover:scale-105 transition duration-500 ease-out">
-                                        {{ substr($p->user->name, 0, 1) }}
-                                    </div>
-                                @endif
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"></div>
+        <!-- Mobile Filter Drawer Toggle Button (Visible on mobile/tablet) -->
+        <div class="lg:hidden">
+            <button type="button"
+                    @click="mobileFilterOpen = !mobileFilterOpen"
+                    class="btn-secondary w-full justify-between text-xs font-bold !py-2.5">
+                <span class="flex items-center gap-2">
+                    <svg class="w-4 h-4 text-[var(--accent-primary)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="21" x2="14" y1="4" y2="4"/><line x1="10" x2="3" y1="4" y2="4"/><line x1="21" x2="12" y1="12" y2="12"/><line x1="8" x2="3" y1="12" y2="12"/><line x1="21" x2="16" y1="20" y2="20"/><line x1="12" x2="3" y1="20" y2="20"/><line x1="14" x2="14" y1="2" y2="6"/><line x1="8" x2="8" y1="10" y2="14"/><line x1="16" x2="16" y1="18" y2="22"/></svg>
+                    <span>Filter Directory @if($activeFilters->isNotEmpty()) ({{ $activeFilters->count() }} Active) @endif</span>
+                </span>
+                <span x-text="mobileFilterOpen ? '▲' : '▼'"></span>
+            </button>
+        </div>
 
-                                <!-- Top Floating Badges -->
-                                <div class="absolute top-2.5 inset-x-2.5 flex items-center justify-between pointer-events-none">
-                                    <div class="flex items-center gap-1.5">
-                                        <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-black/60 text-white/90 backdrop-blur-xs border border-white/10 flex items-center gap-1 shadow-xs">
-                                            🔒 Lotus Shield
-                                        </span>
-                                        @if($p->user->is_verified)
-                                            <span class="bg-primary-900/90 backdrop-blur-xs text-rose-200 px-2 py-0.5 rounded-full border border-rose-400/40 text-[10px] font-bold shadow-xs flex items-center gap-1">
-                                                <span>✓</span> Verified
-                                            </span>
-                                        @endif
-                                        @if($p->user->isPro())
-                                            <span class="bg-amber-950/90 backdrop-blur-xs text-amber-300 px-2 py-0.5 rounded-full border border-amber-400/40 text-[10px] font-extrabold shadow-xs flex items-center gap-1">
-                                                👑 PRO
-                                            </span>
-                                        @endif
-                                    </div>
-                                    @if(isset($p->compatibility_score))
-                                        <span class="bg-rose-950/90 backdrop-blur-xs text-rose-200 px-2.5 py-0.5 rounded-full border border-rose-400/40 text-[10px] font-extrabold shadow-xs">
-                                            ✨ {{ $p->compatibility_score }}% Match
-                                        </span>
+        <!-- Main Discovery Workspace: Filter Sidebar (Left) + Candidate Grid (Right) -->
+        <div class="flex flex-col lg:flex-row gap-6 items-start">
+
+            <!-- Filter Sidebar (Desktop Sticky + Mobile Drawer) -->
+            <aside :class="mobileFilterOpen ? 'block' : 'hidden lg:block'" class="w-full lg:w-72 shrink-0">
+                <div class="card-ledger p-5 bg-[var(--bg-surface)] border border-[var(--border-default)] lg:sticky lg:top-20 space-y-4">
+                    <div class="flex items-center justify-between border-b border-[var(--border-subtle)] pb-3">
+                        <h2 class="text-xs font-bold text-[var(--text-primary)] uppercase tracking-wider flex items-center gap-2">
+                            <svg class="w-4 h-4 text-[var(--accent-primary)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+                            <span>Filter Candidates</span>
+                        </h2>
+                        @if($activeFilters->isNotEmpty())
+                            <a href="{{ route('discovery.index') }}" class="text-[11px] font-semibold text-[var(--text-muted)] hover:text-[var(--color-danger)]">Reset</a>
+                        @endif
+                    </div>
+
+                    <form action="{{ route('discovery.index') }}" method="GET" class="space-y-4">
+                        <!-- Keep Sort Order -->
+                        <input type="hidden" name="sort" value="{{ $sort }}">
+
+                        <!-- Age Range -->
+                        <div class="space-y-1.5">
+                            <label class="block text-[10px] text-[var(--text-muted)] uppercase font-bold tracking-wider">Age Range</label>
+                            <div class="grid grid-cols-2 gap-2">
+                                <input type="number" name="age_min" value="{{ request('age_min') }}" placeholder="Min (18)" min="18" max="80"
+                                       class="input-field text-xs !h-8 !py-1">
+                                <input type="number" name="age_max" value="{{ request('age_max') }}" placeholder="Max (80)" min="18" max="80"
+                                       class="input-field text-xs !h-8 !py-1">
+                            </div>
+                        </div>
+
+                        <!-- Country -->
+                        <div class="space-y-1.5">
+                            <label class="block text-[10px] text-[var(--text-muted)] uppercase font-bold tracking-wider">Country</label>
+                            <input type="text" name="country" value="{{ request('country') }}" placeholder="e.g. Sri Lanka, Thailand"
+                                   class="input-field text-xs !h-8 !py-1 w-full">
+                        </div>
+
+                        <!-- Tradition -->
+                        <div class="space-y-1.5">
+                            <label class="block text-[10px] text-[var(--text-muted)] uppercase font-bold tracking-wider">Buddhist Tradition</label>
+                            <select name="tradition" class="input-field text-xs !h-8 !py-1 w-full">
+                                <option value="">Any Tradition</option>
+                                @foreach(config('buddhist.traditions') as $code => $label)
+                                    <option value="{{ $code }}" {{ request('tradition') === $code ? 'selected' : '' }}>{{ $label }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <!-- Meditation Frequency -->
+                        <div class="space-y-1.5">
+                            <label class="block text-[10px] text-[var(--text-muted)] uppercase font-bold tracking-wider">Meditation Practice</label>
+                            <select name="meditation_frequency" class="input-field text-xs !h-8 !py-1 w-full">
+                                <option value="">Any Practice Level</option>
+                                @foreach(config('buddhist.meditation_frequencies') as $code => $label)
+                                    <option value="{{ $code }}" {{ request('meditation_frequency') === $code ? 'selected' : '' }}>{{ $label }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <!-- Five Precepts (Panca Sila) -->
+                        <div class="space-y-1.5">
+                            <label class="block text-[10px] text-[var(--text-muted)] uppercase font-bold tracking-wider">Five Precepts (Panca Sila)</label>
+                            <select name="panca_sila_adherence" class="input-field text-xs !h-8 !py-1 w-full">
+                                <option value="">Any Observance</option>
+                                @foreach(config('buddhist.panca_sila_adherence') as $code => $label)
+                                    <option value="{{ $code }}" {{ request('panca_sila_adherence') === $code ? 'selected' : '' }}>{{ $label }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <!-- Dietary Preference -->
+                        <div class="space-y-1.5">
+                            <label class="block text-[10px] text-[var(--text-muted)] uppercase font-bold tracking-wider">Dietary Lifestyle</label>
+                            <select name="dietary_preference" class="input-field text-xs !h-8 !py-1 w-full">
+                                <option value="">Any Diet</option>
+                                @foreach(config('buddhist.dietary_preferences') as $code => $label)
+                                    <option value="{{ $code }}" {{ request('dietary_preference') === $code ? 'selected' : '' }}>{{ $label }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <!-- Ethnic Community -->
+                        <div class="space-y-1.5">
+                            <label class="block text-[10px] text-[var(--text-muted)] uppercase font-bold tracking-wider">Ethnic Community</label>
+                            <select name="ethnic_community" class="input-field text-xs !h-8 !py-1 w-full">
+                                <option value="">Any Community (No preference)</option>
+                                @foreach(config('buddhist.ethnic_communities') as $code => $label)
+                                    <option value="{{ $code }}" {{ request('ethnic_community') === $code ? 'selected' : '' }}>{{ $label }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <!-- Family Rep Checkbox -->
+                        <div class="pt-1">
+                            <label class="flex items-center gap-2 text-xs font-semibold text-[var(--text-secondary)] cursor-pointer">
+                                <input type="checkbox" name="family_rep_required" value="1" {{ request('family_rep_required') ? 'checked' : '' }} class="rounded-[2px] text-[var(--accent-primary)] focus:ring-[var(--accent-primary)]">
+                                <span>Family Representative Linked</span>
+                            </label>
+                        </div>
+
+                        <button type="submit" class="btn-primary w-full text-xs !py-2.5 mt-2 flex items-center justify-center gap-2">
+                            <span>Apply Filters</span>
+                        </button>
+                    </form>
+                </div>
+            </aside>
+
+            <!-- Candidates Results Area (Right) -->
+            <main class="flex-1 min-w-0 space-y-4">
+                
+                <!-- Sort Bar & Save Search Trigger -->
+                <div class="card-ledger p-3.5 bg-[var(--bg-surface)] border border-[var(--border-default)] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                    <div class="flex items-center gap-3">
+                        <span class="text-xs font-bold text-[var(--text-primary)]">Found {{ $profiles->total() }} Profiles</span>
+                        <span class="text-[var(--border-default)] hidden sm:inline">|</span>
+                        <button type="button" onclick="document.getElementById('saveSearchModal').classList.remove('hidden')" class="text-xs font-semibold text-[var(--accent-primary)] hover:underline flex items-center gap-1 cursor-pointer">
+                            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+                            <span>Save this Search</span>
+                        </button>
+                    </div>
+
+                    <form action="{{ route('discovery.index') }}" method="GET" class="flex items-center gap-2">
+                        @foreach(request()->except('sort') as $k => $v)
+                            @if(is_array($v))
+                                @foreach($v as $sub)
+                                    <input type="hidden" name="{{ $k }}[]" value="{{ $sub }}">
+                                @endforeach
+                            @elseif(filled($v))
+                                <input type="hidden" name="{{ $k }}" value="{{ $v }}">
+                            @endif
+                        @endforeach
+                        <label for="sort-select" class="text-xs text-[var(--text-muted)] font-medium">Sort:</label>
+                        <select id="sort-select" name="sort" aria-label="Sort candidate profiles" onchange="this.form.submit()" class="input-field text-xs !h-8 !py-1 sm:w-52">
+                            <option value="newest" {{ $sort === 'newest' ? 'selected' : '' }}>Newest profiles</option>
+                            <option value="compatibility" {{ $sort === 'compatibility' ? 'selected' : '' }}>Highest Dhamma compatibility</option>
+                            <option value="verified" {{ $sort === 'verified' ? 'selected' : '' }}>Verified first</option>
+                            <option value="complete" {{ $sort === 'complete' ? 'selected' : '' }}>Most complete profiles</option>
+                        </select>
+                    </form>
+                </div>
+
+                <!-- Saved Searches Quick Strip -->
+                @if($savedSearches->isNotEmpty())
+                    <div class="card-ledger p-3 bg-[var(--bg-subtle)] border border-[var(--border-default)]">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-[var(--text-muted)]">Saved Search Shortcuts ({{ $savedSearches->count() }})</span>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            @foreach($savedSearches as $savedSearch)
+                                @php
+                                    $searchFilters = collect($savedSearch->filters ?? [])->filter(fn ($value) => filled($value));
+                                    $searchUrl = route('discovery.index', $searchFilters->all());
+                                @endphp
+                                <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[var(--radius-sm)] bg-[var(--bg-surface)] border border-[var(--border-default)] text-xs">
+                                    <a href="{{ $searchUrl }}" class="font-semibold text-[var(--text-primary)] hover:text-[var(--accent-primary)]">
+                                        {{ $savedSearch->title }}
+                                    </a>
+                                    <form action="{{ route('discovery.saved-searches.destroy', $savedSearch->id) }}" method="POST" onsubmit="return confirm('Remove this saved search?')" class="inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" aria-label="Remove {{ $savedSearch->title }}" class="text-[var(--text-muted)] hover:text-[var(--color-danger)] leading-none">&times;</button>
+                                    </form>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                @endif
+
+                <!-- Candidate Profiles Grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5">
+                    @forelse($profiles as $p)
+                        <article class="card-ledger flex flex-col justify-between overflow-hidden group bg-[var(--bg-surface)] border border-[var(--border-default)] hover:border-[var(--accent-primary)] transition">
+                            <div>
+                                <!-- Photo Area with Modesty Photo Shield -->
+                                <div class="relative h-56 bg-[var(--neutral-900)] overflow-hidden">
+                                    @if($p->primaryPhoto)
+                                        <img src="{{ $p->primaryPhoto->displayUrl() }}" alt="{{ $p->user->name }}" class="w-full h-full object-cover photo-shield group-hover:scale-102 transition duration-300" loading="lazy" decoding="async">
+                                    @else
+                                        <div class="w-full h-full flex items-center justify-center bg-[var(--bg-subtle)] text-[var(--accent-primary)] font-bold text-3xl">
+                                            {{ substr($p->user->name, 0, 1) }}
+                                        </div>
                                     @endif
+
+                                    <!-- Top Badges -->
+                                    <div class="absolute top-2.5 inset-x-2.5 flex items-center justify-between pointer-events-none">
+                                        <div class="flex items-center gap-1.5">
+                                            <span class="badge-status bg-black/70 text-white border border-white/15 text-[10px] backdrop-blur-xs flex items-center gap-1">
+                                                <svg class="w-3 h-3 text-[var(--accent-primary)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                                                <span>Shielded</span>
+                                            </span>
+                                            @if($p->user->is_verified)
+                                                <span class="badge-verified bg-black/70 text-white border border-white/20 text-[10px] backdrop-blur-xs">
+                                                    <span>✓</span> Verified
+                                                </span>
+                                            @endif
+                                            @if($p->user->isPro())
+                                                <span class="text-[9px] font-extrabold uppercase px-1.5 py-0.5 rounded-[var(--radius-sm)] bg-[var(--accent-primary)] text-white">
+                                                    PRO
+                                                </span>
+                                            @endif
+                                        </div>
+                                        @if(isset($p->compatibility_score))
+                                            <span class="badge-status bg-black/70 text-white border border-white/15 text-[10px] backdrop-blur-xs font-bold">
+                                                {{ $p->compatibility_score }}% Match
+                                            </span>
+                                        @endif
+                                    </div>
+
+                                    <!-- Bottom Scrim Info -->
+                                    <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent p-3.5 text-white">
+                                        <div class="flex items-center justify-between gap-1.5">
+                                            <h3 class="font-heading font-bold text-sm text-white truncate">
+                                                {{ $p->user->name }}
+                                            </h3>
+                                            <span class="text-[9px] px-1.5 py-0.5 rounded-[var(--radius-sm)] bg-white/20 backdrop-blur-xs text-white font-medium border border-white/20 shrink-0">
+                                                {{ ucfirst(str_replace('_', ' ', $p->marital_status ?? $p->user->marital_status ?? 'Single')) }}
+                                            </span>
+                                        </div>
+                                        <p class="text-[11px] text-[var(--neutral-300)] mt-0.5 truncate">
+                                            {{ $p->user->age }} yrs &bull; {{ $p->height_cm ? round($p->height_cm / 30.48, 1) . ' ft &bull; ' : '' }}{{ $p->city ?? 'Location flexible' }}, {{ $p->country ?? '' }}
+                                        </p>
+                                    </div>
                                 </div>
 
-                                <!-- Photo Bottom Overlay: Name, Age, Marital Status & Location -->
-                                <div class="absolute bottom-2.5 inset-x-3 text-white">
-                                    <div class="flex items-center justify-between gap-1.5">
-                                        <h3 class="font-heading font-bold text-base text-white tracking-wide truncate drop-shadow-sm">
-                                            {{ $p->user->name }}
-                                        </h3>
-                                        <span class="text-[9px] px-2 py-0.5 rounded-full bg-white/20 backdrop-blur-xs text-rose-100 font-semibold border border-white/20 shrink-0 whitespace-nowrap">
-                                            {{ ucfirst(str_replace('_', ' ', $p->marital_status ?? $p->user->marital_status ?? 'Single')) }}
-                                        </span>
+                                <!-- Biodata Ledger Matrix -->
+                                <div class="p-3.5 space-y-2 border-b border-[var(--border-subtle)]">
+                                    <div class="grid grid-cols-2 gap-2 text-xs">
+                                        <div>
+                                            <span class="text-[10px] uppercase font-bold text-[var(--text-muted)] tracking-wider block">Tradition</span>
+                                            <span class="font-semibold text-[var(--text-primary)] truncate block">{{ $p->tradition_label }}</span>
+                                        </div>
+                                        <div>
+                                            <span class="text-[10px] uppercase font-bold text-[var(--text-muted)] tracking-wider block">Meditation</span>
+                                            <span class="font-semibold text-[var(--text-primary)] truncate block">{{ $p->meditation_frequency_label }}</span>
+                                        </div>
+                                        <div>
+                                            <span class="text-[10px] uppercase font-bold text-[var(--text-muted)] tracking-wider block">Diet</span>
+                                            <span class="font-semibold text-[var(--text-primary)] truncate block">{{ $p->dietary_label }}</span>
+                                        </div>
+                                        <div>
+                                            <span class="text-[10px] uppercase font-bold text-[var(--text-muted)] tracking-wider block">Family Rep</span>
+                                            <span class="font-semibold truncate block {{ $p->family_rep_required ? 'text-[var(--accent-primary)]' : 'text-[var(--text-secondary)]' }}">
+                                                {{ $p->family_rep_required ? 'Linked' : 'Independent' }}
+                                            </span>
+                                        </div>
                                     </div>
-                                    <p class="text-[11px] text-amber-200/95 font-medium truncate mt-0.5 drop-shadow-xs">
-                                        {{ $p->user->age }} yrs • {{ $p->height_cm ? round($p->height_cm / 30.48, 1) . ' ft • ' : '' }}{{ $p->city ?? 'Location flexible' }}, {{ $p->country ?? '' }}
-                                    </p>
                                 </div>
                             </div>
 
-                            <!-- Card Body: Structured 2x2 Specs Grid -->
-                            <div class="p-3.5 space-y-2.5">
-                                <div class="grid grid-cols-2 gap-2 text-[11px] bg-slate-50 dark:bg-slate-800/60 p-2.5 rounded-2xl border border-slate-100 dark:border-slate-800">
-                                    <div class="min-w-0">
-                                        <span class="text-slate-400 dark:text-slate-500 block text-[9px] uppercase font-bold tracking-wider">Tradition</span>
-                                        <span class="font-semibold text-slate-800 dark:text-slate-200 truncate block">{{ $p->tradition_label }}</span>
-                                    </div>
-                                    <div class="min-w-0">
-                                        <span class="text-slate-400 dark:text-slate-500 block text-[9px] uppercase font-bold tracking-wider">Meditation</span>
-                                        <span class="font-semibold text-slate-800 dark:text-slate-200 truncate block">{{ $p->meditation_frequency_label }}</span>
-                                    </div>
-                                    <div class="min-w-0">
-                                        <span class="text-slate-400 dark:text-slate-500 block text-[9px] uppercase font-bold tracking-wider">Diet</span>
-                                        <span class="font-semibold text-slate-800 dark:text-slate-200 truncate block">{{ $p->dietary_label }}</span>
-                                    </div>
-                                    <div class="min-w-0">
-                                        <span class="text-slate-400 dark:text-slate-500 block text-[9px] uppercase font-bold tracking-wider">Family Rep</span>
-                                        <span class="font-semibold truncate block {{ $p->family_rep_required ? 'text-primary-700 dark:text-primary-400' : 'text-slate-600 dark:text-slate-400' }}">
-                                            {{ $p->family_rep_required ? '🛡️ Linked' : 'Independent' }}
-                                        </span>
-                                    </div>
-                                </div>
+                            <!-- Primary & Secondary CTA Footer -->
+                            <div class="p-3.5 flex items-center gap-2">
+                                <a href="{{ route('discovery.show', $p->user_id) }}" class="btn-primary flex-1 text-center text-xs !py-2 block">
+                                    <span>View Profile</span>
+                                    <span class="text-[10px] ml-1">&rarr;</span>
+                                </a>
+                                @php $isBookmarkedGrid = in_array($p->user_id, $bookmarkedUserIds ?? [], true); @endphp
+                                <form action="{{ route('bookmarks.toggle', $p->user_id) }}" method="POST" class="inline">
+                                    @csrf
+                                    <button type="submit" title="{{ $isBookmarkedGrid ? 'Remove from shortlist' : 'Shortlist candidate for family review' }}"
+                                            class="btn-secondary !py-2 !px-2.5 text-xs {{ $isBookmarkedGrid ? 'text-[var(--accent-primary)] border-[var(--accent-primary)]' : '' }}">
+                                        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="{{ $isBookmarkedGrid ? 'currentColor' : 'none' }}" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                                    </button>
+                                </form>
                             </div>
+                        </article>
+                    @empty
+                        <div class="col-span-full py-12 text-center card-ledger bg-[var(--bg-surface)] border border-[var(--border-default)]">
+                            <p class="text-sm text-[var(--text-primary)] font-semibold">No candidates matched your filter criteria.</p>
+                            <p class="text-xs text-[var(--text-muted)] mt-1">Try widening your age range, tradition, or location filters.</p>
                         </div>
+                    @endforelse
+                </div>
 
-                        <div class="p-3.5 pt-0 flex items-center gap-2">
-                            <a href="{{ route('discovery.show', $p->user_id) }}" class="flex-1 text-center py-2.5 rounded-xl bg-slate-900 dark:bg-slate-800 hover:bg-primary-700 dark:hover:bg-primary-600 text-white text-xs font-bold transition shadow-xs hover:shadow-md flex items-center justify-center gap-1.5 cursor-pointer">
-                                <span>View Profile</span>
-                                <span class="text-[10px]">&rarr;</span>
-                            </a>
-                            @php $isBookmarkedGrid = in_array($p->user_id, $bookmarkedUserIds ?? [], true); @endphp
-                            <form action="{{ route('bookmarks.toggle', $p->user_id) }}" method="POST" class="inline">
-                                @csrf
-                                <button type="submit" title="{{ $isBookmarkedGrid ? 'Remove from shortlist' : 'Shortlist candidate for family review' }}"
-                                        class="p-2.5 rounded-xl border {{ $isBookmarkedGrid ? 'bg-amber-100 border-amber-300 text-amber-700 dark:bg-amber-950 dark:border-amber-700 dark:text-amber-300' : 'border-slate-200 dark:border-slate-700 text-slate-400 hover:text-amber-600 hover:bg-slate-50 dark:hover:bg-slate-800' }} transition cursor-pointer text-xs shadow-xs hover:border-amber-400">
-                                    ⭐
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                @empty
-                    <div class="col-span-full py-12 text-center bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800">
-                        <p class="text-base text-slate-600 dark:text-slate-300 font-semibold">No candidates matched your filter criteria.</p>
-                        <p class="text-xs text-slate-400 mt-1">Try widening your age range, tradition, or location filters.</p>
-                    </div>
-                @endforelse
-            </div>
+                <!-- Pagination -->
+                <div class="pt-4">
+                    {{ $profiles->links() }}
+                </div>
+            </main>
 
-            <!-- Pagination -->
-            <div class="pt-4">
-                {{ $profiles->links() }}
-            </div>
         </div>
 
     </div>
@@ -422,10 +468,10 @@
 
 <!-- Save Search Modal -->
 <div id="saveSearchModal" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
-    <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-md w-full p-6 shadow-2xl border border-slate-200 dark:border-slate-800">
-        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2 font-heading">Save Search Criteria</h3>
-        <p class="text-xs text-slate-500 dark:text-slate-400 mb-4">You will receive notifications whenever new candidates matching your current filters join Global Maitri (FR-3.3).</p>
-        <form action="{{ route('discovery.save-search') }}" method="POST">
+    <div class="card-ledger bg-[var(--bg-surface)] border border-[var(--border-default)] max-w-md w-full p-6 shadow-2xl">
+        <h3 class="text-base font-bold text-[var(--text-primary)] mb-1 font-heading">Save Search Criteria</h3>
+        <p class="text-xs text-[var(--text-secondary)] mb-4">You will receive notifications whenever new candidates matching your current filters join Global Maitri (FR-3.3).</p>
+        <form action="{{ route('discovery.save-search') }}" method="POST" class="space-y-4">
             @csrf
             <input type="hidden" name="country" value="{{ request('country') }}">
             <input type="hidden" name="age_min" value="{{ request('age_min') }}">
@@ -438,15 +484,15 @@
             <input type="hidden" name="marital_status" value="{{ request('marital_status') }}">
             <input type="hidden" name="family_rep_required" value="{{ request('family_rep_required') }}">
 
-            <div class="mb-4">
-                <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Search Title</label>
+            <div>
+                <label class="block text-xs font-bold text-[var(--text-primary)] mb-1">Search Title</label>
                 <input type="text" name="title" required placeholder="e.g. Practicing Theravada in Sri Lanka"
-                       class="w-full px-3 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-xs focus:ring-2 focus:ring-primary-500 outline-none">
+                       class="input-field text-xs w-full">
             </div>
 
-            <div class="flex items-center justify-end gap-2">
-                <button type="button" onclick="document.getElementById('saveSearchModal').classList.add('hidden')" class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">Cancel</button>
-                <button type="submit" class="px-4 py-2 rounded-xl text-xs font-bold bg-primary-700 text-white hover:bg-primary-800 shadow-xs cursor-pointer">Save Search</button>
+            <div class="flex items-center justify-end gap-2 pt-2">
+                <button type="button" onclick="document.getElementById('saveSearchModal').classList.add('hidden')" class="btn-secondary text-xs !py-1.5 !px-3.5">Cancel</button>
+                <button type="submit" class="btn-primary text-xs !py-1.5 !px-4">Save Search</button>
             </div>
         </form>
     </div>

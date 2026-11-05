@@ -17,9 +17,9 @@ class PublicLegalPagesAndFooterTest extends TestCase
 
         $response->assertStatus(200);
         $response->assertSee('Privacy Policy');
-        $response->assertSee('Default Photo Blur');
-        $response->assertSee('Guardian Transparency');
-        $response->assertSee('Right to Erasure');
+        $response->assertSee('Lotus Modesty Shield');
+        $response->assertSee('Family Rep Clarity');
+        $response->assertSee('Horoscope Privacy');
         $response->assertSee('Cookies &amp; Local Storage', false);
     }
 
@@ -29,8 +29,8 @@ class PublicLegalPagesAndFooterTest extends TestCase
 
         $response->assertStatus(200);
         $response->assertSee('Terms of Service');
-        $response->assertSee('Nikah Only');
-        $response->assertSee('Wali Respect');
+        $response->assertSee('Mangala Vivaha Only');
+        $response->assertSee('Family Rep Guidance');
         $response->assertSee('Single Pass Model');
     }
 
@@ -39,10 +39,10 @@ class PublicLegalPagesAndFooterTest extends TestCase
         $response = $this->get(route('about'));
 
         $response->assertStatus(200);
-        $response->assertSee('Our Sacred Mission');
+        $response->assertSee('Our Mindful Mission');
         $response->assertSee('Built for');
-        $response->assertSee('Surah Ar-Rum');
-        $response->assertSee('Wali Chaperoning');
+        $response->assertSee('Mangala Sutta');
+        $response->assertSee('Lotus Modesty');
     }
 
     public function test_contact_and_safety_page_loads_successfully(): void
@@ -51,8 +51,8 @@ class PublicLegalPagesAndFooterTest extends TestCase
 
         $response->assertStatus(200);
         $response->assertSee('Contact &amp; Safety', false);
-        $response->assertSee('support@globalnikkah.com');
-        $response->assertSee('safety@globalnikkah.com');
+        $response->assertSee('support@globalmaitri.com');
+        $response->assertSee('safety@globalmaitri.com');
     }
 
     public function test_unified_footer_is_visible_on_landing_page_with_dedicated_three_links(): void
@@ -60,7 +60,7 @@ class PublicLegalPagesAndFooterTest extends TestCase
         $response = $this->get(route('landing'));
 
         $response->assertStatus(200);
-        $response->assertSee('Global Nikkah');
+        $response->assertSee('Global Maitri');
         $response->assertSee(route('privacy'));
         $response->assertSee(route('terms'));
         $response->assertSee(route('about'));
@@ -80,17 +80,17 @@ class PublicLegalPagesAndFooterTest extends TestCase
 
         Profile::create([
             'user_id' => $user->id,
-            'city' => 'Dhaka',
-            'country' => 'Bangladesh',
-            'sect_madhhab' => 'Sunni - Hanafi',
-            'prayer_frequency' => '5x_daily',
+            'city' => 'Colombo',
+            'country' => 'Sri Lanka',
+            'buddhist_tradition' => 'Theravada',
+            'meditation_frequency' => 'daily',
             'completeness_percentage' => 85,
         ]);
 
         $response = $this->actingAs($user)->get(route('settings.index'));
 
         $response->assertStatus(200);
-        $response->assertSee('Global Nikkah');
+        $response->assertSee('Global Maitri');
         $response->assertSee(route('privacy'));
         $response->assertSee(route('terms'));
         $response->assertSee(route('about'));

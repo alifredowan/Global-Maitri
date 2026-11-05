@@ -1,27 +1,30 @@
 @extends('layouts.app')
 
-@section('title', 'Notifications - Global Nikkah')
+@section('title', 'Notifications - Global Maitri')
 
 @section('content')
-<div class="py-8 bg-slate-50 dark:bg-slate-950 min-h-screen">
+<div class="py-8 bg-[var(--bg-canvas)] min-h-screen transition-colors">
     <div class="max-w-4xl mx-auto px-4 sm:px-6">
         
         <!-- Header -->
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
             <div>
-                <h1 class="text-2xl font-bold font-heading text-slate-900 dark:text-white flex items-center gap-2">
-                    <span>🔔</span> Notifications
+                <h1 class="text-2xl font-bold font-heading text-[var(--text-primary)] flex items-center gap-2">
+                    <svg class="w-6 h-6 text-[var(--accent-primary)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
+                    </svg>
+                    Notifications
                 </h1>
-                <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">
-                    Stay updated with real-time interest requests, guardian updates, and halal chat messages.
+                <p class="text-xs text-[var(--text-secondary)] mt-1">
+                    Stay updated with real-time proposal requests, family representative updates, and mindful chat messages.
                 </p>
             </div>
 
             @if(Auth::user()->unreadNotifications->count() > 0)
                 <form action="{{ route('notifications.read-all') }}" method="POST">
                     @csrf
-                    <button type="submit" class="px-4 py-2 rounded-xl text-xs font-bold bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-200 hover:bg-emerald-50 dark:hover:bg-slate-800 hover:text-emerald-700 transition shadow-2xs">
-                        ✓ Mark All as Read
+                    <button type="submit" class="btn-secondary text-xs px-4 py-2 font-bold cursor-pointer">
+                        &check; Mark All as Read
                     </button>
                 </form>
             @endif
@@ -33,7 +36,6 @@
                 @php
                     $data = $n->data;
                     $isUnread = is_null($n->read_at);
-                    $icon = $data['icon'] ?? '🔔';
                     $type = $data['type'] ?? 'general';
                     $candidateUserId = $data['candidate_id'] ?? $data['sender_id'] ?? $data['recipient_id'] ?? null;
                     $candidateProfileUrl = $candidateUserId ? route('discovery.show', $candidateUserId) : null;
@@ -45,30 +47,34 @@
                     $interestStatus = $currentInterest ? $currentInterest->status : null;
                 @endphp
 
-                <div class="p-4 sm:p-5 rounded-2xl border transition duration-150 {{ $isUnread ? 'bg-white dark:bg-slate-900 border-emerald-300 dark:border-emerald-800/70 shadow-sm' : 'bg-white/70 dark:bg-slate-900/60 border-slate-200 dark:border-slate-800/80 opacity-90' }}">
+                <div class="p-4 sm:p-5 rounded-[4px] border transition {{ $isUnread ? 'bg-[var(--bg-surface)] border-[var(--accent-primary)] ring-1 ring-[var(--accent-primary)]/20 shadow-xs' : 'bg-[var(--bg-surface)]/80 border-[var(--border-default)]' }}">
                     <div class="flex items-start justify-between gap-3">
                         <div class="flex items-start gap-3.5 flex-1 min-w-0">
                             @if($candidateProfileUrl)
-                                <a href="{{ $candidateProfileUrl }}" class="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 flex items-center justify-center text-xl shrink-0 hover:scale-105 hover:ring-2 hover:ring-emerald-500/40 transition shadow-2xs cursor-pointer" title="View Candidate Profile">
-                                    {{ $icon }}
+                                <a href="{{ $candidateProfileUrl }}" class="w-10 h-10 rounded-[4px] bg-[var(--accent-primary)]/10 text-[var(--accent-primary)] flex items-center justify-center shrink-0 border border-[var(--accent-primary)]/20 transition cursor-pointer" title="View Candidate Profile">
+                                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                                    </svg>
                                 </a>
                             @else
-                                <div class="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-xl shrink-0">
-                                    {{ $icon }}
+                                <div class="w-10 h-10 rounded-[4px] bg-[var(--bg-subtle)] text-[var(--accent-primary)] flex items-center justify-center shrink-0 border border-[var(--border-default)]">
+                                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
+                                    </svg>
                                 </div>
                             @endif
                             <div class="flex-1 min-w-0">
                                 <div class="flex items-center gap-2 flex-wrap">
-                                    <h3 class="text-sm font-bold text-slate-900 dark:text-white">
+                                    <h3 class="text-sm font-bold text-[var(--text-primary)]">
                                         {{ $data['title'] ?? 'Notification' }}
                                     </h3>
                                     @if($isUnread)
-                                        <span class="inline-block w-2 h-2 rounded-full bg-emerald-500"></span>
+                                        <span class="inline-block w-2 h-2 rounded-full bg-[var(--accent-primary)]"></span>
                                     @endif
                                 </div>
-                                <p class="text-xs text-slate-600 dark:text-slate-300 mt-1 leading-relaxed">
+                                <p class="text-xs text-[var(--text-secondary)] mt-1 leading-relaxed">
                                     @if($type === 'interest_received' && !empty($data['sender_name']) && $candidateProfileUrl)
-                                        <a href="{{ $candidateProfileUrl }}" class="font-bold text-emerald-700 dark:text-emerald-400 hover:underline">
+                                        <a href="{{ $candidateProfileUrl }}" class="font-bold text-[var(--accent-primary)] hover:underline">
                                             {{ $data['sender_name'] }}
                                         </a>
                                         has sent you an expression of interest!
@@ -78,7 +84,7 @@
                                 </p>
 
                                 @if(!empty($data['note']))
-                                    <div class="mt-2 text-xs bg-slate-50 dark:bg-slate-800/60 p-2.5 rounded-xl border border-slate-200/80 dark:border-slate-700/60 text-slate-700 dark:text-slate-300 italic">
+                                    <div class="mt-2 text-xs bg-[var(--bg-subtle)] p-2.5 rounded-[4px] border border-[var(--border-default)] text-[var(--text-primary)] italic">
                                         &ldquo;{{ $data['note'] }}&rdquo;
                                     </div>
                                 @endif
@@ -86,23 +92,26 @@
                                 <!-- Action Buttons -->
                                 <div class="flex items-center gap-2.5 mt-3 flex-wrap">
                                     @if($candidateProfileUrl)
-                                        <a href="{{ $candidateProfileUrl }}" class="px-3.5 py-1.5 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 hover:bg-emerald-100 dark:hover:bg-emerald-900/60 text-emerald-800 dark:text-emerald-300 font-bold text-xs border border-emerald-300 dark:border-emerald-800 transition shadow-2xs flex items-center gap-1.5 cursor-pointer">
-                                            <span>👤</span> View Profile & Biodata
+                                        <a href="{{ $candidateProfileUrl }}" class="btn-secondary text-xs px-3.5 py-1.5 flex items-center gap-1.5 cursor-pointer">
+                                            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                                            </svg>
+                                            View Profile &amp; Biodata
                                         </a>
                                     @endif
 
                                     @if($type === 'interest_received' && !empty($data['interest_id']))
                                         @if($interestStatus === 'accepted')
-                                            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 text-xs font-bold border border-emerald-300 dark:border-emerald-800">
+                                            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-[4px] bg-[var(--bg-subtle)] text-[var(--color-success)] text-xs font-bold border border-[var(--color-success)]">
                                                 <span>✓</span> Interest Accepted
                                             </span>
                                             @if($currentInterest && $currentInterest->conversation)
-                                                <a href="{{ route('chat.show', $currentInterest->conversation->id) }}" class="text-xs font-bold text-emerald-700 dark:text-emerald-400 hover:underline inline-flex items-center gap-1">
-                                                    <span>💬 Open Messages &rarr;</span>
+                                                <a href="{{ route('chat.show', $currentInterest->conversation->id) }}" class="text-xs font-bold text-[var(--accent-primary)] hover:underline inline-flex items-center gap-1">
+                                                    <span>Open Messages &rarr;</span>
                                                 </a>
                                             @endif
                                         @elseif($interestStatus === 'declined')
-                                            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-xs font-semibold capitalize border border-slate-200 dark:border-slate-700">
+                                            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-[4px] bg-[var(--bg-subtle)] text-[var(--text-muted)] text-xs font-semibold capitalize border border-[var(--border-default)]">
                                                 <span>✕</span> Declined
                                             </span>
                                         @else
@@ -110,15 +119,15 @@
                                             <form action="{{ route('interests.respond', $data['interest_id']) }}" method="POST" class="inline">
                                                 @csrf
                                                 <input type="hidden" name="action" value="accept">
-                                                <button type="submit" class="px-3.5 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-2xs transition cursor-pointer">
-                                                    ✓ Accept Interest
+                                                <button type="submit" class="btn-primary text-xs px-3.5 py-1.5 font-bold cursor-pointer">
+                                                    &check; Accept Interest
                                                 </button>
                                             </form>
 
                                             <form action="{{ route('interests.respond', $data['interest_id']) }}" method="POST" class="inline">
                                                 @csrf
                                                 <input type="hidden" name="action" value="decline">
-                                                <button type="submit" class="px-3.5 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-bold text-xs transition border border-slate-200 dark:border-slate-700 cursor-pointer">
+                                                <button type="submit" class="btn-secondary text-xs px-3.5 py-1.5 font-bold cursor-pointer text-[var(--color-danger)]">
                                                     ✕ Decline
                                                 </button>
                                             </form>
@@ -126,7 +135,7 @@
                                     @endif
 
                                     @if(!empty($actionUrl) && $actionUrl !== $candidateProfileUrl)
-                                        <a href="{{ $actionUrl }}" class="text-xs font-bold text-emerald-700 dark:text-emerald-400 hover:underline">
+                                        <a href="{{ $actionUrl }}" class="text-xs font-bold text-[var(--accent-primary)] hover:underline">
                                             View Details &rarr;
                                         </a>
                                     @endif
@@ -134,7 +143,7 @@
                                     @if($isUnread)
                                         <form action="{{ route('notifications.read', $n->id) }}" method="POST" class="inline ml-auto">
                                             @csrf
-                                            <button type="submit" class="text-[11px] text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300 cursor-pointer">
+                                            <button type="submit" class="text-[11px] text-[var(--text-muted)] hover:text-[var(--text-primary)] cursor-pointer">
                                                 Mark as read
                                             </button>
                                         </form>
@@ -143,18 +152,20 @@
                             </div>
                         </div>
 
-                        <span class="text-[11px] text-slate-400 dark:text-slate-500 whitespace-nowrap shrink-0">
+                        <span class="text-[11px] text-[var(--text-muted)] whitespace-nowrap shrink-0">
                             {{ $n->created_at->diffForHumans() }}
                         </span>
                     </div>
                 </div>
             @empty
-                <div class="py-16 text-center bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-8 shadow-xs">
-                    <div class="w-14 h-14 mx-auto rounded-2xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-2xl mb-3">
-                        🔔
+                <div class="py-16 text-center card-ledger p-8">
+                    <div class="w-14 h-14 mx-auto rounded-[4px] bg-[var(--accent-primary)]/10 text-[var(--accent-primary)] flex items-center justify-center mb-3">
+                        <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
+                        </svg>
                     </div>
-                    <h3 class="text-base font-bold text-slate-900 dark:text-white mb-1">No notifications yet</h3>
-                    <p class="text-xs text-slate-500 dark:text-slate-400 max-w-sm mx-auto">
+                    <h3 class="text-base font-bold text-[var(--text-primary)] mb-1">No notifications yet</h3>
+                    <p class="text-xs text-[var(--text-secondary)] max-w-sm mx-auto">
                         When candidate seekers express interest, guardians approve requests, or new messages arrive, you will receive real-time notifications here.
                     </p>
                 </div>

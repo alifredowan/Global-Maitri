@@ -15,9 +15,9 @@ class MessageModerationTest extends TestCase
         $this->service = new MessageModerationService;
     }
 
-    public function test_it_passes_clean_halal_messages(): void
+    public function test_it_passes_clean_mindful_messages(): void
     {
-        $body = 'As-salamu alaykum. I appreciated reading your profile. How is your study of the Quran progressing?';
+        $body = 'Namaste. I appreciated reading your biodata. How is your Vipassana meditation practice progressing?';
         $result = $this->service->scan($body);
 
         $this->assertTrue($result['is_safe']);
@@ -39,7 +39,7 @@ class MessageModerationTest extends TestCase
 
     public function test_it_flags_and_hides_email_addresses(): void
     {
-        $body = 'You can email my family at brother.zayd@gmail.com anytime.';
+        $body = 'You can email my family at brother.rahula@gmail.com anytime.';
         $result = $this->service->scan($body);
 
         $this->assertFalse($result['is_safe']);
@@ -50,11 +50,22 @@ class MessageModerationTest extends TestCase
 
     public function test_it_flags_whatsapp_and_social_handles(): void
     {
-        $body = 'Add me on whatsapp or my insta @brother_zayd';
+        $body = 'Add me on whatsapp or my insta @brother_rahula';
         $result = $this->service->scan($body);
 
         $this->assertFalse($result['is_safe']);
         $this->assertTrue($result['is_flagged']);
         $this->assertStringContainsString('Social media', $result['flag_reason']);
+    }
+
+    public function test_it_flags_prohibited_dowry_demands(): void
+    {
+        $body = 'Our family expects 10 bhori gold and cash dowry before Mangala Vivaha.';
+        $result = $this->service->scan($body);
+
+        $this->assertFalse($result['is_safe']);
+        $this->assertTrue($result['is_flagged']);
+        $this->assertStringContainsString('Dowry', $result['flag_reason']);
+        $this->assertStringContainsString('[Prohibited Dowry Request Flagged]', $result['sanitized_body']);
     }
 }

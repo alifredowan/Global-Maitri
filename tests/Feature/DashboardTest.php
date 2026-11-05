@@ -34,9 +34,9 @@ class DashboardTest extends TestCase
         $response = $this->actingAs($user)->get(route('dashboard'));
 
         $response->assertOk()
-            ->assertSee('Your path to a blessed union, in one place.')
+            ->assertSee('Your path to a harmonious lifelong union, in one place.')
             ->assertSee('Complete your matrimonial profile')
-            ->assertSeeText('Trust & family')
+            ->assertSeeText('Trust & Family')
             ->assertSee('Profile setup')
             ->assertSee('Add a primary photo');
     }

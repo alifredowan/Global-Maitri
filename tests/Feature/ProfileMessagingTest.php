@@ -52,7 +52,7 @@ class ProfileMessagingTest extends TestCase
         $response->assertOk();
         $response->assertSee('Send Message');
         $response->assertSee(route('chat.show', $conversation->id));
-        $response->assertSee('Mutual Halal Interest Confirmed!');
+        $response->assertSee('Mutual Matrimonial Proposal Confirmed!');
     }
 
     public function test_chat_user_route_redirects_to_active_conversation(): void

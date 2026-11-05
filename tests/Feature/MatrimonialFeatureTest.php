@@ -21,7 +21,7 @@ class MatrimonialFeatureTest extends TestCase
         $response = $this->get('/');
         $response->assertStatus(200);
         $response->assertSee('Global');
-        $response->assertSee('Nikkah');
+        $response->assertSee('Maitri');
     }
 
     public function test_registration_rejects_under_18_candidates(): void
@@ -128,7 +128,7 @@ class MatrimonialFeatureTest extends TestCase
     {
         $bride = User::create([
             'name' => 'Test Bride',
-            'email' => 'photo.test@nikahconnect.test',
+            'email' => 'photo.test@maitriconnect.test',
             'password' => bcrypt('password'),
             'role' => 'seeker',
             'gender' => 'female',
