@@ -37,9 +37,15 @@
             @forelse($received as $interest)
                 <div class="card-ledger bg-[var(--bg-surface)] p-4 sm:p-5 border border-[var(--border-default)] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                     <div class="flex items-center gap-4">
-                        <a href="{{ route('discovery.show', $interest->sender_id) }}" class="w-12 h-12 rounded-[var(--radius-sm)] overflow-hidden bg-[var(--neutral-900)] shrink-0 border border-[var(--border-default)] block group cursor-pointer" title="View Candidate Profile">
+                        @php
+                            $isSenderPhotoVisible = $interest->sender->profile?->isPhotoVisibleTo(Auth::user()) ?? false;
+                        @endphp
+                        <a href="{{ route('discovery.show', $interest->sender_id) }}" class="w-12 h-12 rounded-[var(--radius-sm)] overflow-hidden bg-[var(--neutral-900)] shrink-0 border border-[var(--border-default)] block group cursor-pointer relative" title="View Candidate Profile">
                             @if($interest->sender->profile?->primaryPhoto)
-                                <img src="{{ $interest->sender->profile->primaryPhoto->displayUrl() }}" alt="{{ $interest->sender->name }}" class="w-full h-full object-cover photo-shield group-hover:scale-105 transition" loading="lazy" decoding="async">
+                                <img src="{{ $interest->sender->profile->primaryPhoto->displayUrl() }}" alt="{{ $interest->sender->name }}" class="w-full h-full object-cover {{ $isSenderPhotoVisible ? '' : 'photo-shield' }} group-hover:scale-105 transition" loading="lazy" decoding="async">
+                                @if(! $isSenderPhotoVisible)
+                                    <span class="absolute inset-0 flex items-center justify-center bg-black/50 text-[10px] text-white font-bold pointer-events-none" title="Photo Privacy Protected (FR-4.1)">🔒</span>
+                                @endif
                             @else
                                 <div class="w-full h-full flex items-center justify-center bg-[var(--bg-subtle)] text-[var(--accent-primary)] font-bold text-lg">
                                     {{ substr($interest->sender->name, 0, 1) }}
@@ -127,9 +133,15 @@
             @forelse($sent as $interest)
                 <div class="card-ledger bg-[var(--bg-surface)] p-4 sm:p-5 border border-[var(--border-default)] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                     <div class="flex items-center gap-4">
-                        <a href="{{ route('discovery.show', $interest->recipient_id) }}" class="w-12 h-12 rounded-[var(--radius-sm)] overflow-hidden bg-[var(--neutral-900)] shrink-0 border border-[var(--border-default)] block group cursor-pointer" title="View Candidate Profile">
+                        @php
+                            $isRecipientPhotoVisible = $interest->recipient->profile?->isPhotoVisibleTo(Auth::user()) ?? false;
+                        @endphp
+                        <a href="{{ route('discovery.show', $interest->recipient_id) }}" class="w-12 h-12 rounded-[var(--radius-sm)] overflow-hidden bg-[var(--neutral-900)] shrink-0 border border-[var(--border-default)] block group cursor-pointer relative" title="View Candidate Profile">
                             @if($interest->recipient->profile?->primaryPhoto)
-                                <img src="{{ $interest->recipient->profile->primaryPhoto->displayUrl() }}" alt="{{ $interest->recipient->name }}" class="w-full h-full object-cover photo-shield group-hover:scale-105 transition" loading="lazy" decoding="async">
+                                <img src="{{ $interest->recipient->profile->primaryPhoto->displayUrl() }}" alt="{{ $interest->recipient->name }}" class="w-full h-full object-cover {{ $isRecipientPhotoVisible ? '' : 'photo-shield' }} group-hover:scale-105 transition" loading="lazy" decoding="async">
+                                @if(! $isRecipientPhotoVisible)
+                                    <span class="absolute inset-0 flex items-center justify-center bg-black/50 text-[10px] text-white font-bold pointer-events-none" title="Photo Privacy Protected (FR-4.1)">🔒</span>
+                                @endif
                             @else
                                 <div class="w-full h-full flex items-center justify-center bg-[var(--bg-subtle)] text-[var(--accent-primary)] font-bold text-lg">
                                     {{ substr($interest->recipient->name, 0, 1) }}

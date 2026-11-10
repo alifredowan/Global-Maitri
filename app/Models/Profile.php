@@ -176,25 +176,58 @@ class Profile extends Model
             return true;
         }
 
+        // Linked Family Representative has access to ward's photos
+        $isWardPhoto = false;
+        $isWardAcceptedSuitor = false;
+
+        if ($viewer->isFamilyRep()) {
+            $isWardPhoto = WaliLink::where('wali_user_id', $viewer->id)
+                ->where('seeker_user_id', $this->user_id)
+                ->where('status', 'active')
+                ->exists();
+
+            if ($isWardPhoto) {
+                return true;
+            }
+
+            // Check if this candidate is an accepted suitor of any ward represented by viewer
+            $wardUserIds = WaliLink::where('wali_user_id', $viewer->id)
+                ->where('status', 'active')
+                ->pluck('seeker_user_id');
+
+            if ($wardUserIds->isNotEmpty()) {
+                $isWardAcceptedSuitor = Interest::where('status', 'accepted')
+                    ->whereIn('wali_approval_status', ['approved', 'not_required'])
+                    ->where(function ($q) use ($wardUserIds) {
+                        $q->where(function ($sub) use ($wardUserIds) {
+                            $sub->where('sender_id', $this->user_id)->whereIn('recipient_id', $wardUserIds);
+                        })->orWhere(function ($sub) use ($wardUserIds) {
+                            $sub->whereIn('sender_id', $wardUserIds)->where('recipient_id', $this->user_id);
+                        });
+                    })->exists();
+
+                if ($isWardAcceptedSuitor && $this->photo_privacy_mode !== 'request_only') {
+                    return true;
+                }
+            }
+        }
+
+        // If Guardian / Advisor only mode
+        if ($this->photo_privacy_mode === 'guardian_only') {
+            return $this->photoAccessGrants()
+                ->where('granted_to_user_id', $viewer->id)
+                ->where('status', 'active')
+                ->exists();
+        }
+
         // If user set photo privacy mode to public
         if ($this->photo_privacy_mode === 'public') {
             return true;
         }
 
-        // Linked Family Representative has access to ward's photos
-        if ($viewer->isFamilyRep()) {
-            $isWardsPhoto = WaliLink::where('wali_user_id', $viewer->id)
-                ->where('seeker_user_id', $this->user_id)
-                ->where('status', 'active')
-                ->exists();
-
-            if ($isWardsPhoto) {
-                return true;
-            }
-        }
-
-        // Check if mutual acceptance exists between users
+        // Check if mutual acceptance exists between users (and confirmed by Family Rep if required)
         $mutualInterest = Interest::where('status', 'accepted')
+            ->whereIn('wali_approval_status', ['approved', 'not_required'])
             ->where(function ($q) use ($viewer) {
                 $q->where(function ($sub) use ($viewer) {
                     $sub->where('sender_id', $this->user_id)->where('recipient_id', $viewer->id);

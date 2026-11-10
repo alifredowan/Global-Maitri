@@ -186,7 +186,7 @@
                                 Global<span class="text-[var(--accent-primary)]">Maitri</span>
                             </span>
                             <span class="text-[10px] font-bold uppercase tracking-wider text-[var(--accent-primary)] block -mt-0.5">
-                                {{ Auth::user()->isSuperAdmin() ? 'Super Admin' : (Auth::user()->isModerator() ? 'Staff' : (Auth::user()->isFamilyRep() ? 'Family Representative' : 'Candidate Seeker')) }}
+                                {{ Auth::user()->isSuperAdmin() ? 'Super Admin' : (Auth::user()->isModerator() ? 'Staff' : (Auth::user()->isMonkAdvisor() ? 'Monk / Sangha Advisor' : (Auth::user()->isFamilyRep() ? 'Family Representative' : 'Candidate Seeker'))) }}
                             </span>
                         </div>
                     </div>
@@ -245,6 +245,8 @@
                                         Super Admin
                                     @elseif(Auth::user()->isModerator())
                                         Staff Admin
+                                    @elseif(Auth::user()->isMonkAdvisor())
+                                        Monk / Sangha Advisor
                                     @elseif(Auth::user()->isFamilyRep())
                                         Family Representative
                                     @else
@@ -273,7 +275,7 @@
                                 <p class="text-[10px] text-slate-400 truncate">{{ Auth::user()->email }}</p>
                                 <span class="inline-flex items-center gap-1 text-[9px] font-bold text-[var(--accent-primary)] uppercase tracking-wider">
                                     <span class="w-1.5 h-1.5 rounded-full bg-[var(--accent-primary)]"></span>
-                                    {{ Auth::user()->isSuperAdmin() ? 'Super Admin' : (Auth::user()->isModerator() ? 'Staff' : (Auth::user()->isWali() ? 'Family Rep (Kalyāṇa-Mitta)' : 'Seeker')) }}
+                                    {{ Auth::user()->isSuperAdmin() ? 'Super Admin' : (Auth::user()->isModerator() ? 'Staff' : (Auth::user()->isMonkAdvisor() ? 'Monk / Sangha Advisor' : (Auth::user()->isWali() ? 'Family Rep (Kalyāṇa-Mitta)' : 'Seeker'))) }}
                                 </span>
                             </div>
                         </div>
@@ -551,21 +553,23 @@
                                     </div>
 
                                     <template x-for="item in notifications" :key="item.id">
-                                        <div class="p-3 sm:p-3.5 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition flex items-start gap-3"
+                                        <div @click="markAsRead(item.id, item.data.action_url || item.data.url)"
+                                             class="p-3 sm:p-3.5 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition flex items-start gap-3 cursor-pointer group"
                                              :class="{ 'bg-emerald-50/40 dark:bg-emerald-950/20': !item.read_at }">
-                                            <div class="w-8 h-8 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-base shrink-0"
+                                            <div class="w-8 h-8 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-base shrink-0 group-hover:scale-105 transition"
                                                  x-text="item.data.icon || '🔔'">
                                             </div>
                                             <div class="flex-1 min-w-0">
                                                 <div class="flex items-center justify-between gap-1">
-                                                    <h4 class="text-xs font-bold text-slate-900 dark:text-white truncate" x-text="item.data.title || 'Notification'"></h4>
+                                                    <h4 class="text-xs font-bold text-slate-900 dark:text-white truncate group-hover:text-[var(--accent-primary)] transition" x-text="item.data.title || 'Notification'"></h4>
                                                     <span class="text-[10px] text-slate-400 dark:text-slate-500 whitespace-nowrap" x-text="item.created_at"></span>
                                                 </div>
                                                 <p class="text-[11px] text-slate-600 dark:text-slate-300 mt-0.5 leading-snug line-clamp-2" x-text="item.data.message"></p>
-                                                <template x-if="item.data.action_url">
-                                                    <a :href="item.data.action_url" class="inline-block mt-1 text-[11px] font-bold text-emerald-600 dark:text-emerald-400 hover:underline">
-                                                        Open &rarr;
-                                                    </a>
+                                                <template x-if="item.data.action_url || item.data.url">
+                                                    <span class="inline-flex items-center gap-1 mt-1 text-[11px] font-bold text-[var(--accent-primary)] group-hover:underline">
+                                                        <span>View Details</span>
+                                                        <span>&rarr;</span>
+                                                    </span>
                                                 </template>
                                             </div>
                                         </div>
@@ -590,7 +594,7 @@
                                 </div>
                                 <div class="text-[10px] font-semibold text-emerald-600 dark:text-emerald-400 leading-tight flex items-center gap-1">
                                     <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-                                    {{ Auth::user()->isSuperAdmin() ? 'Super Admin' : (Auth::user()->isModerator() ? 'Staff Admin' : (Auth::user()->isWali() ? 'Family Rep (Kalyāṇa-Mitta)' : 'Seeker')) }}
+                                    {{ Auth::user()->isSuperAdmin() ? 'Super Admin' : (Auth::user()->isModerator() ? 'Staff Admin' : (Auth::user()->isMonkAdvisor() ? 'Monk / Sangha Advisor' : (Auth::user()->isWali() ? 'Family Rep (Kalyāṇa-Mitta)' : 'Seeker'))) }}
                                 </div>
                             </div>
                         </div>

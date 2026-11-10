@@ -183,8 +183,11 @@ class ChatController extends Controller
 
     public function sendMessage(Request $request, int $conversationId): RedirectResponse|JsonResponse
     {
+        $sanitizedInput = strip_tags(trim((string) $request->input('body', '')));
+        $request->merge(['body' => $sanitizedInput]);
+
         $request->validate([
-            'body' => ['required', 'string', 'max:2000'],
+            'body' => ['required', 'string', 'min:1', 'max:2000'],
         ]);
 
         $user = Auth::user();
@@ -271,7 +274,7 @@ class ChatController extends Controller
         }
 
         // Run through safety and contact scanning (FR-4.4, 6.5)
-        $scanResult = $this->moderationService->scan($request->body);
+        $scanResult = $this->moderationService->scan($sanitizedInput);
 
         $message = Message::create([
             'conversation_id' => $conversation->id,

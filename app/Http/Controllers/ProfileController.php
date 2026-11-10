@@ -137,7 +137,7 @@ class ProfileController extends Controller
             'horoscope_visibility' => ['nullable', 'string', 'in:matched_only,granted_only,hidden'],
 
             // Privacy & Preferences
-            'photo_privacy_mode' => ['nullable', 'string', 'in:public,blurred_until_accepted,request_only'],
+            'photo_privacy_mode' => ['nullable', 'string', 'in:public,blurred_until_accepted,request_only,guardian_only'],
             'family_rep_required' => ['nullable', 'boolean'],
             'partner_preferences' => ['nullable', 'array'],
             'field_visibility' => ['nullable', 'array'],
@@ -275,8 +275,8 @@ class ProfileController extends Controller
             ]);
         }
 
-        $docPath = $request->file('document')->store('verifications', 'local');
-        $selfiePath = $request->hasFile('selfie') ? $request->file('selfie')->store('verifications', 'local') : null;
+        $docPath = $request->file('document')->store('verifications', 'private');
+        $selfiePath = $request->hasFile('selfie') ? $request->file('selfie')->store('verifications', 'private') : null;
 
         VerificationRequest::create([
             'user_id' => $user->id,

@@ -80,7 +80,8 @@ class AdminController extends Controller
         $verification = VerificationRequest::findOrFail($id);
         $path = $type === 'document' ? $verification->document_path : $verification->selfie_path;
 
-        if (! $path || ! Storage::disk('local')->exists($path)) {
+        $disk = Storage::disk('private')->exists($path) ? 'private' : 'local';
+        if (! $path || ! Storage::disk($disk)->exists($path)) {
             abort(404);
         }
 
@@ -91,7 +92,7 @@ class AdminController extends Controller
         $extension = pathinfo($path, PATHINFO_EXTENSION) ?: 'bin';
 
         $response = response()->download(
-            Storage::disk('local')->path($path),
+            Storage::disk($disk)->path($path),
             "verification-{$id}-{$type}.{$extension}",
         );
         $response->headers->set('Cache-Control', 'private, no-store');

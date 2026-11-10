@@ -233,6 +233,7 @@
                             <option value="public" {{ old('photo_privacy_mode', $profile->photo_privacy_mode) === 'public' ? 'selected' : '' }}>Public (Visible to all verified members)</option>
                             <option value="blurred_until_accepted" {{ old('photo_privacy_mode', $profile->photo_privacy_mode ?? 'blurred_until_accepted') === 'blurred_until_accepted' ? 'selected' : '' }}>Lotus Blur (Blurred until interest/proposal is mutually accepted)</option>
                             <option value="request_only" {{ old('photo_privacy_mode', $profile->photo_privacy_mode) === 'request_only' ? 'selected' : '' }}>Request Only (Visible strictly upon explicit permission grant)</option>
+                            <option value="guardian_only" {{ old('photo_privacy_mode', $profile->photo_privacy_mode) === 'guardian_only' ? 'selected' : '' }}>Guardian &amp; Sangha Advisor Only (Visible solely to verified Family Reps &amp; Monastic Mentors)</option>
                         </select>
                     </div>
                 </div>

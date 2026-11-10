@@ -158,7 +158,7 @@ class DemoDataSeeder extends Seeder
             'preferred_living_arrangement' => 'independent',
             'views_on_raising_children_in_dhamma' => 'very_important',
             'horoscope_required' => false,
-            'photo_privacy_mode' => 'public',
+            'photo_privacy_mode' => 'blurred_until_accepted',
             'family_rep_required' => false,
             'completeness_percentage' => 95,
         ]);
@@ -167,7 +167,7 @@ class DemoDataSeeder extends Seeder
             'profile_id' => $groomProfile->id,
             'file_path' => 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&auto=format&fit=crop&q=80',
             'is_primary' => true,
-            'is_blurred' => false,
+            'is_blurred' => true,
             'moderation_status' => 'approved',
         ]);
 
@@ -403,14 +403,14 @@ class DemoDataSeeder extends Seeder
             'birth_place' => 'Kandy, Sri Lanka',
             'porondam_score' => 88,
             'horoscope_visibility' => 'matched_only',
-            'photo_privacy_mode' => 'public',
+            'photo_privacy_mode' => 'blurred_until_accepted',
             'completeness_percentage' => 100,
         ]);
         Photo::create([
             'profile_id' => $sriLankanProfile->id,
             'file_path' => 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&auto=format&fit=crop&q=80',
             'is_primary' => true,
-            'is_blurred' => false,
+            'is_blurred' => true,
             'moderation_status' => 'approved',
         ]);
 
@@ -492,14 +492,14 @@ class DemoDataSeeder extends Seeder
             'panca_sila_adherence' => 'very_strict',
             'dietary_preference' => 'vegetarian',
             'alcohol_intoxicants' => 'strictly_never',
-            'photo_privacy_mode' => 'public',
+            'photo_privacy_mode' => 'blurred_until_accepted',
             'completeness_percentage' => 95,
         ]);
         Photo::create([
             'profile_id' => $navayanaProfile->id,
             'file_path' => 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&auto=format&fit=crop&q=80',
             'is_primary' => true,
-            'is_blurred' => false,
+            'is_blurred' => true,
             'moderation_status' => 'approved',
         ]);
     }

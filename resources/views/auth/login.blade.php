@@ -12,7 +12,23 @@
                 <p class="text-xs text-[var(--text-secondary)]">Sign in to review matches, proposals, and mindful messages.</p>
             </div>
 
-            <form action="{{ route('login') }}" method="POST" class="space-y-4">
+            <form action="{{ route('login') }}" method="POST" class="space-y-4"
+                  x-data="{
+                      captchaQuestion: '{{ $captchaQuestion ?? '' }}',
+                      isRefreshing: false,
+                      refreshCaptcha() {
+                          this.isRefreshing = true;
+                          fetch('{{ route('captcha.refresh') }}')
+                              .then(r => r.json())
+                              .then(d => {
+                                  this.captchaQuestion = d.question;
+                                  this.isRefreshing = false;
+                              })
+                              .catch(() => {
+                                  this.isRefreshing = false;
+                              });
+                      }
+                  }">
                 @csrf
 
                 <div>
@@ -51,8 +67,40 @@
                 </div>
 
                 @if($turnstileEnabled)
-                    <div class="flex justify-center pt-1">
+                    <div class="flex flex-col items-center justify-center pt-1 space-y-1">
                         <div class="cf-turnstile" data-sitekey="{{ $turnstileSiteKey }}"></div>
+                        @error('cf-turnstile-response')
+                            <p class="text-[var(--color-danger)] text-xs font-medium">{{ $message }}</p>
+                        @enderror
+                    </div>
+                @else
+                    <div class="space-y-1.5 pt-1">
+                        <div class="flex items-center justify-between">
+                            <label class="block text-xs font-semibold text-[var(--text-secondary)]">
+                                Security Challenge (CAPTCHA) <span class="text-[var(--color-danger)]">*</span>
+                            </label>
+                            <span class="text-[10px] text-[var(--text-muted)]">Anti-bot verification</span>
+                        </div>
+                        <div class="flex items-center gap-2.5 p-2 rounded-[var(--radius-sm)] bg-[var(--bg-subtle)] border border-[var(--border-default)]">
+                            <div class="flex items-center gap-1.5 shrink-0">
+                                <span class="px-2.5 py-1 rounded-[var(--radius-xs)] bg-[var(--bg-surface)] border border-[var(--border-default)] font-mono font-bold text-sm text-[var(--accent-primary)] tracking-wider select-none shadow-2xs"
+                                      x-text="captchaQuestion">
+                                    {{ $captchaQuestion ?? 'Security Check' }}
+                                </span>
+                                <button type="button" @click="refreshCaptcha()"
+                                        :class="{ 'opacity-50 pointer-events-none': isRefreshing }"
+                                        class="text-[var(--text-muted)] hover:text-[var(--accent-primary)] transition p-1 cursor-pointer rounded"
+                                        title="Get a new challenge">
+                                    <svg class="w-4 h-4" :class="{ 'animate-spin': isRefreshing }" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                                </button>
+                            </div>
+                            <input type="number" name="captcha" required placeholder="Answer"
+                                   class="input-field text-xs w-full text-center font-bold tracking-wider"
+                                   autocomplete="off" inputmode="numeric">
+                        </div>
+                        @error('captcha')
+                            <p class="text-[var(--color-danger)] text-xs font-medium">{{ $message }}</p>
+                        @enderror
                     </div>
                 @endif
 

@@ -39,34 +39,48 @@
                     $type = $data['type'] ?? 'general';
                     $candidateUserId = $data['candidate_id'] ?? $data['sender_id'] ?? $data['recipient_id'] ?? null;
                     $candidateProfileUrl = $candidateUserId ? route('discovery.show', $candidateUserId) : null;
-                    $actionUrl = !empty($data['action_url']) ? $data['action_url'] : $candidateProfileUrl;
-                    if ($type === 'interest_received' && $candidateProfileUrl) {
-                        $actionUrl = $candidateProfileUrl;
+                    
+                    // Comprehensive resolution of target action URL
+                    $actionUrl = $data['action_url'] ?? $data['url'] ?? null;
+                    if (! $actionUrl) {
+                        if (! empty($data['marriage_id']) || str_contains($type, 'nikah_milestone')) {
+                            $actionUrl = route('marriages.celebration');
+                        } elseif ($type === 'interest_received' || ! empty($data['interest_id'])) {
+                            $actionUrl = $candidateProfileUrl ?: route('interests.index');
+                        } elseif (! empty($data['conversation_id'])) {
+                            $actionUrl = route('chat.show', $data['conversation_id']);
+                        } elseif ($candidateProfileUrl) {
+                            $actionUrl = $candidateProfileUrl;
+                        }
                     }
+
                     $currentInterest = !empty($data['interest_id']) && isset($interests[$data['interest_id']]) ? $interests[$data['interest_id']] : null;
                     $interestStatus = $currentInterest ? $currentInterest->status : null;
                 @endphp
 
-                <div class="p-4 sm:p-5 rounded-[4px] border transition {{ $isUnread ? 'bg-[var(--bg-surface)] border-[var(--accent-primary)] ring-1 ring-[var(--accent-primary)]/20 shadow-xs' : 'bg-[var(--bg-surface)]/80 border-[var(--border-default)]' }}">
+                <div class="p-4 sm:p-5 rounded-[4px] border transition {{ $isUnread ? 'bg-[var(--bg-surface)] border-[var(--accent-primary)] ring-1 ring-[var(--accent-primary)]/20 shadow-xs' : 'bg-[var(--bg-surface)]/80 border-[var(--border-default)]' }} {{ $actionUrl ? 'cursor-pointer hover:border-[var(--accent-primary)]/70 hover:shadow-sm' : '' }}"
+                     @if($actionUrl) onclick="if(!event.target.closest('a, button, form, input')) { window.location.href = '{{ $actionUrl }}'; }" @endif>
                     <div class="flex items-start justify-between gap-3">
                         <div class="flex items-start gap-3.5 flex-1 min-w-0">
-                            @if($candidateProfileUrl)
-                                <a href="{{ $candidateProfileUrl }}" class="w-10 h-10 rounded-[4px] bg-[var(--accent-primary)]/10 text-[var(--accent-primary)] flex items-center justify-center shrink-0 border border-[var(--accent-primary)]/20 transition cursor-pointer" title="View Candidate Profile">
-                                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
-                                    </svg>
+                            @if($actionUrl || $candidateProfileUrl)
+                                <a href="{{ $actionUrl ?: $candidateProfileUrl }}" class="w-10 h-10 rounded-[4px] bg-[var(--accent-primary)]/10 text-[var(--accent-primary)] flex items-center justify-center shrink-0 border border-[var(--accent-primary)]/20 transition hover:scale-105 cursor-pointer" title="Open details">
+                                    <span class="text-lg">{{ $data['icon'] ?? '🔔' }}</span>
                                 </a>
                             @else
                                 <div class="w-10 h-10 rounded-[4px] bg-[var(--bg-subtle)] text-[var(--accent-primary)] flex items-center justify-center shrink-0 border border-[var(--border-default)]">
-                                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
-                                    </svg>
+                                    <span class="text-lg">{{ $data['icon'] ?? '🔔' }}</span>
                                 </div>
                             @endif
                             <div class="flex-1 min-w-0">
                                 <div class="flex items-center gap-2 flex-wrap">
                                     <h3 class="text-sm font-bold text-[var(--text-primary)]">
-                                        {{ $data['title'] ?? 'Notification' }}
+                                        @if($actionUrl)
+                                            <a href="{{ $actionUrl }}" class="hover:text-[var(--accent-primary)] hover:underline transition">
+                                                {{ $data['title'] ?? 'Notification' }}
+                                            </a>
+                                        @else
+                                            {{ $data['title'] ?? 'Notification' }}
+                                        @endif
                                     </h3>
                                     @if($isUnread)
                                         <span class="inline-block w-2 h-2 rounded-full bg-[var(--accent-primary)]"></span>
@@ -91,7 +105,14 @@
 
                                 <!-- Action Buttons -->
                                 <div class="flex items-center gap-2.5 mt-3 flex-wrap">
-                                    @if($candidateProfileUrl)
+                                    @if(str_contains($type, 'nikah_milestone') || !empty($data['marriage_id']))
+                                        <a href="{{ route('marriages.celebration') }}" class="btn-primary text-xs px-3.5 py-1.5 font-bold inline-flex items-center gap-1.5 cursor-pointer shadow-xs">
+                                            <span>💍 Open Mangala Vivaha Details</span>
+                                            <span>&rarr;</span>
+                                        </a>
+                                    @endif
+
+                                    @if($candidateProfileUrl && !str_contains($type, 'nikah_milestone'))
                                         <a href="{{ $candidateProfileUrl }}" class="btn-secondary text-xs px-3.5 py-1.5 flex items-center gap-1.5 cursor-pointer">
                                             <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
@@ -134,9 +155,10 @@
                                         @endif
                                     @endif
 
-                                    @if(!empty($actionUrl) && $actionUrl !== $candidateProfileUrl)
-                                        <a href="{{ $actionUrl }}" class="text-xs font-bold text-[var(--accent-primary)] hover:underline">
-                                            View Details &rarr;
+                                    @if(!empty($actionUrl) && $actionUrl !== $candidateProfileUrl && !str_contains($type, 'nikah_milestone'))
+                                        <a href="{{ $actionUrl }}" class="btn-secondary text-xs px-3.5 py-1.5 font-bold text-[var(--accent-primary)] hover:underline inline-flex items-center gap-1">
+                                            <span>View Details</span>
+                                            <span>&rarr;</span>
                                         </a>
                                     @endif
 
@@ -153,6 +175,10 @@
                         </div>
 
                         <span class="text-[11px] text-[var(--text-muted)] whitespace-nowrap shrink-0">
+                            {{ $n->created_at->diffForHumans() }}
+                        </span>
+                    </div>
+                </div>
                             {{ $n->created_at->diffForHumans() }}
                         </span>
                     </div>

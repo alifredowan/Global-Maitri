@@ -33,6 +33,10 @@ class PhotoController extends Controller
 
         $isAuthorized = $photo->profile?->isPhotoVisibleTo($viewer);
 
+        if ($photo->is_private && ! ($viewer && ($viewer->id === $photoOwner?->id || $viewer->isAdmin() || $viewer->isModerator() || $photo->profile?->photoAccessGrants()->where('granted_to_user_id', $viewer->id)->where('status', 'active')->exists()))) {
+            $isAuthorized = false;
+        }
+
         if ($isAuthorized) {
             return $this->serveOriginal($photo);
         }
@@ -142,7 +146,7 @@ class PhotoController extends Controller
 
     protected function serveSvgSilhouette(Photo $photo): Response
     {
-        $label = 'Photo Privacy Protected (FR-4.1)';
+        $label = 'Lotus Privacy Shield Active (Global Maitri)';
 
         $svg = <<<SVG
 <svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400">

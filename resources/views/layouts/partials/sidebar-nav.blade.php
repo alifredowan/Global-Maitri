@@ -224,14 +224,14 @@
     @if($isSuperAdmin || (!$isAdminOrStaff && ($user->isFamilyRep() || $user->waliLinksAsWali()->exists())))
         <div>
             <div class="px-3 mb-2 text-[10px] font-bold uppercase tracking-wider text-[var(--accent-primary)] dark:text-[#f0c550] flex items-center justify-between">
-                <span>Family Console</span>
+                <span>{{ $user->isMonkAdvisor() ? 'Advisor & Sangha Console' : 'Family Console' }}</span>
                 <span class="text-[9px] font-bold px-1.5 py-0.5 rounded-[var(--radius-xs)] bg-[var(--accent-subtle)] text-[var(--accent-text)] dark:bg-[#2b2310] dark:text-[#f0c550]">FREE</span>
             </div>
             <div class="space-y-0.5">
                 <a href="{{ route('family.dashboard') }}"
                    class="flex items-center gap-3 px-3 py-2 rounded-[var(--radius-sm)] text-xs transition {{ request()->routeIs('family.dashboard') || request()->routeIs('wali.dashboard') ? 'bg-[#26241c] text-[#f0c550] border-l-2 border-[var(--accent-primary)] font-semibold' : 'text-slate-300 hover:bg-slate-800/60 hover:text-white font-medium' }}">
                     <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
-                    <span class="flex-1">Family Dashboard</span>
+                    <span class="flex-1">{{ $user->isMonkAdvisor() ? 'Advisor Dashboard' : 'Family Dashboard' }}</span>
                 </a>
 
                 <a href="{{ route('family.link') }}"

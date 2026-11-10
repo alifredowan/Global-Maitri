@@ -9,6 +9,7 @@ use App\Models\Profile;
 use App\Models\Subscription;
 use App\Models\SubscriptionPlan;
 use App\Models\User;
+use App\Models\WaliLink;
 use App\Notifications\NikahMilestoneNotification;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Notification;
@@ -269,5 +270,56 @@ class MarriageMilestoneTest extends TestCase
         $this->assertEquals('never_married', $bride->fresh()->marital_status);
 
         Notification::assertSentTo($groom, NikahMilestoneNotification::class);
+    }
+
+    public function test_certificate_access_is_restricted_to_couple_and_authorized_family(): void
+    {
+        $groom = $this->createSeeker('male', 'married');
+        $bride = $this->createSeeker('female', 'married');
+        $stranger = $this->createSeeker('male');
+
+        $familyRep = User::factory()->create([
+            'role' => 'family_rep',
+            'email' => 'family.guardian@example.com',
+            'is_verified' => true,
+        ]);
+
+        WaliLink::create([
+            'seeker_user_id' => $bride->id,
+            'wali_user_id' => $familyRep->id,
+            'relationship_type' => 'mother',
+            'permission_level' => 'full_involvement',
+            'status' => 'active',
+            'invite_token' => 'cert-auth-token',
+        ]);
+
+        $marriage = Marriage::create([
+            'groom_id' => $groom->id,
+            'bride_id' => $bride->id,
+            'initiated_by_user_id' => $groom->id,
+            'status' => 'confirmed',
+            'confirmed_at' => now(),
+            'marriage_date' => now()->toDateString(),
+        ]);
+
+        // Groom can view
+        $this->actingAs($groom)->get(route('marriages.certificate', $marriage->id))
+            ->assertOk()
+            ->assertSee('Mangala Vivaha Blessing Certificate');
+
+        // Bride can view
+        $this->actingAs($bride)->get(route('marriages.certificate', $marriage->id))
+            ->assertOk()
+            ->assertSee('Mangala Vivaha Blessing Certificate');
+
+        // Family Rep can view
+        $this->actingAs($familyRep)->get(route('marriages.certificate', $marriage->id))
+            ->assertOk()
+            ->assertSee('Mangala Vivaha Blessing Certificate');
+
+        // Unauthorized stranger is rejected
+        $this->actingAs($stranger)->get(route('marriages.certificate', $marriage->id))
+            ->assertRedirect(route('dashboard'))
+            ->assertSessionHas('error', 'Unauthorized access to marriage certificate.');
     }
 }

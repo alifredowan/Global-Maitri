@@ -15,17 +15,19 @@
                         <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
                         </svg>
-                        <span>Family Representative &amp; Kalyāṇa-Mitta Console</span>
+                        <span>{{ Auth::user()->isMonkAdvisor() ? 'Monk & Dhamma Advisor Console' : 'Family Representative & Kalyāṇa-Mitta Console' }}</span>
                     </div>
                     <h1 class="font-heading font-extrabold text-2xl sm:text-3xl text-white">
-                        Family Oversight &amp; Kalyāṇa-Mitta Guidance Center
+                        {{ Auth::user()->isMonkAdvisor() ? 'Sangha & Elder Advisor Guidance Center' : 'Family Oversight & Kalyāṇa-Mitta Guidance Center' }}
                     </h1>
                     <p class="text-xs text-[#d6d2c8] mt-1.5 max-w-2xl leading-relaxed">
-                        Mindful Buddhist matrimonial facilitation empowering trusted parents, elders, and spiritual mentors (Kalyāṇa-Mitta) to review suitor proposals, offer moral counsel, and foster harmonious lifelong companionship.
+                        {{ Auth::user()->isMonkAdvisor() 
+                            ? 'Monastic and elder advisory console providing spiritual blessings (Paritta), moral counsel, and harmonious Dhamma facilitation for prospective couples and their families.' 
+                            : 'Mindful Buddhist matrimonial facilitation empowering trusted parents, elders, and spiritual mentors (Kalyāṇa-Mitta) to review suitor proposals, offer moral counsel, and foster harmonious lifelong companionship.' }}
                     </p>
                 </div>
                 <span class="px-3.5 py-1.5 rounded-[4px] text-xs font-bold bg-[var(--accent-primary)]/20 text-[#e0b84c] border border-[var(--accent-primary)]/40 self-start md:self-center shrink-0">
-                    &check; Kalyāṇa-Mitta Oversight Active
+                    &check; {{ Auth::user()->isMonkAdvisor() ? 'Dhamma Advisor Active' : 'Kalyāṇa-Mitta Oversight Active' }}
                 </span>
             </div>
         </div>
@@ -62,8 +64,14 @@
                 <div class="card-ledger p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
                     <div class="flex items-center gap-4">
                         <div class="w-16 h-16 rounded-[4px] bg-[#141412] overflow-hidden shrink-0 border border-[var(--border-default)] relative">
+                            @php
+                                $isSenderPhotoVisible = $pi->sender->profile?->isPhotoVisibleTo(Auth::user()) ?? false;
+                            @endphp
                             @if($pi->sender->profile?->primaryPhoto)
-                                <img src="{{ $pi->sender->profile->primaryPhoto->displayUrl() }}" alt="{{ $pi->sender->name }}" class="w-full h-full object-cover" loading="lazy" decoding="async">
+                                <img src="{{ $pi->sender->profile->primaryPhoto->displayUrl() }}" alt="{{ $pi->sender->name }}" class="w-full h-full object-cover {{ $isSenderPhotoVisible ? '' : 'photo-shield' }}" loading="lazy" decoding="async">
+                                @if(! $isSenderPhotoVisible)
+                                    <span class="absolute inset-0 flex items-center justify-center bg-black/50 text-[9px] text-white font-bold pointer-events-none" title="Photo Privacy Protected (FR-4.1)">🔒 Protected</span>
+                                @endif
                             @else
                                 <div class="w-full h-full flex items-center justify-center bg-[#22211c] text-[#e0b84c] font-bold text-2xl">
                                     {{ substr($pi->sender->name, 0, 1) }}

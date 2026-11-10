@@ -52,7 +52,7 @@ class PaymentWebhookController extends Controller
                 $userId = $metadata['user_id'] ?? null;
                 $plan = $metadata['plan'] ?? null;
                 $cycle = $metadata['billing_cycle'] ?? 'one_time_marriage';
-                $promo = $metadata['promo_code'] ?: null;
+                $promo = $metadata['promo_code'] ?? null;
                 $amountTotal = isset($session['amount_total']) ? ((float) $session['amount_total']) / 100 : 0.0;
 
                 $user = $userId ? User::find($userId) : null;

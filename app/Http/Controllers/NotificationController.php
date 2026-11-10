@@ -33,6 +33,23 @@ class NotificationController extends Controller
                     $itemData['interest_status'] = $interests[$itemData['interest_id']]->status;
                 }
 
+                $targetUrl = $itemData['action_url'] ?? $itemData['url'] ?? null;
+                if (! $targetUrl) {
+                    if (! empty($itemData['marriage_id'])) {
+                        $targetUrl = route('marriages.celebration');
+                    } elseif (! empty($itemData['conversation_id'])) {
+                        $targetUrl = route('chat.show', $itemData['conversation_id']);
+                    } elseif (! empty($itemData['interest_id'])) {
+                        $targetUrl = route('interests.index');
+                    } elseif (! empty($itemData['sender_id'])) {
+                        $targetUrl = route('discovery.show', $itemData['sender_id']);
+                    } elseif (! empty($itemData['candidate_id'])) {
+                        $targetUrl = route('discovery.show', $itemData['candidate_id']);
+                    }
+                }
+                $itemData['action_url'] = $targetUrl;
+                $itemData['url'] = $targetUrl;
+
                 return [
                     'id' => $n->id,
                     'data' => $itemData,

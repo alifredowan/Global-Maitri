@@ -9,10 +9,12 @@ use App\Models\Subscription;
 use App\Models\User;
 use App\Rules\Turnstile;
 use App\Services\AccountDeletionService;
+use App\Services\CaptchaService;
 use App\Services\TurnstileService;
 use App\Services\WaliWorkflowService;
 use Carbon\Carbon;
 use Illuminate\Auth\Events\PasswordReset;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -151,31 +153,44 @@ class AuthController extends Controller
                 ->with('success', 'May you be happy and well! Your Global Maitri account has been registered. Please check your email inbox to verify and activate your profile.');
         }
 
-        // Family Representative Registration
+        // Family Representative / Kalyāṇa-Mitta Registration
         AuditLog::record($user->id, 'family_rep_registered', 'User', $user->id, ['role' => $role, 'email' => $user->email]);
-
-        return redirect()->route('verification.notice')
-            ->with('registered_email', $user->email)
-            ->with('success', 'May you be happy and well! Your Family Representative account has been created. Please check your inbox to activate your account.');
 
         app(WaliWorkflowService::class)->autoLinkWaliUser($user);
 
-        // Wali must approve email verification first before accessing the platform
         return redirect()->route('verification.notice')
             ->with('registered_email', $user->email)
-            ->with('success', 'Assalamu Alaikum! Your Guardian account has been registered. Please check your email inbox and click the verification link to activate your account.');
+            ->with('success', 'May you be happy and well! Your Family Representative & Kalyāṇa-Mitta account has been created. Please check your inbox to activate your account.');
     }
 
-    public function showLogin(TurnstileService $turnstileService): View
+    public function showLogin(TurnstileService $turnstileService, CaptchaService $captchaService): View
     {
+        $captcha = $captchaService->generate();
+
         return view('auth.login', [
             'turnstileEnabled' => $turnstileService->isEnabled(),
             'turnstileSiteKey' => $turnstileService->getSiteKey(),
+            'captchaQuestion' => $captcha['question'],
         ]);
     }
 
-    public function login(Request $request): RedirectResponse
+    public function refreshCaptcha(CaptchaService $captchaService): JsonResponse
     {
+        return response()->json($captchaService->generate());
+    }
+
+    public function login(Request $request, TurnstileService $turnstileService, CaptchaService $captchaService): RedirectResponse
+    {
+        if (! $turnstileService->isEnabled()) {
+            if (! $captchaService->verify($request->input('captcha'))) {
+                $captchaService->generate();
+
+                return back()->withErrors([
+                    'captcha' => 'The security CAPTCHA answer is incorrect. Please try again.',
+                ])->withInput($request->except('password', 'captcha'));
+            }
+        }
+
         $normalizedEmail = strtolower(trim((string) $request->input('email')));
         $request->merge(['email' => $normalizedEmail]);
 
@@ -188,6 +203,8 @@ class AuthController extends Controller
         $credentials['email'] = $normalizedEmail;
 
         if (Auth::attempt($credentials, $request->boolean('remember'))) {
+            $captchaService->clear();
+
             $user = Auth::user();
 
             if (! $user->hasVerifiedEmail()) {
@@ -223,6 +240,8 @@ class AuthController extends Controller
 
             return redirect()->intended(route('dashboard'));
         }
+
+        $captchaService->generate();
 
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',

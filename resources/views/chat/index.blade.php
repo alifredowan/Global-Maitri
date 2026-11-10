@@ -28,7 +28,7 @@
                     <div class="flex items-center gap-3.5">
                         <div class="w-12 h-12 rounded-[var(--radius-sm)] bg-[var(--neutral-900)] overflow-hidden shrink-0 border border-[var(--border-default)]">
                             @if($other?->profile?->primaryPhoto)
-                                <img src="{{ $other->profile->primaryPhoto->displayUrl() }}" alt="{{ $other->name }}" class="w-full h-full object-cover photo-shield" loading="lazy" decoding="async">
+                                <img src="{{ $other->profile->primaryPhoto->displayUrl() }}" alt="{{ $other->name }}" class="w-full h-full object-cover {{ ($other->profile->isPhotoVisibleTo(Auth::user())) ? '' : 'photo-shield' }}" loading="lazy" decoding="async">
                             @else
                                 <div class="w-full h-full flex items-center justify-center bg-[var(--bg-subtle)] text-[var(--accent-primary)] font-bold text-lg">
                                     {{ substr($other?->name ?? 'User', 0, 1) }}

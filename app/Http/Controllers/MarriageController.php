@@ -16,10 +16,30 @@ class MarriageController extends Controller
         protected MarriageCompletionService $marriageService
     ) {}
 
-    public function celebration(): View|RedirectResponse
+    public function celebration(Request $request): View|RedirectResponse
     {
         $user = Auth::user();
         $marriage = $user->activeMarriage() ?? $user->pendingMarriage();
+
+        $requestedId = $request->query('marriage_id') ?? $request->query('id');
+        if ($requestedId) {
+            $m = Marriage::with(['groom.profile', 'bride.profile', 'initiator'])->find($requestedId);
+            if ($m && ($m->groom_id === $user->id || $m->bride_id === $user->id || $user->isAdmin())) {
+                $marriage = $m;
+            }
+        }
+
+        // Support Family Representative viewing their ward's Mangala Vivaha milestone
+        if (! $marriage && $user->isFamilyRep()) {
+            $wardIds = $user->waliLinksAsWali()->where('status', 'active')->pluck('seeker_user_id');
+            $marriage = Marriage::with(['groom.profile', 'bride.profile', 'initiator'])
+                ->where(function ($q) use ($wardIds) {
+                    $q->whereIn('groom_id', $wardIds)->orWhereIn('bride_id', $wardIds);
+                })
+                ->whereIn('status', ['confirmed', 'pending_confirmation'])
+                ->latest()
+                ->first();
+        }
 
         if (! $marriage) {
             return redirect()->route('profile.show')
@@ -39,8 +59,18 @@ class MarriageController extends Controller
         $marriage = Marriage::with(['groom.profile', 'bride.profile'])->findOrFail($id);
 
         $isCouple = ($user->id === $marriage->groom_id || $user->id === $marriage->bride_id);
-        $isFamily = $marriage->groom?->waliLinksAsSeeker()->where('wali_user_id', $user->id)->exists()
-            || $marriage->bride?->waliLinksAsSeeker()->where('wali_user_id', $user->id)->exists();
+        $isFamily = $marriage->groom?->waliLinksAsSeeker()
+            ->where(function ($q) use ($user) {
+                $q->where('wali_user_id', $user->id)->orWhere('wali_email', $user->email);
+            })
+            ->where('status', 'active')
+            ->exists()
+            || $marriage->bride?->waliLinksAsSeeker()
+                ->where(function ($q) use ($user) {
+                    $q->where('wali_user_id', $user->id)->orWhere('wali_email', $user->email);
+                })
+                ->where('status', 'active')
+                ->exists();
 
         if (! $isCouple && ! $isFamily && ! $user->isAdmin()) {
             return redirect()->route('dashboard')->with('error', 'Unauthorized access to marriage certificate.');

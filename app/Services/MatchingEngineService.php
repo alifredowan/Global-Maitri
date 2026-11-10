@@ -218,6 +218,14 @@ class MatchingEngineService
             ];
         }
 
+        if ($p1->horoscope_required && $p2->horoscope_required) {
+            $highlights[] = [
+                'icon' => '✨',
+                'label' => 'Horoscope & Porondam',
+                'detail' => 'Both candidates value traditional Porondam astrological matching.',
+            ];
+        }
+
         return array_slice($highlights, 0, 4);
     }
 
@@ -230,6 +238,7 @@ class MatchingEngineService
         if (! $profile) {
             return collect();
         }
+        $profile->setRelation('user', $user);
 
         $targetGender = $user->gender === 'male' ? 'female' : ($user->gender === 'female' ? 'male' : null);
         if (! $targetGender) {
@@ -252,7 +261,7 @@ class MatchingEngineService
                     ->where('gender', $targetGender);
             });
 
-        $candidates = $query->get();
+        $candidates = $query->latest('profiles.updated_at')->limit(60)->get();
 
         return $candidates->map(function (Profile $candidate) use ($profile) {
             $candidate->compatibility_score = $this->computeCompatibility($profile, $candidate);

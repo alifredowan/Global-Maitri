@@ -41,6 +41,7 @@ class NikahMilestoneNotification extends Notification implements ShouldBroadcast
     public function toMail(object $notifiable): MailMessage
     {
         $initiator = $this->marriage->initiator;
+        $spouse = $this->marriage->spouseOf($notifiable) ?? ($notifiable->id === $this->marriage->groom_id ? $this->marriage->bride : $this->marriage->groom);
         $url = route('marriages.celebration');
 
         if ($this->event === 'confirmed') {
@@ -52,6 +53,18 @@ class NikahMilestoneNotification extends Notification implements ShouldBroadcast
                 ->action('View Celebration & Blessing Certificate', $url)
                 ->line('Your Single Marriage Pass has successfully concluded. Anumodana for honoring us to be a part of your auspicious journey.')
                 ->salutation('With warmest Metta, The Global Maitri Team');
+        }
+
+        if ($this->event === 'declaration_submitted') {
+            $spouseName = $spouse?->name ?? 'your partner';
+
+            return (new MailMessage)
+                ->subject('Mangala Vivaha Milestone Declared - Awaiting Confirmation - Global Maitri')
+                ->greeting("Namaste, {$notifiable->name}!")
+                ->line("Your Mangala Vivaha declaration with **{$spouseName}** has been successfully recorded.")
+                ->line('Your milestone has been routed to your spouse and family representative for mutual confirmation.')
+                ->action('View Mangala Vivaha Details', $url)
+                ->salutation('Warm regards, The Global Maitri Team');
         }
 
         return (new MailMessage)
@@ -72,6 +85,8 @@ class NikahMilestoneNotification extends Notification implements ShouldBroadcast
     public function toArray(object $notifiable): array
     {
         $initiator = $this->marriage->initiator;
+        $spouse = $this->marriage->spouseOf($notifiable) ?? ($notifiable->id === $this->marriage->groom_id ? $this->marriage->bride : $this->marriage->groom);
+        $celebrationUrl = route('marriages.celebration');
 
         if ($this->event === 'initiated') {
             return [
@@ -79,8 +94,27 @@ class NikahMilestoneNotification extends Notification implements ShouldBroadcast
                 'title' => '💍 Mangala Vivaha Declared',
                 'message' => "{$initiator->name} has declared that you have solemnized your Mangala Vivaha! Please review and confirm this auspicious milestone.",
                 'marriage_id' => $this->marriage->id,
+                'initiator_id' => $initiator->id,
+                'initiator_name' => $initiator->name,
                 'icon' => '💍',
-                'url' => route('marriages.celebration'),
+                'action_url' => $celebrationUrl,
+                'url' => $celebrationUrl,
+            ];
+        }
+
+        if ($this->event === 'declaration_submitted') {
+            $spouseName = $spouse?->name ?? 'your partner';
+
+            return [
+                'type' => 'nikah_milestone_submitted',
+                'title' => '💍 Mangala Vivaha Declared',
+                'message' => "Your Mangala Vivaha declaration with {$spouseName} has been submitted and is awaiting confirmation.",
+                'marriage_id' => $this->marriage->id,
+                'spouse_id' => $spouse?->id,
+                'spouse_name' => $spouseName,
+                'icon' => '💍',
+                'action_url' => $celebrationUrl,
+                'url' => $celebrationUrl,
             ];
         }
 
@@ -91,7 +125,8 @@ class NikahMilestoneNotification extends Notification implements ShouldBroadcast
                 'message' => 'Sadhu! Your Mangala Vivaha milestone is confirmed. May the Triple Gem bless your union with peace and harmony.',
                 'marriage_id' => $this->marriage->id,
                 'icon' => '🎉',
-                'url' => route('marriages.celebration'),
+                'action_url' => $celebrationUrl,
+                'url' => $celebrationUrl,
             ];
         }
 
@@ -101,6 +136,7 @@ class NikahMilestoneNotification extends Notification implements ShouldBroadcast
             'message' => 'The Mangala Vivaha milestone confirmation request was declined.',
             'marriage_id' => $this->marriage->id,
             'icon' => 'ℹ️',
+            'action_url' => route('chat.index'),
             'url' => route('chat.index'),
         ];
     }

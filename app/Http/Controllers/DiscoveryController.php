@@ -50,6 +50,9 @@ class DiscoveryController extends Controller
 
         $currentUser = Auth::user();
         $userProfile = $currentUser->profile;
+        if ($userProfile) {
+            $userProfile->setRelation('user', $currentUser);
+        }
 
         // Strict opposite gender discovery (FR-6.1)
         if ($currentUser->gender === 'male') {
@@ -60,10 +63,14 @@ class DiscoveryController extends Controller
             $targetGender = $request->input('gender', 'female');
         }
 
+        $blockedIds = $currentUser->blockedUsers()->pluck('users.id')
+            ->merge($currentUser->blockedByUsers()->pluck('users.id'))
+            ->unique()
+            ->values();
+
         $query = Profile::with(['user.activeSubscription', 'primaryPhoto'])
             ->where('user_id', '!=', $currentUser->id)
-            ->whereNotIn('user_id', $currentUser->blockedUsers()->pluck('users.id'))
-            ->whereNotIn('user_id', $currentUser->blockedByUsers()->pluck('users.id'))
+            ->whereNotIn('user_id', $blockedIds)
             ->whereHas('user', function ($q) use ($targetGender) {
                 $q->where('is_active', true)
                     ->where('role', 'seeker')
@@ -222,6 +229,7 @@ class DiscoveryController extends Controller
 
         $compatibilityScore = null;
         if ($currentUser->profile) {
+            $currentUser->profile->setRelation('user', $currentUser);
             $compatibilityScore = $this->matchingEngine->computeCompatibility($currentUser->profile, $profile);
         }
         $compatibilityHighlights = $currentUser->profile

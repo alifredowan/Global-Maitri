@@ -119,8 +119,16 @@
                         <article class="card-ledger flex flex-col justify-between overflow-hidden group bg-[var(--bg-surface)] border border-[var(--border-default)] hover:border-[var(--accent-primary)] transition">
                             <div>
                                 <div class="relative h-44 bg-[var(--neutral-900)] overflow-hidden">
+                                    @php
+                                        $isMatchPhotoVisible = $match->isPhotoVisibleTo(Auth::user());
+                                    @endphp
                                     @if($match->primaryPhoto)
-                                        <img src="{{ $match->primaryPhoto->displayUrl() }}" alt="{{ $match->user->name }}" class="w-full h-full object-cover photo-shield group-hover:scale-102 transition duration-300" loading="lazy" decoding="async">
+                                        <img src="{{ $match->primaryPhoto->displayUrl() }}" alt="{{ $match->user->name }}" class="w-full h-full object-cover {{ $isMatchPhotoVisible ? '' : 'photo-shield' }} group-hover:scale-102 transition duration-300" loading="lazy" decoding="async">
+                                        @if(! $isMatchPhotoVisible)
+                                            <div class="absolute inset-0 flex items-center justify-center bg-black/40 text-[10px] text-white font-bold pointer-events-none">
+                                                <span>🔒 Shield</span>
+                                            </div>
+                                        @endif
                                     @else
                                         <div class="w-full h-full flex items-center justify-center bg-[var(--bg-subtle)] text-[var(--accent-primary)] font-bold text-2xl">
                                             {{ substr($match->user->name, 0, 1) }}

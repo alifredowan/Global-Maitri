@@ -86,6 +86,7 @@ class MarriageCompletionService
         ]);
 
         $spouse->notify(new NikahMilestoneNotification($marriage, 'initiated'));
+        $initiator->notify(new NikahMilestoneNotification($marriage, 'declaration_submitted'));
 
         return $marriage;
     }
