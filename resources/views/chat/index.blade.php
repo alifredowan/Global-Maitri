@@ -46,7 +46,7 @@
                                     <h3 class="font-bold text-sm text-[var(--text-primary)]">{{ $other?->name ?? 'Candidate' }}</h3>
                                     @if($hasWali)
                                         <span class="badge-status bg-[var(--accent-subtle)] text-[var(--accent-primary)] border border-[var(--accent-primary)]/30 text-[10px]">
-                                            Wali Chaperoned
+                                            Kalyāṇa-Mitta Guided
                                         </span>
                                     @endif
                                 @endif

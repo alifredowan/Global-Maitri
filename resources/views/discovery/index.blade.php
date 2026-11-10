@@ -10,11 +10,7 @@
         <div class="card-ledger p-5 sm:p-6 bg-[var(--bg-surface)] border border-[var(--border-default)] flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
             <div>
                 <div class="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-[var(--accent-primary)] mb-1">
-                    <svg class="w-3.5 h-3.5 text-[var(--accent-primary)]" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24">
-                        <circle cx="12" cy="12" r="9"/>
-                        <circle cx="12" cy="12" r="3"/>
-                        <path d="M12 3v6m0 6v6M3 12h6m6 0h6"/>
-                    </svg>
+                    <x-application-logo class="w-3.5 h-3.5 text-[var(--accent-primary)] shrink-0" />
                     <span>Metta Matchmaking</span>
                 </div>
                 <h1 class="text-xl sm:text-2xl font-extrabold text-[var(--text-primary)] font-heading">Buddhist Match Discovery</h1>

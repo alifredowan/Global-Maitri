@@ -7,13 +7,7 @@
     <div class="max-w-md mx-auto px-4">
         <div class="card-ledger bg-[var(--bg-surface)] border border-[var(--border-default)] shadow-xs p-6 sm:p-8 space-y-5">
             <div class="text-center space-y-2">
-                <div class="w-10 h-10 rounded-[var(--radius-sm)] bg-[var(--accent-subtle)] text-[var(--accent-primary)] flex items-center justify-center mx-auto">
-                    <svg class="w-5 h-5 text-[var(--accent-primary)]" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24">
-                        <circle cx="12" cy="12" r="9"/>
-                        <circle cx="12" cy="12" r="3"/>
-                        <path d="M12 3v6m0 6v6M3 12h6m6 0h6"/>
-                    </svg>
-                </div>
+                <x-application-logo variant="badge" badge-class="w-12 h-12 mx-auto" />
                 <h1 class="text-xl sm:text-2xl font-extrabold text-[var(--text-primary)] font-heading">Welcome Back</h1>
                 <p class="text-xs text-[var(--text-secondary)]">Sign in to review matches, proposals, and mindful messages.</p>
             </div>

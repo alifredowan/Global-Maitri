@@ -22,9 +22,7 @@
             @php $marriage = $user->activeMarriage(); @endphp
             <div class="card-hero bg-[var(--bg-surface)] border border-[var(--border-default)] p-6 rounded-[var(--radius-xl)] flex flex-col sm:flex-row items-center justify-between gap-4">
                 <div class="flex items-center gap-4 text-center sm:text-left">
-                    <div class="w-12 h-12 rounded-[var(--radius-sm)] bg-[var(--accent-primary)] text-white flex items-center justify-center text-xl shadow-xs shrink-0">
-                        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><path d="M12 3v18M3 12h18"/></svg>
-                    </div>
+                    <x-application-logo variant="badge" badge-class="w-12 h-12 shrink-0" />
                     <div>
                         <div class="flex items-center gap-2 justify-center sm:justify-start">
                             <span class="text-xs font-bold uppercase tracking-wider text-[var(--accent-primary)]">Mangala Vivaha</span>

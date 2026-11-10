@@ -11,11 +11,7 @@
             <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
                 <div class="max-w-2xl space-y-2">
                     <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-[var(--radius-sm)] bg-[var(--accent-subtle)] text-[var(--accent-primary)] text-xs font-bold uppercase tracking-wider">
-                        <svg class="w-3.5 h-3.5 text-[var(--accent-primary)]" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24">
-                            <circle cx="12" cy="12" r="9"/>
-                            <circle cx="12" cy="12" r="3"/>
-                            <path d="M12 3v6m0 6v6M3 12h6m6 0h6"/>
-                        </svg>
+                        <x-application-logo class="w-3.5 h-3.5 text-[var(--accent-primary)] shrink-0" />
                         <span>May you be happy and well, {{ $user->name }}</span>
                     </div>
                     <h1 class="font-heading text-2xl sm:text-3xl font-extrabold text-[var(--text-primary)] tracking-tight">

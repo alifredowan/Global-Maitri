@@ -12,24 +12,18 @@
                     <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
                     </svg>
-                    <span>Family &amp; Elder Guidance</span>
+                    <span>Family &amp; Kalyāṇa-Mitta Guidance</span>
                 </div>
-                <h1 class="text-2xl font-extrabold text-[var(--text-primary)] font-heading">Family Representative Linkage</h1>
-                <p class="text-xs text-[var(--text-secondary)] mt-1">Involve a parent, elder, trusted relative, or monk advisor to guide your marriage search with wisdom and blessings (FR-4.3).</p>
+                <h1 class="text-2xl font-extrabold text-[var(--text-primary)] font-heading">Family Representative &amp; Kalyāṇa-Mitta Linkage</h1>
+                <p class="text-xs text-[var(--text-secondary)] mt-1">Involve a parent, elder, trusted relative, or spiritual mentor (Kalyāṇa-Mitta) to guide your marriage search with wisdom, Dhamma values, and family blessings (FR-4.3).</p>
             </div>
-            <div class="h-10 w-10 rounded-[4px] bg-[var(--accent-primary)]/10 text-[var(--accent-primary)] flex items-center justify-center">
-                <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
-                    <circle cx="12" cy="12" r="9"/>
-                    <circle cx="12" cy="12" r="3"/>
-                    <path d="M12 3v6m0 6v6M3 12h6m6 0h6"/>
-                </svg>
-            </div>
+            <x-application-logo variant="badge" badge-class="w-11 h-11" />
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             <!-- Left Form -->
             <div class="md:col-span-2 card-ledger p-6">
-                <h2 class="text-base font-bold text-[var(--text-primary)] font-heading mb-1">Link a Family Representative</h2>
+                <h2 class="text-base font-bold text-[var(--text-primary)] font-heading mb-1">Link a Family Representative (Kalyāṇa-Mitta)</h2>
                 <p class="text-xs text-[var(--text-secondary)] mb-4">
                     Your representative must have a registered account on Global Maitri to be linked.
                 </p>
@@ -71,6 +65,8 @@
                                 <option value="grandparent" {{ old('relationship_type') === 'grandparent' ? 'selected' : '' }}>Grandparent</option>
                                 <option value="other_relative" {{ old('relationship_type') === 'other_relative' ? 'selected' : '' }}>Trusted Elder / Relative</option>
                                 <option value="monk_advisor" {{ old('relationship_type') === 'monk_advisor' ? 'selected' : '' }}>Monk / Sangha Advisor</option>
+                                <option value="kalyanamitta" {{ old('relationship_type') === 'kalyanamitta' ? 'selected' : '' }}>Kalyāṇa-Mitta (Spiritual Mentor / Noble Guide)</option>
+                                <option value="guardian" {{ old('relationship_type') === 'guardian' ? 'selected' : '' }}>Legal Guardian (Bārakaaruwa / Abhibhāvak)</option>
                             </select>
                             @error('relationship_type')
                                 <p class="text-[var(--color-danger)] text-xs mt-1 font-semibold">{{ $message }}</p>

@@ -35,13 +35,7 @@
         <!-- 4 Core Privacy Guarantees Grid -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <div class="card-ledger p-5 transition">
-                <div class="w-10 h-10 rounded-[4px] bg-[var(--accent-primary)]/10 text-[var(--accent-primary)] flex items-center justify-center mb-3">
-                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="9"/>
-                        <circle cx="12" cy="12" r="3"/>
-                        <path d="M12 3v6m0 6v6M3 12h6m6 0h6"/>
-                    </svg>
-                </div>
+                <x-application-logo variant="badge" badge-class="w-10 h-10 mb-3" />
                 <h3 class="font-bold text-sm text-[var(--text-primary)]">Lotus Modesty Shield</h3>
                 <p class="text-xs text-[var(--text-secondary)] mt-1 leading-relaxed">
                     Photos remain sheltered across search and discovery until mutual consent is granted.

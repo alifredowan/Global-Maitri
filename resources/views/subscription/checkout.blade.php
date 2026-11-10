@@ -66,11 +66,7 @@
              }">
             <div class="text-center mb-6">
                 <span class="px-3.5 py-1 rounded-[4px] text-xs font-bold bg-[var(--accent-primary)]/10 text-[var(--accent-primary)] uppercase tracking-wider inline-flex items-center gap-1.5 border border-[var(--accent-primary)]/20">
-                    <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="9"/>
-                        <circle cx="12" cy="12" r="3"/>
-                        <path d="M12 3v6m0 6v6M3 12h6m6 0h6"/>
-                    </svg>
+                    <x-application-logo class="w-3.5 h-3.5 text-[var(--accent-primary)] shrink-0" />
                     Single Marriage Pass
                 </span>
                 <h1 class="text-2xl font-extrabold text-[var(--text-primary)] font-heading mt-3">Acquire {{ $planDetails['name'] }}</h1>

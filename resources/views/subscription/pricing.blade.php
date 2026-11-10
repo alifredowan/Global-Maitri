@@ -12,7 +12,7 @@
         <!-- Header / Ethical Philosophy -->
         <div class="text-center max-w-3xl mx-auto space-y-3">
             <div class="inline-flex items-center gap-2 px-3 py-1 rounded-[var(--radius-sm)] bg-[var(--accent-subtle)] text-[var(--accent-primary)] border border-[var(--accent-primary)]/30 text-xs font-bold uppercase tracking-wider">
-                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><path d="M12 3v18M3 12h18"/></svg>
+                <x-application-logo class="w-3.5 h-3.5 text-[var(--accent-primary)]" />
                 <span>Membership Plans & Tiers • Single Marriage Pass</span>
             </div>
             <h1 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[var(--text-primary)] font-heading tracking-tight">

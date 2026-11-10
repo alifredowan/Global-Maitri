@@ -12,11 +12,7 @@
         <!-- Header Hero -->
         <div class="text-center space-y-4">
             <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-[4px] bg-[var(--accent-primary)]/10 border border-[var(--accent-primary)]/20 text-[var(--accent-primary)] text-xs font-bold uppercase tracking-wider">
-                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <circle cx="12" cy="12" r="9"/>
-                    <circle cx="12" cy="12" r="3"/>
-                    <path d="M12 3v6m0 6v6M3 12h6m6 0h6"/>
-                </svg>
+                <x-application-logo class="w-3.5 h-3.5 text-[var(--accent-primary)] shrink-0" />
                 <span>Our Mindful Mission</span>
             </div>
             <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-[var(--text-primary)] font-heading tracking-tight leading-[1.15]">
@@ -110,13 +106,7 @@
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 <div class="card-ledger p-6 transition space-y-3">
-                    <div class="w-12 h-12 rounded-[4px] bg-[var(--accent-primary)]/10 text-[var(--accent-primary)] flex items-center justify-center">
-                        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="12" r="9"/>
-                            <circle cx="12" cy="12" r="3"/>
-                            <path d="M12 3v6m0 6v6M3 12h6m6 0h6"/>
-                        </svg>
-                    </div>
+                    <x-application-logo variant="badge" badge-class="w-12 h-12" />
                     <h4 class="font-bold text-base text-[var(--text-primary)]">Lotus Modesty</h4>
                     <p class="text-xs text-[var(--text-secondary)] leading-relaxed">
                         Photos are sheltered by default with an artistic lotus blur. Seekers evaluate inner qualities, Dhamma practice, and character first.

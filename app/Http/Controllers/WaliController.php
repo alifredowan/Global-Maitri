@@ -25,13 +25,15 @@ class WaliController extends Controller
 
         // If current user is a Wali
         $wards = WaliLink::with(['seeker.profile.primaryPhoto'])
-            ->where('wali_user_id', $user->id)
-            ->orWhere('wali_email', $user->email)
+            ->where(function ($query) use ($user) {
+                $query->where('wali_user_id', $user->id)
+                    ->orWhere('wali_email', $user->email);
+            })
             ->get();
 
         $wardUserIds = $wards->pluck('seeker_user_id')->toArray();
 
-        $pendingInterests = Interest::with(['sender.profile', 'recipient'])
+        $pendingInterests = Interest::with(['sender.profile.primaryPhoto', 'recipient'])
             ->whereIn('recipient_id', $wardUserIds)
             ->where('wali_approval_status', 'pending')
             ->latest()
@@ -62,7 +64,7 @@ class WaliController extends Controller
         ]);
 
         $request->validate([
-            'relationship_type' => ['required', 'string', 'in:father,mother,brother,sister,uncle,aunt,guardian,elder_relative,monk_advisor,other,grandfather,other_mahram'],
+            'relationship_type' => ['required', 'string', 'in:father,mother,brother,sister,uncle,aunt,guardian,elder_relative,monk_advisor,kalyanamitta,kalyana_mitta,other,grandfather,other_mahram'],
             'permission_level' => ['required', 'in:view_only,approve_required,full_proxy'],
             'wali_name' => ['required', 'string', 'max:100'],
             'wali_email' => [

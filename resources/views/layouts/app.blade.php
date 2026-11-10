@@ -6,7 +6,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'Global Maitri - Buddhist Matrimonial Platform')</title>
     <link rel="icon" href="{{ asset('favicon.svg') }}" type="image/svg+xml">
-    <link rel="alternate icon" href="{{ asset('favicon.svg') }}" type="image/svg+xml">
+    <link rel="alternate icon" href="{{ asset('favicon.png') }}" type="image/png">
+    <link rel="apple-touch-icon" href="{{ asset('images/logo-emblem.png') }}">
     <meta name="description" content="@yield('meta_description', 'Global Maitri is a Buddhist matrimonial platform for serious, marriage-oriented Buddhists across traditions, with verified profiles, family involvement, and mindful matchmaking.')">
     <meta name="robots" content="@yield('robots', 'noindex, nofollow')">
     @hasSection('canonical_url')
@@ -179,13 +180,7 @@
 
                     <!-- Brand in Mobile Drawer (Clicking closes drawer) -->
                     <div @click="mobileSidebarOpen = false" class="flex items-center gap-3 px-2 mb-6 cursor-pointer select-none" title="Close Drawer">
-                        <div class="w-10 h-10 rounded-[4px] bg-[var(--accent-primary)] flex items-center justify-center text-white shadow-xs">
-                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24">
-                                <circle cx="12" cy="12" r="9"/>
-                                <circle cx="12" cy="12" r="3"/>
-                                <path d="M12 3v6m0 6v6M3 12h6m6 0h6M5.636 5.636l4.243 4.243m4.242 4.242l4.243 4.243M5.636 18.364l4.243-4.243m4.242-4.242l4.243-4.243"/>
-                            </svg>
-                        </div>
+                        <x-application-logo variant="badge" badge-class="w-10 h-10" />
                         <div>
                             <span class="font-heading font-extrabold text-lg text-white tracking-tight flex items-center gap-1">
                                 Global<span class="text-[var(--accent-primary)]">Maitri</span>
@@ -238,13 +233,7 @@
                             @click="toggleSidebar()"
                             class="flex items-center gap-3 group flex-1 min-w-0 text-left cursor-pointer focus:outline-none"
                             title="Open / Close Sidebar (Global Maitri Logo)">
-                        <div class="w-10 h-10 rounded-[4px] bg-[var(--accent-primary)] flex items-center justify-center text-white shadow-xs group-hover:bg-[var(--accent-hover)] transition">
-                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24">
-                                <circle cx="12" cy="12" r="9"/>
-                                <circle cx="12" cy="12" r="3"/>
-                                <path d="M12 3v6m0 6v6M3 12h6m6 0h6M5.636 5.636l4.243 4.243m4.242 4.242l4.243 4.243M5.636 18.364l4.243-4.243m4.242-4.242l4.243-4.243"/>
-                            </svg>
-                        </div>
+                        <x-application-logo variant="badge" badge-class="w-10 h-10 group-hover:scale-105" />
                         <div>
                             <div class="font-heading font-extrabold text-base text-white tracking-tight flex items-center gap-1 group-hover:text-[var(--accent-primary)] transition">
                                 Global<span class="text-[var(--accent-primary)]">Maitri</span>
@@ -284,7 +273,7 @@
                                 <p class="text-[10px] text-slate-400 truncate">{{ Auth::user()->email }}</p>
                                 <span class="inline-flex items-center gap-1 text-[9px] font-bold text-[var(--accent-primary)] uppercase tracking-wider">
                                     <span class="w-1.5 h-1.5 rounded-full bg-[var(--accent-primary)]"></span>
-                                    {{ Auth::user()->isSuperAdmin() ? 'Super Admin' : (Auth::user()->isModerator() ? 'Staff' : (Auth::user()->isWali() ? 'Wali' : 'Seeker')) }}
+                                    {{ Auth::user()->isSuperAdmin() ? 'Super Admin' : (Auth::user()->isModerator() ? 'Staff' : (Auth::user()->isWali() ? 'Family Rep (Kalyāṇa-Mitta)' : 'Seeker')) }}
                                 </span>
                             </div>
                         </div>
@@ -325,13 +314,7 @@
                              x-show="!sidebarOpen || window.innerWidth < 1024"
                              class="flex items-center gap-2.5 cursor-pointer select-none group"
                              title="Open / Close Sidebar (Global Maitri Logo)">
-                            <div class="w-9 h-9 rounded-[4px] bg-[var(--accent-primary)] flex items-center justify-center text-white shadow-xs group-hover:bg-[var(--accent-hover)] transition">
-                                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24">
-                                    <circle cx="12" cy="12" r="9"/>
-                                    <circle cx="12" cy="12" r="3"/>
-                                    <path d="M12 3v6m0 6v6M3 12h6m6 0h6M5.636 5.636l4.243 4.243m4.242 4.242l4.243 4.243M5.636 18.364l4.243-4.243m4.242-4.242l4.243-4.243"/>
-                                </svg>
-                            </div>
+                            <x-application-logo variant="badge" badge-class="w-9 h-9 group-hover:scale-105" />
                             <span class="font-heading font-extrabold text-base tracking-tight text-[var(--text-primary)] group-hover:text-[var(--accent-primary)] transition">
                                 Global<span class="text-[var(--accent-primary)]">Maitri</span>
                             </span>
@@ -607,7 +590,7 @@
                                 </div>
                                 <div class="text-[10px] font-semibold text-emerald-600 dark:text-emerald-400 leading-tight flex items-center gap-1">
                                     <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-                                    {{ Auth::user()->isSuperAdmin() ? 'Super Admin' : (Auth::user()->isModerator() ? 'Staff Admin' : (Auth::user()->isWali() ? 'Guardian (Wali)' : 'Seeker')) }}
+                                    {{ Auth::user()->isSuperAdmin() ? 'Super Admin' : (Auth::user()->isModerator() ? 'Staff Admin' : (Auth::user()->isWali() ? 'Family Rep (Kalyāṇa-Mitta)' : 'Seeker')) }}
                                 </div>
                             </div>
                         </div>
@@ -698,20 +681,8 @@
                     <div class="flex items-center justify-between h-16">
                         <!-- Brand Logo -->
                         <div class="flex items-center gap-3">
-                            <a href="{{ route('landing') }}" class="flex items-center gap-2.5 group">
-                                <div class="w-9 h-9 rounded-[4px] bg-[var(--accent-primary)] flex items-center justify-center text-white shadow-xs group-hover:bg-[var(--accent-hover)] transition">
-                                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24">
-                                        <circle cx="12" cy="12" r="9"/>
-                                        <circle cx="12" cy="12" r="3"/>
-                                        <path d="M12 3v6m0 6v6M3 12h6m6 0h6M5.636 5.636l4.243 4.243m4.242 4.242l4.243 4.243M5.636 18.364l4.243-4.243m4.242-4.242l4.243-4.243"/>
-                                    </svg>
-                                </div>
-                                <div>
-                                    <span class="font-heading font-extrabold text-xl tracking-tight text-[var(--text-primary)] flex items-center gap-1.5">
-                                        Global<span class="text-[var(--accent-primary)]">Maitri</span>
-                                    </span>
-                                    <span class="text-[10px] uppercase font-bold tracking-widest text-[var(--accent-primary)] block -mt-1">Buddhist Matrimonial</span>
-                                </div>
+                            <a href="{{ route('landing') }}" class="group">
+                                <x-application-logo variant="full" badge-class="w-9 h-9" />
                             </a>
                         </div>
 
@@ -818,8 +789,8 @@
                          @endif
 
                          @if(Auth::user()->isWali())
-                             { name: 'Guardian Console & Ward Overview', cat: 'Wali', icon: '🤝', url: '{{ route('wali.dashboard') }}' },
-                             { name: 'Link Ward by Matrimonial Code', cat: 'Wali', icon: '🔗', url: '{{ route('wali.link') }}' },
+                             { name: 'Family Rep Console & Candidate Overview', cat: 'Family Rep', icon: '🤝', url: '{{ route('wali.dashboard') }}' },
+                             { name: 'Link Candidate by Matrimonial Code', cat: 'Family Rep', icon: '🔗', url: '{{ route('wali.link') }}' },
                          @endif
 
                          { name: 'Account Settings & Security', cat: 'Settings', icon: '🔒', url: '{{ route('settings.index') }}' },

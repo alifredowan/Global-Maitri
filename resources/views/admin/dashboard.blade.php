@@ -38,7 +38,7 @@
         <div class="card-ledger p-5">
             <span class="text-[11px] font-bold text-[var(--text-muted)] uppercase tracking-wider block mb-1">Total Users</span>
             <span class="text-2xl font-extrabold text-[var(--text-primary)] font-heading">{{ $metrics['total_users'] }}</span>
-            <span class="text-[10px] text-[var(--text-secondary)] block mt-1">{{ $metrics['seekers'] }} Seekers • {{ $metrics['walis'] }} Walis</span>
+            <span class="text-[10px] text-[var(--text-secondary)] block mt-1">{{ $metrics['seekers'] }} Seekers • {{ $metrics['walis'] }} Family Reps (Kalyāṇa-Mittas)</span>
         </div>
 
         <div class="card-ledger p-5">

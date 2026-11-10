@@ -47,22 +47,14 @@
     <div class="certificate-container w-full max-w-4xl bg-white rounded-[4px] border-8 border-double border-[var(--accent-primary)]/80 p-10 sm:p-14 shadow-xl space-y-8 text-center relative overflow-hidden">
 
         <!-- Subtle Watermark Background -->
-        <div class="absolute inset-0 flex items-center justify-center opacity-5 pointer-events-none select-none">
-            <svg class="w-96 h-96 text-[var(--accent-primary)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-                <circle cx="12" cy="12" r="9"/>
-                <circle cx="12" cy="12" r="3"/>
-                <path d="M12 3v6m0 6v6M3 12h6m6 0h6"/>
-            </svg>
+        <div class="absolute inset-0 flex items-center justify-center opacity-[0.07] pointer-events-none select-none">
+            <img src="{{ asset('images/logo-emblem.png') }}" alt="" class="w-96 h-96 object-contain">
         </div>
 
         <!-- Certificate Header -->
         <div class="space-y-2 relative">
-            <div class="w-16 h-16 mx-auto rounded-[4px] bg-[var(--accent-primary)]/10 border-2 border-[var(--accent-primary)]/40 flex items-center justify-center text-[var(--accent-primary)] shadow-xs">
-                <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
-                    <circle cx="12" cy="12" r="9"/>
-                    <circle cx="12" cy="12" r="3"/>
-                    <path d="M12 3v6m0 6v6M3 12h6m6 0h6"/>
-                </svg>
+            <div class="w-20 h-20 mx-auto rounded-full bg-white border-2 border-[var(--accent-primary)]/40 flex items-center justify-center p-2.5 shadow-xs">
+                <img src="{{ asset('images/logo-emblem.png') }}" alt="Global Maitri Seal" class="w-full h-full object-contain">
             </div>
 
             <p class="font-cinzel text-xs uppercase tracking-[0.25em] text-[var(--accent-primary)] font-bold pt-2">

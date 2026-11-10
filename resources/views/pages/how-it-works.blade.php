@@ -100,11 +100,7 @@
         <div class="mx-auto grid max-w-7xl items-center gap-14 px-4 sm:px-6 lg:grid-cols-12 lg:px-8">
             <div class="lg:col-span-5">
                 <div class="mb-5 inline-flex items-center gap-2 rounded-full border border-[var(--accent-primary)]/30 bg-[var(--accent-primary)]/10 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[.18em] text-[#e0b84c]">
-                    <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="9"/>
-                        <circle cx="12" cy="12" r="3"/>
-                        <path d="M12 3v6m0 6v6M3 12h6m6 0h6"/>
-                    </svg>
+                    <x-application-logo class="h-3.5 w-3.5 text-[#e0b84c]" />
                     A Clear Path to Mangala Vivaha
                 </div>
                 <h1 class="font-heading text-4xl font-extrabold leading-[1.08] tracking-tight sm:text-6xl text-white">
@@ -173,13 +169,9 @@
 
                     <!-- Center Hub -->
                     <div class="absolute left-1/2 top-[49%] z-10 flex w-40 -translate-x-1/2 -translate-y-1/2 flex-col items-center text-center sm:w-48">
-                        <div class="how-it-works-map-node relative flex h-24 w-24 items-center justify-center rounded-full border border-[var(--accent-primary)]/60 bg-[#141412] sm:h-28 sm:w-28">
+                        <div class="how-it-works-map-node relative flex h-24 w-24 items-center justify-center rounded-full border border-[var(--accent-primary)]/60 bg-[#141412] sm:h-28 sm:w-28 p-4">
                             <div class="absolute inset-2 rounded-full border border-dashed border-[var(--accent-primary)]/35"></div>
-                            <svg class="relative h-8 w-8 text-[#e0b84c]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
-                                <circle cx="12" cy="12" r="9"/>
-                                <circle cx="12" cy="12" r="3"/>
-                                <path d="M12 3v6m0 6v6M3 12h6m6 0h6"/>
-                            </svg>
+                            <x-application-logo class="relative h-10 w-10 text-[#e0b84c]" />
                         </div>
                         <p class="mt-4 text-[9px] font-bold uppercase tracking-[.22em] text-[#a8a49c]">Global Maitri</p>
                         <p class="mt-1 text-sm font-bold text-white sm:text-base">Auspicious union</p>

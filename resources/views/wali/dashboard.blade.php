@@ -15,17 +15,17 @@
                         <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
                         </svg>
-                        <span>Family Representative Console</span>
+                        <span>Family Representative &amp; Kalyāṇa-Mitta Console</span>
                     </div>
                     <h1 class="font-heading font-extrabold text-2xl sm:text-3xl text-white">
-                        Family Oversight &amp; Matrimonial Guidance Center
+                        Family Oversight &amp; Kalyāṇa-Mitta Guidance Center
                     </h1>
                     <p class="text-xs text-[#d6d2c8] mt-1.5 max-w-2xl leading-relaxed">
-                        Mindful matrimonial facilitation empowering trusted parents, elders, and advisors to review suitor proposals, offer moral counsel, and foster harmonious lifelong companionship.
+                        Mindful Buddhist matrimonial facilitation empowering trusted parents, elders, and spiritual mentors (Kalyāṇa-Mitta) to review suitor proposals, offer moral counsel, and foster harmonious lifelong companionship.
                     </p>
                 </div>
                 <span class="px-3.5 py-1.5 rounded-[4px] text-xs font-bold bg-[var(--accent-primary)]/20 text-[#e0b84c] border border-[var(--accent-primary)]/40 self-start md:self-center shrink-0">
-                    &check; Representative Oversight Active
+                    &check; Kalyāṇa-Mitta Oversight Active
                 </span>
             </div>
         </div>
@@ -117,17 +117,21 @@
                 @forelse($wards as $wardLink)
                     <div class="card-ledger p-5 flex items-center justify-between">
                         <div class="flex items-center gap-3.5">
-                            <div class="w-12 h-12 rounded-[4px] bg-[var(--accent-primary)]/10 text-[var(--accent-primary)] font-bold flex items-center justify-center text-base border border-[var(--accent-primary)]/20">
-                                {{ substr($wardLink->seeker->name, 0, 1) }}
+                            <div class="w-12 h-12 rounded-[4px] bg-[var(--accent-primary)]/10 text-[var(--accent-primary)] font-bold flex items-center justify-center text-base border border-[var(--accent-primary)]/20 overflow-hidden shrink-0">
+                                @if($wardLink->seeker?->profile?->primaryPhoto)
+                                    <img src="{{ $wardLink->seeker->profile->primaryPhoto->displayUrl() }}" alt="{{ $wardLink->seeker->name }}" class="w-full h-full object-cover" loading="lazy" decoding="async">
+                                @else
+                                    {{ substr($wardLink->seeker?->name ?? 'C', 0, 1) }}
+                                @endif
                             </div>
                             <div>
-                                <h3 class="font-bold text-sm text-[var(--text-primary)]">{{ $wardLink->seeker->name }}</h3>
+                                <h3 class="font-bold text-sm text-[var(--text-primary)]">{{ $wardLink->seeker?->name ?? 'Candidate' }}</h3>
                                 <p class="text-[11px] text-[var(--text-secondary)]">
-                                    {{ $wardLink->seeker->age }} yrs • {{ ucfirst(str_replace('_', ' ', $wardLink->relationship_type)) }} • {{ str_replace('_', ' ', $wardLink->permission_level) }}
+                                    {{ $wardLink->seeker?->age ? $wardLink->seeker->age . ' yrs • ' : '' }}{{ ucfirst(str_replace('_', ' ', $wardLink->relationship_type)) }} • {{ str_replace('_', ' ', $wardLink->permission_level) }}
                                 </p>
                             </div>
                         </div>
-                        <a href="{{ route('discovery.show', $wardLink->seeker_id) }}" class="btn-secondary text-xs px-3 py-1.5">
+                        <a href="{{ route('discovery.show', $wardLink->seeker_user_id) }}" class="btn-secondary text-xs px-3 py-1.5">
                             View Profile &rarr;
                         </a>
                     </div>

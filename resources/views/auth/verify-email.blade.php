@@ -9,7 +9,7 @@
         <!-- Top Buddhist Blessing & Badge -->
         <div class="text-center space-y-2">
             <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[var(--bg-subtle)] text-[var(--accent-primary)] border border-[var(--border-default)]">
-                <svg class="w-3.5 h-3.5 text-[var(--accent-primary)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><line x1="12" y1="3" x2="12" y2="9"/><line x1="12" y1="15" x2="12" y2="21"/><line x1="3" y1="12" x2="9" y2="12"/><line x1="15" y1="12" x2="21" y2="12"/></svg>
+                <x-application-logo class="w-3.5 h-3.5 text-[var(--accent-primary)]" />
                 <span>Mandatory Email Verification</span>
             </span>
             <p class="text-base sm:text-lg text-[var(--accent-primary)] font-medium">May You Be Happy and Well</p>

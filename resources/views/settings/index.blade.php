@@ -17,7 +17,7 @@
                     <div class="flex items-center gap-2">
                         <h1 class="text-2xl font-extrabold text-[var(--text-primary)] font-heading">{{ $user->name }}</h1>
                         <span class="px-2.5 py-0.5 rounded-[4px] text-[10px] font-bold uppercase tracking-wider bg-[var(--accent-primary)]/10 text-[var(--accent-primary)] border border-[var(--accent-primary)]/20">
-                            {{ $user->isSuperAdmin() ? 'Super Admin' : ($user->isModerator() ? 'Moderator' : ($user->isWali() ? 'Family Rep' : 'Candidate')) }}
+                            {{ $user->isSuperAdmin() ? 'Super Admin' : ($user->isModerator() ? 'Moderator' : ($user->isWali() ? 'Family Rep (Kalyāṇa-Mitta)' : 'Candidate')) }}
                         </span>
                     </div>
                     <p class="text-xs text-[var(--text-secondary)] mt-1">Manage your personal credentials, contact details, security password, and privacy preferences.</p>
@@ -419,10 +419,10 @@
                             <div class="flex items-start justify-between gap-3 pt-3 border-t border-[var(--border-default)]">
                                 <div>
                                     <label for="wali_required" class="text-xs font-bold text-[var(--text-primary)] block cursor-pointer">
-                                        Enforce Representative Clearance
+                                        Enforce Representative / Kalyāṇa-Mitta Clearance
                                     </label>
                                     <span class="text-[11px] text-[var(--text-secondary)] block mt-0.5">
-                                        Proposals and communications must be cleared by your linked Family Representative first.
+                                        Proposals and communications must be cleared by your linked Family Representative (Kalyāṇa-Mitta) first.
                                     </span>
                                 </div>
                                 <input type="checkbox"
@@ -458,7 +458,7 @@
                             'email_notifications' => 'Email notifications',
                             'interest_notifications' => 'Interest requests and responses',
                             'message_notifications' => 'New chaperoned messages',
-                            'wali_notifications' => 'Family representative updates',
+                            'wali_notifications' => 'Family representative & Kalyāṇa-Mitta updates',
                             'saved_search_notifications' => 'Saved-search matches',
                             'marriage_notifications' => 'Mangala Vivaha milestone updates',
                         ] as $preferenceKey => $preferenceLabel)

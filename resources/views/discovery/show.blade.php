@@ -73,7 +73,7 @@
                                 </span>
                                 @if($profile->family_rep_required || ($activeWaliLink ?? null))
                                     <span class="badge-status text-[11px] bg-[var(--bg-subtle)] text-[var(--text-secondary)] border border-[var(--border-default)]">
-                                        Family Rep: {{ ($activeWaliLink ?? null) ? ($activeWaliLink->wali_name . ' (' . ucfirst(str_replace('_', ' ', $activeWaliLink->relationship_type)) . ')') : 'Family Consultation' }}
+                                        Family Rep (Kalyāṇa-Mitta): {{ ($activeWaliLink ?? null) ? ($activeWaliLink->wali_name . ' (' . ucfirst(str_replace('_', ' ', $activeWaliLink->relationship_type)) . ')') : 'Family Consultation' }}
                                     </span>
                                 @endif
                             </div>
@@ -138,7 +138,7 @@
                                 @endif
                             @elseif($existingInterest && $existingInterest->status === 'pending_wali')
                                 <div class="badge-status bg-[var(--bg-subtle)] text-[var(--text-secondary)] border border-[var(--border-default)] text-xs !py-1.5 !px-3">
-                                    <span>Awaiting Family Representative Approval</span>
+                                    <span>Awaiting Family Representative (Kalyāṇa-Mitta) Approval</span>
                                 </div>
                             @elseif($existingInterest)
                                 <div class="badge-status bg-[var(--bg-subtle)] text-[var(--text-secondary)] border border-[var(--border-default)] text-xs !py-1.5 !px-3 capitalize">
@@ -438,7 +438,7 @@
                         </div>
                         @if($activeWaliLink ?? null)
                             <div class="def-row bg-[var(--accent-subtle)] -mx-2 px-2 rounded-[var(--radius-sm)]">
-                                <dt class="def-term font-semibold text-[var(--accent-primary)]">Family Representative</dt>
+                                <dt class="def-term font-semibold text-[var(--accent-primary)]">Family Representative (Kalyāṇa-Mitta)</dt>
                                 <dd class="def-desc font-bold text-[var(--text-primary)]">
                                     {{ $activeWaliLink->wali_name }} ({{ ucfirst(str_replace('_', ' ', $activeWaliLink->relationship_type)) }})
                                 </dd>

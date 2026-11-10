@@ -38,11 +38,7 @@
             <!-- Pali Sutta Blessing -->
             <div class="space-y-3 max-w-2xl mx-auto">
                 <span class="px-3.5 py-1 rounded-[4px] text-[11px] font-bold uppercase tracking-wider bg-[var(--accent-primary)]/20 text-[#e0b84c] border border-[var(--accent-primary)]/30 inline-flex items-center gap-1.5">
-                    <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="9"/>
-                        <circle cx="12" cy="12" r="3"/>
-                        <path d="M12 3v6m0 6v6M3 12h6m6 0h6"/>
-                    </svg>
+                    <x-application-logo class="w-3.5 h-3.5 text-[#e0b84c]" />
                     Sacred Mangala Vivaha Milestone
                 </span>
 
@@ -90,13 +86,7 @@
                 </div>
 
                 <div class="flex flex-col items-center">
-                    <div class="w-12 h-12 rounded-[4px] bg-[var(--accent-primary)] text-white flex items-center justify-center shadow-xs">
-                        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="12" r="9"/>
-                            <circle cx="12" cy="12" r="3"/>
-                            <path d="M12 3v6m0 6v6M3 12h6m6 0h6"/>
-                        </svg>
-                    </div>
+                    <x-application-logo variant="badge" badge-class="w-12 h-12" />
                     <span class="text-[10px] font-bold uppercase text-[#e0b84c] tracking-wider mt-1.5">Vivaha</span>
                 </div>
 

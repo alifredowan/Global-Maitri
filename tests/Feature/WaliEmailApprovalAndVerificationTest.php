@@ -253,4 +253,37 @@ class WaliEmailApprovalAndVerificationTest extends TestCase
         $response->assertSee('Maitri');
         $response->assertDontSee('Global Nikkah');
     }
+
+    public function test_wali_dashboard_renders_linked_candidates_with_profile_link(): void
+    {
+        $seeker = User::factory()->create([
+            'name' => 'Kavinda Perera',
+            'gender' => 'male',
+            'role' => 'seeker',
+            'dob' => '1995-06-15',
+        ]);
+
+        $wali = User::factory()->create([
+            'name' => 'Uncle Sunil',
+            'email' => 'sunil@example.com',
+            'gender' => 'male',
+            'role' => 'wali',
+        ]);
+
+        WaliLink::create([
+            'seeker_user_id' => $seeker->id,
+            'wali_user_id' => $wali->id,
+            'wali_name' => 'Uncle Sunil',
+            'wali_email' => 'sunil@example.com',
+            'relationship_type' => 'uncle',
+            'permission_level' => 'approve_required',
+            'status' => 'active',
+        ]);
+
+        $response = $this->actingAs($wali)->get(route('wali.dashboard'));
+
+        $response->assertStatus(200);
+        $response->assertSee('Kavinda Perera');
+        $response->assertSee(route('discovery.show', $seeker->id));
+    }
 }

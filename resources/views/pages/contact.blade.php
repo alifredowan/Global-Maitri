@@ -13,11 +13,7 @@
             <div class="absolute -bottom-32 -left-20 h-72 w-72 rounded-full bg-[var(--accent-primary)]/10 blur-3xl"></div>
             <div class="relative max-w-3xl space-y-5">
                 <span class="inline-flex items-center gap-2 rounded-[4px] border border-[var(--accent-primary)]/30 bg-[var(--accent-primary)]/10 px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-[#e0b84c]">
-                    <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="9"/>
-                        <circle cx="12" cy="12" r="3"/>
-                        <path d="M12 3v6m0 6v6M3 12h6m6 0h6"/>
-                    </svg>
+                    <x-application-logo class="h-3.5 w-3.5 text-[#e0b84c]" />
                     Contact &amp; Safety Center
                 </span>
                 <h1 class="font-heading text-3xl font-extrabold tracking-tight sm:text-5xl text-white">We are here to support your mindful matrimonial journey.</h1>

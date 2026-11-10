@@ -18,7 +18,7 @@
                     <h2 class="font-bold text-sm text-[var(--text-primary)] flex items-center gap-2 flex-wrap">
                         @if($waliObserver && Auth::id() === $waliObserver->id)
                             {{ $conversation->participants->where('pivot.role', 'seeker')->pluck('name')->join(' & ') }}
-                            <span class="badge-status text-[10px] bg-[var(--accent-subtle)] text-[var(--accent-primary)] border border-[var(--accent-primary)]/30">Observing as Family Rep</span>
+                            <span class="badge-status text-[10px] bg-[var(--accent-subtle)] text-[var(--accent-primary)] border border-[var(--accent-primary)]/30">Observing as Kalyāṇa-Mitta</span>
                         @else
                             {{ $otherUser?->name ?? 'Candidate' }}
                             @if($otherUser?->is_verified)
@@ -26,7 +26,7 @@
                             @endif
                             @if($waliObserver)
                                 <span class="badge-status text-[10px] bg-[var(--accent-subtle)] text-[var(--accent-primary)] border border-[var(--accent-primary)]/30">
-                                    Family Rep: {{ $waliObserver->name }}
+                                    Family Rep (Kalyāṇa-Mitta): {{ $waliObserver->name }}
                                 </span>
                             @endif
                         @endif
@@ -65,8 +65,8 @@
                     <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
                 </div>
                 <div class="text-xs text-[var(--text-primary)]">
-                    <strong class="font-bold block">Family Representative Observer Active</strong>
-                    <span class="text-[var(--text-secondary)]">{{ $waliObserver->name }} is present as a family representative to offer mindful guidance and respectful communication support (FR-4.3).</span>
+                    <strong class="font-bold block">Family Representative &amp; Kalyāṇa-Mitta Observer Active</strong>
+                    <span class="text-[var(--text-secondary)]">{{ $waliObserver->name }} is present as a family representative and spiritual mentor (Kalyāṇa-Mitta) to offer mindful guidance and respectful communication support (FR-4.3).</span>
                 </div>
             </div>
         @endif
@@ -296,7 +296,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         let waliBadge = '';
         if (isWali) {
-            waliBadge = '<span class="badge-status text-[9px] bg-[var(--accent-subtle)] text-[var(--accent-primary)] border border-[var(--accent-primary)]/30">Family Rep</span>';
+            waliBadge = '<span class="badge-status text-[9px] bg-[var(--accent-subtle)] text-[var(--accent-primary)] border border-[var(--accent-primary)]/30">Kalyāṇa-Mitta</span>';
         }
 
         const headerHtml = '<div class="flex items-center gap-1 text-[11px] text-[var(--text-muted)] mb-1 px-1">' +

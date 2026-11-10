@@ -341,6 +341,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return in_array($this->role, ['family_rep', 'wali'], true);
     }
 
+    public function isKalyanaMitta(): bool
+    {
+        return $this->isFamilyRep();
+    }
+
     public function isMonkAdvisor(): bool
     {
         return $this->role === 'monk_advisor';

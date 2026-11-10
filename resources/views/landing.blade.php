@@ -18,11 +18,7 @@
             <div class="lg:col-span-7 space-y-6 text-left">
                 <!-- Heritage Pill -->
                 <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-[var(--radius-sm)] bg-[var(--accent-subtle)] border border-[var(--accent-primary)]/30 text-[var(--accent-primary)] text-xs font-bold uppercase tracking-wider">
-                    <svg class="w-4 h-4 text-[var(--accent-primary)] shrink-0" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24">
-                        <circle cx="12" cy="12" r="9"/>
-                        <circle cx="12" cy="12" r="3"/>
-                        <path d="M12 3v6m0 6v6M3 12h6m6 0h6M5.636 5.636l4.243 4.243m4.242 4.242l4.243 4.243M5.636 18.364l4.243-4.243m4.242-4.242l4.243-4.243"/>
-                    </svg>
+                    <x-application-logo class="w-4 h-4 text-[var(--accent-primary)] shrink-0" />
                     <span>Mindful Intentions &bull; Mangala Vivaha &bull; Global Buddhist Community</span>
                 </div>
 
@@ -205,8 +201,8 @@
 
             <!-- Pillar 3 -->
             <div class="p-5 rounded-[var(--radius-md)] bg-[var(--bg-subtle)] border border-[var(--border-default)] space-y-3">
-                <div class="w-10 h-10 rounded-[var(--radius-sm)] bg-[var(--accent-subtle)] text-[var(--accent-primary)] flex items-center justify-center">
-                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><path d="M12 3v6m0 6v6M3 12h6m6 0h6M5.636 5.636l4.243 4.243m4.242 4.242l4.243 4.243M5.636 18.364l4.243-4.243m4.242-4.242l4.243-4.243"/></svg>
+                <div class="w-10 h-10 rounded-[var(--radius-sm)] bg-[var(--accent-subtle)] text-[var(--accent-primary)] flex items-center justify-center p-1.5">
+                    <x-application-logo class="w-6 h-6 text-[var(--accent-primary)]" />
                 </div>
                 <h3 class="text-sm font-bold text-[var(--text-primary)] font-heading">Dhamma-Weighted Match Score</h3>
                 <p class="text-xs text-[var(--text-secondary)] leading-relaxed">

@@ -90,7 +90,7 @@ class AuthController extends Controller
             $rules['marital_status'] = ['required', 'in:never_married,divorced,widowed,annulled'];
         } else {
             $rules['marital_status'] = ['nullable', 'in:never_married,divorced,widowed,annulled'];
-            $rules['relationship_type'] = ['nullable', 'string', 'in:father,mother,brother,sister,uncle,aunt,guardian,elder_relative,monk_advisor,other,grandfather,other_mahram'];
+            $rules['relationship_type'] = ['nullable', 'string', 'in:father,mother,brother,sister,uncle,aunt,guardian,elder_relative,monk_advisor,kalyanamitta,kalyana_mitta,other,grandfather,other_mahram'];
         }
 
         $countryName = $rule['name'] ?? 'your country';

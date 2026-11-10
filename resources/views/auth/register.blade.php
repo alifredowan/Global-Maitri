@@ -9,20 +9,14 @@
             
             <!-- Header -->
             <div class="text-center space-y-2">
-                <div class="w-10 h-10 rounded-[var(--radius-sm)] bg-[var(--accent-subtle)] text-[var(--accent-primary)] flex items-center justify-center mx-auto">
-                    <svg class="w-5 h-5 text-[var(--accent-primary)]" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24">
-                        <circle cx="12" cy="12" r="9"/>
-                        <circle cx="12" cy="12" r="3"/>
-                        <path d="M12 3v6m0 6v6M3 12h6m6 0h6"/>
-                    </svg>
-                </div>
+                <x-application-logo variant="badge" badge-class="w-12 h-12 mx-auto" />
                 <h1 class="text-xl sm:text-2xl font-extrabold text-[var(--text-primary)] font-heading">
                     <span x-show="role === 'seeker'">Create Candidate Profile</span>
-                    <span x-show="role === 'wali'" style="display: none;">Register as Family Representative</span>
+                    <span x-show="role === 'wali'" style="display: none;">Register as Family Representative &amp; Kalyāṇa-Mitta</span>
                 </h1>
                 <p class="text-xs text-[var(--text-secondary)] max-w-md mx-auto">
                     <span x-show="role === 'seeker'">Begin your journey towards a lifelong union rooted in loving-kindness (Metta) and mutual respect.</span>
-                    <span x-show="role === 'wali'" style="display: none;">Guide and support your family member or ward in their Buddhist matrimonial search.</span>
+                    <span x-show="role === 'wali'" style="display: none;">Guide and support your family member or ward with mindful Buddhist Kalyāṇa-Mitta mentorship.</span>
                 </p>
             </div>
 
@@ -45,9 +39,9 @@
                             class="p-3.5 rounded-[var(--radius-sm)] border text-left transition flex flex-col justify-between cursor-pointer">
                         <div class="flex items-center gap-2 mb-1">
                             <span class="w-2 h-2 rounded-full" :class="role === 'wali' ? 'bg-[var(--accent-primary)]' : 'bg-[var(--border-default)]'"></span>
-                            <span class="font-bold text-xs text-[var(--text-primary)] font-heading">Family Representative</span>
+                            <span class="font-bold text-xs text-[var(--text-primary)] font-heading">Family Rep / Kalyāṇa-Mitta</span>
                         </div>
-                        <p class="text-[10px] text-[var(--text-muted)]">Parent, elder, relative, or advisor assisting a candidate.</p>
+                        <p class="text-[10px] text-[var(--text-muted)]">Parent, elder, relative, or spiritual mentor (Kalyāṇa-Mitta) guiding a candidate.</p>
                     </button>
                 </div>
             </div>
@@ -71,7 +65,7 @@
                 <div>
                     <label class="block text-xs font-semibold text-[var(--text-secondary)] mb-1">
                         <span x-show="role === 'seeker'">Full Legal Name</span>
-                        <span x-show="role === 'wali'" style="display: none;">Representative's Full Legal Name</span>
+                        <span x-show="role === 'wali'" style="display: none;">Representative / Kalyāṇa-Mitta Legal Name</span>
                         <span class="text-[var(--color-danger)]">*</span>
                     </label>
                     <input type="text" name="name" value="{{ old('name') }}" required
@@ -245,7 +239,7 @@
 
                 <button type="submit" class="btn-primary w-full text-xs sm:text-sm !py-3 mt-3">
                     <span x-show="role === 'seeker'">Create Candidate Profile</span>
-                    <span x-show="role === 'wali'" style="display: none;">Create Family Representative Account</span>
+                    <span x-show="role === 'wali'" style="display: none;">Create Family Representative &amp; Kalyāṇa-Mitta Account</span>
                 </button>
             </form>
 

@@ -12,14 +12,14 @@
                 <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
                 </svg>
-                <span>Buddhist Matrimonial Family Guidance</span>
+                <span>Buddhist Matrimonial Family Guidance (Kalyāṇa-Mitta)</span>
             </span>
             <p class="font-serif text-lg sm:text-xl text-[var(--accent-primary)] font-semibold">Namo Buddhaya</p>
             <h1 class="text-2xl sm:text-3xl font-extrabold text-[var(--text-primary)] font-heading">
-                Family Representative Connection Request
+                Family Representative &amp; Kalyāṇa-Mitta Connection Request
             </h1>
             <p class="text-xs sm:text-sm text-[var(--text-secondary)] max-w-lg mx-auto">
-                You have been invited to act as a Family Representative &amp; Advisor on <strong class="text-[var(--text-primary)]">Global Maitri</strong>.
+                You have been invited to act as a Family Representative &amp; Kalyāṇa-Mitta (Noble Spiritual Guide &amp; Family Mentor) on <strong class="text-[var(--text-primary)]">Global Maitri</strong>.
             </p>
         </div>
 
@@ -104,11 +104,7 @@
             <!-- Buddhist Family Principle Note -->
             <div class="p-4 rounded-[4px] bg-[var(--accent-primary)]/5 border border-[var(--accent-primary)]/20 text-xs text-[var(--text-secondary)] space-y-1.5">
                 <p class="font-semibold text-[var(--accent-primary)] flex items-center gap-1.5">
-                    <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="9"/>
-                        <circle cx="12" cy="12" r="3"/>
-                        <path d="M12 3v6m0 6v6M3 12h6m6 0h6"/>
-                    </svg>
+                    <x-application-logo class="w-3.5 h-3.5 text-[var(--accent-primary)] shrink-0" />
                     Blessing of the Elders (Mangala Sutta)
                 </p>
                 <p class="italic text-[var(--text-primary)]">
