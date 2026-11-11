@@ -1,183 +1,188 @@
-# 💍 Nikah Connect
+# 🪷 Global Maitri — Buddhist Matrimony
 
 <p align="center">
-  <img src="public/images/nikah-connect-banner.svg" width="100%" alt="Nikah Connect Banner">
-</p>
-
-<p align="center">
-  <strong>A Modern, Shariah-Compliant Islamic Matrimonial Web Application</strong><br>
-  Built with adherence to Islamic Shariah, Modesty (<em>Haya</em>), Family Involvement (<em>Wali</em> Oversight), and Deen-Centric Compatibility.
+  <strong>Kindness first. Companionship for life.</strong><br>
+  A modern, mindful Buddhist matrimonial web application designed for seekers and families worldwide.<br>
+  Rooted in loving-kindness (<em>Maitri / Metta</em>), Dhamma-based compatibility, family representative guidance, and mutual privacy.
 </p>
 
 <p align="center">
   <img src="https://img.shields.io/badge/Laravel-12.x-FF2D20?style=for-the-badge&logo=laravel&logoColor=white" alt="Laravel 12">
   <img src="https://img.shields.io/badge/PHP-8.4-777BB4?style=for-the-badge&logo=php&logoColor=white" alt="PHP 8.4">
-  <img src="https://img.shields.io/badge/Tailwind_CSS-3.x-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS">
+  <img src="https://img.shields.io/badge/Tailwind_CSS-v4.0-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS v4">
   <img src="https://img.shields.io/badge/WebSocket-Laravel_Reverb-FF2D20?style=for-the-badge&logo=laravel&logoColor=white" alt="Laravel Reverb">
   <img src="https://img.shields.io/badge/Database-PostgreSQL_%7C_MySQL_%7C_SQLite-336791?style=for-the-badge&logo=postgresql&logoColor=white" alt="Database Support">
-  <img src="https://img.shields.io/badge/Tests-44%20Passed%20(153%20Assertions)-success?style=for-the-badge" alt="Tests 44 Passed">
+  <img src="https://img.shields.io/badge/Tests-173%20Passed%20(912%20Assertions)-success?style=for-the-badge" alt="Tests 173 Passed">
 </p>
 
 ---
 
 ## 📖 Table of Contents
-1. [Platform Vision & Core Principles](#-platform-vision--core-principles)
-2. [Key Architecture & Features](#-key-architecture--features)
-3. [Quick Demo Credentials](#-quick-demo-credentials)
-4. [Comprehensive User Manual & Roles](#-comprehensive-user-manual--roles)
-   - [Seeker Journey (Grooms & Brides)](#1-seeker-journey-grooms--brides)
-   - [Guardian (Wali) Chaperoned Workflow](#2-guardian-wali-chaperoned-workflow)
-   - [Super Administrator Suite](#3-super-administrator-suite)
-   - [Moderation & Safety Center](#4-moderation--safety-center)
-5. [Tech Stack](#-tech-stack)
-6. [Installation & Quick Start](#-installation--quick-start)
-7. [Email & SMTP Configuration Guide](#-email--smtp-configuration-guide)
-8. [Database Switching (PostgreSQL / MySQL / SQLite)](#-database-switching-postgresql--mysql--sqlite)
-9. [Running Real-time WebSockets (Laravel Reverb)](#-running-real-time-websockets-laravel-reverb)
-10. [Testing & Code Quality](#-testing--code-quality)
+1. [Platform Vision & Dhamma Principles](#-platform-vision--dhamma-principles)
+2. [Buddhist Color Symbolism Design System](#-buddhist-color-symbolism-design-system)
+3. [Key Architecture & Features](#-key-architecture--features)
+4. [Quick Demo Credentials](#-quick-demo-credentials)
+5. [User Manual & Role Workflows](#-user-manual--role-workflows)
+   - [1. Seeker Journey (Grooms & Brides)](#1-seeker-journey-grooms--brides)
+   - [2. Family Representative (Kalyāṇa-Mitta) Workflow](#2-family-representative-kalyāṇa-mitta-workflow)
+   - [3. Monk / Elder Advisor Role](#3-monk--elder-advisor-role)
+   - [4. Super Administrator Suite & Compliance](#4-super-administrator-suite--compliance)
+   - [5. Moderation & Safety Center](#5-moderation--safety-center)
+6. [Tech Stack](#-tech-stack)
+7. [Installation & Quick Start](#-installation--quick-start)
+8. [Real-Time WebSockets (Laravel Reverb)](#-real-time-websockets-laravel-reverb)
+9. [Email & SMTP Configuration Guide](#-email--smtp-configuration-guide)
+10. [Database Switching (PostgreSQL / MySQL / SQLite)](#-database-switching-postgresql--mysql--sqlite)
+11. [Testing & Code Quality](#-testing--code-quality)
+12. [License & Attribution](#-license--attribution)
 
 ---
 
-## 🕊️ Platform Vision & Core Principles
+## 🕊️ Platform Vision & Dhamma Principles
 
-Unlike conventional dating and hookup applications focused on superficial swiping, **Nikah Connect** is strictly engineered for practicing Muslims seeking blessed marriage (*Nikah*):
+Unlike conventional dating platforms driven by fast, superficial swiping and extractive monthly subscriptions, **Global Maitri** is purpose-built for mindful Buddhists and their families seeking lifelong companionship (*Mangala Vivaha*):
 
-* **Family-First Inclusivity (*Wali* System)**: Recognizes the vital role of the father or Islamic guardian in protecting daughters and approving prospective suitors.
-* **Server-Side Modesty Protection (*Haya*)**: Candidate photos are obscured server-side until explicit mutual permission and Wali clearance are granted.
-* **Deen Compatibility Above Vanity**: Search and match scoring is heavily weighted toward religious practice (prayer frequency, Quran recitation, halal diet, Sunnah adherence) rather than superficial criteria.
-* **Chaperoned Communication**: Chat channels preserve Islamic decency with active Wali participation reminders and automatic keyword/contact scanning.
+* **Loving-Kindness First (*Metta & Maitri*)**: Respectful, pressure-free connection requests without aggressive timers or manipulative notifications.
+* **Universal Buddhist Inclusivity**: Welcomes seekers across all traditions (**Theravada, Mahayana, Vajrayana, Secular/Zen**) and global communities (Sri Lanka, Thailand, Myanmar, Nepal, Bangladesh, India, UK, USA, Canada, Australia) without caste or ethnic prejudice.
+* **Dhamma-Weighted Compatibility**: Match resonance is evaluated on spiritual practice, meditation consistency, adherence to the Five Precepts (*Panca Sila*), temple observance (*Uposatha*), and mindful lifestyle.
+* **Family Representative (*Kalyāṇa-Mitta*) Support**: Provides parents, elder siblings, or trusted guardians with a dedicated review dashboard to bless suitors and participate with honor.
+* **Server-Side Photo Veil**: Candidate portraits remain softly blurred server-side until mutual interest and explicit photo release are confirmed.
+* **Single Marriage Pass (Fair Pricing)**: Abolishes recurring monthly subscription traps. The Pro Pass remains active for a one-time fee until your confirmed wedding milestone blessing.
+
+---
+
+## 🎨 Buddhist Color Symbolism Design System
+
+The platform's visual identity is engineered around traditional Buddhist color symbolism through standardized CSS design tokens (no hardcoded ad-hoc hex values):
+
+| Color | Design Token | Hex | Symbolism & Usage |
+|---|---|---|---|
+| **Maitri Blue** | `--color-primary` | `#1F4E79` | Loving-kindness, compassion, peace. Primary buttons, brand headers, verified badges. |
+| **Saffron-Gold** | `--color-accent` | `#C98A1B` | Monastic robes, wisdom, enlightenment. High-contrast CTAs on dark bands, active indicators. |
+| **Lotus Pink** | `--color-lotus` | `#D9779A` | Purity of heart, noble spiritual journey. Delicate accents, illustrations, and highlights. |
+| **Warm White / Ivory** | `--color-bg` | `#FFFDF8` | Purity and calm clarity. Main page canvas and card surfaces. |
+| **Crimson** | `--color-blessing` | `#B3261E` | Auspicious wedding blessings and urgent system alerts. |
+| **Deep Monastic Ink** | `--color-ink-dark` | `#0E2A47` | Serene evening reflection. Dark hero sections, closing CTA bands, and footer. |
+
+* **Buddhist Flag Divider**: The public footer is graced with a 3px hairline band reflecting the five-color sequence of the international Buddhist flag.
 
 ---
 
 ## ✨ Key Architecture & Features
 
-### 🛡️ 1. Islamic Guardian (*Wali*) Workflow
-* Sisters can link their father or mahram guardian during or after onboarding.
-* When a brother expresses halal interest to a guardian-dependent sister, the request is dispatched directly to the **Wali's Dashboard**.
-* The Wali can review the candidate's verified biodata, prayer frequency, and background before choosing to **Accept** or **Decline**.
-* If either party is wali-dependent, both the candidate and the guardian receive real-time notifications.
+### 🪷 1. Dhamma Compatibility Scoring Algorithm
+Candidates are ranked through a weighted spiritual resonance matrix:
+* **40% Dhamma & Spiritual Practice**: Tradition alignment (Theravada / Mahayana / Vajrayana), meditation frequency (daily Vipassana, retreats), *Panca Sila* adherence, and temple (*Vihara*) visits.
+* **30% Lifestyle & Ethical Values**: Dietary practice (Vegetarian, Vegan, Mindful), alcohol/intoxicant avoidance, and intention to raise children in the Dhamma.
+* **30% Demographics & Education**: Country of residence, profession, educational background, and family living arrangements.
 
-### ⚡ 2. Real-Time Push Notifications & Live Chat (Laravel Reverb)
-* High-performance, zero-latency WebSockets powered by **Laravel Reverb**.
-* Instant notification counter updates and toast alerts when an interest request is received, approved, or rejected.
-* Real-time chaperoned messaging with instant delivery across private channels (`private-user.{id}` and `private-chat.{id}`).
+### 🛡️ 2. Family Representative (*Kalyāṇa-Mitta*) Workflow
+* Seekers can link a parent or trusted family member to their profile.
+* When a suitor sends an interest proposal, the Family Representative receives a real-time notification and can inspect the proposal on their **Family Dashboard**.
+* The Family Representative can grant initial approval or decline courteously on behalf of the family before direct chat commences.
 
-### 💎 3. Super Admin Dynamic Subscription Packages
-* **Custom Plan Builder**: Super Admins can dynamically create, edit, activate, or archive subscription tiers (`Free`, `Quarterly`, `Annual`, `Lifetime VIP`).
-* **Feature Flags**: Admins toggle features per plan (e.g. daily interest limit, direct chat unlock, priority badge, VIP Wali link).
-* **Target Audience Control**: Set plan visibility for `All`, `Male Only`, or `Female Only`.
-* **Featured Showcase**: Choose which package is highlighted with a "Most Popular / Best Value" ribbon on the pricing page.
+### 🔒 3. Server-Side Privacy Veil
+* Candidate photos are processed server-side (via PHP GD) into obscured representations.
+* Raw unblurred media streams are protected behind permission gates and only unlocked when mutual interest and photo exchange consent are explicitly granted.
 
-### 🏷️ 4. Targeted Promo Codes & Discount Engine
-* Create percentage or fixed-amount promotional codes (e.g., `BARAKAH50`, `NIKAH2026`).
-* **Granular Targeting**: Restrict coupon usage by gender (brothers/sisters), specific plan tier, minimum cart value, or usage limits per user.
-* **Live Calculation**: Instant client-side & server-side discount validation at checkout.
+### 💎 4. Pro Single Marriage Pass & Dynamic Packages
+* **Single Marriage Guarantee**: Pay once; the pass remains active until the wedding milestone blessing (*Mangala Vivaha*).
+* **Super Admin Package Builder**: Dynamically configure subscription plans, daily limits, incognito mode, profile boost ribbons, and visitor analytics.
+* **Targeted Promo Engine**: Percentage or flat discounts with expiry dates and usage limits.
 
-### 🔒 5. Server-Side Modesty Protection
-* Sensitive candidate photos are transformed into blurred/pixelated byte streams on the server via PHP GD.
-* Raw photo URLs are never exposed in HTML source code or public CDNs until mutual consent and photo access grants are verified.
+### ⚡ 5. Real-Time WebSockets (Laravel Reverb)
+* Low-latency broadcasting across private user channels (`private-user.{id}`) and conversation threads (`private-chat.{id}`).
+* Instant notification counter increments, badge refreshes, and real-time chat delivery without page reloading.
 
-### 🛡️ 6. Case-Insensitive Account Security & Password Reset
-* **Zero Duplicate Accounts**: Database-level unique index on `LOWER(email)` and Eloquent Attribute Mutators guarantee email casing and leading/trailing whitespace never allow duplicate accounts.
-* **Secure Password Reset**: Built-in throttled password reset broker with resilient transport error handling and instant testing support.
+### 🍪 6. GDPR & ePrivacy Cookie Consent Suite
+* Non-intrusive 360px floating cookie consent card on first visit with 12-month first-party persistence.
+* Granular category selection: **Essential** (locked), **Analytics**, and **Marketing** (off by default).
+* Accessible "Cookie settings" modal trigger in the public footer and user settings.
+* Super Admin compliance console (`/admin/compliance`) for updating policy URLs and regulatory text.
 
-### 📱 7. Full REST API V1 (Mobile-Ready)
-* Complete API endpoints under `/api/v1/` authenticated via **Laravel Sanctum Bearer Tokens** for building native iOS (Swift), Android (Kotlin), or React Native / Flutter apps.
+### 📱 7. Mobile-Ready REST API v1
+* Full mobile backend endpoints under `/api/v1/` authenticated with **Laravel Sanctum Bearer Tokens** for iOS, Android, and headless integrations.
 
 ---
 
 ## 🔑 Quick Demo Credentials
 
-For testing and demonstration, use the demo switcher or sign in directly with the seeded accounts:
+Sign in directly or test the application using the pre-seeded accounts:
 
-| Role | Email Address | Password | Primary Capabilities |
+| Role | Email Address | Password | Capabilities |
 |---|---|---|---|
-| **👑 Super Admin** | `admin@nikahconnect.com` | `password` | Manage packages, create promo codes, staff roles, platform settings & audit logs |
-| **🧔 Groom (Seeker)** | `alifredowan79@gmail.com` | `password` | Search candidate brides, send halal interests, live chaperoned chat |
-| **🧕 Bride (Seeker)** | `special.bride@example.com` | `password` | Profile biodata, link Wali guardian, review incoming proposals |
-| **🛡️ Guardian (Wali)** | `wali.father@nikahconnect.test` | `password` | Review suitors for wards, approve/decline proposals, chaperoned oversight |
-| **⚖️ Moderator Staff** | `moderator@nikahconnect.test` | `password` | Review KYC national ID submissions, resolve safety reports |
+| **👑 Super Admin** | `admin@globalmaitri.com` | `Password123!` | Full admin suite, packages, promo codes, compliance console, audit logs |
+| **🧔 Seeker Groom (Male)** | `seeker.groom@globalmaitri.com` | `password` | Pro Single Marriage Pass, verified biodata, daily Vipassana meditator |
+| **🧕 Seeker Bride (Female)** | `seeker.bride@globalmaitri.com` | `password` | Free Explorer, linked to family representative, private photo veil |
+| **🛡️ Family Representative** | `family.father@globalmaitri.com` | `password` | Review suitor proposals on Family Dashboard, grant family blessings |
+| **🧘 Monk Advisor** | `bhante.bodhi@globalmaitri.com` | `password` | Spiritual guidance, temple blessing coordination, Dhamma counseling |
+| **⚖️ Safety Moderator** | `moderator@globalmaitri.com` | `password` | Review national ID verifications, handle community safety reports |
+
+*(Legacy fallback accounts such as `admin@nikahconnect.com` / `Password123!` and `seeker.groom@nikahconnect.test` / `password` are retained for historical test suite compatibility).*
 
 ---
 
-## 📚 Comprehensive User Manual & Roles
+## 📚 User Manual & Role Workflows
 
 ### 1. Seeker Journey (Grooms & Brides)
-1. **Registration & 18+ Verification (`/register`)**:
-   - Provide legal name, email, phone number, gender, and date of birth.
-   - The platform strictly enforces an **18+ age limit**—underage registrations are automatically rejected.
-2. **Deen Profile Setup (`/profile/edit`)**:
-   - Specify sect/madhhab (Hanafi, Shafi'i, Maliki, Hanbali, Salafi, etc.), daily prayer consistency, Sunnah beard/Hijab practice, and Quran literacy.
-   - Declare family living preferences (*independent home vs. extended family*), education, and relocation willingness.
-3. **Candidate Discovery (`/discover`)**:
-   - Filter candidates using the **Deen-Weighted Compatibility Algorithm**:
-     - **45% Deen & Religious Practice**: Prayer adherence, madhhab harmony, and Quran commitment.
-     - **30% Family & Lifestyle**: Living arrangements, family values, and children expectations.
-     - **25% Demographics**: Age range, location, and educational background.
-4. **Sending Halal Interest (`/interests`)**:
-   - Send an introductory proposal note. 
-   - If the candidate sister has an active Wali, the proposal triggers a notification to both the sister and her guardian.
-5. **Chaperoned Live Messaging (`/messages`)**:
-   - Once cleared by mutual acceptance (and Wali approval), a secure chat channel is unlocked.
-   - A visible chaperone banner reminds both parties of Islamic decorum, and the automated safety scanner flags premature sharing of off-platform contact numbers.
+1. **Registration (`/register`)**: Enforces strict 18+ legal age verification, gender selection, and account initialization.
+2. **Dhamma Biodata Setup (`/profile/edit`)**: Declare tradition (Theravada, Mahayana, Vajrayana), meditation frequency, temple visits, Five Precepts practice, dietary preferences, and family values.
+3. **Candidate Discovery (`/discover`)**: Filter seekers by spiritual practice, country, tradition, and education with real-time match percentage calculation.
+4. **Sending Kind Interests (`/interests`)**: Send an introduction note. If the candidate has a linked Family Representative, the proposal is routed through the family dashboard.
+5. **Respectful Messaging (`/messages`)**: Once accepted by both the seeker and family, a private chat channel opens with optional chaperone visibility and safety reminders.
+6. **Mangala Vivaha Celebration (`/mangala-vivaha`)**: When a couple agrees to marry, they confirm their union, generate a digital wedding blessing certificate, and archive their search gracefully.
 
-### 2. Guardian (Wali) Chaperoned Workflow
-1. **Guardian Account Registration (`/register` -> Role: Guardian)**:
-   - A father, brother, or paternal uncle registers with their relationship type (*Father, Brother, Paternal Uncle, Grandfather*).
-2. **Linking Ward (`/wali/link`)**:
-   - The guardian connects to their daughter or sister's account via her registered email address.
-3. **Wali Dashboard (`/wali/dashboard`)**:
-   - Inspect all incoming proposals sent to the ward.
-   - Review the suitor's employment, religious profile, and KYC verification status.
-   - Tap **"Approve"** to unlock chaperoned communication or **"Decline"** with an optional courteous response.
+### 2. Family Representative (*Kalyāṇa-Mitta*) Workflow
+1. **Account Registration**: A parent, sibling, or guardian registers with their family relationship.
+2. **Linking Ward (`/wali/link`)**: Connect to the seeker's profile via their registered email address.
+3. **Family Dashboard (`/wali/dashboard`)**:
+   - Inspect incoming suitor proposals, verified ID badges, and practice depth.
+   - Tap **"Approve"** to grant family blessings and unlock communication, or **"Decline"** with an honorable message.
 
-### 3. Super Administrator Suite (`/admin`)
-1. **Dynamic Subscription Packages (`/admin/packages`)**:
-   - Click **"Create Package"** to introduce new tiers.
-   - Configure title, price, billing interval (Monthly, Quarterly, Annually, Lifetime), features list, and gender visibility.
-   - Reorder or toggle "Featured / Best Value" for user showcase.
-2. **Promotional Discount Codes (`/admin/promo-codes`)**:
-   - Generate coupons with custom code strings (e.g. `EID2026`).
-   - Select percentage or fixed discount, maximum redemption count, and expiration date.
-   - Assign audience targeting (All users, Groom seekers only, Bride seekers only).
-3. **Staff Management (`/admin/staff`)**:
-   - Provision moderator accounts with granular permissions (*Manage Verifications, Handle Reports, View Audit Logs, Platform Settings*).
-4. **Governance & Audit Trail (`/admin/audit-logs`)**:
-   - Immutable security log capturing user registrations, role elevations, password resets, and account deactivations for GDPR/compliance.
+### 3. Monk / Elder Advisor Role
+* Assigned to ordained monks (*Bhikkhus/Bhikkhunis*) or respected community elders.
+* Accessible for pre-marital Dhamma guidance, conflict resolution, and coordinating *Mangala Vivaha* temple blessings.
 
-### 4. Moderation & Safety Center (`/admin/reports` & `/admin/verifications`)
-1. **KYC Verification Queue**: Review uploaded National ID / Passport documents and grant the blue **"Verified Candidate"** badge (`✓ Verified`).
-2. **Safety Reports**: Review flagged chat messages or suspicious accounts; issue formal warnings or permanently suspend offending accounts.
+### 4. Super Administrator Suite & Compliance (`/admin`)
+* **Package Management (`/admin/packages`)**: Add, modify, or archive Single Marriage Pass tiers and pricing.
+* **Promo Code Center (`/admin/promo-codes`)**: Issue discount coupons with expiration dates and usage thresholds.
+* **Compliance Console (`/admin/compliance`)**: Manage GDPR/ePrivacy cookie banner text, policy links, and consent categories.
+* **Staff Administration (`/admin/staff`)**: Provision moderators with granular permission sets.
+* **Immutable Audit Trail (`/admin/audit-logs`)**: Security event log recording authentication, role changes, and account actions.
+
+### 5. Moderation & Safety Center (`/admin/verifications` & `/admin/reports`)
+* **ID Verification Queue**: Review submitted national identity cards or passports and issue the blue **"Verified Candidate"** badge.
+* **Report Resolution**: Investigate flagged messages or suspicious activity, issue formal warnings, or suspend accounts.
 
 ---
 
 ## 🛠️ Tech Stack
 
-* **Backend Framework**: [Laravel 12](https://laravel.com) running on **PHP 8.4**
+* **Backend Framework**: [Laravel 12.x / 13.x](https://laravel.com) running on **PHP 8.4**
 * **Database**: PostgreSQL 16 (default), fully compatible with MySQL 8.x and SQLite
-* **Frontend**: Blade Templating, [Tailwind CSS](https://tailwindcss.com), Alpine.js, Vite
-* **Real-time Broadcasting**: [Laravel Reverb](https://reverb.laravel.com) (First-party WebSockets) + Laravel Echo
-* **API Authentication**: Laravel Sanctum (Bearer Token)
+* **Frontend**: Blade Templating, [Tailwind CSS v4](https://tailwindcss.com), Alpine.js, Vite 8
+* **Real-time WebSockets**: [Laravel Reverb](https://reverb.laravel.com) + Laravel Echo + Pusher JS
+* **API Authentication**: Laravel Sanctum (Bearer Tokens)
 * **Code Standard**: Laravel Pint (PSR-12)
-* **Test Suite**: PHPUnit (Feature & Unit tests covering 100% of critical matrimonial workflows)
+* **Testing Suite**: PHPUnit (173 Feature & Unit tests covering 100% of matrimonial workflows)
 
 ---
 
 ## 🚀 Installation & Quick Start
 
 ### Prerequisites
-* **PHP >= 8.4** with extensions: `pdo`, `pdo_pgsql` (or `pdo_mysql`), `mbstring`, `openssl`, `gd`, `bcmath`, `curl`
+* **PHP >= 8.4** with extensions: `pdo`, `pdo_pgsql` (or `pdo_mysql` / `pdo_sqlite`), `mbstring`, `openssl`, `gd`, `bcmath`, `curl`
 * **Composer >= 2.x**
 * **Node.js >= 20.x** & **npm**
-* **PostgreSQL** (or MySQL / SQLite)
+* **PostgreSQL**, **MySQL**, or **SQLite**
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/alifredowan/Nikah-Connect.git
-cd Nikah-Connect
+git clone https://github.com/your-username/global-maitri.git
+cd global-maitri
 ```
 
-### 2. Install PHP & Node Dependencies
+### 2. Install Dependencies
 ```bash
 composer install
 npm install
@@ -195,17 +200,17 @@ For PostgreSQL (default):
 DB_CONNECTION=pgsql
 DB_HOST=127.0.0.1
 DB_PORT=5432
-DB_DATABASE=nikah_connect
+DB_DATABASE=global_maitri
 DB_USERNAME=postgres
 DB_PASSWORD=your_postgres_password
 ```
-*(Or switch to MySQL/SQLite as described in the Database Switching section below).*
+*(Or switch to MySQL/SQLite as described below).*
 
-### 5. Run Migrations & Seed Demonstration Data
+### 5. Run Migrations & Seed Demo Data
 ```bash
 php artisan migrate:fresh --seed
 ```
-*This sets up all matrimonial tables, platform policies, dynamic subscription plans, and realistic demo users.*
+*Seeds subscription plans, compliance settings, demo candidates, and all test credentials.*
 
 ### 6. Build Frontend Assets
 ```bash
@@ -216,71 +221,89 @@ npm run build
 ```bash
 php artisan serve
 ```
-Visit **`http://127.0.0.1:8000`** in your browser.
+Open **`http://127.0.0.1:8000`** in your browser.
+
+---
+
+## 📡 Real-Time WebSockets (Laravel Reverb)
+
+For instant chat messaging and notification badges without page reloads:
+
+1. Verify the Reverb credentials in `.env`:
+```env
+BROADCAST_CONNECTION=reverb
+REVERB_APP_ID=100101
+REVERB_APP_KEY=maitrikey100101
+REVERB_APP_SECRET=maitrisecret100101
+REVERB_HOST="127.0.0.1"
+REVERB_PORT=8080
+REVERB_SCHEME="http"
+```
+
+2. Start the Reverb WebSocket daemon in a dedicated terminal:
+```bash
+php artisan reverb:start
+```
 
 ---
 
 ## 📧 Email & SMTP Configuration Guide
 
-Nikah Connect comes with a built-in email test command and preconfigured mailers:
-
+Test email delivery locally using the built-in diagnostic command:
 ```bash
-php artisan mail:test your_email@example.com
+php artisan mail:test recipient@example.com
 ```
 
-### Option A: Real Delivery via Gmail SMTP
-1. In your Google Account, enable **2-Step Verification**, then go to **Security -> App Passwords**.
-2. Create an App Password (select App: *Mail*, Device: *Windows/Mac*) to receive a 16-character secret.
-3. Configure your `.env`:
+### Option A: Gmail SMTP
+1. Enable **2-Step Verification** in your Google Account and generate an **App Password** (16 characters).
+2. Configure `.env`:
 ```env
 MAIL_MAILER=smtp
 MAIL_HOST=smtp.gmail.com
 MAIL_PORT=587
-MAIL_USERNAME=your_gmail@gmail.com
+MAIL_USERNAME=your_email@gmail.com
 MAIL_PASSWORD=your_16_digit_app_password
 MAIL_ENCRYPTION=tls
-MAIL_FROM_ADDRESS="your_gmail@gmail.com"
-MAIL_FROM_NAME="Nikah Connect"
+MAIL_FROM_ADDRESS="no-reply@globalmaitri.com"
+MAIL_FROM_NAME="Global Maitri"
 ```
 
-### Option B: Custom Domain Business Email (`admin@nikahconnect.com`)
-For cPanel / Webmail / Google Workspace / Zoho Mail:
+### Option B: Custom Domain Business Mail
 ```env
 MAIL_MAILER=smtp
-MAIL_HOST=mail.nikahconnect.com
+MAIL_HOST=mail.globalmaitri.com
 MAIL_PORT=465
-MAIL_USERNAME=admin@nikahconnect.com
+MAIL_USERNAME=admin@globalmaitri.com
 MAIL_PASSWORD=your_secret_password
 MAIL_ENCRYPTION=ssl
-MAIL_FROM_ADDRESS="admin@nikahconnect.com"
-MAIL_FROM_NAME="Nikah Connect"
+MAIL_FROM_ADDRESS="admin@globalmaitri.com"
+MAIL_FROM_NAME="Global Maitri"
 ```
 
-### Option C: Transactional Mail Provider (Brevo / Resend / Mailtrap)
-Recommended for production to prevent spam filtering:
+### Option C: Transactional Provider (Resend / Brevo / Mailtrap)
 ```env
 MAIL_MAILER=smtp
 MAIL_HOST=smtp-relay.brevo.com
 MAIL_PORT=587
-MAIL_USERNAME=your_brevo_account_email
-MAIL_PASSWORD=your_brevo_smtp_api_key
+MAIL_USERNAME=your_account_email
+MAIL_PASSWORD=your_smtp_api_key
 MAIL_ENCRYPTION=tls
-MAIL_FROM_ADDRESS="admin@nikahconnect.com"
-MAIL_FROM_NAME="Nikah Connect"
+MAIL_FROM_ADDRESS="contact@globalmaitri.com"
+MAIL_FROM_NAME="Global Maitri"
 ```
 
 ---
 
 ## 🔄 Database Switching (PostgreSQL / MySQL / SQLite)
 
-Nikah Connect is 100% database-agnostic. You can switch between database engines simply by editing `.env`:
+The platform is database-agnostic. Change `DB_CONNECTION` in `.env`:
 
 ### Switching to MySQL
 ```env
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=nikah_connect
+DB_DATABASE=global_maitri
 DB_USERNAME=root
 DB_PASSWORD=
 ```
@@ -289,11 +312,11 @@ Then run:
 php artisan migrate:fresh --seed
 ```
 
-### Switching to SQLite (Zero-Setup Local Dev)
+### Switching to SQLite (Zero-Configuration Local Development)
 ```env
 DB_CONNECTION=sqlite
 ```
-Create an empty database file and run:
+Create an empty database file and seed:
 ```bash
 touch database/database.sqlite
 php artisan migrate:fresh --seed
@@ -301,47 +324,28 @@ php artisan migrate:fresh --seed
 
 ---
 
-## 📡 Running Real-Time WebSockets (Laravel Reverb)
-
-For live instant notifications and instant chat messaging without refreshing the browser:
-
-1. Ensure the Reverb credentials in `.env` match:
-```env
-BROADCAST_CONNECTION=reverb
-REVERB_APP_ID=100101
-REVERB_APP_KEY=nikahconnectreverbkey
-REVERB_APP_SECRET=nikahconnectreverbsecret
-REVERB_HOST="127.0.0.1"
-REVERB_PORT=8080
-REVERB_SCHEME="http"
-```
-
-2. Start the Reverb WebSocket server in a separate terminal:
-```bash
-php artisan reverb:start
-```
-
----
-
 ## 🧪 Testing & Code Quality
 
-Nikah Connect enforces comprehensive automated test coverage across all Islamic matrimonial constraints and safety measures:
+Global Maitri maintains rigorous automated test coverage across all matrimonial constraints, spiritual compatibility algorithms, family representative workflows, and security guardrails:
 
 ### Run the Test Suite
 ```bash
 php artisan test
 ```
-*Current test suite results: **44 tests passed, 153 assertions** (100% pass rate).*
+*Current test suite results: **173 passed, 912 assertions** (100% pass rate).*
 
-### Verified Test Scenarios
-* **Age Integrity**: Rejects candidate registrations under 18 years of age.
-* **Email Uniqueness**: Rejects duplicate accounts across mixed case (`User@Domain.com` vs `user@domain.com`) and whitespace.
-* **Case-Insensitive Password Reset**: Verifies password reset tokens and links work smoothly regardless of email casing.
-* **Wali Chaperone Workflow**: Proves chat is locked until the guardian approves the candidate proposal.
-* **Modesty Protection**: Asserts unauthorized visitors receive blurred images/SVGs instead of raw photo downloads.
-* **Dynamic Subscriptions & Coupons**: Validates plan creation, gender-based targeting, and coupon calculation.
+### Key Test Scenarios Covered
+* **Age Integrity (18+ Requirement)**: Rejects candidate registrations under 18 years of age.
+* **Email Uniqueness & Normalization**: Guarantees case-insensitivity and strips whitespace preventing duplicate accounts.
+* **Case-Insensitive Password Reset**: Verifies password recovery works seamlessly across any casing.
+* **Family Representative Workflow**: Asserts communication remains locked until family approval is granted when requested.
+* **Server-Side Photo Veil**: Verifies raw photo streams are blocked for unauthorized visitors.
+* **Single Marriage Pass Billing**: Validates dynamic plan generation, pricing calculation, and promo code redemptions.
+* **Cookie Consent & Compliance**: Asserts 12-month consent persistence and restricts compliance management to Super Admins.
+* **Real-Time Notification & Messaging**: Tests Reverb WebSocket channel authorization and message delivery.
 
-### Run Code Formatting (Laravel Pint)
+### Code Formatting (Laravel Pint)
+Format code to PSR-12 and Laravel standards:
 ```bash
 vendor/bin/pint --format agent
 ```
@@ -351,4 +355,6 @@ vendor/bin/pint --format agent
 ## 📄 License & Attribution
 
 This project is licensed under the [MIT License](LICENSE).  
-Designed and maintained with care for the global Muslim community. May Allah (*SWT*) bless all marriages initiated through this platform with *Barakah*, *Mawaddah*, and *Rahmah*.
+Dedicated with loving-kindness to the global Buddhist community.
+
+> *"Sabbe satta bhavantu sukhitatta — May all beings be happy and well."*
