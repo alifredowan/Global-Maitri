@@ -25,7 +25,7 @@ class SubscriptionPricingTest extends TestCase
             ->assertSee('Pro Single Marriage Pass')
             ->assertSee('VIP Maitri Blessing Pass')
             ->assertSee('Our Single Marriage Guarantee (One-Time Pass Guarantee)')
-            ->assertDontSee('সাবস্ক্রিপশন গ্যারান্টি')
+            ->assertDontSee("\u{09B8}\u{09BE}\u{09AC}\u{09B8}\u{0995}\u{09CD}\u{09B0}\u{09BF}\u{09AA}\u{09B6}\u{09A8} \u{0997}\u{09CD}\u{09AF}\u{09BE}\u{09B0}\u{09BE}\u{09A8}\u{09CD}\u{099F}\u{09BF}")
             ->assertSee('href="'.route('register').'"', false)
             ->assertDontSee('Current Active Plan')
             ->assertDontSee('Your Current Plan')

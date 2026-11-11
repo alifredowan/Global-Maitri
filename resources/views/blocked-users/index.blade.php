@@ -29,7 +29,7 @@
                 @forelse($blockedUsers as $blockedUser)
                     <div class="flex items-center justify-between gap-4 py-4 first:pt-0 last:pb-0">
                         <div class="flex min-w-0 items-center gap-3">
-                            <div class="flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-[4px] bg-[#141412] font-bold text-[#e0b84c] border border-[var(--border-default)]">
+                            <div class="flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-[3px] bg-[var(--bg-subtle)] font-serif font-bold text-[var(--saffron-gold)] border border-[var(--border-default)]">
                                 @if($blockedUser->profile?->primaryPhoto)
                                     <img src="{{ $blockedUser->profile->primaryPhoto->displayUrl() }}" alt="{{ $blockedUser->name }}" class="photo-shield h-full w-full object-cover" loading="lazy" decoding="async">
                                 @else

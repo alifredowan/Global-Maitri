@@ -19,8 +19,8 @@
 
             <!-- Session Status Alert -->
             @if (session('status'))
-                <div class="mb-4 p-4 rounded-xl bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200 dark:border-emerald-800 text-xs font-semibold text-emerald-800 dark:text-emerald-200 flex items-center gap-2">
-                    <svg class="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                <div class="mb-4 p-4 rounded-xl bg-[var(--color-success-bg)] border border-[var(--color-success-border)] text-xs font-semibold text-[var(--color-success)] flex items-center gap-2">
+                    <svg class="w-4 h-4 text-[var(--color-success)] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
                     <span>{{ session('status') }}</span>
                 </div>
             @endif

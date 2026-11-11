@@ -1,111 +1,178 @@
 /**
- * Theme Tokens (Buddhist Matrimonial Platform: Global Maitri)
+ * Buddhist Color Symbolism Brand & Theme Tokens — Global Maitri
  *
- * PALETTE:
- * - Accent: #A67C00 (Muted ochre / Buddhist monastic robe gold)
- * - Accent Hover: #856300 (Darker shade of the same hue)
- * - Accent Active: #664C00
- * - Accent Subtle: #FAF6E9 (Muted ochre wash)
- * - Background Canvas Tint: #F4F2EE (Calm stone-grey)
- * - Card/Surface: #FFFFFF
- * - Secondary Accent: #7D5B28 (Dignified temple bronze / teak)
- * - Semantic Signals: Muted green (#1B6848) strictly for validation/status. No green brand colors.
+ * COLOR MEANING & DESIGN LOGIC:
+ * - Blue = Maitri, loving-kindness (matches brand name). Primary color.
+ * - Saffron/gold = monastic robes, wisdom, enlightenment. Accent color.
+ * - Lotus pink = the lotus, purity of heart. Soft secondary tint.
+ * - White/ivory = purity. Main background color.
+ * - Crimson = blessings. Tiny accents only.
+ *
+ * All components consume these tokens; no hardcoded hex in templates.
  */
 
 :root {
   /* =======================================================================
-   * 1. CANVAS & BACKGROUND TINTS (Calm stone-grey base)
+   * 1. CORE BUDDHIST PALETTE TOKENS (LIGHT MODE)
    * ======================================================================= */
-  --bg-canvas: #f4f2ee;
-  --bg-surface: #ffffff;
-  --bg-subtle: #ece9e3;
-  --bg-muted: #e2dfd7;
-  --bg-inset: #e8e5dd;
+  --color-primary: #1F4E79;        /* Maitri blue (primary action, brand) */
+  --color-primary-hover: #173C5E;
+  --color-primary-soft: #E6EEF6;
+
+  --color-ink-dark: #0E2A47;       /* Dark sections, footer, CTA band */
+  --color-ink-darker: #091D33;
+
+  --color-accent: #C98A1B;         /* Saffron-gold (monastic robes, wisdom) */
+  --color-accent-hover: #A97212;
+  --color-accent-soft: #FBF1DC;
+
+  --color-lotus: #D9779A;          /* Lotus pink (illustrations & highlights, not body text) */
+  --color-lotus-soft: #FBEAF1;
+
+  --color-blessing: #B3261E;       /* Crimson (blessings, unread badges) */
+
+  --color-bg: #FFFDF8;             /* Warm white (pure rice-paper/ivory base) */
+  --color-surface: #FFFFFF;        /* Crisp card surface */
+  --color-surface-alt: #F7F3EA;    /* Muted warm sand */
+
+  --color-text: #1A1A1A;           /* Deep ink text */
+  --color-text-muted: #4B5563;     /* Muted body text */
+  --color-border: #E5DFD0;         /* Warm hairline border */
+
+  /* Semantic status colors (disciplined, accessible) */
+  --color-success: #1E7F4F;
+  --color-success-bg: #EAF6F0;
+  --color-success-border: #BFE3D1;
+  --color-warning: #A15C00;
+  --color-warning-bg: #FDF6EB;
+  --color-warning-border: #F3DCB4;
+  --color-danger: #B3261E;
+  --color-danger-bg: #FDEEED;
+  --color-danger-border: #F4C4C1;
+  --color-info: var(--color-primary);
+  --color-info-bg: var(--color-primary-soft);
+  --color-info-border: #B6D2EC;
 
   /* =======================================================================
-   * 2. TYPOGRAPHY INK & CONTRAST
+   * 2. BACKWARD-COMPATIBLE SYSTEM MAPPINGS
    * ======================================================================= */
-  --text-primary: #1f1e1b;
-  --text-secondary: #524f47;
-  --text-muted: #78746b;
-  --text-inverse: #ffffff;
+  --bg-canvas: var(--color-bg);
+  --bg-surface: var(--color-surface);
+  --bg-card: var(--color-surface);
+  --bg-subtle: var(--color-surface-alt);
+  --bg-muted: var(--color-surface-alt);
+  --bg-inset: #EDE7DC;
 
-  /* =======================================================================
-   * 3. HAIRLINE BORDER HUES
-   * ======================================================================= */
-  --border-subtle: #e6e3db;
-  --border-default: #d6d2c8;
-  --border-strong: #aca699;
+  --text-primary: var(--color-text);
+  --text-secondary: var(--color-text-muted);
+  --text-muted: var(--color-text-muted);
+  --text-inverse: #FFFFFF;
 
-  /* =======================================================================
-   * 4. PRIMARY ACCENT (Muted Ochre — Buddhist Monastic Robe Gold)
-   * ======================================================================= */
-  --accent-primary: #a67c00;
-  --accent-hover: #856300;
-  --accent-active: #664c00;
-  --accent-subtle: #faf6e9;
-  --accent-subtle-hover: #f3ecce;
-  --accent-border: #dfd1a5;
-  --accent-text: #6b5000;
-  --accent-contrast: #ffffff;
+  --border-subtle: #ECE6D8;
+  --border-default: var(--color-border);
+  --border-strong: #CEC4AF;
 
-  /* =======================================================================
-   * 5. SECONDARY ACCENT (Dignified Temple Bronze / Teak)
-   * ======================================================================= */
-  --secondary-primary: #7d5b28;
-  --secondary-hover: #63471c;
-  --secondary-subtle: #fbf6ee;
-  --secondary-border: #ebdcc8;
-  --secondary-text: #573c14;
+  --accent-primary: var(--color-primary);
+  --accent-hover: var(--color-primary-hover);
+  --accent-active: #122F4B;
+  --accent-subtle: var(--color-primary-soft);
+  --accent-subtle-hover: #D7E5F3;
+  --accent-border: #B6D2EC;
+  --accent-text: var(--color-primary);
+  --accent-contrast: #FFFFFF;
 
-  /* =======================================================================
-   * 6. KEYBOARD ACCESSIBILITY FOCUS RING
-   * ======================================================================= */
-  --focus-ring: 0 0 0 2px var(--bg-surface), 0 0 0 4px var(--accent-primary);
+  --saffron-gold: var(--color-accent);
+  --secondary-primary: var(--color-accent);
+  --secondary-hover: var(--color-accent-hover);
+  --secondary-active: #8A5B0D;
+  --secondary-subtle: var(--color-accent-soft);
+  --secondary-border: #ECD5A5;
+  --secondary-text: var(--color-accent-hover);
+
+  /* Radii */
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 14px;
+  --radius-pill: 9999px;
+
+  /* Focus ring: 2px saffron outline with 2px offset */
+  --focus-ring: 0 0 0 2px var(--color-surface), 0 0 0 4px var(--color-accent);
   --focus-ring-offset: 2px;
-
-  /* =======================================================================
-   * 7. GEOMETRIC BACKGROUND PATTERN (Restrained 3-5% opacity)
-   * ======================================================================= */
-  --pattern-faint: radial-gradient(circle, rgba(166, 124, 0, 0.05) 1px, transparent 1px);
-  --pattern-faint-size: 24px 24px;
 }
 
 /* =======================================================================
- * DARK THEME (Serene, deep stone-charcoal night palette with warm ochre)
+ * 3. DARK THEME TOKENS
  * ======================================================================= */
 .dark {
-  --bg-canvas: #141412;
-  --bg-surface: #1c1c18;
-  --bg-subtle: #242420;
-  --bg-muted: #2f2f2a;
-  --bg-inset: #181815;
+  --color-bg: #0B1624;
+  --color-surface: #12233A;
+  --color-surface-alt: #172C47;
+  --color-text: #F2F2F2;
+  --color-text-muted: #B8C4D3;
+  --color-border: #243B5A;
 
-  --text-primary: #f5f4f0;
-  --text-secondary: #c4c1b6;
-  --text-muted: #8c887d;
-  --text-inverse: #141412;
+  --color-primary: #6FA3D8;        /* Lighter blue for dark background contrast */
+  --color-primary-hover: #8BB7E5;
+  --color-primary-soft: #152A42;
 
-  --border-subtle: #292924;
-  --border-default: #383832;
-  --border-strong: #525047;
+  --color-ink-dark: #0B1624;
+  --color-ink-darker: #060D17;
 
-  --accent-primary: #d4a625;
-  --accent-hover: #e6b738;
-  --accent-active: #c2951b;
-  --accent-subtle: #2b2310;
-  --accent-subtle-hover: #382e14;
-  --accent-border: #574519;
-  --accent-text: #f0c550;
-  --accent-contrast: #181406;
+  --color-accent: #E2B04F;         /* Lighter saffron for dark background */
+  --color-accent-hover: #F0C46A;
+  --color-accent-soft: #2F2715;
 
-  --secondary-primary: #d99a4e;
-  --secondary-hover: #e5ab66;
-  --secondary-subtle: #291e10;
-  --secondary-border: #4d391c;
-  --secondary-text: #f5be7e;
+  --color-lotus: #E6A0BC;
+  --color-lotus-soft: #351D28;
 
-  --focus-ring: 0 0 0 2px var(--bg-surface), 0 0 0 4px var(--accent-primary);
-  --pattern-faint: radial-gradient(circle, rgba(212, 166, 37, 0.04) 1px, transparent 1px);
-  --pattern-faint-size: 24px 24px;
+  --color-blessing: #E0534C;
+
+  --color-success: #3EB378;
+  --color-success-bg: #0E291C;
+  --color-success-border: #1C5438;
+  --color-warning: #E2B04F;
+  --color-warning-bg: #2B210C;
+  --color-warning-border: #5C4316;
+  --color-danger: #E0534C;
+  --color-danger-bg: #2D1414;
+  --color-danger-border: #5A2727;
+  --color-info: var(--color-primary);
+  --color-info-bg: var(--color-primary-soft);
+  --color-info-border: #26466B;
+
+  --bg-canvas: var(--color-bg);
+  --bg-surface: var(--color-surface);
+  --bg-card: var(--color-surface);
+  --bg-subtle: var(--color-surface-alt);
+  --bg-muted: var(--color-surface-alt);
+  --bg-inset: #09131F;
+
+  --text-primary: var(--color-text);
+  --text-secondary: var(--color-text-muted);
+  --text-muted: var(--color-text-muted);
+  --text-inverse: #0B1624;
+
+  --border-subtle: #1C304A;
+  --border-default: var(--color-border);
+  --border-strong: #3A5B87;
+
+  --accent-primary: var(--color-primary);
+  --accent-hover: var(--color-primary-hover);
+  --accent-active: #4F86BE;
+  --accent-subtle: var(--color-primary-soft);
+  --accent-subtle-hover: #1D3A5C;
+  --accent-border: #26466B;
+  --accent-text: var(--color-primary);
+  --accent-contrast: #0B1624;
+
+  --saffron-gold: var(--color-accent);
+  --secondary-primary: var(--color-accent);
+  --secondary-hover: var(--color-accent-hover);
+  --secondary-active: #C98A1B;
+  --secondary-subtle: var(--color-accent-soft);
+  --secondary-border: #4D3D1D;
+  --secondary-text: var(--color-accent);
+
+  --focus-ring: 0 0 0 2px var(--color-surface), 0 0 0 4px var(--color-accent);
 }

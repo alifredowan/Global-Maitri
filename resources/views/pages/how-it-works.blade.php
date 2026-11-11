@@ -92,30 +92,26 @@
     @endphp
 
     <!-- Hero Section -->
-    <section class="relative isolate overflow-hidden bg-[#141412] py-16 text-[#f4f2ee] sm:py-24 border-b border-[#2d2b27]">
-        <div class="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_15%_20%,rgba(166,124,0,.15),transparent_35%),radial-gradient(circle_at_85%_80%,rgba(166,124,0,.12),transparent_30%)]"></div>
-        <div class="absolute -left-20 top-16 h-72 w-72 rounded-full border border-[var(--accent-primary)]/10"></div>
-        <div class="absolute -right-24 bottom-0 h-96 w-96 rounded-full border border-[var(--accent-primary)]/10"></div>
-
+    <section class="relative isolate overflow-hidden bg-[var(--bg-canvas)] py-16 text-[var(--text-primary)] sm:py-24 border-b border-[var(--border-default)]">
         <div class="mx-auto grid max-w-7xl items-center gap-14 px-4 sm:px-6 lg:grid-cols-12 lg:px-8">
             <div class="lg:col-span-5">
-                <div class="mb-5 inline-flex items-center gap-2 rounded-full border border-[var(--accent-primary)]/30 bg-[var(--accent-primary)]/10 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[.18em] text-[#e0b84c]">
-                    <x-application-logo class="h-3.5 w-3.5 text-[#e0b84c]" />
+                <div class="mb-5 inline-flex items-center gap-2 rounded-[3px] border border-[var(--saffron-gold)]/25 bg-[var(--saffron-gold)]/10 px-3 py-1 text-xs font-mono uppercase tracking-wider text-[var(--saffron-gold)]">
+                    <span class="w-1.5 h-1.5 rounded-full bg-[var(--saffron-gold)]"></span>
                     A Clear Path to Mangala Vivaha
                 </div>
-                <h1 class="font-heading text-4xl font-extrabold leading-[1.08] tracking-tight sm:text-6xl text-white">
+                <h1 class="font-serif text-3xl font-bold leading-[1.12] tracking-tight sm:text-5xl text-[var(--text-primary)]">
                     Two hearts.<br>
-                    <span class="text-[#e0b84c]">One mindful circle.</span>
+                    <span class="text-[var(--saffron-gold)]">One mindful circle.</span>
                 </h1>
-                <p class="mt-6 max-w-xl text-sm leading-7 text-[#d6d2c8] sm:text-base">
-                    Global Maitri connects earnest Buddhist seekers through a respectful, family-aware process—so an auspicious introduction can flourish with clarity, Dhamma compatibility, and loving-kindness.
+                <p class="mt-5 max-w-xl text-xs sm:text-sm leading-relaxed text-[var(--text-secondary)]">
+                    Global Maitri connects earnest Buddhist individuals through a respectful, family-aware process — so an auspicious introduction can unfold with clarity, Dhamma compatibility, and loving-kindness.
                 </p>
                 <div class="mt-8 flex flex-wrap gap-3">
-                    <a href="{{ route('register') }}" class="btn-primary inline-flex items-center gap-2 text-sm">
+                    <a href="{{ route('register') }}" class="btn-primary inline-flex items-center gap-2 text-xs py-2.5 px-5 font-medium">
                         <span>Start your profile</span>
                         <span aria-hidden="true">&rarr;</span>
                     </a>
-                    <a href="#journey" class="btn-secondary inline-flex items-center gap-2 text-sm">
+                    <a href="#journey" class="btn-secondary inline-flex items-center gap-2 text-xs py-2.5 px-5 font-medium">
                         <span>Explore the journey</span>
                     </a>
                 </div>
@@ -123,92 +119,89 @@
 
             <!-- Animated relationship map -->
             <div class="relative lg:col-span-7" aria-label="Animated diagram showing two seekers and a Family Representative connected through Global Maitri">
-                <div class="relative mx-auto aspect-[1.08] max-w-2xl overflow-hidden rounded-[4px] border border-[#3d3a33] bg-[#1a1916]/90 p-4 shadow-2xl backdrop-blur sm:aspect-[1.25] sm:p-8">
-                    <div class="absolute inset-0 opacity-40 [background-image:linear-gradient(rgba(166,124,0,.08)_1px,transparent_1px),linear-gradient(90deg,rgba(166,124,0,.08)_1px,transparent_1px)] [background-size:32px_32px]"></div>
-                    <div class="absolute -left-24 top-1/3 h-72 w-72 rounded-full bg-[var(--accent-primary)]/10 blur-3xl"></div>
-                    <div class="absolute -right-24 bottom-0 h-72 w-72 rounded-full bg-[var(--accent-primary)]/10 blur-3xl"></div>
-                    <div class="absolute left-1/2 top-1/2 h-52 w-52 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--accent-primary)]/10 blur-3xl"></div>
+                <div class="relative mx-auto aspect-[1.08] max-w-2xl overflow-hidden rounded-[4px] border border-[var(--color-border)] bg-[var(--color-surface)] dark:border-[var(--color-border)] dark:bg-[var(--color-surface)]/90 p-4 shadow-2xl backdrop-blur sm:aspect-[1.25] sm:p-8">
+                    <div class="absolute inset-0 opacity-40 [background-image:linear-gradient(rgba(31,78,121,.08)_1px,transparent_1px),linear-gradient(90deg,rgba(31,78,121,.08)_1px,transparent_1px)] [background-size:32px_32px]"></div>
+                    <div class="absolute -left-24 top-1/3 h-72 w-72 rounded-full bg-[var(--color-primary)]/10 blur-3xl"></div>
+                    <div class="absolute -right-24 bottom-0 h-72 w-72 rounded-full bg-[var(--color-primary)]/10 blur-3xl"></div>
+                    <div class="absolute left-1/2 top-1/2 h-52 w-52 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--color-primary)]/10 blur-3xl"></div>
                     <svg class="pointer-events-none absolute inset-0 z-0 h-full w-full" viewBox="0 0 700 560" fill="none" role="img" aria-labelledby="relationship-map-title">
                         <title id="relationship-map-title">Two seekers and their Family Representative connected through a trusted matrimonial process</title>
-                        <path d="M153 166 C235 210 270 238 325 274" stroke="rgba(166,124,0,.36)" stroke-width="2" stroke-linecap="round" />
-                        <path d="M547 166 C465 210 430 238 375 274" stroke="rgba(166,124,0,.36)" stroke-width="2" stroke-linecap="round" />
-                        <path d="M350 450 C350 393 350 362 350 318" stroke="rgba(166,124,0,.42)" stroke-width="2" stroke-linecap="round" />
-                        <path class="how-it-works-packet" d="M153 166 C235 210 270 238 325 274" stroke="var(--accent-primary)" stroke-width="4" stroke-linecap="round" />
-                        <path class="how-it-works-packet delay-1" d="M547 166 C465 210 430 238 375 274" stroke="var(--accent-primary)" stroke-width="4" stroke-linecap="round" />
-                        <path class="how-it-works-packet delay-2" d="M350 450 C350 393 350 362 350 318" stroke="var(--accent-primary)" stroke-width="4" stroke-linecap="round" />
-                        <circle class="how-it-works-orbit" cx="350" cy="295" r="76" stroke="rgba(166,124,0,.26)" stroke-width="1" stroke-dasharray="3 9" />
+                        <path d="M153 166 C235 210 270 238 325 274" stroke="rgba(31,78,121,.36)" stroke-width="2" stroke-linecap="round" />
+                        <path d="M547 166 C465 210 430 238 375 274" stroke="rgba(31,78,121,.36)" stroke-width="2" stroke-linecap="round" />
+                        <path d="M350 450 C350 393 350 362 350 318" stroke="rgba(31,78,121,.42)" stroke-width="2" stroke-linecap="round" />
+                        <path class="how-it-works-packet" d="M153 166 C235 210 270 238 325 274" stroke="var(--color-primary)" stroke-width="4" stroke-linecap="round" />
+                        <path class="how-it-works-packet delay-1" d="M547 166 C465 210 430 238 375 274" stroke="var(--color-primary)" stroke-width="4" stroke-linecap="round" />
+                        <path class="how-it-works-packet delay-2" d="M350 450 C350 393 350 362 350 318" stroke="var(--color-primary)" stroke-width="4" stroke-linecap="round" />
+                        <circle class="how-it-works-orbit" cx="350" cy="295" r="76" stroke="rgba(31,78,121,.26)" stroke-width="1" stroke-dasharray="3 9" />
                     </svg>
 
                     <!-- Candidate A -->
-                    <div class="how-it-works-float how-it-works-map-card absolute left-[3%] top-[10%] z-10 w-[43%] max-w-52 rounded-[4px] border border-[#3d3a33] bg-[#22211c]/90 p-3 backdrop-blur-xl sm:left-[8%] sm:top-[8%] sm:w-48 sm:p-4">
+                    <div class="how-it-works-float how-it-works-map-card absolute left-[3%] top-[10%] z-10 w-[43%] max-w-52 rounded-[4px] border border-[var(--color-border)] bg-[var(--color-surface)]/95 dark:border-[var(--color-border)] dark:bg-[var(--color-surface-alt)]/95 p-3 backdrop-blur-xl sm:left-[8%] sm:top-[8%] sm:w-48 sm:p-4">
                         <div class="flex items-center gap-3">
-                            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-[4px] bg-[var(--accent-primary)]/20 text-[#e0b84c]">{!! $hiwIcon('user', 'h-5 w-5') !!}</div>
+                            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-[4px] bg-[var(--color-primary-soft)] text-[var(--color-accent)]">{!! $hiwIcon('user', 'h-5 w-5') !!}</div>
                             <div>
-                                <p class="text-xs font-bold text-white">Candidate A</p>
-                                <p class="mt-0.5 text-[10px] text-[#a8a49c]">Verified intention</p>
+                                <p class="text-xs font-bold text-[var(--text-primary)]">Candidate A</p>
+                                <p class="mt-0.5 text-[10px] text-[var(--text-muted)]">Verified intention</p>
                             </div>
                         </div>
-                        <div class="mt-3 flex items-center gap-1.5 text-[10px] font-semibold text-[#e0b84c]">
-                            <span class="h-1.5 w-1.5 rounded-full bg-[var(--accent-primary)]"></span> Profile ready
+                        <div class="mt-3 flex items-center gap-1.5 text-[10px] font-semibold text-[var(--color-accent)]">
+                            <span class="h-1.5 w-1.5 rounded-full bg-[var(--color-primary)]"></span> Profile ready
                         </div>
                     </div>
 
                     <!-- Candidate B -->
-                    <div class="how-it-works-float delay-1 how-it-works-map-card absolute right-[3%] top-[10%] z-10 w-[43%] max-w-52 rounded-[4px] border border-[#3d3a33] bg-[#22211c]/90 p-3 backdrop-blur-xl sm:right-[8%] sm:top-[8%] sm:w-48 sm:p-4">
+                    <div class="how-it-works-float delay-1 how-it-works-map-card absolute right-[3%] top-[10%] z-10 w-[43%] max-w-52 rounded-[4px] border border-[var(--color-border)] bg-[var(--color-surface)]/95 dark:border-[var(--color-border)] dark:bg-[var(--color-surface-alt)]/95 p-3 backdrop-blur-xl sm:right-[8%] sm:top-[8%] sm:w-48 sm:p-4">
                         <div class="flex items-center gap-3">
-                            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-[4px] bg-[var(--accent-primary)]/20 text-[#e0b84c]">{!! $hiwIcon('user', 'h-5 w-5') !!}</div>
+                            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-[4px] bg-[var(--color-primary-soft)] text-[var(--color-accent)]">{!! $hiwIcon('user', 'h-5 w-5') !!}</div>
                             <div>
-                                <p class="text-xs font-bold text-white">Candidate B</p>
-                                <p class="mt-0.5 text-[10px] text-[#a8a49c]">Dhamma aligned</p>
+                                <p class="text-xs font-bold text-[var(--text-primary)]">Candidate B</p>
+                                <p class="mt-0.5 text-[10px] text-[var(--text-muted)]">Dhamma aligned</p>
                             </div>
                         </div>
-                        <div class="mt-3 flex items-center gap-1.5 text-[10px] font-semibold text-[#e0b84c]">
-                            <span class="h-1.5 w-1.5 rounded-full bg-[var(--accent-primary)]"></span> Mutual interest
+                        <div class="mt-3 flex items-center gap-1.5 text-[10px] font-semibold text-[var(--color-accent)]">
+                            <span class="h-1.5 w-1.5 rounded-full bg-[var(--color-primary)]"></span> Mutual interest
                         </div>
                     </div>
 
                     <!-- Center Hub -->
                     <div class="absolute left-1/2 top-[49%] z-10 flex w-40 -translate-x-1/2 -translate-y-1/2 flex-col items-center text-center sm:w-48">
-                        <div class="how-it-works-map-node relative flex h-24 w-24 items-center justify-center rounded-full border border-[var(--accent-primary)]/60 bg-[#141412] sm:h-28 sm:w-28 p-4">
-                            <div class="absolute inset-2 rounded-full border border-dashed border-[var(--accent-primary)]/35"></div>
-                            <x-application-logo class="relative h-10 w-10 text-[#e0b84c]" />
+                        <div class="how-it-works-map-node relative flex h-20 w-20 items-center justify-center rounded-full border border-[var(--color-accent)]/40 bg-[var(--color-bg)] sm:h-24 sm:w-24 p-3 shadow-xs">
+                            <div class="absolute inset-1.5 rounded-full border border-dashed border-[var(--color-accent)]/30"></div>
+                            <x-application-logo class="relative h-8 w-8 text-[var(--color-accent)]" />
                         </div>
-                        <p class="mt-4 text-[9px] font-bold uppercase tracking-[.22em] text-[#a8a49c]">Global Maitri</p>
-                        <p class="mt-1 text-sm font-bold text-white sm:text-base">Auspicious union</p>
-                        <span class="mt-2 rounded-full border border-[var(--accent-primary)]/30 bg-[var(--accent-primary)]/10 px-2.5 py-1 text-[9px] font-semibold uppercase tracking-wider text-[#e0b84c]">Respect before closeness</span>
+                        <p class="mt-3 text-[9px] font-mono uppercase tracking-[.22em] text-[var(--text-muted)]">Global Maitri</p>
+                        <p class="mt-0.5 text-xs sm:text-sm font-bold text-[var(--text-primary)]">Auspicious Union</p>
+                        <span class="mt-1.5 rounded-full border border-[var(--color-accent)]/25 bg-[var(--color-accent-soft)] px-2.5 py-0.5 text-[9px] font-mono text-[var(--color-accent)]">Respect first</span>
                     </div>
 
                     <!-- Family Rep -->
-                    <div class="how-it-works-float delay-2 how-it-works-map-card absolute bottom-[4%] left-1/2 z-10 w-[58%] max-w-56 -translate-x-1/2 rounded-[4px] border border-[#3d3a33] bg-[#22211c]/90 p-3 backdrop-blur-xl sm:bottom-[7%] sm:w-56 sm:p-4">
+                    <div class="how-it-works-float delay-2 how-it-works-map-card absolute bottom-[4%] left-1/2 z-10 w-[58%] max-w-56 -translate-x-1/2 rounded-[4px] border border-[var(--color-border)] bg-[var(--color-surface)]/95 dark:border-[var(--color-border)] dark:bg-[var(--color-surface-alt)]/95 p-3 sm:bottom-[7%] sm:w-56 sm:p-4 backdrop-blur-xl shadow-xs">
                         <div class="flex items-center gap-3">
-                            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-[4px] bg-[var(--accent-primary)]/20 text-[#e0b84c]">{!! $hiwIcon('shield-check', 'h-5 w-5') !!}</div>
+                            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-[3px] bg-[var(--color-primary-soft)] text-[var(--color-accent)]">{!! $hiwIcon('shield-check', 'h-5 w-5') !!}</div>
                             <div>
-                                <p class="text-xs font-bold text-white">Family Rep / Elder</p>
-                                <p class="mt-0.5 text-[10px] text-[#a8a49c]">Visible when chosen</p>
+                                <p class="text-xs font-bold text-[var(--text-primary)]">Family Rep / Elder</p>
+                                <p class="mt-0.5 text-[10px] text-[var(--text-muted)]">Visible when chosen</p>
                             </div>
                         </div>
-                        <div class="mt-3 flex items-center gap-1.5 text-[10px] font-semibold text-[#e0b84c]">
-                            <span class="h-1.5 w-1.5 rounded-full bg-[var(--accent-primary)]"></span> Family guidance
+                        <div class="mt-3 flex items-center gap-1.5 text-[10px] font-semibold text-[var(--color-accent)]">
+                            <span class="h-1.5 w-1.5 rounded-full bg-[var(--color-primary)]"></span> Family guidance
                         </div>
                     </div>
 
-                    <div class="absolute left-1/2 top-3 z-10 -translate-x-1/2 rounded-full border border-[#3d3a33] bg-[#141412]/80 px-3.5 py-1.5 text-[9px] font-bold uppercase tracking-[.18em] text-[#d6d2c8] shadow-lg sm:top-5">Intent &amp; Metta layer</div>
+                    <div class="absolute left-1/2 top-3 z-10 -translate-x-1/2 rounded-full border border-[var(--border-default)] bg-[var(--bg-card)] px-3 py-1 text-[9px] font-mono uppercase tracking-[.18em] text-[var(--text-secondary)] shadow-xs sm:top-5">Intent &amp; Metta layer</div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Interactive system walkthrough -->
-    <section class="relative overflow-hidden border-b border-[var(--border-default)] bg-[var(--bg-surface)] py-16 sm:py-24"
-             x-data="{ activeStage: 1, timer: null }"
-             x-init="timer = setInterval(() => { activeStage = activeStage === 6 ? 1 : activeStage + 1 }, 4800)"
-             x-on:mouseenter="clearInterval(timer)"
-             x-on:mouseleave="timer = setInterval(() => { activeStage = activeStage === 6 ? 1 : activeStage + 1 }, 4800)">
+    <section class="relative overflow-hidden border-b border-[var(--border-default)] bg-[var(--bg-canvas)] py-16 sm:py-24"
+             x-data="{ activeStage: 1 }">
         <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div class="mx-auto max-w-3xl text-center">
-                <span class="text-xs font-bold uppercase tracking-[.2em] text-[var(--accent-primary)]">See the system in motion</span>
-                <h2 class="mt-3 font-heading text-3xl font-extrabold tracking-tight text-[var(--text-primary)] sm:text-5xl">A mindful path, never a guessing game.</h2>
-                <p class="mx-auto mt-4 max-w-2xl text-sm leading-6 text-[var(--text-secondary)]">Follow each signal as it moves through the platform. Select a stage to see who acts, what unlocks, and how the Family Representative supports the journey.</p>
+            <div class="mx-auto max-w-3xl text-center space-y-2">
+                <span class="text-xs font-mono uppercase tracking-wider text-[var(--saffron-gold)]">System Walkthrough</span>
+                <h2 class="font-serif text-2xl sm:text-4xl font-bold tracking-tight text-[var(--text-primary)]">A mindful path, never a guessing game.</h2>
+                <p class="mx-auto mt-2 max-w-2xl text-xs sm:text-sm leading-relaxed text-[var(--text-secondary)]">Follow each step as it moves through the platform. Select a stage to explore candidate actions, privacy states, and family representative guidance.</p>
             </div>
 
             <div class="mt-12 overflow-hidden card-ledger">
@@ -325,7 +318,7 @@
                                 <p class="mt-3 text-sm leading-6 text-[var(--text-secondary)]">A proposal signal indicates earnest intent. The recipient can accept or politely decline without any uncomfortable pressure.</p>
                                 <div class="mt-5 space-y-2 text-xs font-semibold text-[var(--text-primary)]">
                                     <p>✓ Consent before messaging begins</p>
-                                    <p>✓ Mutual acceptance unlocks conversation</p>
+                                    <p>✓ Mutual acceptance opens conversation</p>
                                     <p>✓ Lotus blur reveals gracefully upon agreement</p>
                                 </div>
                             </div>
@@ -431,42 +424,42 @@
             <div class="mx-auto mt-8 max-w-5xl overflow-hidden card-ledger">
                 <!-- Seeker / Candidate -->
                 <div x-show="role === 'seeker'" x-transition.opacity class="grid lg:grid-cols-[.8fr_1.2fr]">
-                    <div class="bg-[#141412] p-7 text-[#f4f2ee] sm:p-10 border-b lg:border-b-0 lg:border-r border-[#2d2b27]">
-                        <span class="inline-flex h-14 w-14 items-center justify-center rounded-[4px] bg-[var(--accent-primary)]/20 text-[#e0b84c]">{!! $hiwIcon('user', 'h-7 w-7') !!}</span>
-                        <p class="mt-8 text-[10px] font-bold uppercase tracking-[.2em] text-[#e0b84c]">For the Candidate</p>
-                        <h3 class="mt-3 font-heading text-3xl font-extrabold text-white">You bring the intention.</h3>
-                        <p class="mt-4 text-sm leading-6 text-[#d6d2c8]">Your profile is your respectful introduction. You decide what to share, who to approach, and when a conversation moves toward marriage.</p>
-                        <a href="{{ route('register') }}" class="btn-primary mt-8 inline-flex items-center gap-2 text-xs">Build my biodata &rarr;</a>
+                    <div class="bg-[var(--bg-canvas)] p-7 text-[var(--text-primary)] sm:p-10 border-b lg:border-b-0 lg:border-r border-[var(--border-default)]">
+                        <span class="inline-flex h-12 w-12 items-center justify-center rounded-[3px] bg-[var(--bg-subtle)] border border-[var(--border-default)] text-[var(--saffron-gold)]">{!! $hiwIcon('user', 'h-6 w-6') !!}</span>
+                        <p class="mt-6 text-[10px] font-mono uppercase tracking-[.2em] text-[var(--saffron-gold)]">For the Candidate</p>
+                        <h3 class="mt-2 font-serif text-2xl font-bold text-[var(--text-primary)]">You bring the intention.</h3>
+                        <p class="mt-3 text-xs sm:text-sm leading-relaxed text-[var(--text-secondary)]">Your profile is your respectful introduction. You decide what to share, who to approach, and when a conversation moves toward marriage.</p>
+                        <a href="{{ route('register') }}" class="btn-primary mt-6 inline-flex items-center gap-2 text-xs py-2 px-4 font-medium">Build my biodata &rarr;</a>
                     </div>
-                    <div class="p-7 sm:p-10 bg-[var(--bg-surface)]">
-                        <p class="text-xs font-bold uppercase tracking-wider text-[var(--accent-primary)]">Your four moments</p>
+                    <div class="p-7 sm:p-10 bg-[var(--bg-card)]">
+                        <p class="text-xs font-mono uppercase tracking-wider text-[var(--saffron-gold)]">Your four moments</p>
                         <div class="mt-6 space-y-5">
                             <div class="flex gap-4">
-                                <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-[4px] bg-[var(--accent-primary)]/10 text-xs font-extrabold text-[var(--accent-primary)]">01</span>
+                                <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-[3px] bg-[var(--bg-subtle)] border border-[var(--border-default)] text-xs font-mono text-[var(--saffron-gold)]">01</span>
                                 <div>
-                                    <h4 class="text-sm font-bold text-[var(--text-primary)]">Complete your biodata</h4>
-                                    <p class="mt-1 text-xs leading-5 text-[var(--text-secondary)]">Add your tradition, meditation rhythm, Five Precepts, and partner preferences.</p>
+                                    <h4 class="text-xs sm:text-sm font-serif font-bold text-[var(--text-primary)]">Complete your biodata</h4>
+                                    <p class="mt-1 text-xs leading-relaxed text-[var(--text-secondary)]">Add your tradition, meditation rhythm, Five Precepts, and partner preferences.</p>
                                 </div>
                             </div>
                             <div class="flex gap-4">
-                                <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-[4px] bg-[var(--accent-primary)]/10 text-xs font-extrabold text-[var(--accent-primary)]">02</span>
+                                <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-[3px] bg-[var(--bg-subtle)] border border-[var(--border-default)] text-xs font-mono text-[var(--saffron-gold)]">02</span>
                                 <div>
-                                    <h4 class="text-sm font-bold text-[var(--text-primary)]">Explore compatible candidates</h4>
-                                    <p class="mt-1 text-xs leading-5 text-[var(--text-secondary)]">Review Dhamma compatibility indicators before photos or chatting.</p>
+                                    <h4 class="text-xs sm:text-sm font-serif font-bold text-[var(--text-primary)]">Explore compatible candidates</h4>
+                                    <p class="mt-1 text-xs leading-relaxed text-[var(--text-secondary)]">Review Dhamma compatibility indicators before photos or chatting.</p>
                                 </div>
                             </div>
                             <div class="flex gap-4">
-                                <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-[4px] bg-[var(--accent-primary)]/10 text-xs font-extrabold text-[var(--accent-primary)]">03</span>
+                                <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-[3px] bg-[var(--bg-subtle)] border border-[var(--border-default)] text-xs font-mono text-[var(--saffron-gold)]">03</span>
                                 <div>
-                                    <h4 class="text-sm font-bold text-[var(--text-primary)]">Send one respectful proposal</h4>
-                                    <p class="mt-1 text-xs leading-5 text-[var(--text-secondary)]">The recipient chooses whether the door opens gracefully.</p>
+                                    <h4 class="text-xs sm:text-sm font-serif font-bold text-[var(--text-primary)]">Send one respectful proposal</h4>
+                                    <p class="mt-1 text-xs leading-relaxed text-[var(--text-secondary)]">The recipient chooses whether the door opens gracefully.</p>
                                 </div>
                             </div>
                             <div class="flex gap-4">
-                                <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-[4px] bg-[var(--accent-primary)]/10 text-xs font-extrabold text-[var(--accent-primary)]">04</span>
+                                <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-[3px] bg-[var(--bg-subtle)] border border-[var(--border-default)] text-xs font-mono text-[var(--saffron-gold)]">04</span>
                                 <div>
-                                    <h4 class="text-sm font-bold text-[var(--text-primary)]">Move toward Mangala Vivaha</h4>
-                                    <p class="mt-1 text-xs leading-5 text-[var(--text-secondary)]">Mindful chat and family involvement facilitate lifelong companionship.</p>
+                                    <h4 class="text-xs sm:text-sm font-serif font-bold text-[var(--text-primary)]">Move toward Mangala Vivaha</h4>
+                                    <p class="mt-1 text-xs leading-relaxed text-[var(--text-secondary)]">Mindful chat and family involvement facilitate lifelong companionship.</p>
                                 </div>
                             </div>
                         </div>
@@ -475,42 +468,42 @@
 
                 <!-- Family Rep -->
                 <div x-show="role === 'wali'" x-transition.opacity class="grid lg:grid-cols-[.8fr_1.2fr]">
-                    <div class="bg-[#141412] p-7 text-[#f4f2ee] sm:p-10 border-b lg:border-b-0 lg:border-r border-[#2d2b27]">
-                        <span class="inline-flex h-14 w-14 items-center justify-center rounded-[4px] bg-[var(--accent-primary)]/20 text-[#e0b84c]">{!! $hiwIcon('shield-check', 'h-7 w-7') !!}</span>
-                        <p class="mt-8 text-[10px] font-bold uppercase tracking-[.2em] text-[#e0b84c]">For the Family Representative</p>
-                        <h3 class="mt-3 font-heading text-3xl font-extrabold text-white">You bring family confidence.</h3>
-                        <p class="mt-4 text-sm leading-6 text-[#d6d2c8]">Parents and trusted relatives participate actively with full clarity and permission controls for both male and female candidates.</p>
-                        <a href="{{ route('register') }}" class="btn-primary mt-8 inline-flex items-center gap-2 text-xs">Representative Access &rarr;</a>
+                    <div class="bg-[var(--bg-canvas)] p-7 text-[var(--text-primary)] sm:p-10 border-b lg:border-b-0 lg:border-r border-[var(--border-default)]">
+                        <span class="inline-flex h-12 w-12 items-center justify-center rounded-[3px] bg-[var(--bg-subtle)] border border-[var(--border-default)] text-[var(--saffron-gold)]">{!! $hiwIcon('shield-check', 'h-6 w-6') !!}</span>
+                        <p class="mt-6 text-[10px] font-mono uppercase tracking-[.2em] text-[var(--saffron-gold)]">For the Family Representative</p>
+                        <h3 class="mt-2 font-serif text-2xl font-bold text-[var(--text-primary)]">You bring family confidence.</h3>
+                        <p class="mt-3 text-xs sm:text-sm leading-relaxed text-[var(--text-secondary)]">Parents and trusted relatives participate actively with full clarity and permission controls for both male and female candidates.</p>
+                        <a href="{{ route('register') }}" class="btn-primary mt-6 inline-flex items-center gap-2 text-xs py-2 px-4 font-medium">Representative Access &rarr;</a>
                     </div>
-                    <div class="p-7 sm:p-10 bg-[var(--bg-surface)]">
-                        <p class="text-xs font-bold uppercase tracking-wider text-[var(--accent-primary)]">Your four moments</p>
+                    <div class="p-7 sm:p-10 bg-[var(--bg-card)]">
+                        <p class="text-xs font-mono uppercase tracking-wider text-[var(--saffron-gold)]">Your four moments</p>
                         <div class="mt-6 space-y-5">
                             <div class="flex gap-4">
-                                <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-[4px] bg-[var(--accent-primary)]/10 text-xs font-extrabold text-[var(--accent-primary)]">01</span>
+                                <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-[3px] bg-[var(--bg-subtle)] border border-[var(--border-default)] text-xs font-mono text-[var(--saffron-gold)]">01</span>
                                 <div>
-                                    <h4 class="text-sm font-bold text-[var(--text-primary)]">Receive candidate link</h4>
-                                    <p class="mt-1 text-xs leading-5 text-[var(--text-secondary)]">The seeker connects your profile with custom relation roles.</p>
+                                    <h4 class="text-xs sm:text-sm font-serif font-bold text-[var(--text-primary)]">Receive candidate link</h4>
+                                    <p class="mt-1 text-xs leading-relaxed text-[var(--text-secondary)]">The seeker connects your profile with custom relation roles.</p>
                                 </div>
                             </div>
                             <div class="flex gap-4">
-                                <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-[4px] bg-[var(--accent-primary)]/10 text-xs font-extrabold text-[var(--accent-primary)]">02</span>
+                                <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-[3px] bg-[var(--bg-subtle)] border border-[var(--border-default)] text-xs font-mono text-[var(--saffron-gold)]">02</span>
                                 <div>
-                                    <h4 class="text-sm font-bold text-[var(--text-primary)]">Choose permission level</h4>
-                                    <p class="mt-1 text-xs leading-5 text-[var(--text-secondary)]">View-only, proposal approval, or active chaperone support.</p>
+                                    <h4 class="text-xs sm:text-sm font-serif font-bold text-[var(--text-primary)]">Choose permission level</h4>
+                                    <p class="mt-1 text-xs leading-relaxed text-[var(--text-secondary)]">View-only, proposal approval, or active chaperone support.</p>
                                 </div>
                             </div>
                             <div class="flex gap-4">
-                                <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-[4px] bg-[var(--accent-primary)]/10 text-xs font-extrabold text-[var(--accent-primary)]">03</span>
+                                <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-[3px] bg-[var(--bg-subtle)] border border-[var(--border-default)] text-xs font-mono text-[var(--saffron-gold)]">03</span>
                                 <div>
-                                    <h4 class="text-sm font-bold text-[var(--text-primary)]">Review candidate background</h4>
-                                    <p class="mt-1 text-xs leading-5 text-[var(--text-secondary)]">Examine Dhamma practice, lifestyle, and family compatibility.</p>
+                                    <h4 class="text-xs sm:text-sm font-serif font-bold text-[var(--text-primary)]">Review candidate background</h4>
+                                    <p class="mt-1 text-xs leading-relaxed text-[var(--text-secondary)]">Examine Dhamma practice, lifestyle, and family compatibility.</p>
                                 </div>
                             </div>
                             <div class="flex gap-4">
-                                <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-[4px] bg-[var(--accent-primary)]/10 text-xs font-extrabold text-[var(--accent-primary)]">04</span>
+                                <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-[3px] bg-[var(--bg-subtle)] border border-[var(--border-default)] text-xs font-mono text-[var(--saffron-gold)]">04</span>
                                 <div>
-                                    <h4 class="text-sm font-bold text-[var(--text-primary)]">Bless the union</h4>
-                                    <p class="mt-1 text-xs leading-5 text-[var(--text-secondary)]">Guide the families toward an auspicious Mangala Vivaha celebration.</p>
+                                    <h4 class="text-xs sm:text-sm font-serif font-bold text-[var(--text-primary)]">Bless the union</h4>
+                                    <p class="mt-1 text-xs leading-relaxed text-[var(--text-secondary)]">Guide the families toward an auspicious Mangala Vivaha celebration.</p>
                                 </div>
                             </div>
                         </div>
@@ -519,27 +512,47 @@
 
                 <!-- Family Elders -->
                 <div x-show="role === 'family'" x-transition.opacity class="grid lg:grid-cols-[.8fr_1.2fr]">
-                    <div class="bg-[#141412] p-7 text-[#f4f2ee] sm:p-10 border-b lg:border-b-0 lg:border-r border-[#2d2b27]">
-                        <span class="inline-flex h-14 w-14 items-center justify-center rounded-[4px] bg-[var(--accent-primary)]/20 text-[#e0b84c]">{!! $hiwIcon('home', 'h-7 w-7') !!}</span>
-                        <p class="mt-8 text-[10px] font-bold uppercase tracking-[.2em] text-[#e0b84c]">For the Family</p>
-                        <h3 class="mt-3 font-heading text-3xl font-extrabold text-white">You nurture the new chapter.</h3>
-                        <p class="mt-4 text-sm leading-6 text-[#d6d2c8]">The platform assists families in seeing a respectful path from first introduction to real-world celebration and temple blessings.</p>
-                        <a href="{{ route('about') }}" class="btn-primary mt-8 inline-flex items-center gap-2 text-xs">Learn our principles &rarr;</a>
+                    <div class="bg-[var(--bg-canvas)] p-7 text-[var(--text-primary)] sm:p-10 border-b lg:border-b-0 lg:border-r border-[var(--border-default)]">
+                        <span class="inline-flex h-12 w-12 items-center justify-center rounded-[3px] bg-[var(--bg-subtle)] border border-[var(--border-default)] text-[var(--saffron-gold)]">{!! $hiwIcon('home', 'h-6 w-6') !!}</span>
+                        <p class="mt-6 text-[10px] font-mono uppercase tracking-[.2em] text-[var(--saffron-gold)]">For the Family</p>
+                        <h3 class="mt-2 font-serif text-2xl font-bold text-[var(--text-primary)]">You nurture the new chapter.</h3>
+                        <p class="mt-3 text-xs sm:text-sm leading-relaxed text-[var(--text-secondary)]">The platform assists families in seeing a respectful path from first introduction to real-world celebration and temple blessings.</p>
+                        <a href="{{ route('about') }}" class="btn-primary mt-6 inline-flex items-center gap-2 text-xs py-2 px-4 font-medium">Learn our principles &rarr;</a>
                     </div>
-                    <div class="p-7 sm:p-10 bg-[var(--bg-surface)]">
-                        <p class="text-xs font-bold uppercase tracking-wider text-[var(--accent-primary)]">Your four moments</p>
+                    <div class="p-7 sm:p-10 bg-[var(--bg-card)]">
+                        <p class="text-xs font-mono uppercase tracking-wider text-[var(--saffron-gold)]">Your four moments</p>
                         <div class="mt-6 space-y-5">
                             <div class="flex gap-4">
-                                <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-[4px] bg-[var(--accent-primary)]/10 text-xs font-extrabold text-[var(--accent-primary)]">01</span>
+                                <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-[3px] bg-[var(--bg-subtle)] border border-[var(--border-default)] text-xs font-mono text-[var(--saffron-gold)]">01</span>
                                 <div>
-                                    <h4 class="text-sm font-bold text-[var(--text-primary)]">Start with context</h4>
-                                    <p class="mt-1 text-xs leading-5 text-[var(--text-secondary)]">Understand the candidate's Dhamma practice and family background.</p>
+                                    <h4 class="text-xs sm:text-sm font-serif font-bold text-[var(--text-primary)]">Start with context</h4>
+                                    <p class="mt-1 text-xs leading-relaxed text-[var(--text-secondary)]">Understand the candidate's Dhamma practice and family background.</p>
                                 </div>
                             </div>
                             <div class="flex gap-4">
-                                <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-[4px] bg-[var(--accent-primary)]/10 text-xs font-extrabold text-[var(--accent-primary)]">02</span>
+                                <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-[3px] bg-[var(--bg-subtle)] border border-[var(--border-default)] text-xs font-mono text-[var(--saffron-gold)]">02</span>
                                 <div>
-                                    <h4 class="text-sm font-bold text-[var(--text-primary)]">Respect mutual signals</h4>
+                                    <h4 class="text-xs sm:text-sm font-serif font-bold text-[var(--text-primary)]">Respect mutual signals</h4>
+                                    <p class="mt-1 text-xs leading-relaxed text-[var(--text-secondary)]">Communication begins only after both seekers agree.</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4">
+                                <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-[3px] bg-[var(--bg-subtle)] border border-[var(--border-default)] text-xs font-mono text-[var(--saffron-gold)]">03</span>
+                                <div>
+                                    <h4 class="text-xs sm:text-sm font-serif font-bold text-[var(--text-primary)]">Meet with dignity</h4>
+                                    <p class="mt-1 text-xs leading-relaxed text-[var(--text-secondary)]">Representative supervision creates a serene first step.</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4">
+                                <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-[3px] bg-[var(--bg-subtle)] border border-[var(--border-default)] text-xs font-mono text-[var(--saffron-gold)]">04</span>
+                                <div>
+                                    <h4 class="text-xs sm:text-sm font-serif font-bold text-[var(--text-primary)]">Celebrate the union</h4>
+                                    <p class="mt-1 text-xs leading-relaxed text-[var(--text-secondary)]">Solemnize with family blessings, Metta, and Mangala Vivaha.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                                     <p class="mt-1 text-xs leading-5 text-[var(--text-secondary)]">Communication begins only after both seekers agree.</p>
                                 </div>
                             </div>
@@ -602,7 +615,7 @@
                     </div>
                     <span class="mt-5 block text-[10px] font-bold uppercase tracking-wider text-[var(--accent-primary)]">Step 03</span>
                     <h3 class="mt-2 font-heading text-lg font-extrabold text-[var(--text-primary)]">Signal mutual interest</h3>
-                    <p class="mt-2 text-xs leading-5 text-[var(--text-secondary)]">No unsolicited messaging. Conversation unlocks upon mutual interest and representative approvals.</p>
+                    <p class="mt-2 text-xs leading-5 text-[var(--text-secondary)]">No unsolicited messaging. Conversation opens upon mutual interest and representative approvals.</p>
                 </div>
 
                 <div class="card-ledger relative p-5">
@@ -617,16 +630,17 @@
         </div>
     </section>
 
-    <!-- Closing CTA -->
-    <section class="bg-[#141412] py-16 text-[#f4f2ee] sm:py-20 border-t border-[#2d2b27]">
+    <!-- Closing CTA Band -->
+    <section class="section--dark py-16 sm:py-20 border-t border-[var(--color-border)]/30">
         <div class="mx-auto flex max-w-5xl flex-col items-center justify-between gap-8 px-4 text-center sm:px-6 lg:flex-row lg:text-left lg:px-8">
-            <div>
-                <span class="text-xs font-bold uppercase tracking-[.2em] text-[#e0b84c]">Ready when you are</span>
-                <h2 class="mt-3 font-heading text-3xl font-extrabold tracking-tight text-white sm:text-4xl">Start with a sincere intention.</h2>
-                <p class="mt-3 max-w-xl text-sm leading-6 text-[#d6d2c8]">Your auspicious journey begins with a biodata that reflects who you are, your Dhamma values, and the mindful union you wish to build.</p>
+            <div class="space-y-2">
+                <span class="text-xs font-mono uppercase tracking-[.2em] text-[var(--color-accent)]">Ready When You Are</span>
+                <h2 class="font-heading text-2xl sm:text-3xl font-bold tracking-tight text-white">Start with a sincere intention.</h2>
+                <p class="max-w-xl text-sm leading-relaxed text-[var(--text-secondary)]">Your matrimonial journey begins with a biodata that reflects who you are, your Dhamma values, and the peaceful partnership you wish to build.</p>
             </div>
-            <a href="{{ route('register') }}" class="btn-primary shrink-0 text-sm px-6 py-3.5">Create your biodata &rarr;</a>
+            <a href="{{ route('register') }}" class="btn-primary shrink-0 text-xs sm:text-sm px-6 py-3 font-semibold !bg-[var(--color-accent)] !text-[var(--color-ink-dark)] hover:!bg-[var(--color-accent-hover)]">Create your biodata &rarr;</a>
         </div>
     </section>
 </div>
 @endsection
+

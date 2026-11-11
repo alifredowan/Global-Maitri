@@ -5,22 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $targetUser->name }} - Buddhist Matrimonial Biodata | Global Maitri</title>
 
-    <!-- Google Fonts -->
+    <!-- Google Fonts: Fraunces, Cormorant Garamond, DM Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800&family=Outfit:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
 
     @vite(['resources/css/app.css'])
 
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; }
-        .font-heading { font-family: 'Outfit', sans-serif; }
-        .font-pali { font-family: 'Cinzel', serif; letter-spacing: 0.05em; }
+        body { font-family: 'DM Sans', system-ui, -apple-system, sans-serif; font-size: 17px; line-height: 1.6; color: var(--color-text); }
+        @media (max-width: 640px) { body { font-size: 16px; } }
+        .font-heading { font-family: 'Fraunces', 'Cormorant Garamond', Georgia, serif; font-weight: 700; }
+        .font-pali { font-family: 'Cormorant Garamond', Georgia, serif; letter-spacing: 0.04em; }
 
         @media print {
             .no-print { display: none !important; }
-            body { background: white !important; color: #141412 !important; padding: 0 !important; }
-            .biodata-container { box-shadow: none !important; border: 1px solid #d6d2c8 !important; margin: 0 !important; width: 100% !important; max-width: 100% !important; padding: 24px !important; }
+            body { background: white !important; color: var(--color-text) !important; padding: 0 !important; }
+            .biodata-container { box-shadow: none !important; border: 1px solid var(--color-border) !important; margin: 0 !important; width: 100% !important; max-width: 100% !important; padding: 24px !important; }
             .page-break { page-break-after: always; }
         }
     </style>
@@ -66,12 +67,12 @@
 
         <!-- Candidate Overview Box -->
         <div class="flex flex-col sm:flex-row items-center sm:items-start gap-6 bg-[var(--bg-subtle)] p-6 rounded-[4px] border border-[var(--border-default)]">
-            <div class="w-28 h-28 sm:w-32 sm:h-32 rounded-[4px] overflow-hidden bg-[#141412] border-2 border-[var(--accent-primary)] shadow-sm shrink-0 relative">
+            <div class="w-28 h-28 sm:w-32 sm:h-32 rounded-[3px] overflow-hidden bg-[var(--bg-canvas)] border border-[var(--saffron-gold)]/50 shadow-xs shrink-0 relative">
                 @if($profile->primaryPhoto)
                     <img src="{{ $profile->primaryPhoto->displayUrl() }}" alt="{{ $targetUser->name }}"
                          class="w-full h-full object-cover {{ $isPhotoVisible ? '' : 'filter blur-[10px]' }}">
                 @else
-                    <div class="w-full h-full flex items-center justify-center bg-[#22211c] text-[#e0b84c] font-bold text-3xl">
+                    <div class="w-full h-full flex items-center justify-center bg-[var(--bg-subtle)] text-[var(--saffron-gold)] font-serif font-bold text-3xl">
                         {{ substr($targetUser->name, 0, 1) }}
                     </div>
                 @endif
@@ -328,3 +329,4 @@
 
 </body>
 </html>
+

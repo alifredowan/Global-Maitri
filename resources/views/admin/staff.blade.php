@@ -32,8 +32,8 @@
     </div>
 
     @if(session('success'))
-        <div class="p-4 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800 text-emerald-900 dark:text-emerald-200 text-xs font-medium flex items-center gap-2 shadow-xs">
-            <svg class="w-4 h-4 shrink-0 text-emerald-600 dark:text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+        <div class="p-4 rounded-xl bg-[var(--color-success-bg)] border border-[var(--color-success-border)] text-[var(--color-success)] text-xs font-medium flex items-center gap-2 shadow-xs">
+            <svg class="w-4 h-4 shrink-0 text-[var(--color-success)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
             <span>{{ session('success') }}</span>
         </div>
     @endif
@@ -129,8 +129,8 @@
                             </td>
                             <td class="py-4 px-6">
                                 @if($staff->is_active)
-                                    <span class="inline-flex items-center gap-1 text-emerald-700 dark:text-emerald-400 font-bold text-[11px]">
-                                        <span class="w-2 h-2 rounded-full bg-emerald-500"></span> Active
+                                    <span class="inline-flex items-center gap-1 text-[var(--color-success)] font-bold text-[11px]">
+                                        <span class="w-2 h-2 rounded-full bg-[var(--color-success)]"></span> Active
                                     </span>
                                 @else
                                     <span class="inline-flex items-center gap-1 text-[var(--text-muted)] font-bold text-[11px]">
@@ -346,3 +346,4 @@
     </div>
 </div>
 @endsection
+

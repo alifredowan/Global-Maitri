@@ -75,7 +75,7 @@ All layout margins, paddings, and component dimensions adhere to a strict **4px 
 Matrimonial platforms across South Asia and global diasporas require bilingual English and Bengali script support.
 
 ```css
---font-sans: 'Inter', 'Noto Sans Bengali', 'Hind Siliguri', -apple-system, sans-serif;
+--font-sans: 'DM Sans', -apple-system, sans-serif;
 ```
 
 ### Scale & Hierarchy

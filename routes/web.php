@@ -25,6 +25,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [LandingController::class, 'index'])->name('landing');
 Route::get('/pricing', [SubscriptionController::class, 'pricing'])->name('subscription.pricing');
 Route::get('/privacy', [LandingController::class, 'privacy'])->name('privacy');
+Route::get('/cookies', [LandingController::class, 'cookies'])->name('cookies');
 Route::get('/terms', [LandingController::class, 'terms'])->name('terms');
 Route::get('/about', [LandingController::class, 'about'])->name('about');
 Route::get('/contact', [LandingController::class, 'contact'])->name('contact');
@@ -293,6 +294,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::post('/staff/{id}/toggle-status', [AdminController::class, 'toggleStaffStatus'])
                 ->middleware('throttle:30,1')
                 ->name('staff.toggle-status');
+
+            // Compliance & Cookie Consent Management
+            Route::get('/compliance', [AdminController::class, 'compliance'])->name('compliance');
+            Route::post('/compliance', [AdminController::class, 'updateCompliance'])
+                ->middleware('throttle:30,1')
+                ->name('compliance.update');
         });
 
         // Platform Policies, Dynamic Packages & Promo Codes (manage_settings or Super Admin)

@@ -75,12 +75,12 @@
                                 <!-- Top Card Header -->
                                 <div class="flex items-start justify-between gap-2.5 mb-3">
                                     <div class="flex items-center gap-3 min-w-0">
-                                        <div class="relative w-14 h-14 rounded-[4px] overflow-hidden bg-[#141412] shrink-0 border border-[var(--border-default)]">
+                                        <div class="relative w-14 h-14 rounded-[3px] overflow-hidden bg-[var(--bg-subtle)] shrink-0 border border-[var(--border-default)]">
                                             @if($profile && $profile->primaryPhoto)
                                                 <img src="{{ $profile->primaryPhoto->displayUrl() }}" alt="{{ $candidate->name }}" loading="lazy" decoding="async"
                                                      class="w-full h-full object-cover {{ $b->is_photo_visible ? '' : 'photo-shield' }}">
                                             @else
-                                                <div class="w-full h-full flex items-center justify-center bg-[#22211c] text-[#e0b84c] font-bold text-xl">
+                                                <div class="w-full h-full flex items-center justify-center bg-[var(--bg-subtle)] text-[var(--saffron-gold)] font-serif font-bold text-xl">
                                                     {{ substr($candidate->name, 0, 1) }}
                                                 </div>
                                             @endif
@@ -179,23 +179,23 @@
             @endif
 
         @else
-            <!-- Free User Upgrade Banner -->
-            <div class="bg-[#141412] rounded-[4px] p-8 sm:p-12 text-[#f4f2ee] shadow-xl border border-[#2d2b27]">
-                <div class="max-w-2xl space-y-4">
-                    <span class="px-3 py-1 rounded-[4px] text-xs font-bold uppercase tracking-wider bg-[var(--accent-primary)]/20 text-[#e0b84c] border border-[var(--accent-primary)]/30 inline-block">
-                        Single Marriage Pass Exclusive
+            <!-- Free User Upgrade Monograph -->
+            <div class="card-monograph p-8 sm:p-12 space-y-4 bg-gradient-to-b from-[var(--bg-card)] to-[var(--bg-subtle)]">
+                <div class="max-w-2xl space-y-3">
+                    <span class="px-2.5 py-0.5 rounded-[3px] text-xs font-mono uppercase tracking-wider bg-[var(--saffron-gold)]/10 text-[var(--saffron-gold)] border border-[var(--saffron-gold)]/25 inline-block">
+                        Single Marriage Pass Feature
                     </span>
-                    <h2 class="text-3xl font-extrabold font-heading text-white">
+                    <h2 class="text-2xl sm:text-3xl font-serif font-bold text-[var(--text-primary)]">
                         Shortlist Candidates for Family Review
                     </h2>
-                    <p class="text-xs sm:text-sm text-[#d6d2c8] leading-relaxed">
-                        In a Buddhist matrimonial journey, family consultation is key. Upgrade to Single Marriage Pass to shortlist candidates, write private family consultation notes, and download printable Dhamma biodatas for your family elders!
+                    <p class="text-xs sm:text-sm text-[var(--text-secondary)] leading-relaxed">
+                        In a Buddhist matrimonial journey, quiet family consultation is key. The Single Marriage Pass allows you to shortlist profiles, keep private consultation notes, and download printable Dhamma biodatas for elders to review in peace.
                     </p>
-                    <div class="pt-4 flex flex-col sm:flex-row gap-3">
-                        <a href="{{ route('subscription.pricing') }}" class="btn-primary text-xs px-7 py-3 text-center">
-                            Upgrade to Single Marriage Pass &rarr;
+                    <div class="pt-3 flex flex-col sm:flex-row gap-3">
+                        <a href="{{ route('subscription.pricing') }}" class="btn-primary text-xs px-6 py-2.5 text-center font-medium">
+                            Single Marriage Pass Details &rarr;
                         </a>
-                        <a href="{{ route('discovery.index') }}" class="btn-secondary text-xs px-6 py-3 text-center text-[#d6d2c8]">
+                        <a href="{{ route('discovery.index') }}" class="btn-secondary text-xs px-5 py-2.5 text-center font-medium">
                             Browse Candidates
                         </a>
                     </div>

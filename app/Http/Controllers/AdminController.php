@@ -803,4 +803,33 @@ class AdminController extends Controller
 
         return back()->with('success', "Staff account {$statusText} successfully.");
     }
+
+    public function compliance(): View
+    {
+        $cookieBannerHeading = PlatformSetting::get('cookie_banner_heading', 'Your privacy, your choice');
+        $cookieBannerText = PlatformSetting::get('cookie_banner_text', 'We use a few cookies to keep you signed in and understand how the site is used. You choose what we can use.');
+        $cookiePolicyUrl = PlatformSetting::get('cookie_policy_url', route('privacy').'#cookies');
+        $privacyPolicyUrl = PlatformSetting::get('privacy_policy_url', route('privacy'));
+
+        return view('admin.compliance', compact('cookieBannerHeading', 'cookieBannerText', 'cookiePolicyUrl', 'privacyPolicyUrl'));
+    }
+
+    public function updateCompliance(Request $request): RedirectResponse
+    {
+        $validated = $request->validate([
+            'cookie_banner_heading' => ['required', 'string', 'max:255'],
+            'cookie_banner_text' => ['required', 'string', 'max:1000'],
+            'cookie_policy_url' => ['required', 'string', 'max:255'],
+            'privacy_policy_url' => ['required', 'string', 'max:255'],
+        ]);
+
+        PlatformSetting::set('cookie_banner_heading', $validated['cookie_banner_heading'], 'string', 'compliance', 'Cookie banner title');
+        PlatformSetting::set('cookie_banner_text', $validated['cookie_banner_text'], 'string', 'compliance', 'Cookie banner description');
+        PlatformSetting::set('cookie_policy_url', $validated['cookie_policy_url'], 'string', 'compliance', 'Cookie policy URL');
+        PlatformSetting::set('privacy_policy_url', $validated['privacy_policy_url'], 'string', 'compliance', 'Privacy policy URL');
+
+        AuditLog::record(Auth::id(), 'compliance_settings_updated');
+
+        return back()->with('success', 'Cookie consent and compliance settings updated successfully.');
+    }
 }

@@ -257,7 +257,7 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect()->route('landing');
+        return redirect()->route('landing')->with('success', 'You have been signed out.');
     }
 
     public function deactivate(Request $request): RedirectResponse

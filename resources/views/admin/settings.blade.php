@@ -53,7 +53,7 @@
                 <div class="flex items-center justify-between">
                     <h2 class="text-base font-bold text-[var(--text-primary)] font-heading">CAPTCHA (Cloudflare Turnstile)</h2>
                     @if($captchaSettings['is_configured'])
-                        <span class="text-[10px] font-bold px-2 py-0.5 rounded-full {{ $captchaSettings['enabled'] ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300' : 'bg-[var(--bg-subtle)] text-[var(--text-muted)] border border-[var(--border-default)]' }}">
+                        <span class="text-[10px] font-bold px-2 py-0.5 rounded-full {{ $captchaSettings['enabled'] ? 'bg-[var(--color-success-bg)] text-[var(--color-success)] border border-[var(--color-success-border)]' : 'bg-[var(--bg-subtle)] text-[var(--text-muted)] border border-[var(--border-default)]' }}">
                             {{ $captchaSettings['enabled'] ? 'Active' : 'Configured' }}
                         </span>
                     @else
@@ -168,3 +168,4 @@
 
 </div>
 @endsection
+

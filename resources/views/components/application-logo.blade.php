@@ -18,7 +18,7 @@
         @endif
     </div>
 @elseif($variant === 'badge')
-    <div {{ $attributes->merge(['class' => 'relative shrink-0 ' . $badgeClass . ' rounded-[6px] bg-white dark:bg-[#181714] border border-[var(--border-default)] dark:border-[#eab308]/30 shadow-xs flex items-center justify-center p-1 overflow-hidden transition-transform duration-200']) }}>
+    <div {{ $attributes->merge(['class' => 'relative shrink-0 ' . $badgeClass . ' rounded-[6px] bg-[var(--color-surface)] border border-[var(--color-border)] shadow-xs flex items-center justify-center p-1 overflow-hidden transition-transform duration-200']) }}>
         <img src="{{ asset('images/logo-emblem.png') }}" alt="{{ $alt }}" class="w-full h-full object-contain" loading="eager" decoding="async">
     </div>
 @else

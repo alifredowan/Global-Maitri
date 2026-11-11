@@ -200,7 +200,7 @@
                     </h2>
 
                     <p class="text-xs sm:text-sm text-[var(--text-secondary)] leading-relaxed">
-                        Don't miss out on potential mindful life companions who have reviewed your matrimonial biodata. Upgrade to Single Marriage Pass to unlock visitor details, Dhamma compatibility scores, and send instant proposals!
+                        Don't miss out on potential mindful life companions who have reviewed your matrimonial biodata. Upgrade to Single Marriage Pass to view visitor details, Dhamma compatibility scores, and send instant proposals!
                     </p>
 
                     <div class="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">

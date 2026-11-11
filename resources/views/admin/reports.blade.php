@@ -41,7 +41,7 @@
                             <span class="text-[var(--text-muted)] line-clamp-1 italic">{{ $r->details ?? 'No additional note' }}</span>
                         </td>
                         <td class="p-4">
-                            <span class="px-2.5 py-1 rounded-full font-bold text-[10px] {{ $r->status === 'actioned' ? 'bg-emerald-100 dark:bg-emerald-950/70 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800/60' : ($r->status === 'dismissed' ? 'bg-[var(--bg-subtle)] text-[var(--text-muted)] border border-[var(--border-default)]' : 'bg-rose-100 dark:bg-rose-950/70 text-rose-800 dark:text-rose-300 border border-rose-200 dark:border-rose-800/60') }}">
+                            <span class="px-2.5 py-1 rounded-full font-bold text-[10px] {{ $r->status === 'actioned' ? 'bg-[var(--color-success-bg)] text-[var(--color-success)] border border-[var(--color-success-border)]' : ($r->status === 'dismissed' ? 'bg-[var(--bg-subtle)] text-[var(--text-muted)] border border-[var(--border-default)]' : 'bg-rose-100 dark:bg-rose-950/70 text-rose-800 dark:text-rose-300 border border-rose-200 dark:border-rose-800/60') }}">
                                 {{ ucfirst($r->status) }}
                             </span>
                         </td>
@@ -89,3 +89,4 @@
 
 </div>
 @endsection
+

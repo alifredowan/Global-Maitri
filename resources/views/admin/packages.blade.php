@@ -71,8 +71,8 @@
         </div>
 
         @if(session('success'))
-            <div class="p-4 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-200 text-xs font-semibold flex items-center gap-2 shadow-xs">
-                <svg class="w-4 h-4 shrink-0 text-emerald-600 dark:text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            <div class="p-4 rounded-xl bg-[var(--color-success-bg)] border border-[var(--color-success-border)] text-[var(--color-success)] text-xs font-semibold flex items-center gap-2 shadow-xs">
+                <svg class="w-4 h-4 shrink-0 text-[var(--color-success)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
                 <span>{{ session('success') }}</span>
             </div>
         @endif
@@ -122,7 +122,7 @@
                 <button type="button" @click="displayFilter = 'active'"
                         :class="displayFilter === 'active' ? 'bg-[var(--accent-primary)] text-white shadow-xs' : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]'"
                         class="px-3.5 py-1.5 rounded-lg transition cursor-pointer flex items-center gap-1.5">
-                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                    <span class="w-1.5 h-1.5 rounded-full bg-[var(--color-success)]"></span>
                     <span>Displayed ({{ $packages->where('is_active', true)->count() }})</span>
                 </button>
                 <button type="button" @click="displayFilter = 'inactive'"
@@ -144,8 +144,8 @@
                         <div class="flex items-center justify-between gap-2 mb-3">
                             <div class="flex items-center gap-2">
                                 @if($pkg->is_active)
-                                    <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-extrabold bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 uppercase tracking-wider">
-                                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                                    <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-extrabold bg-[var(--color-success-bg)] text-[var(--color-success)] border border-[var(--color-success-border)] uppercase tracking-wider">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-[var(--color-success)] animate-pulse"></span>
                                         Displayed to Users
                                     </span>
                                 @else
@@ -200,7 +200,7 @@
 
                             <div class="flex items-center justify-between">
                                 <span class="text-[var(--text-muted)]">Advanced Filters:</span>
-                                <span>{!! $pkg->advanced_filters ? '<span class="text-emerald-600 font-bold">✓ Enabled</span>' : '<span class="text-[var(--text-muted)]">✕ None</span>' !!}</span>
+                                <span>{!! $pkg->advanced_filters ? '<span class="text-[var(--color-success)] font-bold">✓ Enabled</span>' : '<span class="text-[var(--text-muted)]">✕ None</span>' !!}</span>
                             </div>
 
                             <div class="flex items-center justify-between">
@@ -210,7 +210,7 @@
 
                             <div class="flex items-center justify-between">
                                 <span class="text-[var(--text-muted)]">See Who Viewed You:</span>
-                                <span>{!! $pkg->see_who_viewed ? '<span class="text-emerald-600 font-bold">✓ Enabled</span>' : '<span class="text-[var(--text-muted)]">✕ None</span>' !!}</span>
+                                <span>{!! $pkg->see_who_viewed ? '<span class="text-[var(--color-success)] font-bold">✓ Enabled</span>' : '<span class="text-[var(--text-muted)]">✕ None</span>' !!}</span>
                             </div>
 
                             <div class="flex items-center justify-between">
@@ -226,7 +226,7 @@
                                 <ul class="space-y-1 text-[11px] text-[var(--text-muted)]">
                                     @foreach($pkg->features as $feat)
                                         <li class="flex items-start gap-1.5">
-                                            <svg class="w-3.5 h-3.5 shrink-0 text-emerald-600 dark:text-emerald-400 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                                            <svg class="w-3.5 h-3.5 shrink-0 text-[var(--color-success)] mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
                                             <span>{{ $feat }}</span>
                                         </li>
                                     @endforeach
@@ -503,3 +503,4 @@
     </div>
 </div>
 @endsection
+

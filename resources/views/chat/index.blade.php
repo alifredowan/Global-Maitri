@@ -1,22 +1,23 @@
 @extends('layouts.app')
 
-@section('title', 'Mindful Conversations - Global Maitri')
+@section('title', 'Conversations — Global Maitri')
 
 @section('content')
-<div class="py-6 bg-[var(--bg-canvas)] min-h-screen">
+<div class="py-6 sm:py-8 bg-[var(--bg-canvas)] min-h-[calc(100vh-160px)]">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
 
-        <div class="card-ledger bg-[var(--bg-surface)] p-5 sm:p-6 border border-[var(--border-default)] flex items-center justify-between">
-            <div>
-                <h1 class="text-xl sm:text-2xl font-extrabold text-[var(--text-primary)] font-heading">Mindful Conversations</h1>
-                <p class="text-xs text-[var(--text-secondary)] mt-0.5">Private communication unlocked after mutual proposal acceptance (FR-4.2).</p>
+        <div class="rounded-[var(--radius-lg)] bg-[var(--bg-surface)] p-5 sm:p-7 border border-[var(--border-default)] flex items-center justify-between shadow-xs">
+            <div class="space-y-1">
+                <p class="text-xs font-semibold uppercase tracking-wider text-[var(--accent-primary)]">Messages</p>
+                <h1 class="font-heading text-2xl font-bold text-[var(--text-primary)]">Conversations</h1>
+                <p class="text-xs sm:text-sm text-[var(--text-secondary)]">Private messages with accepted proposals.</p>
             </div>
-            <span class="badge-status bg-[var(--accent-subtle)] text-[var(--accent-primary)] border border-[var(--accent-primary)]/30 text-xs">
-                Chaperoned &amp; Protected
+            <span class="text-xs font-medium px-3 py-1 rounded-[var(--radius-xs)] bg-[var(--accent-subtle)] text-[var(--accent-primary)] border border-[var(--border-default)]">
+                Protected space
             </span>
         </div>
 
-        <div class="card-ledger bg-[var(--bg-surface)] border border-[var(--border-default)] overflow-hidden divide-y divide-[var(--border-subtle)]">
+        <div class="card-monograph divide-y divide-[var(--border-subtle)] overflow-hidden">
             @forelse($conversations as $conversation)
                 @php
                     $isChaperoneUser = $conversation->participants->where('id', Auth::id())->first()?->pivot?->role === 'wali_chaperone';
@@ -25,33 +26,33 @@
                     $seekers = $conversation->participants->where('pivot.role', 'seeker');
                 @endphp
                 <a href="{{ route('chat.show', $conversation->id) }}" class="p-4 sm:p-5 flex items-center justify-between gap-4 hover:bg-[var(--bg-subtle)] transition block">
-                    <div class="flex items-center gap-3.5">
-                        <div class="w-12 h-12 rounded-[var(--radius-sm)] bg-[var(--neutral-900)] overflow-hidden shrink-0 border border-[var(--border-default)]">
+                    <div class="flex items-center gap-3.5 min-w-0">
+                        <div class="w-12 h-12 rounded-[var(--radius-xs)] bg-[var(--bg-subtle)] overflow-hidden shrink-0 border border-[var(--border-default)]">
                             @if($other?->profile?->primaryPhoto)
-                                <img src="{{ $other->profile->primaryPhoto->displayUrl() }}" alt="{{ $other->name }}" class="w-full h-full object-cover {{ ($other->profile->isPhotoVisibleTo(Auth::user())) ? '' : 'photo-shield' }}" loading="lazy" decoding="async">
+                                <img src="{{ $other->profile->primaryPhoto->displayUrl() }}" alt="{{ $other->name }}" class="w-full h-full object-cover {{ ($other->profile->isPhotoVisibleTo(Auth::user())) ? '' : 'photo-shield' }}" loading="lazy">
                             @else
-                                <div class="w-full h-full flex items-center justify-center bg-[var(--bg-subtle)] text-[var(--accent-primary)] font-bold text-lg">
+                                <div class="w-full h-full flex items-center justify-center bg-[var(--bg-subtle)] text-[var(--accent-primary)] font-bold text-sm">
                                     {{ substr($other?->name ?? 'User', 0, 1) }}
                                 </div>
                             @endif
                         </div>
-                        <div>
+                        <div class="min-w-0">
                             <div class="flex items-center gap-2">
                                 @if($isChaperoneUser)
-                                    <h3 class="font-bold text-sm text-[var(--text-primary)]">{{ $seekers->pluck('name')->join(' & ') }}</h3>
-                                    <span class="badge-status bg-[var(--accent-subtle)] text-[var(--accent-primary)] border border-[var(--accent-primary)]/30 text-[10px]">
-                                        Observing as Guardian
+                                    <h3 class="font-heading font-bold text-sm text-[var(--text-primary)] truncate">{{ $seekers->pluck('name')->join(' & ') }}</h3>
+                                    <span class="text-[10px] font-semibold text-[var(--accent-primary)]">
+                                        &bull; Family observer
                                     </span>
                                 @else
-                                    <h3 class="font-bold text-sm text-[var(--text-primary)]">{{ $other?->name ?? 'Candidate' }}</h3>
+                                    <h3 class="font-heading font-bold text-sm text-[var(--text-primary)] truncate">{{ $other?->name ?? 'Candidate' }}</h3>
                                     @if($hasWali)
-                                        <span class="badge-status bg-[var(--accent-subtle)] text-[var(--accent-primary)] border border-[var(--accent-primary)]/30 text-[10px]">
-                                            Kalyāṇa-Mitta Guided
+                                        <span class="text-[10px] font-semibold text-[var(--accent-primary)]">
+                                            &bull; Family guided
                                         </span>
                                     @endif
                                 @endif
                             </div>
-                            <p class="text-xs text-[var(--text-secondary)] line-clamp-1 mt-0.5">
+                            <p class="text-xs text-[var(--text-secondary)] truncate mt-0.5">
                                 {{ $conversation->latestMessage?->body ?? 'Conversation started...' }}
                             </p>
                         </div>
@@ -64,12 +65,14 @@
                     </div>
                 </a>
             @empty
-                <div class="p-12 text-center text-[var(--text-muted)] text-xs">
-                    <p class="font-semibold text-sm text-[var(--text-primary)]">No active conversations yet.</p>
-                    <p class="mt-1">Messaging unlocks once an Interest request is mutually accepted by both parties.</p>
-                    <a href="{{ route('discovery.index') }}" class="btn-primary inline-block mt-4 text-xs !py-2 !px-4">
-                        Find Matches
-                    </a>
+                <div class="p-12 text-center text-[var(--text-muted)] text-xs space-y-2">
+                    <p class="font-semibold text-sm text-[var(--text-primary)]">No conversations yet.</p>
+                    <p class="max-w-md mx-auto">Conversations begin once both parties accept an interest proposal.</p>
+                    <div class="pt-2">
+                        <a href="{{ route('discovery.index') }}" class="btn-primary text-xs !py-2 !px-4">
+                            Browse candidates &rarr;
+                        </a>
+                    </div>
                 </div>
             @endforelse
         </div>

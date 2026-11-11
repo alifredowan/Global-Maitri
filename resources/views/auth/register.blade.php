@@ -1,54 +1,56 @@
 @extends('layouts.app')
 
-@section('title', 'Register - Global Maitri')
+@section('title', 'Create your profile — Global Maitri')
+@section('meta_description', 'Begin your Buddhist matrimonial journey with verified identities, private photos, and family representative support.')
 
 @section('content')
-<div class="py-10 bg-[var(--bg-canvas)] min-h-screen" x-data="{ role: '{{ old('role', 'seeker') }}' }">
+<div class="py-10 sm:py-14 bg-[var(--bg-canvas)] min-h-[calc(100vh-160px)]" x-data="{ role: '{{ old('role', 'seeker') }}' }">
     <div class="max-w-xl mx-auto px-4 sm:px-6">
-        <div class="card-ledger bg-[var(--bg-surface)] border border-[var(--border-default)] shadow-xs p-6 sm:p-8 space-y-6">
+        <div class="rounded-[var(--radius-lg)] bg-[var(--bg-surface)] border border-[var(--border-default)] shadow-xs p-6 sm:p-9 space-y-6">
             
             <!-- Header -->
-            <div class="text-center space-y-2">
-                <x-application-logo variant="badge" badge-class="w-12 h-12 mx-auto" />
-                <h1 class="text-xl sm:text-2xl font-extrabold text-[var(--text-primary)] font-heading">
-                    <span x-show="role === 'seeker'">Create Candidate Profile</span>
-                    <span x-show="role === 'wali'" style="display: none;">Register as Family Representative &amp; Kalyāṇa-Mitta</span>
+            <div class="text-left space-y-2 border-b border-[var(--border-subtle)] pb-5">
+                <p class="text-xs font-semibold uppercase tracking-wider text-[var(--accent-primary)]">Getting started</p>
+                <h1 class="font-heading text-2xl sm:text-3xl font-bold text-[var(--text-primary)]">
+                    <span x-show="role === 'seeker'">Create your profile</span>
+                    <span x-show="role === 'wali'" style="display: none;">Join as a family representative</span>
                 </h1>
-                <p class="text-xs text-[var(--text-secondary)] max-w-md mx-auto">
-                    <span x-show="role === 'seeker'">Begin your journey towards a lifelong union rooted in loving-kindness (Metta) and mutual respect.</span>
-                    <span x-show="role === 'wali'" style="display: none;">Guide and support your family member or ward with mindful Buddhist Kalyāṇa-Mitta mentorship.</span>
+                <p class="text-xs sm:text-sm text-[var(--text-secondary)] leading-relaxed">
+                    <span x-show="role === 'seeker'">No rush. Take your time. You can choose what to share, and photos stay private until you both agree.</span>
+                    <span x-show="role === 'wali'" style="display: none;">Parents, elders, and mentors can join free to advise and review proposals alongside candidates.</span>
                 </p>
             </div>
 
             <!-- Role Selection Options -->
             <div class="space-y-2">
-                <label class="block text-[11px] font-bold uppercase tracking-wider text-[var(--text-muted)]">I am registering as:</label>
-                <div class="grid grid-cols-2 gap-3">
+                <label class="block text-[11px] font-semibold uppercase tracking-wider text-[var(--text-muted)]">I am joining as:</label>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <button type="button" @click="role = 'seeker'"
-                            :class="role === 'seeker' ? 'border-[var(--accent-primary)] bg-[var(--accent-subtle)] text-[var(--accent-primary)] ring-1 ring-[var(--accent-primary)]' : 'border-[var(--border-default)] bg-[var(--bg-subtle)] text-[var(--text-secondary)] hover:border-[var(--border-strong)]'"
-                            class="p-3.5 rounded-[var(--radius-sm)] border text-left transition flex flex-col justify-between cursor-pointer">
-                        <div class="flex items-center gap-2 mb-1">
-                            <span class="w-2 h-2 rounded-full" :class="role === 'seeker' ? 'bg-[var(--accent-primary)]' : 'bg-[var(--border-default)]'"></span>
-                            <span class="font-bold text-xs text-[var(--text-primary)] font-heading">Candidate / Seeker</span>
+                            :class="role === 'seeker' ? 'border-[var(--accent-primary)] bg-[var(--accent-subtle)] ring-1 ring-[var(--accent-primary)]' : 'border-[var(--border-default)] bg-[var(--bg-subtle)] hover:border-[var(--border-strong)]'"
+                            class="p-4 rounded-[var(--radius-sm)] border text-left transition flex flex-col justify-between cursor-pointer">
+                        <div class="flex items-center gap-2 mb-1.5">
+                            <span class="w-2.5 h-2.5 rounded-full border border-black/10 shrink-0" :class="role === 'seeker' ? 'bg-[var(--accent-primary)]' : 'bg-transparent border-[var(--border-default)]'"></span>
+                            <span class="font-heading font-bold text-xs text-[var(--text-primary)]">Candidate</span>
                         </div>
-                        <p class="text-[10px] text-[var(--text-muted)]">Seeking a lifelong partner for myself (Groom or Bride).</p>
+                        <p class="text-xs text-[var(--text-secondary)] leading-snug">Looking for a life partner for myself (Groom or Bride).</p>
                     </button>
 
                     <button type="button" @click="role = 'wali'"
-                            :class="role === 'wali' ? 'border-[var(--accent-primary)] bg-[var(--accent-subtle)] text-[var(--accent-primary)] ring-1 ring-[var(--accent-primary)]' : 'border-[var(--border-default)] bg-[var(--bg-subtle)] text-[var(--text-secondary)] hover:border-[var(--border-strong)]'"
-                            class="p-3.5 rounded-[var(--radius-sm)] border text-left transition flex flex-col justify-between cursor-pointer">
-                        <div class="flex items-center gap-2 mb-1">
-                            <span class="w-2 h-2 rounded-full" :class="role === 'wali' ? 'bg-[var(--accent-primary)]' : 'bg-[var(--border-default)]'"></span>
-                            <span class="font-bold text-xs text-[var(--text-primary)] font-heading">Family Rep / Kalyāṇa-Mitta</span>
+                            :class="role === 'wali' ? 'border-[var(--accent-primary)] bg-[var(--accent-subtle)] ring-1 ring-[var(--accent-primary)]' : 'border-[var(--border-default)] bg-[var(--bg-subtle)] hover:border-[var(--border-strong)]'"
+                            class="p-4 rounded-[var(--radius-sm)] border text-left transition flex flex-col justify-between cursor-pointer">
+                        <div class="flex items-center gap-2 mb-1.5">
+                            <span class="w-2.5 h-2.5 rounded-full border border-black/10 shrink-0" :class="role === 'wali' ? 'bg-[var(--accent-primary)]' : 'bg-transparent border-[var(--border-default)]'"></span>
+                            <span class="font-heading font-bold text-xs text-[var(--text-primary)]">Family representative</span>
                         </div>
-                        <p class="text-[10px] text-[var(--text-muted)]">Parent, elder, relative, or spiritual mentor (Kalyāṇa-Mitta) guiding a candidate.</p>
+                        <p class="text-xs text-[var(--text-secondary)] leading-snug">Parent, elder, or relative helping someone you care about.</p>
                     </button>
                 </div>
             </div>
 
             @if ($errors->any())
-                <div class="p-3.5 rounded-[var(--radius-sm)] bg-[var(--color-danger-bg)] border border-[var(--color-danger-border)] text-[var(--color-danger)] text-xs">
-                    <ul class="list-disc list-inside space-y-1">
+                <div class="p-4 rounded-[var(--radius-sm)] bg-[var(--bg-surface)] border border-[var(--color-danger)] text-xs text-[var(--text-primary)]">
+                    <p class="font-bold text-[var(--color-danger)] mb-1">Please check the following:</p>
+                    <ul class="list-disc list-inside space-y-0.5 text-[var(--text-secondary)]">
                         @foreach ($errors->all() as $error)
                             <li>{{ $error }}</li>
                         @endforeach
@@ -64,24 +66,24 @@
 
                 <div>
                     <label class="block text-xs font-semibold text-[var(--text-secondary)] mb-1">
-                        <span x-show="role === 'seeker'">Full Legal Name</span>
-                        <span x-show="role === 'wali'" style="display: none;">Representative / Kalyāṇa-Mitta Legal Name</span>
+                        <span x-show="role === 'seeker'">Full legal name</span>
+                        <span x-show="role === 'wali'" style="display: none;">Your full name (Representative)</span>
                         <span class="text-[var(--color-danger)]">*</span>
                     </label>
                     <input type="text" name="name" value="{{ old('name') }}" required
                            class="input-field text-xs w-full"
-                           :placeholder="role === 'seeker' ? 'e.g. Ananda Wickramasinghe' : 'e.g. Dr. Sarath Wickramasinghe'">
+                           :placeholder="role === 'seeker' ? 'e.g. Ananda Barua' : 'e.g. Sarath Wickramasinghe'">
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                     <div>
-                        <label class="block text-xs font-semibold text-[var(--text-secondary)] mb-1">Email Address <span class="text-[var(--color-danger)]">*</span></label>
+                        <label class="block text-xs font-semibold text-[var(--text-secondary)] mb-1">Email address <span class="text-[var(--color-danger)]">*</span></label>
                         <input type="email" name="email" value="{{ old('email') }}" required
                                class="input-field text-xs w-full"
                                placeholder="your.email@domain.com">
                     </div>
                     <div>
-                        <label class="block text-xs font-semibold text-[var(--text-secondary)] mb-1">Phone Number</label>
+                        <label class="block text-xs font-semibold text-[var(--text-secondary)] mb-1">Phone number</label>
                         <div class="flex gap-2"
                              x-data="{
                                 open: false,
@@ -143,14 +145,14 @@
                     <div>
                         <label class="block text-xs font-semibold text-[var(--text-secondary)] mb-1">Gender <span class="text-[var(--color-danger)]">*</span></label>
                         <select name="gender" required class="input-field text-xs w-full">
-                            <option value="">Select Gender</option>
-                            <option value="male" {{ old('gender') === 'male' ? 'selected' : '' }}>Male (Groom / Suitor)</option>
-                            <option value="female" {{ old('gender') === 'female' ? 'selected' : '' }}>Female (Bride / Suitor)</option>
+                            <option value="">Select gender</option>
+                            <option value="male" {{ old('gender') === 'male' ? 'selected' : '' }}>Male (Groom)</option>
+                            <option value="female" {{ old('gender') === 'female' ? 'selected' : '' }}>Female (Bride)</option>
                         </select>
                     </div>
                     <div>
                         <label class="block text-xs font-semibold text-[var(--text-secondary)] mb-1">
-                            Date of Birth (18+ Enforced) <span class="text-[var(--color-danger)]">*</span>
+                            Date of birth <span class="text-[var(--color-danger)]">*</span>
                         </label>
                         <input type="text" name="dob" value="{{ old('dob') }}" required
                                inputmode="numeric" placeholder="dd/mm/yyyy" maxlength="10"
@@ -158,26 +160,26 @@
                                x-data
                                x-on:input="$el.value = $el.value.replace(/[^0-9]/g, '').replace(/^(\d{2})(\d)/, '$1/$2').replace(/^(\d{2})\/(\d{2})(\d)/, '$1/$2/$3').slice(0, 10)"
                                class="input-field text-xs w-full">
-                        <span class="text-[10px] text-[var(--text-muted)] block mt-0.5">Format: dd/mm/yyyy.</span>
+                        <span class="text-[10px] text-[var(--text-muted)] block mt-0.5">Format: dd/mm/yyyy. You must be 18 or older.</span>
                     </div>
                 </div>
 
                 <!-- Seeker-specific Field: Marital Status -->
                 <div x-show="role === 'seeker'">
-                    <label class="block text-xs font-semibold text-[var(--text-secondary)] mb-1">Marital Status (Monogamy Enforced) <span class="text-[var(--color-danger)]">*</span></label>
+                    <label class="block text-xs font-semibold text-[var(--text-secondary)] mb-1">Marital status <span class="text-[var(--color-danger)]">*</span></label>
                     <select name="marital_status" :required="role === 'seeker'" class="input-field text-xs w-full">
-                        <option value="">Select Marital Status</option>
-                        <option value="never_married" {{ old('marital_status', 'never_married') === 'never_married' ? 'selected' : '' }}>Single / Never Married</option>
+                        <option value="">Select status</option>
+                        <option value="never_married" {{ old('marital_status', 'never_married') === 'never_married' ? 'selected' : '' }}>Never married</option>
                         <option value="divorced" {{ old('marital_status') === 'divorced' ? 'selected' : '' }}>Divorced</option>
                         <option value="widowed" {{ old('marital_status') === 'widowed' ? 'selected' : '' }}>Widowed</option>
                         <option value="annulled" {{ old('marital_status') === 'annulled' ? 'selected' : '' }}>Annulled</option>
                     </select>
-                    <span class="text-[10px] text-[var(--text-muted)] block mt-0.5">Currently married individuals are excluded. Divorced and widowed candidates are welcomed.</span>
+                    <span class="text-[10px] text-[var(--text-muted)] block mt-0.5">Currently married individuals cannot register. Divorced and widowed members are welcomed with equal dignity.</span>
                 </div>
 
                 <!-- Family Representative-specific Field: Relationship -->
                 <div x-show="role === 'wali'" style="display: none;">
-                    <label class="block text-xs font-semibold text-[var(--text-secondary)] mb-1">Relationship to Candidate / Seeker</label>
+                    <label class="block text-xs font-semibold text-[var(--text-secondary)] mb-1">Your relationship to the candidate</label>
                     <select name="relationship_type" class="input-field text-xs w-full">
                         <option value="father" {{ old('relationship_type') === 'father' ? 'selected' : '' }}>Father</option>
                         <option value="mother" {{ old('relationship_type') === 'mother' ? 'selected' : '' }}>Mother</option>
@@ -186,8 +188,8 @@
                         <option value="uncle" {{ old('relationship_type') === 'uncle' ? 'selected' : '' }}>Uncle</option>
                         <option value="aunt" {{ old('relationship_type') === 'aunt' ? 'selected' : '' }}>Aunt</option>
                         <option value="grandparent" {{ old('relationship_type') === 'grandparent' ? 'selected' : '' }}>Grandparent</option>
-                        <option value="other_relative" {{ old('relationship_type') === 'other_relative' ? 'selected' : '' }}>Trusted Elder / Relative</option>
-                        <option value="monk_advisor" {{ old('relationship_type') === 'monk_advisor' ? 'selected' : '' }}>Monk / Sangha Advisor</option>
+                        <option value="other_relative" {{ old('relationship_type') === 'other_relative' ? 'selected' : '' }}>Trusted elder or relative</option>
+                        <option value="monk_advisor" {{ old('relationship_type') === 'monk_advisor' ? 'selected' : '' }}>Monk / Sangha advisor</option>
                     </select>
                 </div>
 
@@ -207,7 +209,7 @@
                         </div>
                     </div>
                     <div>
-                        <label class="block text-xs font-semibold text-[var(--text-secondary)] mb-1">Confirm Password <span class="text-[var(--color-danger)]">*</span></label>
+                        <label class="block text-xs font-semibold text-[var(--text-secondary)] mb-1">Confirm password <span class="text-[var(--color-danger)]">*</span></label>
                         <div class="relative" x-data="{ showConfirm: false }">
                             <input :type="showConfirm ? 'text' : 'password'" name="password_confirmation" required
                                    class="input-field text-xs w-full pr-10"
@@ -232,19 +234,19 @@
                     <label class="flex items-start gap-2.5 text-xs text-[var(--text-secondary)] cursor-pointer select-none">
                         <input type="checkbox" name="terms" required class="mt-0.5 rounded-[2px] text-[var(--accent-primary)] focus:ring-[var(--accent-primary)]">
                         <span>
-                            I affirm that I am using this platform strictly for Buddhist matrimony (Mangala Vivaha), zero dowry demands, and accept the <a href="{{ route('terms') }}" class="text-[var(--accent-primary)] underline font-medium">Terms of Service</a> and <a href="{{ route('privacy') }}" class="text-[var(--accent-primary)] underline font-medium">Privacy Policy</a>.
+                            I affirm that I am using Global Maitri strictly for marriage, uphold our anti-dowry policy, and agree to the <a href="{{ route('terms') }}" class="text-[var(--accent-primary)] underline font-medium">Terms of Service</a> and <a href="{{ route('privacy') }}" class="text-[var(--accent-primary)] underline font-medium">Privacy Policy</a>.
                         </span>
                     </label>
                 </div>
 
-                <button type="submit" class="btn-primary w-full text-xs sm:text-sm !py-3 mt-3">
-                    <span x-show="role === 'seeker'">Create Candidate Profile</span>
-                    <span x-show="role === 'wali'" style="display: none;">Create Family Representative &amp; Kalyāṇa-Mitta Account</span>
+                <button type="submit" class="btn-primary w-full text-xs sm:text-sm !py-2.5 mt-3">
+                    <span x-show="role === 'seeker'">Create profile</span>
+                    <span x-show="role === 'wali'" style="display: none;">Create representative account</span>
                 </button>
             </form>
 
-            <div class="text-center pt-3 text-xs text-[var(--text-muted)] border-t border-[var(--border-subtle)]">
-                Already registered? <a href="{{ route('login') }}" class="font-bold text-[var(--accent-primary)] hover:underline">Sign in here</a>
+            <div class="text-left pt-3 text-xs text-[var(--text-muted)] border-t border-[var(--border-subtle)]">
+                Already have an account? <a href="{{ route('login') }}" class="font-semibold text-[var(--accent-primary)] hover:underline">Sign in here &rarr;</a>
             </div>
         </div>
     </div>

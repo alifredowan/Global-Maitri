@@ -1,41 +1,41 @@
 @extends('layouts.app')
 
-@section('title', 'Account Settings - Global Maitri')
+@section('title', 'Account Settings — Global Maitri')
 @section('page_title', 'Account Settings')
 
 @section('content')
-<div class="py-8 bg-[var(--bg-canvas)] min-h-screen transition-colors">
+<div class="py-10 bg-[var(--bg-canvas)] min-h-screen transition-colors">
     <div class="{{ (Auth::user()->isAdmin() || Auth::user()->isModerator()) ? 'px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto' : 'max-w-5xl mx-auto px-4 sm:px-6 lg:px-8' }} space-y-8">
 
-        <!-- Header Banner -->
-        <div class="card-ledger p-6 sm:p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <!-- Header Monograph -->
+        <div class="card-monograph p-6 sm:p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
             <div class="flex items-center gap-4">
-                <div class="w-14 h-14 rounded-[4px] bg-[var(--accent-primary)] text-white text-2xl font-bold flex items-center justify-center shadow-xs">
+                <div class="w-14 h-14 rounded-[3px] bg-[var(--bg-subtle)] border border-[var(--border-default)] text-[var(--saffron-gold)] font-serif text-2xl font-semibold flex items-center justify-center shadow-xs">
                     {{ strtoupper(substr($user->name, 0, 1)) }}
                 </div>
                 <div>
-                    <div class="flex items-center gap-2">
-                        <h1 class="text-2xl font-extrabold text-[var(--text-primary)] font-heading">{{ $user->name }}</h1>
-                        <span class="px-2.5 py-0.5 rounded-[4px] text-[10px] font-bold uppercase tracking-wider bg-[var(--accent-primary)]/10 text-[var(--accent-primary)] border border-[var(--accent-primary)]/20">
-                            {{ $user->isSuperAdmin() ? 'Super Admin' : ($user->isModerator() ? 'Moderator' : ($user->isWali() ? 'Family Rep (Kalyāṇa-Mitta)' : 'Candidate')) }}
+                    <div class="flex items-center gap-2.5 flex-wrap">
+                        <h1 class="text-xl sm:text-2xl font-serif font-bold text-[var(--text-primary)]">{{ $user->name }}</h1>
+                        <span class="px-2.5 py-0.5 rounded-[3px] text-[10px] font-mono uppercase tracking-wider bg-[var(--saffron-gold)]/10 text-[var(--saffron-gold)] border border-[var(--saffron-gold)]/25">
+                            {{ $user->isSuperAdmin() ? 'Super Admin' : ($user->isModerator() ? 'Moderator' : ($user->isWali() ? 'Family Representative (Kalyāṇa-Mitta)' : 'Candidate')) }}
                         </span>
                     </div>
-                    <p class="text-xs text-[var(--text-secondary)] mt-1">Manage your personal credentials, contact details, security password, and privacy preferences.</p>
+                    <p class="text-xs text-[var(--text-secondary)] mt-1">Manage your credentials, contact information, password, and privacy preferences with care.</p>
                 </div>
             </div>
 
-            <div class="flex items-center gap-2">
+            <div class="flex items-center gap-2.5 shrink-0">
                 @if($user->isAdmin() || $user->isModerator())
-                    <a href="{{ route('admin.dashboard') }}" class="btn-secondary text-xs px-3.5 py-2 flex items-center gap-1.5 font-bold">
-                        <svg class="w-4 h-4 text-[var(--accent-primary)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                    <a href="{{ route('admin.dashboard') }}" class="btn-secondary text-xs px-4 py-2 flex items-center gap-1.5 font-medium">
+                        <svg class="w-3.5 h-3.5 text-[var(--saffron-gold)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
                         </svg>
                         <span>Admin Dashboard</span>
                     </a>
                 @else
-                    <a href="{{ route('profile.show') }}" class="btn-secondary text-xs px-3.5 py-2 flex items-center gap-1.5 font-bold">
-                        <svg class="w-4 h-4 text-[var(--accent-primary)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                    <a href="{{ route('profile.show') }}" class="btn-secondary text-xs px-4 py-2 flex items-center gap-1.5 font-medium">
+                        <svg class="w-3.5 h-3.5 text-[var(--lotus-pink)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
                         </svg>
                         <span>View Biodata</span>
                     </a>
@@ -44,19 +44,19 @@
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <!-- Left: Account & Personal Info -->
+            <!-- Left: Account & Personal Details -->
             <div class="lg:col-span-2 space-y-8">
                 <!-- 1. Personal & Contact Info Form -->
-                <div class="card-ledger p-6 sm:p-7">
+                <div class="card-monograph p-6 sm:p-7">
                     <div class="flex items-center gap-3 mb-6 pb-4 border-b border-[var(--border-default)]">
-                        <div class="w-8 h-8 rounded-[4px] bg-[var(--accent-primary)]/10 text-[var(--accent-primary)] flex items-center justify-center">
-                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                        <div class="w-8 h-8 rounded-[3px] bg-[var(--bg-subtle)] border border-[var(--border-default)] text-[var(--saffron-gold)] flex items-center justify-center">
+                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
                             </svg>
                         </div>
                         <div>
-                            <h2 class="text-base font-bold text-[var(--text-primary)] font-heading">Personal & Account Information</h2>
-                            <p class="text-[11px] text-[var(--text-secondary)]">Update your account name, email address, and demographic details.</p>
+                            <h2 class="text-sm sm:text-base font-serif font-bold text-[var(--text-primary)]">Personal & Account Information</h2>
+                            <p class="text-[11px] text-[var(--text-secondary)]">Your name, verified email, and core demographic information.</p>
                         </div>
                     </div>
 
@@ -65,7 +65,7 @@
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
-                                <label class="block text-xs font-bold text-[var(--text-primary)] uppercase tracking-wider mb-1.5">
+                                <label class="block text-xs font-medium text-[var(--text-primary)] mb-1.5">
                                     Full Name <span class="text-[var(--color-danger)]">*</span>
                                 </label>
                                 <input type="text"
@@ -76,7 +76,7 @@
                             </div>
 
                             <div>
-                                <label class="block text-xs font-bold text-[var(--text-primary)] uppercase tracking-wider mb-1.5">
+                                <label class="block text-xs font-medium text-[var(--text-primary)] mb-1.5">
                                     Email Address <span class="text-[var(--color-danger)]">*</span>
                                 </label>
                                 <input type="email"
@@ -89,7 +89,7 @@
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
-                                <label class="block text-xs font-bold text-[var(--text-primary)] uppercase tracking-wider mb-1.5">
+                                <label class="block text-xs font-medium text-[var(--text-primary)] mb-1.5">
                                     Phone Number
                                 </label>
                                 <input type="text"
@@ -100,23 +100,23 @@
                             </div>
 
                             <div>
-                                <label class="block text-xs font-bold text-[var(--text-primary)] uppercase tracking-wider mb-1.5">
-                                    System Role
+                                <label class="block text-xs font-medium text-[var(--text-primary)] mb-1.5">
+                                    Account Role
                                 </label>
                                 <div class="input-field text-xs bg-[var(--bg-subtle)] text-[var(--text-secondary)] flex items-center justify-between" style="min-height: 44px;">
                                     <span class="capitalize">{{ str_replace('_', ' ', $user->role) }}</span>
-                                    <span class="text-[10px] text-[var(--text-muted)]">Fixed</span>
+                                    <span class="text-[10px] font-mono text-[var(--text-muted)]">Fixed</span>
                                 </div>
                             </div>
                         </div>
 
                         @if($user->isSeeker())
-                            <div class="pt-4 border-t border-[var(--border-default)] space-y-4">
-                                <h3 class="text-xs font-bold text-[var(--text-primary)] uppercase tracking-wider">Demographics &amp; Location</h3>
+                            <div class="pt-5 border-t border-[var(--border-default)] space-y-4">
+                                <span class="text-[11px] font-mono uppercase tracking-wider text-[var(--saffron-gold)] block">Demographics &amp; Location</span>
 
                                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                                     <div>
-                                        <label class="block text-xs font-bold text-[var(--text-primary)] uppercase tracking-wider mb-1.5">
+                                        <label class="block text-xs font-medium text-[var(--text-primary)] mb-1.5">
                                             Gender
                                         </label>
                                         <select name="gender" class="input-field text-xs">
@@ -126,7 +126,7 @@
                                     </div>
 
                                     <div>
-                                        <label class="block text-xs font-bold text-[var(--text-primary)] uppercase tracking-wider mb-1.5">
+                                        <label class="block text-xs font-medium text-[var(--text-primary)] mb-1.5">
                                             Date of Birth (dd/mm/yyyy)
                                         </label>
                                         <input type="text"
@@ -142,7 +142,7 @@
                                     </div>
 
                                     <div>
-                                        <label class="block text-xs font-bold text-[var(--text-primary)] uppercase tracking-wider mb-1.5">
+                                        <label class="block text-xs font-medium text-[var(--text-primary)] mb-1.5">
                                             Marital Status
                                         </label>
                                         <select name="marital_status" class="input-field text-xs">
@@ -156,42 +156,42 @@
 
                                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                     <div>
-                                        <label class="block text-xs font-bold text-[var(--text-primary)] uppercase tracking-wider mb-1.5">
+                                        <label class="block text-xs font-medium text-[var(--text-primary)] mb-1.5">
                                             City
                                         </label>
                                         <input type="text"
                                                name="city"
                                                value="{{ old('city', $profile?->city) }}"
-                                               placeholder="e.g. Colombo, Kandy, Bangkok"
+                                               placeholder="e.g. Chittagong, Dhaka, Colombo, Bangkok"
                                                class="input-field text-xs">
                                     </div>
 
                                     <div>
-                                        <label class="block text-xs font-bold text-[var(--text-primary)] uppercase tracking-wider mb-1.5">
+                                        <label class="block text-xs font-medium text-[var(--text-primary)] mb-1.5">
                                             Country
                                         </label>
                                         <input type="text"
                                                name="country"
                                                value="{{ old('country', $profile?->country) }}"
-                                               placeholder="e.g. Sri Lanka, Thailand, USA"
+                                               placeholder="e.g. Bangladesh, Sri Lanka, Thailand"
                                                class="input-field text-xs">
                                     </div>
                                 </div>
 
                                 <div>
-                                    <label class="block text-xs font-bold text-[var(--text-primary)] uppercase tracking-wider mb-1.5">
-                                        About Me / Short Bio
+                                    <label class="block text-xs font-medium text-[var(--text-primary)] mb-1.5">
+                                        Personal Introduction
                                     </label>
                                     <textarea name="bio"
                                               rows="3"
-                                              placeholder="A brief intro about your practice and goals..."
+                                              placeholder="A brief intro about your practice, everyday life, and family outlook..."
                                               class="input-field text-xs">{{ old('bio', $profile?->bio) }}</textarea>
                                 </div>
                             </div>
                         @endif
 
                         <div class="pt-2">
-                            <button type="submit" class="btn-primary text-xs px-6 py-2.5 font-bold cursor-pointer">
+                            <button type="submit" class="btn-primary text-xs px-6 py-2.5 font-medium cursor-pointer">
                                 Save Account Changes
                             </button>
                         </div>
@@ -200,12 +200,12 @@
                     <div class="mt-6 border-t border-[var(--border-default)] pt-5">
                         <div class="flex items-start justify-between gap-4">
                             <div>
-                                <h3 class="text-xs font-bold text-[var(--text-primary)]">Revoke API sessions</h3>
-                                <p class="mt-1 text-[11px] leading-relaxed text-[var(--text-secondary)]">Sign out API-connected devices and apps if you suspect a token has been exposed.</p>
+                                <h3 class="text-xs font-serif font-bold text-[var(--text-primary)]">Revoke API Sessions</h3>
+                                <p class="mt-0.5 text-[11px] leading-relaxed text-[var(--text-secondary)]">Sign out all connected devices and secondary sessions if you suspect unauthorized access.</p>
                             </div>
                             <form action="{{ route('settings.api-sessions.revoke') }}" method="POST" class="shrink-0" onsubmit="return confirm('Revoke all API sessions?')">
                                 @csrf
-                                <button type="submit" class="btn-secondary text-[11px] px-3 py-2 text-[var(--color-danger)] font-bold cursor-pointer">
+                                <button type="submit" class="btn-secondary text-[11px] px-3.5 py-2 text-[var(--color-danger)] font-medium cursor-pointer">
                                     Revoke all
                                 </button>
                             </form>
@@ -214,16 +214,16 @@
                 </div>
 
                 <!-- 2. Password & Security Form -->
-                <div class="card-ledger p-6 sm:p-7">
+                <div class="card-monograph p-6 sm:p-7">
                     <div class="flex items-center gap-3 mb-6 pb-4 border-b border-[var(--border-default)]">
-                        <div class="w-8 h-8 rounded-[4px] bg-[var(--accent-primary)]/10 text-[var(--accent-primary)] flex items-center justify-center">
-                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v4a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                        <div class="w-8 h-8 rounded-[3px] bg-[var(--bg-subtle)] border border-[var(--border-default)] text-[var(--saffron-gold)] flex items-center justify-center">
+                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v4a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
                             </svg>
                         </div>
                         <div>
-                            <h2 class="text-base font-bold text-[var(--text-primary)] font-heading">Password & Security</h2>
-                            <p class="text-[11px] text-[var(--text-secondary)]">Change your password to keep your account safe and protected.</p>
+                            <h2 class="text-sm sm:text-base font-serif font-bold text-[var(--text-primary)]">Password &amp; Security</h2>
+                            <p class="text-[11px] text-[var(--text-secondary)]">Update your account password regularly to preserve account integrity.</p>
                         </div>
                     </div>
 
@@ -231,7 +231,7 @@
                         @csrf
 
                         <div>
-                            <label class="block text-xs font-bold text-[var(--text-primary)] uppercase tracking-wider mb-1.5">
+                            <label class="block text-xs font-medium text-[var(--text-primary)] mb-1.5">
                                 Current Password <span class="text-[var(--color-danger)]">*</span>
                             </label>
                             <div class="relative" x-data="{ showCurrent: false }">
@@ -244,12 +244,12 @@
                                         class="absolute right-3 top-1/2 -translate-y-1/2 text-[var(--text-muted)] hover:text-[var(--text-primary)] focus:outline-none cursor-pointer p-1"
                                         :title="showCurrent ? 'Hide password' : 'View password'"
                                         tabindex="-1">
-                                    <svg x-show="!showCurrent" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                    <svg x-show="!showCurrent" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.75">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
                                     </svg>
-                                    <svg x-show="showCurrent" style="display: none;" class="w-4 h-4 text-[var(--accent-primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l18 18"/>
+                                    <svg x-show="showCurrent" style="display: none;" class="w-4 h-4 text-[var(--lotus-pink)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.75">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l18 18"/>
                                     </svg>
                                 </button>
                             </div>
@@ -257,7 +257,7 @@
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
-                                <label class="block text-xs font-bold text-[var(--text-primary)] uppercase tracking-wider mb-1.5">
+                                <label class="block text-xs font-medium text-[var(--text-primary)] mb-1.5">
                                     New Password <span class="text-[var(--color-danger)]">*</span>
                                 </label>
                                 <div class="relative" x-data="{ showNew: false }">
@@ -271,19 +271,19 @@
                                             class="absolute right-3 top-1/2 -translate-y-1/2 text-[var(--text-muted)] hover:text-[var(--text-primary)] focus:outline-none cursor-pointer p-1"
                                             :title="showNew ? 'Hide password' : 'View password'"
                                             tabindex="-1">
-                                        <svg x-show="!showNew" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                        <svg x-show="!showNew" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.75">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
                                         </svg>
-                                        <svg x-show="showNew" style="display: none;" class="w-4 h-4 text-[var(--accent-primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l18 18"/>
+                                        <svg x-show="showNew" style="display: none;" class="w-4 h-4 text-[var(--lotus-pink)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.75">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l18 18"/>
                                         </svg>
                                     </button>
                                 </div>
                             </div>
 
                             <div>
-                                <label class="block text-xs font-bold text-[var(--text-primary)] uppercase tracking-wider mb-1.5">
+                                <label class="block text-xs font-medium text-[var(--text-primary)] mb-1.5">
                                     Confirm New Password <span class="text-[var(--color-danger)]">*</span>
                                 </label>
                                 <div class="relative" x-data="{ showConfirm: false }">
@@ -297,12 +297,12 @@
                                             class="absolute right-3 top-1/2 -translate-y-1/2 text-[var(--text-muted)] hover:text-[var(--text-primary)] focus:outline-none cursor-pointer p-1"
                                             :title="showConfirm ? 'Hide password' : 'View password'"
                                             tabindex="-1">
-                                        <svg x-show="!showConfirm" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                        <svg x-show="!showConfirm" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.75">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
                                         </svg>
-                                        <svg x-show="showConfirm" style="display: none;" class="w-4 h-4 text-[var(--accent-primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l18 18"/>
+                                        <svg x-show="showConfirm" style="display: none;" class="w-4 h-4 text-[var(--lotus-pink)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.75">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l18 18"/>
                                         </svg>
                                     </button>
                                 </div>
@@ -310,7 +310,7 @@
                         </div>
 
                         <div class="pt-2">
-                            <button type="submit" class="btn-primary text-xs px-6 py-2.5 font-bold cursor-pointer">
+                            <button type="submit" class="btn-primary text-xs px-6 py-2.5 font-medium cursor-pointer">
                                 Update Password
                             </button>
                         </div>
@@ -318,79 +318,37 @@
                 </div>
             </div>
 
-            <!-- Right Column: Preferences & Fast Links -->
+            <!-- Right Column: Preferences, Summary, Danger Zone -->
             <div class="space-y-6">
-                <!-- Account Summary Card -->
-                <div class="card-ledger p-6 bg-[#141412] text-[#f4f2ee] border border-[#2d2b27] space-y-4">
-                    <span class="text-[10px] font-bold uppercase tracking-wider text-[#e0b84c]">Account Status</span>
+                <!-- Account Summary Monograph -->
+                <div class="card-monograph p-6 space-y-4 bg-gradient-to-b from-[var(--bg-card)] to-[var(--bg-subtle)]">
+                    <span class="text-[10px] font-mono uppercase tracking-wider text-[var(--saffron-gold)]">Account Overview</span>
                     <div class="flex items-center justify-between">
                         <div>
-                            <p class="text-xs text-[#a8a49c]">Status</p>
-                            <p class="text-sm font-bold text-[#e0b84c] flex items-center gap-1.5">
-                                <span class="w-2 h-2 rounded-full bg-[var(--accent-primary)]"></span> Active &amp; Verified
+                            <p class="text-[11px] text-[var(--text-muted)]">Membership</p>
+                            <p class="text-xs font-serif font-semibold text-[var(--text-primary)] flex items-center gap-1.5 mt-0.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-[var(--color-success)]"></span> Active &amp; Verified
                             </p>
                         </div>
                         <div class="text-right">
-                            <p class="text-xs text-[#a8a49c]">Member Since</p>
-                            <p class="text-sm font-bold text-white">{{ $user->created_at->format('d/m/Y') }}</p>
+                            <p class="text-[11px] text-[var(--text-muted)]">Member Since</p>
+                            <p class="text-xs font-mono font-medium text-[var(--text-primary)] mt-0.5">{{ $user->created_at->format('d/m/Y') }}</p>
                         </div>
                     </div>
-                    <div class="pt-3 border-t border-[#2d2b27] text-[11px] text-[#a8a49c]">
-                        Account ID: <span class="font-mono text-white">#GM-{{ str_pad($user->id, 5, '0', STR_PAD_LEFT) }}</span>
+                    <div class="pt-3 border-t border-[var(--border-default)] text-[11px] text-[var(--text-secondary)] flex items-center justify-between">
+                        <span>Member ID</span>
+                        <span class="font-mono text-[var(--text-primary)]">#GM-{{ str_pad($user->id, 5, '0', STR_PAD_LEFT) }}</span>
                     </div>
                 </div>
-
-                <div class="card-ledger p-6 border-[var(--border-default)]">
-                    <div class="flex items-center gap-2">
-                        <svg class="w-5 h-5 text-[var(--color-danger)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
-                        </svg>
-                        <h3 class="font-heading text-sm font-bold text-[var(--text-primary)]">Delete account permanently</h3>
-                    </div>
-                    <p class="mt-3 text-xs leading-5 text-[var(--text-secondary)]">
-                        This permanently removes your profile, photos, messages, matches, and verification files. This action cannot be undone.
-                    </p>
-                    <form action="{{ route('account.delete') }}" method="POST" class="mt-5 space-y-3">
-                        @csrf
-                        <input type="password" name="password" required autocomplete="current-password" placeholder="Confirm your password" class="input-field text-xs">
-                        <textarea name="reason" required maxlength="500" rows="2" placeholder="Why are you leaving? (required)" class="input-field text-xs"></textarea>
-                        <label class="flex items-start gap-2 text-[11px] font-semibold leading-4 text-[var(--text-secondary)]">
-                            <input type="checkbox" name="confirmation" value="1" required class="mt-0.5 rounded-[2px] border-[var(--border-default)] text-[var(--color-danger)] focus:ring-[var(--color-danger)]">
-                            <span>I understand that permanent deletion cannot be reversed.</span>
-                        </label>
-                        <button type="submit" class="btn-secondary w-full text-xs font-bold text-[var(--color-danger)] border-[var(--border-default)] hover:bg-[var(--bg-subtle)]" onclick="return confirm('Permanently delete your account and personal data? This cannot be undone.')">
-                            Permanently delete account
-                        </button>
-                    </form>
-                </div>
-
-                @if($user->isSuperAdmin() || $user->hasPermission('manage_settings'))
-                    <!-- Admin Fast Link to Platform Policies -->
-                    <div class="card-ledger p-6 space-y-3">
-                        <div class="flex items-center gap-2">
-                            <svg class="w-5 h-5 text-[var(--accent-primary)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                            </svg>
-                            <h3 class="text-sm font-bold text-[var(--text-primary)] font-heading">Global Platform Policies</h3>
-                        </div>
-                        <p class="text-xs text-[var(--text-secondary)] leading-relaxed">
-                            As an Administrator, you can configure platform-wide settings like KYC enforcement, image auto-blurring, and rate limits.
-                        </p>
-                        <a href="{{ route('admin.settings') }}" class="btn-secondary text-xs px-4 py-2 inline-flex items-center gap-1.5 font-bold">
-                            <span>Manage Platform Policies &rarr;</span>
-                        </a>
-                    </div>
-                @endif
 
                 @if($user->isSeeker())
                     <!-- Privacy & Modesty Preferences for Seekers -->
-                    <div class="card-ledger p-6 space-y-4">
+                    <div class="card-monograph p-6 space-y-4">
                         <div class="flex items-center gap-2 pb-3 border-b border-[var(--border-default)]">
-                            <svg class="w-5 h-5 text-[var(--accent-primary)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                            <svg class="w-4 h-4 text-[var(--lotus-pink)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
                             </svg>
-                            <h3 class="text-sm font-bold text-[var(--text-primary)] font-heading">Privacy & Lotus Modesty Preferences</h3>
+                            <h3 class="text-xs font-serif font-bold text-[var(--text-primary)]">Privacy & Lotus Modesty Preferences</h3>
                         </div>
 
                         <form action="{{ route('settings.preferences.update') }}" method="POST" class="space-y-4">
@@ -400,11 +358,11 @@
                             <!-- Incognito Browsing -->
                             <div class="flex items-start justify-between gap-3">
                                 <div>
-                                    <label for="is_incognito" class="text-xs font-bold text-[var(--text-primary)] block cursor-pointer">
+                                    <label for="is_incognito" class="text-xs font-medium text-[var(--text-primary)] block cursor-pointer">
                                         Incognito Profile Browsing
                                     </label>
-                                    <span class="text-[11px] text-[var(--text-secondary)] block mt-0.5">
-                                        Visit candidate profiles anonymously without appearing in their "Who Viewed You" list.
+                                    <span class="text-[11px] text-[var(--text-secondary)] block mt-0.5 leading-relaxed">
+                                        Browse candidate profiles privately without appearing in their &ldquo;Who Viewed You&rdquo; list.
                                     </span>
                                 </div>
                                 <input type="checkbox"
@@ -418,11 +376,11 @@
                             <!-- Wali Requirement -->
                             <div class="flex items-start justify-between gap-3 pt-3 border-t border-[var(--border-default)]">
                                 <div>
-                                    <label for="wali_required" class="text-xs font-bold text-[var(--text-primary)] block cursor-pointer">
-                                        Enforce Representative / Kalyāṇa-Mitta Clearance
+                                    <label for="wali_required" class="text-xs font-medium text-[var(--text-primary)] block cursor-pointer">
+                                        Family Representative Clearance
                                     </label>
-                                    <span class="text-[11px] text-[var(--text-secondary)] block mt-0.5">
-                                        Proposals and communications must be cleared by your linked Family Representative (Kalyāṇa-Mitta) first.
+                                    <span class="text-[11px] text-[var(--text-secondary)] block mt-0.5 leading-relaxed">
+                                        Proposals and first communications must be approved by your linked family representative first.
                                     </span>
                                 </div>
                                 <input type="checkbox"
@@ -433,21 +391,39 @@
                                        class="mt-1 w-4 h-4 rounded-[2px] border-[var(--border-default)] text-[var(--accent-primary)] focus:ring-[var(--accent-primary)]">
                             </div>
 
-                            <button type="submit" class="btn-primary w-full py-2 text-xs font-bold cursor-pointer">
+                            <!-- Cookie Preferences Trigger -->
+                            <div class="pt-3 border-t border-[var(--border-default)] flex items-center justify-between gap-3">
+                                <div>
+                                    <span class="text-xs font-medium text-[var(--text-primary)] block">
+                                        Cookie Consent &amp; Privacy Choices
+                                    </span>
+                                    <span class="text-[11px] text-[var(--text-secondary)] block mt-0.5 leading-relaxed">
+                                        Review or modify your essential and optional cookie permissions at any time.
+                                    </span>
+                                </div>
+                                <button type="button"
+                                        @click="$dispatch('open-cookie-settings')"
+                                        class="btn-secondary text-xs !py-1.5 !px-3 shrink-0 cursor-pointer">
+                                    Cookie settings
+                                </button>
+                            </div>
+
+                            <button type="submit" class="btn-primary w-full py-2 text-xs font-medium cursor-pointer">
                                 Save Privacy Preferences
                             </button>
                         </form>
                     </div>
                 @endif
 
-                <div class="card-ledger p-6">
+                <!-- Notification Preferences -->
+                <div class="card-monograph p-6">
                     <div class="flex items-center gap-2 border-b border-[var(--border-default)] pb-3">
-                        <svg class="w-5 h-5 text-[var(--accent-primary)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
+                        <svg class="w-4 h-4 text-[var(--saffron-gold)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
                         </svg>
                         <div>
-                            <h3 class="font-heading text-sm font-bold text-[var(--text-primary)]">Notification preferences</h3>
-                            <p class="mt-0.5 text-[11px] text-[var(--text-secondary)]">Choose which updates reach you through the platform.</p>
+                            <h3 class="font-serif text-xs font-bold text-[var(--text-primary)]">Notification Preferences</h3>
+                            <p class="mt-0.5 text-[11px] text-[var(--text-secondary)]">Choose which updates reach you quietly.</p>
                         </div>
                     </div>
                     @php($notificationPreferences = $user->notificationPreferences())
@@ -455,19 +431,63 @@
                         @csrf
                         <input type="hidden" name="section" value="notifications">
                         @foreach([
-                            'email_notifications' => 'Email notifications',
-                            'interest_notifications' => 'Interest requests and responses',
-                            'message_notifications' => 'New chaperoned messages',
-                            'wali_notifications' => 'Family representative & Kalyāṇa-Mitta updates',
-                            'saved_search_notifications' => 'Saved-search matches',
-                            'marriage_notifications' => 'Mangala Vivaha milestone updates',
+                            'email_notifications' => 'Email updates',
+                            'interest_notifications' => 'Interest proposals & replies',
+                            'message_notifications' => 'New mindful chat messages',
+                            'wali_notifications' => 'Family representative updates',
+                            'saved_search_notifications' => 'Saved-search match alerts',
+                            'marriage_notifications' => 'Mangala Vivaha milestone alerts',
                         ] as $preferenceKey => $preferenceLabel)
-                            <label class="flex items-center justify-between gap-3 text-xs font-semibold text-[var(--text-primary)] cursor-pointer">
+                            <label class="flex items-center justify-between gap-3 text-xs text-[var(--text-primary)] cursor-pointer">
                                 <span>{{ $preferenceLabel }}</span>
                                 <input type="checkbox" name="{{ $preferenceKey }}" value="1" {{ $notificationPreferences[$preferenceKey] ? 'checked' : '' }} class="h-4 w-4 rounded-[2px] border-[var(--border-default)] text-[var(--accent-primary)] focus:ring-[var(--accent-primary)]">
                             </label>
                         @endforeach
-                        <button type="submit" class="btn-primary mt-2 w-full py-2 font-bold text-xs cursor-pointer">Save notification preferences</button>
+                        <button type="submit" class="btn-primary mt-2 w-full py-2 font-medium text-xs cursor-pointer">Save Notification Preferences</button>
+                    </form>
+                </div>
+
+                @if($user->isSuperAdmin() || $user->hasPermission('manage_settings'))
+                    <!-- Admin Fast Link to Platform Policies -->
+                    <div class="card-monograph p-6 space-y-3">
+                        <div class="flex items-center gap-2">
+                            <svg class="w-4 h-4 text-[var(--saffron-gold)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                            </svg>
+                            <h3 class="text-xs font-serif font-bold text-[var(--text-primary)]">Platform Policies</h3>
+                        </div>
+                        <p class="text-xs text-[var(--text-secondary)] leading-relaxed">
+                            Configure platform-wide settings like KYC enforcement, image auto-blurring, and rate limits.
+                        </p>
+                        <a href="{{ route('admin.settings') }}" class="btn-secondary text-xs px-4 py-2 inline-flex items-center gap-1.5 font-medium">
+                            <span>Manage Platform Policies &rarr;</span>
+                        </a>
+                    </div>
+                @endif
+
+                <!-- Danger Zone: Permanent Account Deletion -->
+                <div class="card-monograph p-6 border-[var(--color-danger)]/30">
+                    <div class="flex items-center gap-2">
+                        <svg class="w-4 h-4 text-[var(--color-danger)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                        </svg>
+                        <h3 class="font-serif text-xs font-bold text-[var(--text-primary)]">Delete Account Permanently</h3>
+                    </div>
+                    <p class="mt-2 text-xs leading-relaxed text-[var(--text-secondary)]">
+                        This permanently removes your profile, photos, conversations, matches, and uploaded verification records. This action cannot be reversed.
+                    </p>
+                    <form action="{{ route('account.delete') }}" method="POST" class="mt-4 space-y-3">
+                        @csrf
+                        <input type="password" name="password" required autocomplete="current-password" placeholder="Confirm your password" class="input-field text-xs">
+                        <textarea name="reason" required maxlength="500" rows="2" placeholder="Why are you leaving? (required)" class="input-field text-xs"></textarea>
+                        <label class="flex items-start gap-2 text-[11px] leading-relaxed text-[var(--text-secondary)]">
+                            <input type="checkbox" name="confirmation" value="1" required class="mt-0.5 rounded-[2px] border-[var(--border-default)] text-[var(--color-danger)] focus:ring-[var(--color-danger)]">
+                            <span>I understand that permanent deletion cannot be reversed.</span>
+                        </label>
+                        <button type="submit" class="btn-secondary w-full text-xs font-medium text-[var(--color-danger)] border-[var(--border-default)] hover:bg-[var(--bg-subtle)]" onclick="return confirm('Permanently delete your account and personal data? This cannot be undone.')">
+                            Permanently Delete Account
+                        </button>
                     </form>
                 </div>
             </div>

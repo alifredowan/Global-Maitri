@@ -7,25 +7,24 @@
 <div class="py-6 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-8">
 
     <!-- Top Atmospheric Banner -->
-    <div class="bg-[#141412] rounded-[4px] p-6 sm:p-8 text-[#f4f2ee] shadow-sm border border-[#2d2b27] relative overflow-hidden">
-        <div class="absolute inset-0 opacity-15 bg-[radial-gradient(var(--accent-primary)_1px,transparent_1px)] [background-size:20px_20px]"></div>
+    <div class="card-monograph p-6 sm:p-8 relative overflow-hidden bg-gradient-to-b from-[var(--bg-card)] to-[var(--bg-subtle)]">
         <div class="relative flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
-                <div class="inline-flex items-center space-x-1.5 px-3 py-1 rounded-[4px] bg-[var(--accent-primary)]/20 text-[#e0b84c] text-xs font-semibold uppercase tracking-wider mb-2 border border-[var(--accent-primary)]/30">
-                    <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                <div class="inline-flex items-center space-x-1.5 px-3 py-1 rounded-[3px] bg-[var(--saffron-gold)]/10 text-[var(--saffron-gold)] text-xs font-mono uppercase tracking-wider mb-2 border border-[var(--saffron-gold)]/25">
+                    <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
                     </svg>
                     <span>Trust &amp; Operations Center</span>
                 </div>
-                <h1 class="font-heading font-extrabold text-2xl sm:text-3xl text-white">
+                <h1 class="font-serif font-bold text-2xl sm:text-3xl text-[var(--text-primary)]">
                     Administrative &amp; Safety Operations
                 </h1>
-                <p class="text-xs text-[#d6d2c8] mt-1 max-w-2xl">
+                <p class="text-xs text-[var(--text-secondary)] mt-1 max-w-2xl leading-relaxed">
                     Platform governance, KYC verification queue, reports handling, and immutable audit logs (FR-7.1 - 7.5).
                 </p>
             </div>
             <div class="flex items-center gap-2 self-start sm:self-center shrink-0">
-                <span class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-[4px] text-xs font-semibold bg-[var(--accent-primary)]/20 text-[#e0b84c] border border-[var(--accent-primary)]/30">
+                <span class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-[4px] text-xs font-semibold bg-[var(--color-primary-soft)] text-[var(--color-accent)] border border-[var(--color-border)]">
                     <span class="w-2 h-2 rounded-full bg-[var(--accent-primary)] animate-pulse"></span>
                     System Operational
                 </span>
@@ -61,7 +60,7 @@
 
         <div class="card-ledger p-5">
             <span class="text-[11px] font-bold text-[var(--text-muted)] uppercase tracking-wider block mb-1">Paid Members</span>
-            <span class="text-2xl font-extrabold text-[#b58900] dark:text-[#e0b84c] font-heading">{{ $metrics['paying_subscribers'] }}</span>
+            <span class="text-2xl font-extrabold text-[var(--color-accent)] font-heading">{{ $metrics['paying_subscribers'] }}</span>
             <span class="text-[10px] text-[var(--text-secondary)] block mt-1">Single Pass Active</span>
         </div>
 

@@ -171,7 +171,7 @@
                 </div>
             @else
                 <div class="card-ledger border border-dashed border-[var(--border-default)] p-8 text-center bg-[var(--bg-subtle)]">
-                    <p class="text-xs font-semibold text-[var(--text-secondary)]">Complete your Dhamma biodata preferences to unlock daily compatibility recommendations.</p>
+                    <p class="text-xs font-semibold text-[var(--text-secondary)]">Complete your Dhamma biodata preferences to receive daily compatibility recommendations.</p>
                     <a href="{{ route('profile.edit') }}" class="mt-2.5 inline-flex items-center gap-1 text-xs font-bold text-[var(--accent-primary)] hover:underline">
                         <span>Edit Preferences</span>
                         <span>&rarr;</span>

@@ -202,14 +202,14 @@
         </div>
 
         <!-- Contact Support Footer Callout -->
-        <div class="p-8 rounded-[4px] bg-[#141412] text-[#f4f2ee] border border-[#2d2b27] flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl">
+        <div class="card-monograph p-8 flex flex-col sm:flex-row items-center justify-between gap-6 bg-gradient-to-b from-[var(--bg-card)] to-[var(--bg-subtle)]">
             <div class="space-y-1 text-center sm:text-left">
-                <h3 class="text-lg font-bold font-heading text-white">Questions Regarding Your Privacy?</h3>
-                <p class="text-xs text-[#d6d2c8]">
-                    Our Data Protection Officer and Ethics Council are here to assist you at any time.
+                <h3 class="text-lg font-serif font-bold text-[var(--text-primary)]">Questions Regarding Your Privacy?</h3>
+                <p class="text-xs text-[var(--text-secondary)]">
+                    Our Data Protection Officer and Community Care team are here to assist you at any time.
                 </p>
             </div>
-            <a href="mailto:privacy@globalmaitri.com" class="btn-primary text-xs px-6 py-3 shrink-0">
+            <a href="mailto:privacy@globalmaitri.com" class="btn-primary text-xs px-6 py-2.5 font-medium shrink-0">
                 Contact Privacy Team &rarr;
             </a>
         </div>

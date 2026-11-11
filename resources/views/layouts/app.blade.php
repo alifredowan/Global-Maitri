@@ -41,45 +41,30 @@
     <meta property="og:description" content="@yield('meta_description', 'Global Maitri is a Buddhist matrimonial platform for serious, marriage-oriented Buddhists across traditions, with verified profiles, family involvement, and mindful matchmaking.')">
     <meta property="og:type" content="website">
 
-    <!-- Theme Initialization (Prevent FOUC: 4 Moods Supported) -->
+    <!-- Theme Initialization (Prevent FOUC: Light / Dark Supported) -->
     <script>
         (function() {
-            const savedMood = localStorage.getItem('maitri_theme') || localStorage.getItem('nikah_theme') || (localStorage.getItem('theme') === 'dark' ? 'dark' : 'light');
-            document.documentElement.classList.remove('dark', 'theme-emerald', 'theme-sand');
-            if (savedMood === 'dark') {
+            const savedTheme = localStorage.getItem('maitri_theme') || (localStorage.getItem('theme') === 'dark' ? 'dark' : 'light');
+            document.documentElement.classList.remove('dark');
+            if (savedTheme === 'dark') {
                 document.documentElement.classList.add('dark');
-            } else if (savedMood === 'emerald') {
-                document.documentElement.classList.add('dark', 'theme-emerald');
-            } else if (savedMood === 'sand') {
-                document.documentElement.classList.add('theme-sand');
             }
         })();
     </script>
 
-    <!-- Google Fonts: Outfit & Plus Jakarta Sans -->
+    <!-- Google Fonts: Fraunces & Cormorant Garamond (display), DM Sans (body) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400;1,9..40,500&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
 
     <!-- Vite Assets -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; }
-        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
-        .bg-emerald-gradient, .bg-rose-gradient {
-            background: linear-gradient(135deg, #881337 0%, #be123c 60%, #e11d48 100%);
-        }
-        .bg-gold-gradient {
-            background: linear-gradient(135deg, #d97706 0%, #f59e0b 100%);
-        }
-        .glass-header {
-            background: rgba(255, 255, 255, 0.94);
-            backdrop-filter: blur(12px);
-        }
-        .dark .glass-header {
-            background: rgba(15, 23, 42, 0.92);
-        }
+        body { font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 16px; line-height: 1.55; }
+        @media (max-width: 640px) { body { font-size: 15px; } }
+        :where(h1, h2, h3, h4, .font-heading) { font-family: 'Fraunces', 'Cormorant Garamond', Georgia, serif; font-weight: 700; line-height: 1.2; }
+        .font-serif-accent { font-family: 'Cormorant Garamond', Georgia, serif; }
         .photo-blur {
             filter: blur(14px);
             transition: filter 0.3s ease;
@@ -108,33 +93,8 @@
       @keydown.window.cmd.k.prevent="commandPaletteOpen = true"
       @open-command-palette.window="commandPaletteOpen = true">
 
-    <div id="cookie-consent-banner"
-         class="fixed inset-x-3 bottom-3 z-[100] hidden sm:inset-x-auto sm:bottom-5 sm:left-5 sm:max-w-xl"
-         role="dialog"
-         aria-modal="false"
-         aria-labelledby="cookie-consent-title"
-         aria-describedby="cookie-consent-description">
-        <div class="rounded-[6px] border border-[var(--border-default)] bg-[var(--bg-surface)] p-4 shadow-xl sm:p-5">
-            <div class="flex items-start gap-3">
-                <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-[4px] bg-[var(--accent-subtle)] text-[var(--accent-primary)]" aria-hidden="true">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/>
-                    </svg>
-                </div>
-                <div class="min-w-0 flex-1">
-                    <h2 id="cookie-consent-title" class="font-heading text-sm font-bold text-[var(--text-primary)]">Your privacy, your choice</h2>
-                    <p id="cookie-consent-description" class="mt-1 text-xs leading-5 text-[var(--text-secondary)]">
-                        We use essential cookies to keep you signed in, protect forms, and remember your privacy preference. We do not use advertising cookies. <a href="{{ route('privacy') }}#cookies" class="font-semibold text-[var(--accent-primary)] underline underline-offset-2 hover:text-[var(--accent-hover)]">Read our cookie policy</a>.
-                    </p>
-                    <div class="mt-4 flex flex-wrap items-center gap-2">
-                        <button type="button" data-cookie-consent="accepted" class="btn-primary text-xs !py-1.5 !px-3.5">Accept all</button>
-                        <button type="button" data-cookie-consent="essential" class="btn-secondary text-xs !py-1.5 !px-3.5">Essential only</button>
-                        <a href="{{ route('contact') }}" class="ml-auto text-[11px] font-semibold text-[var(--text-muted)] hover:text-[var(--accent-primary)] hover:underline">Questions?</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <!-- Cookie Consent (Restored with Customize Panel, 12-Month Storage, and Admin Compliance) -->
+    <x-cookie-consent />
 
     @auth
         {{-- ========================================================= --}}
@@ -196,23 +156,17 @@
                         @include('layouts.partials.sidebar-nav')
                     </nav>
 
-                    <!-- Mobile User Card & Logout -->
+                    <!-- Mobile User Profile Indicator -->
                     <div class="pt-4 mt-4 border-t border-slate-800">
                         <div class="flex items-center gap-3 px-2 py-2">
-                            <div class="w-9 h-9 rounded-full bg-rose-900 border border-rose-600 text-rose-200 font-bold flex items-center justify-center text-sm">
+                            <div class="w-9 h-9 rounded-full bg-[var(--accent-primary)] text-white font-bold flex items-center justify-center text-sm">
                                 {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
                             </div>
                             <div class="flex-1 min-w-0">
                                 <p class="text-xs font-bold text-white truncate">{{ Auth::user()->name }}</p>
-                                <p class="text-[10px] text-rose-400 font-medium capitalize">{{ Auth::user()->role }}</p>
+                                <p class="text-[10px] text-slate-400 font-medium capitalize">{{ Auth::user()->role }}</p>
                             </div>
                         </div>
-                        <form action="{{ route('logout') }}" method="POST" class="mt-2">
-                            @csrf
-                            <button type="submit" class="w-full flex items-center gap-2 px-3 py-2 text-xs font-semibold text-rose-400 hover:bg-rose-950/40 rounded-xl transition">
-                                <span>🚪</span> Sign Out
-                            </button>
-                        </form>
                     </div>
                 </div>
             </div>
@@ -263,30 +217,20 @@
                     @include('layouts.partials.sidebar-nav')
                 </nav>
 
-                <!-- Sidebar Footer User Card with Integrated Arrow Logout -->
+                <!-- Sidebar Footer User Card -->
                 <div class="p-4 border-t border-slate-800/80 bg-slate-950/40">
-                    <div class="flex items-center justify-between gap-2 p-2.5 rounded-[6px] bg-slate-800/50 border border-slate-700/60">
-                        <div class="flex items-center gap-2.5 min-w-0">
-                            <div class="w-8 h-8 rounded-full bg-[var(--accent-primary)] text-white font-bold flex items-center justify-center text-xs shrink-0">
-                                {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
-                            </div>
-                            <div class="min-w-0 flex-1">
-                                <p class="text-xs font-bold text-white truncate">{{ Auth::user()->name }}</p>
-                                <p class="text-[10px] text-slate-400 truncate">{{ Auth::user()->email }}</p>
-                                <span class="inline-flex items-center gap-1 text-[9px] font-bold text-[var(--accent-primary)] uppercase tracking-wider">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-[var(--accent-primary)]"></span>
-                                    {{ Auth::user()->isSuperAdmin() ? 'Super Admin' : (Auth::user()->isModerator() ? 'Staff' : (Auth::user()->isMonkAdvisor() ? 'Monk / Sangha Advisor' : (Auth::user()->isWali() ? 'Family Rep (Kalyāṇa-Mitta)' : 'Seeker'))) }}
-                                </span>
-                            </div>
+                    <div class="flex items-center gap-2.5 p-2.5 rounded-[6px] bg-slate-800/50 border border-slate-700/60">
+                        <div class="w-8 h-8 rounded-full bg-[var(--accent-primary)] text-white font-bold flex items-center justify-center text-xs shrink-0">
+                            {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
                         </div>
-                        <form action="{{ route('logout') }}" method="POST">
-                            @csrf
-                            <button type="submit" title="Sign Out" class="p-2 text-slate-400 hover:text-[var(--accent-primary)] hover:bg-slate-700/60 rounded-[4px] transition cursor-pointer">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
-                                </svg>
-                            </button>
-                        </form>
+                        <div class="min-w-0 flex-1">
+                            <p class="text-xs font-bold text-white truncate">{{ Auth::user()->name }}</p>
+                            <p class="text-[10px] text-slate-400 truncate">{{ Auth::user()->email }}</p>
+                            <span class="inline-flex items-center gap-1 text-[9px] font-bold text-[var(--accent-primary)] uppercase tracking-wider">
+                                <span class="w-1.5 h-1.5 rounded-full bg-[var(--accent-primary)]"></span>
+                                {{ Auth::user()->isSuperAdmin() ? 'Super Admin' : (Auth::user()->isModerator() ? 'Staff' : (Auth::user()->isMonkAdvisor() ? 'Monk / Sangha Advisor' : (Auth::user()->isWali() ? 'Family Rep (Kalyāṇa-Mitta)' : 'Seeker'))) }}
+                            </span>
+                        </div>
                     </div>
                 </div>
             </aside>
@@ -295,13 +239,13 @@
             <div class="flex-1 flex flex-col min-w-0">
 
                 <!-- Clean Top Navigation Header (NO TABS) -->
-                <header class="sticky top-0 z-40 h-16 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800 flex items-center justify-between px-4 sm:px-6 lg:px-8">
+                <header class="sticky top-0 z-40 h-16 bg-[var(--color-surface)]/95 dark:bg-[var(--color-surface)]/95 backdrop-blur-md border-b border-[var(--color-border)] flex items-center justify-between px-4 sm:px-6 lg:px-8">
                     <!-- Left: Single 3-Dots Button AND Global Maitri Logo (Both trigger open/close) -->
                     <div class="flex items-center gap-3">
                         <!-- 3-Dots Toggle Button (The ONE 3-Dots Button) -->
                         <button type="button"
                                 @click="toggleSidebar()"
-                                class="p-2 rounded-xl text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition focus:outline-none cursor-pointer flex items-center justify-center shrink-0"
+                                class="p-2 rounded-xl text-slate-600 dark:text-slate-300 hover:text-[var(--color-primary)] dark:hover:text-[var(--color-primary)] hover:bg-[var(--color-primary-soft)] dark:hover:bg-slate-800 transition focus:outline-none cursor-pointer flex items-center justify-center shrink-0"
                                 aria-label="Toggle Sidebar Menu"
                                 title="Open / Close Sidebar (3 Dots)">
                             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -317,20 +261,45 @@
                              class="flex items-center gap-2.5 cursor-pointer select-none group"
                              title="Open / Close Sidebar (Global Maitri Logo)">
                             <x-application-logo variant="badge" badge-class="w-9 h-9 group-hover:scale-105" />
-                            <span class="font-heading font-extrabold text-base tracking-tight text-[var(--text-primary)] group-hover:text-[var(--accent-primary)] transition">
-                                Global<span class="text-[var(--accent-primary)]">Maitri</span>
+                            <span class="font-heading font-extrabold text-base tracking-tight text-[var(--color-primary)] group-hover:text-[var(--color-primary-hover)] transition">
+                                Global<span class="text-[var(--color-accent)]">Maitri</span>
                             </span>
                         </div>
+
+                        <!-- Desktop Main Navigation Next to Logo (Discover, Interests, Shortlist) -->
+                        <nav class="hidden md:flex items-center gap-1 ml-2 lg:ml-4" aria-label="Main Navigation">
+                            <a href="{{ route('discovery.index') }}"
+                               class="relative px-3 py-1.5 text-xs font-semibold rounded-md transition-colors {{ request()->routeIs('discovery.*') ? 'text-[var(--color-primary)] font-bold' : 'text-[var(--text-secondary)] hover:text-[var(--color-primary)] hover:bg-[var(--bg-subtle)]' }}">
+                                Discover
+                                @if(request()->routeIs('discovery.*'))
+                                    <span class="absolute bottom-0 left-3 right-3 h-0.5 rounded-full bg-[var(--color-accent)]"></span>
+                                @endif
+                            </a>
+                            <a href="{{ route('interests.index') }}"
+                               class="relative px-3 py-1.5 text-xs font-semibold rounded-md transition-colors {{ request()->routeIs('interests.*') ? 'text-[var(--color-primary)] font-bold' : 'text-[var(--text-secondary)] hover:text-[var(--color-primary)] hover:bg-[var(--bg-subtle)]' }}">
+                                Interests
+                                @if(request()->routeIs('interests.*'))
+                                    <span class="absolute bottom-0 left-3 right-3 h-0.5 rounded-full bg-[var(--color-accent)]"></span>
+                                @endif
+                            </a>
+                            <a href="{{ route('bookmarks.index') }}"
+                               class="relative px-3 py-1.5 text-xs font-semibold rounded-md transition-colors {{ request()->routeIs('bookmarks.*') ? 'text-[var(--color-primary)] font-bold' : 'text-[var(--text-secondary)] hover:text-[var(--color-primary)] hover:bg-[var(--bg-subtle)]' }}">
+                                Shortlist
+                                @if(request()->routeIs('bookmarks.*'))
+                                    <span class="absolute bottom-0 left-3 right-3 h-0.5 rounded-full bg-[var(--color-accent)]"></span>
+                                @endif
+                            </a>
+                        </nav>
                     </div>
 
                     <!-- Center: Quick Command Search Trigger (Standard SaaS Benchmark) -->
                     <div class="hidden md:flex flex-1 max-w-sm mx-4">
                         <button type="button"
                                 @click="commandPaletteOpen = true"
-                                class="w-full flex items-center justify-between gap-3 px-3.5 py-1.5 rounded-[4px] border border-[var(--border-default)] bg-[var(--bg-subtle)] text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:border-[var(--accent-primary)] transition cursor-pointer text-xs group"
+                                class="w-full flex items-center justify-between gap-3 px-3.5 py-1.5 rounded-[4px] border border-[var(--border-default)] bg-[var(--bg-subtle)] text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:border-[var(--color-accent)] transition cursor-pointer text-xs group"
                                 title="Quick Command Palette & Search (Ctrl + K)">
                             <div class="flex items-center gap-2 min-w-0">
-                                <svg class="w-4 h-4 text-[var(--accent-primary)] shrink-0 group-hover:scale-105 transition transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg class="w-4 h-4 text-[var(--color-primary)] shrink-0 group-hover:scale-105 transition transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                                 </svg>
                                 <span class="font-medium text-[var(--text-secondary)] truncate">Quick search & navigation...</span>
@@ -341,264 +310,8 @@
                         </button>
                     </div>
 
-                    <!-- Right Controls: Status Pill, 4-Mood Switcher, Reverb Bell, Profile Dropdown -->
-                    <div class="flex items-center gap-2 sm:gap-3">
-                        <!-- Operational System Live Status Pill -->
-                        <div class="hidden xl:flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200/80 dark:border-emerald-800/60 text-[11px] font-semibold text-emerald-700 dark:text-emerald-300">
-                            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                            <span>Live Operational</span>
-                        </div>
-
-                        <!-- 4-Mood Visual Theme Picker Dropdown -->
-                        <div class="relative" x-data="{
-                            moodOpen: false,
-                            currentMood: localStorage.getItem('maitri_theme') || localStorage.getItem('nikah_theme') || (localStorage.getItem('theme') === 'dark' ? 'dark' : 'light'),
-                            moods: [
-                                { id: 'light', name: 'Daylight', icon: '☀️', desc: 'Serene lotus & rose', dot: 'bg-rose-400 border-amber-300' },
-                                { id: 'dark', name: 'Midnight', icon: '🌙', desc: 'Deep calm slate mode', dot: 'bg-slate-900 border-slate-700' },
-                                { id: 'emerald', name: 'Sacred Lotus', icon: '🪷', desc: 'Deep lotus rose & gold', dot: 'bg-rose-800 border-amber-400' },
-                                { id: 'sand', name: 'Monastic Saffron', icon: '☸️', desc: 'Warm saffron gold & cream', dot: 'bg-amber-100 border-amber-600' }
-                            ],
-                            selectMood(mood) {
-                                this.currentMood = mood;
-                                localStorage.setItem('maitri_theme', mood);
-                                localStorage.setItem('nikah_theme', mood);
-                                localStorage.setItem('theme', (mood === 'light' || mood === 'sand') ? 'light' : 'dark');
-                                document.documentElement.classList.remove('dark', 'theme-emerald', 'theme-sand');
-                                if (mood === 'dark') {
-                                    document.documentElement.classList.add('dark');
-                                } else if (mood === 'emerald') {
-                                    document.documentElement.classList.add('dark', 'theme-emerald');
-                                } else if (mood === 'sand') {
-                                    document.documentElement.classList.add('theme-sand');
-                                }
-                                this.moodOpen = false;
-                                window.dispatchEvent(new CustomEvent('maitri-mood-changed', { detail: { mood } }));
-                                window.dispatchEvent(new CustomEvent('nikah-mood-changed', { detail: { mood } }));
-                            },
-                            get activeMood() {
-                                return this.moods.find(m => m.id === this.currentMood) || this.moods[0];
-                            }
-                        }">
-                            <button type="button"
-                                    id="theme-toggle"
-                                    @click="moodOpen = !moodOpen"
-                                    @click.outside="moodOpen = false"
-                                    class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-100/70 dark:bg-slate-800/70 hover:bg-slate-200/80 dark:hover:bg-slate-700/80 text-xs font-semibold text-slate-700 dark:text-slate-200 transition focus:outline-none"
-                                    title="Switch Visual Mood (4 Themes Available)"
-                                    aria-label="Switch Theme Mood">
-                                <span x-text="activeMood.icon" class="text-sm"></span>
-                                <span x-text="activeMood.name" class="hidden sm:inline text-xs font-bold text-slate-700 dark:text-slate-200"></span>
-                                <svg class="w-3.5 h-3.5 text-slate-400 transition transform" :class="moodOpen ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                                </svg>
-                            </button>
-
-                            <!-- Dropdown Menu of 4 Moods -->
-                            <div x-show="moodOpen"
-                                 x-cloak
-                                 x-transition:enter="transition ease-out duration-150"
-                                 x-transition:enter-start="opacity-0 scale-95"
-                                 x-transition:enter-end="opacity-100 scale-100"
-                                 x-transition:leave="transition ease-in duration-100"
-                                 x-transition:leave-start="opacity-100 scale-100"
-                                 x-transition:leave-end="opacity-0 scale-95"
-                                 class="absolute right-0 mt-2 w-64 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-2xl p-2 z-50">
-                                <div class="px-3 py-2 border-b border-slate-100 dark:border-slate-800 mb-1 flex items-center justify-between">
-                                    <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">Visual Mood (4 Available)</span>
-                                    <span class="text-[10px] font-bold text-rose-600 dark:text-rose-400">Mindful Aesthetics</span>
-                                </div>
-                                <div class="space-y-1">
-                                    <template x-for="mood in moods" :key="mood.id">
-                                        <button type="button"
-                                                @click="selectMood(mood.id)"
-                                                class="w-full flex items-center justify-between p-2 rounded-xl text-left transition cursor-pointer"
-                                                :class="currentMood === mood.id ? 'bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-300 dark:border-emerald-700' : 'hover:bg-slate-100 dark:hover:bg-slate-800 border border-transparent'">
-                                            <div class="flex items-center gap-2.5">
-                                                <span x-text="mood.icon" class="text-base"></span>
-                                                <div>
-                                                    <p class="text-xs font-bold text-slate-900 dark:text-white" x-text="mood.name"></p>
-                                                    <p class="text-[10px] text-slate-500 dark:text-slate-400" x-text="mood.desc"></p>
-                                                </div>
-                                            </div>
-                                            <div class="flex items-center gap-1.5">
-                                                <span class="w-3 h-3 rounded-full border shadow-xs" :class="mood.dot"></span>
-                                                <svg x-show="currentMood === mood.id" class="w-4 h-4 text-emerald-600 dark:text-emerald-400" fill="currentColor" viewBox="0 0 20 20">
-                                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                                                </svg>
-                                            </div>
-                                        </button>
-                                    </template>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Real-time Notification Bell -->
-                        <div class="relative" x-data="{
-                            notifOpen: false,
-                            unreadCount: {{ Auth::user()->unreadNotifications->count() }},
-                            notifications: [],
-                            loading: false,
-                            fetchNotifications(silent = false) {
-                                if (!silent) this.loading = true;
-                                fetch('{{ route('notifications.index') }}', {
-                                    headers: { 'Accept': 'application/json', 'X-Requested-With': 'XMLHttpRequest' }
-                                })
-                                .then(res => res.json())
-                                .then(data => {
-                                    const previousCount = this.unreadCount;
-                                    this.notifications = data.notifications;
-                                    this.unreadCount = data.unread_count;
-                                    if (!silent) this.loading = false;
-
-                                    if (typeof data.unread_messages_count !== 'undefined' && window.updateSidebarMessageBadge) {
-                                        window.updateSidebarMessageBadge(data.unread_messages_count);
-                                    }
-
-                                    // If silent background poll detected a new unread notification (e.g. when Echo is offline),
-                                    // only show toast if it hasn't already been displayed
-                                    if (silent && data.notifications && data.notifications.length > 0) {
-                                        const newest = data.notifications[0];
-                                        const newestId = newest.id;
-                                        if (newest && !newest.read_at && (!window.processedNotificationIds || !window.processedNotificationIds.has(newestId))) {
-                                            if (window.handleReverbNotification) {
-                                                window.handleReverbNotification({
-                                                    id: newest.id,
-                                                    title: newest.data?.title || 'New Notification',
-                                                    message: newest.data?.message || '',
-                                                    icon: newest.data?.icon || '🔔',
-                                                    action_url: newest.data?.action_url || ''
-                                                });
-                                            }
-                                        }
-                                    }
-                                })
-                                .catch(() => { if (!silent) this.loading = false; });
-                            },
-                            markAsRead(id, url) {
-                                fetch('/notifications/' + id + '/read', {
-                                    method: 'POST',
-                                    headers: {
-                                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                                        'Accept': 'application/json',
-                                        'X-Requested-With': 'XMLHttpRequest'
-                                    }
-                                })
-                                .then(res => res.json())
-                                .then(data => {
-                                    this.unreadCount = data.unread_count;
-                                    const n = this.notifications.find(item => item.id === id);
-                                    if (n) n.read_at = new Date().toISOString();
-                                    if (url) window.location.href = url;
-                                });
-                            },
-                            markAllRead() {
-                                fetch('{{ route('notifications.read-all') }}', {
-                                    method: 'POST',
-                                    headers: {
-                                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                                        'Accept': 'application/json',
-                                        'X-Requested-With': 'XMLHttpRequest'
-                                    }
-                                })
-                                .then(res => res.json())
-                                .then(data => {
-                                    this.unreadCount = 0;
-                                    this.notifications.forEach(n => n.read_at = new Date().toISOString());
-                                });
-                            }
-                        }"
-                        x-init="fetchNotifications(); setInterval(() => fetchNotifications(true), 4000);"
-                        @new-notification-received.window="unreadCount = Math.max(unreadCount + 1, 1); notifications.unshift($event.detail); if(notifications.length > 20) notifications.pop();">
-                            <button type="button"
-                                    @click="notifOpen = !notifOpen; if(notifOpen) { fetchNotifications(); if(unreadCount > 0) markAllRead(); }"
-                                    id="notification-bell-btn"
-                                    aria-label="Notifications"
-                                    title="Real-Time Notifications"
-                                    class="relative p-2 rounded-xl text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800 transition focus:outline-none focus:ring-2 focus:ring-emerald-500">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
-                                </svg>
-                                <span x-show="unreadCount > 0"
-                                      x-text="unreadCount > 99 ? '99+' : unreadCount"
-                                      x-cloak
-                                      class="absolute -top-0.5 -right-0.5 min-w-[18px] h-[18px] px-1 bg-amber-500 text-white font-extrabold text-[10px] rounded-full flex items-center justify-center ring-2 ring-white dark:ring-slate-900 animate-pulse">
-                                </span>
-                            </button>
-
-                            <!-- Dropdown Menu -->
-                            <div x-show="notifOpen"
-                                 @click.away="notifOpen = false"
-                                 x-cloak
-                                 class="absolute right-0 mt-2 w-80 sm:w-96 bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-800 py-3 z-50 animate-in fade-in slide-in-from-top-2">
-                                
-                                <div class="px-4 py-2 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
-                                    <div class="flex items-center gap-2">
-                                        <h3 class="text-xs font-bold font-heading text-slate-900 dark:text-white uppercase tracking-wider">
-                                            Notifications
-                                        </h3>
-                                        <span x-show="unreadCount > 0" x-text="unreadCount + ' new'" class="text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300"></span>
-                                    </div>
-                                    <button type="button"
-                                            x-show="unreadCount > 0"
-                                            @click="markAllRead()"
-                                            class="text-[11px] font-semibold text-emerald-600 dark:text-emerald-400 hover:underline">
-                                        Mark all read
-                                    </button>
-                                </div>
-
-                                <div class="max-h-80 overflow-y-auto divide-y divide-slate-100 dark:divide-slate-800/60">
-                                    <div x-show="loading" class="p-6 text-center text-xs text-slate-400">
-                                        Loading notifications...
-                                    </div>
-
-                                    <template x-for="item in notifications" :key="item.id">
-                                        <div @click="markAsRead(item.id, item.data.action_url || item.data.url)"
-                                             class="p-3 sm:p-3.5 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition flex items-start gap-3 cursor-pointer group"
-                                             :class="{ 'bg-emerald-50/40 dark:bg-emerald-950/20': !item.read_at }">
-                                            <div class="w-8 h-8 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-base shrink-0 group-hover:scale-105 transition"
-                                                 x-text="item.data.icon || '🔔'">
-                                            </div>
-                                            <div class="flex-1 min-w-0">
-                                                <div class="flex items-center justify-between gap-1">
-                                                    <h4 class="text-xs font-bold text-slate-900 dark:text-white truncate group-hover:text-[var(--accent-primary)] transition" x-text="item.data.title || 'Notification'"></h4>
-                                                    <span class="text-[10px] text-slate-400 dark:text-slate-500 whitespace-nowrap" x-text="item.created_at"></span>
-                                                </div>
-                                                <p class="text-[11px] text-slate-600 dark:text-slate-300 mt-0.5 leading-snug line-clamp-2" x-text="item.data.message"></p>
-                                                <template x-if="item.data.action_url || item.data.url">
-                                                    <span class="inline-flex items-center gap-1 mt-1 text-[11px] font-bold text-[var(--accent-primary)] group-hover:underline">
-                                                        <span>View Details</span>
-                                                        <span>&rarr;</span>
-                                                    </span>
-                                                </template>
-                                            </div>
-                                        </div>
-                                    </template>
-
-                                    <div x-show="!loading && notifications.length === 0" class="py-8 text-center text-xs text-slate-400 dark:text-slate-500">
-                                        No notifications yet
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Constant Super Admin / User Badge (No Dropdown, Constant Display) -->
-                        <div class="flex items-center gap-2.5 px-3 py-1.5 rounded-2xl bg-slate-100/80 dark:bg-slate-800/80 border border-slate-200/80 dark:border-slate-700/80 select-none"
-                             title="{{ Auth::user()->name }} ({{ Auth::user()->email }})">
-                            <div class="w-8 h-8 rounded-full bg-emerald-600 text-white font-bold flex items-center justify-center text-xs shadow-xs">
-                                {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
-                            </div>
-                            <div class="text-left hidden sm:block">
-                                <div class="text-xs font-bold text-slate-900 dark:text-white leading-tight">
-                                    {{ Auth::user()->name }}
-                                </div>
-                                <div class="text-[10px] font-semibold text-emerald-600 dark:text-emerald-400 leading-tight flex items-center gap-1">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-                                    {{ Auth::user()->isSuperAdmin() ? 'Super Admin' : (Auth::user()->isModerator() ? 'Staff Admin' : (Auth::user()->isMonkAdvisor() ? 'Monk / Sangha Advisor' : (Auth::user()->isWali() ? 'Family Rep (Kalyāṇa-Mitta)' : 'Seeker'))) }}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <!-- Right Controls: Standard Header Actions (1. Messages, 2. Notifications, 3. Theme, 4. Avatar/AccountMenu) -->
+                    <x-header-actions />
                 </header>
 
                 <!-- Mangala Vivaha Milestone Banner if pending -->
@@ -606,8 +319,10 @@
                     @php $pendingM = Auth::user()->pendingMarriage(); @endphp
                     <div class="bg-gradient-to-r from-amber-500/20 via-rose-500/15 to-amber-500/20 border-b border-amber-300 dark:border-amber-700/60 px-4 py-3 text-slate-900 dark:text-slate-100 text-xs font-semibold">
                         <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
-                            <div class="flex items-center gap-2">
-                                <span class="text-base animate-bounce">🌸</span>
+                            <div class="flex items-center gap-2.5">
+                                <span class="flex h-6 w-6 items-center justify-center rounded-[var(--radius-xs)] bg-[var(--accent-subtle)] text-[var(--accent-primary)] shrink-0">
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                                </span>
                                 <span>
                                     @if(Auth::id() !== $pendingM->initiated_by_user_id)
                                         <strong>Mangala Vivaha Declaration Pending:</strong> {{ $pendingM->initiator->name }} declared your wedding blessing celebration!
@@ -616,7 +331,7 @@
                                     @endif
                                 </span>
                             </div>
-                            <a href="{{ route('marriages.celebration') }}" class="px-3.5 py-1.5 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-extrabold text-xs shadow-xs transition shrink-0">
+                            <a href="{{ route('marriages.celebration') }}" class="btn-primary text-xs !py-1 !px-3 shrink-0">
                                 View Celebration &rarr;
                             </a>
                         </div>
@@ -626,36 +341,36 @@
                 <!-- Flash Alerts -->
                 <div class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 mt-4">
                     @if(session('success'))
-                        <div class="bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-200 px-4 py-3 rounded-2xl text-xs font-semibold flex items-center justify-between shadow-xs mb-4">
-                            <div class="flex items-center gap-2">
-                                <span class="text-base">✓</span>
+                        <div class="bg-[var(--bg-surface)] border border-[var(--color-success)] text-[var(--text-primary)] px-4 py-3 rounded-[var(--radius-sm)] text-xs font-medium flex items-center justify-between shadow-2xs mb-4">
+                            <div class="flex items-center gap-2.5">
+                                <svg class="w-4 h-4 text-[var(--color-success)] shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
                                 <span>{{ session('success') }}</span>
                             </div>
                         </div>
                     @endif
 
                     @if(session('warning'))
-                        <div class="bg-amber-50 dark:bg-amber-950/60 border border-amber-200 dark:border-amber-800 text-amber-800 dark:text-amber-200 px-4 py-3 rounded-2xl text-xs font-semibold flex items-center justify-between shadow-xs mb-4">
-                            <div class="flex items-center gap-2">
-                                <span class="text-base">⚠️</span>
+                        <div class="bg-[var(--bg-surface)] border border-[var(--color-warning)] text-[var(--text-primary)] px-4 py-3 rounded-[var(--radius-sm)] text-xs font-medium flex items-center justify-between shadow-2xs mb-4">
+                            <div class="flex items-center gap-2.5">
+                                <svg class="w-4 h-4 text-[var(--color-warning)] shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
                                 <span>{{ session('warning') }}</span>
                             </div>
                         </div>
                     @endif
 
                     @if(session('info'))
-                        <div class="bg-sky-50 dark:bg-sky-950/60 border border-sky-200 dark:border-sky-800 text-sky-800 dark:text-sky-200 px-4 py-3 rounded-2xl text-xs font-semibold flex items-center justify-between shadow-xs mb-4">
-                            <div class="flex items-center gap-2">
-                                <span class="text-base">ℹ️</span>
+                        <div class="bg-[var(--bg-surface)] border border-[var(--border-default)] text-[var(--text-primary)] px-4 py-3 rounded-[var(--radius-sm)] text-xs font-medium flex items-center justify-between shadow-2xs mb-4">
+                            <div class="flex items-center gap-2.5">
+                                <svg class="w-4 h-4 text-[var(--accent-primary)] shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
                                 <span>{{ session('info') }}</span>
                             </div>
                         </div>
                     @endif
 
                     @if($errors->any())
-                        <div class="bg-rose-50 dark:bg-rose-950/60 border border-rose-200 dark:border-rose-800 text-rose-800 dark:text-rose-200 p-4 rounded-2xl text-xs shadow-xs mb-4">
-                            <p class="font-bold mb-1">Please correct the following:</p>
-                            <ul class="list-disc list-inside space-y-0.5">
+                        <div class="bg-[var(--bg-surface)] border border-[var(--color-danger)] text-[var(--text-primary)] p-4 rounded-[var(--radius-sm)] text-xs shadow-2xs mb-4">
+                            <p class="font-bold text-[var(--color-danger)] mb-1">Please check the following details:</p>
+                            <ul class="list-disc list-inside space-y-0.5 text-[var(--text-secondary)]">
                                 @foreach($errors->all() as $err)
                                     <li>{{ $err }}</li>
                                 @endforeach
@@ -672,6 +387,9 @@
                 <!-- Unified Platform Footer -->
                 @include('layouts.partials.footer')
             </div>
+
+            <!-- Mobile Bottom Tab Bar (Discover, Interests, Messages, Shortlist, Profile) -->
+            <x-mobile-bottom-nav />
         </div>
 
     @else
@@ -679,10 +397,10 @@
         {{-- GUEST VISITOR: CLEAN PUBLIC HEADER & FULL-WIDTH CANVAS    --}}
         {{-- ========================================================= --}}
         <div class="min-h-full flex flex-col">
-            <!-- Public Header -->
-            <header class="sticky top-0 z-40 border-b border-[var(--border-default)] bg-[var(--bg-surface)] shadow-xs">
+            <!-- Standard Logged-Out Public Header (64px desktop, 56px mobile) -->
+            <header class="sticky top-0 z-40 border-b border-[var(--border-default)] bg-[var(--bg-surface)]/95 backdrop-blur-md shadow-2xs">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="flex items-center justify-between h-16">
+                    <div class="flex items-center justify-between h-14 sm:h-16">
                         <!-- Brand Logo -->
                         <div class="flex items-center gap-3">
                             <a href="{{ route('landing') }}" class="group">
@@ -690,34 +408,50 @@
                             </a>
                         </div>
 
-                        <!-- Public Controls -->
-                        <div class="flex items-center gap-3">
+                        <!-- Public Controls: How it works, theme toggle, Sign in text link, Create profile button -->
+                        <div class="flex items-center gap-2 sm:gap-3">
                             <a href="{{ route('how-it-works') }}"
-                               class="hidden sm:inline-flex items-center gap-1.5 text-xs font-semibold text-[var(--text-secondary)] hover:text-[var(--accent-primary)] px-2 py-2 transition {{ request()->routeIs('how-it-works') ? 'text-[var(--accent-primary)]' : '' }}">
-                                <span class="text-[var(--accent-primary)]">✦</span>
+                               class="hidden sm:inline-flex items-center text-xs font-semibold text-[var(--text-secondary)] hover:text-[var(--accent-primary)] px-2.5 py-1.5 transition {{ request()->routeIs('how-it-works') ? 'text-[var(--accent-primary)] font-bold' : '' }}">
                                 How it works
                             </a>
-                            <a href="{{ route('subscription.pricing') }}"
-                               class="hidden md:inline-flex items-center gap-1.5 text-xs font-semibold text-[var(--text-secondary)] hover:text-[var(--accent-primary)] px-2 py-2 transition">
-                                Single Marriage Pass
-                            </a>
-                            <button type="button"
-                                    id="theme-toggle"
-                                    aria-label="Toggle Dark / Light Mode"
-                                    class="p-2 rounded-[4px] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-subtle)] transition">
-                                <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-amber-500" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"/>
-                                </svg>
-                                <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-[var(--text-secondary)]" fill="currentColor" viewBox="0 0 20 20">
-                                    <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/>
-                                </svg>
-                            </button>
 
-                            <a href="{{ route('login') }}" class="btn-secondary text-xs !py-1.5 !px-3.5">
-                                Log in
+                            <!-- Icon-Only Theme Toggle (44x44px hit area, 22px icon) -->
+                            <div class="relative inline-flex"
+                                 x-data="{
+                                     isDark: document.documentElement.classList.contains('dark'),
+                                     toggleTheme() {
+                                         this.isDark = !this.isDark;
+                                         if (this.isDark) {
+                                             document.documentElement.classList.add('dark');
+                                             localStorage.setItem('theme', 'dark');
+                                             localStorage.setItem('maitri_theme', 'dark');
+                                         } else {
+                                             document.documentElement.classList.remove('dark');
+                                             localStorage.setItem('theme', 'light');
+                                             localStorage.setItem('maitri_theme', 'light');
+                                         }
+                                         window.dispatchEvent(new CustomEvent('maitri-mood-changed', { detail: { mood: this.isDark ? 'dark' : 'light' } }));
+                                     }
+                                 }">
+                                <button type="button"
+                                        @click="toggleTheme()"
+                                        title="Theme"
+                                        aria-label="Toggle light and dark theme"
+                                        class="w-11 h-11 flex items-center justify-center rounded-full text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-subtle)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-primary)] transition cursor-pointer">
+                                    <svg x-show="isDark" x-cloak class="w-[22px] h-[22px]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"/>
+                                    </svg>
+                                    <svg x-show="!isDark" class="w-[22px] h-[22px]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z"/>
+                                    </svg>
+                                </button>
+                            </div>
+
+                            <a href="{{ route('login') }}" class="text-xs font-semibold text-[var(--text-secondary)] hover:text-[var(--text-primary)] px-2.5 py-1.5 transition">
+                                Sign in
                             </a>
-                            <a href="{{ route('register') }}" class="btn-primary text-xs !py-1.5 !px-4">
-                                Create Profile
+                            <a href="{{ route('register') }}" class="btn-primary text-xs !py-2 !px-4">
+                                Create profile
                             </a>
                         </div>
                     </div>
@@ -799,9 +533,8 @@
 
                          { name: 'Account Settings & Security', cat: 'Settings', icon: '🔒', url: '{{ route('settings.index') }}' },
                          { name: 'Switch Mood: Daylight (Noor)', cat: 'Mood', icon: '☀️', action: 'light' },
-                         { name: 'Switch Mood: Midnight (Layl)', cat: 'Mood', icon: '🌙', action: 'dark' },
-                         { name: 'Switch Mood: Royal Emerald (Zumarad)', cat: 'Mood', icon: '💎', action: 'emerald' },
-                         { name: 'Switch Mood: Desert Sand (Sahara)', cat: 'Mood', icon: '🏜️', action: 'sand' },
+                         { name: 'Switch Theme: Daylight Mode', cat: 'Theme', icon: '☀️', action: 'light' },
+                         { name: 'Switch Theme: Serene Dark Mode', cat: 'Theme', icon: '🌙', action: 'dark' },
                      ],
                      get filteredItems() {
                          if (!this.search.trim()) return this.items.slice(0, 8);
@@ -810,7 +543,7 @@
                      },
                      executeItem(item) {
                          if (item.action) {
-                             if (window.setNikahMood) window.setNikahMood(item.action);
+                             if (window.setMaitriMood) window.setMaitriMood(item.action);
                              commandPaletteOpen = false;
                          } else if (item.url) {
                              window.location.href = item.url;
@@ -820,14 +553,14 @@
 
                 <!-- Search Header -->
                 <div class="relative flex items-center p-4 border-b border-slate-100 dark:border-slate-800">
-                    <svg class="w-5 h-5 text-emerald-500 mr-3 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-5 h-5 text-[var(--color-primary)] mr-3 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                     </svg>
                     <input type="text"
                            x-model="search"
                            x-ref="searchInput"
                            x-init="$watch('commandPaletteOpen', value => { if (value) setTimeout(() => $refs.searchInput.focus(), 100); })"
-                           placeholder="Type a command, page name, or mood (e.g. 'kyc', 'emerald', 'plans')..."
+                           placeholder="Type a command or page name (e.g. 'matches', 'interests', 'pricing')..."
                            class="w-full bg-transparent text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none font-medium">
                     <button type="button"
                             @click="commandPaletteOpen = false"
@@ -841,11 +574,11 @@
                     <template x-for="item in filteredItems" :key="item.name">
                         <button type="button"
                                 @click="executeItem(item)"
-                                class="w-full flex items-center justify-between p-2.5 rounded-2xl hover:bg-emerald-50 dark:hover:bg-slate-800/80 transition text-left group cursor-pointer">
+                                class="w-full flex items-center justify-between p-2.5 rounded-2xl hover:bg-[var(--color-primary-soft)] dark:hover:bg-slate-800/80 transition text-left group cursor-pointer">
                             <div class="flex items-center gap-3 min-w-0">
                                 <span x-text="item.icon" class="text-lg shrink-0"></span>
                                 <div class="truncate">
-                                    <p class="text-xs font-bold text-slate-800 dark:text-slate-100 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition truncate" x-text="item.name"></p>
+                                    <p class="text-xs font-bold text-slate-800 dark:text-slate-100 group-hover:text-[var(--color-primary)] dark:group-hover:text-[var(--color-primary)] transition truncate" x-text="item.name"></p>
                                 </div>
                             </div>
                             <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 uppercase tracking-wider shrink-0" x-text="item.cat"></span>
@@ -858,7 +591,7 @@
 
                 <!-- Footer Hint -->
                 <div class="px-4 py-2.5 bg-slate-50 dark:bg-slate-950/50 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-[11px] text-slate-400">
-                    <span>Quick Navigation & 4 Moods</span>
+                    <span>Quick Navigation</span>
                     <span class="flex items-center gap-1 font-mono text-[10px]">
                         Use <kbd class="px-1 py-0.5 bg-white dark:bg-slate-800 rounded border border-slate-200 dark:border-slate-700">ESC</kbd> to exit
                     </span>
@@ -872,21 +605,15 @@
 
     <!-- Theme & Real-Time Broadcasting Scripts -->
     <script>
-        // Global 4-Mood Switching Helper Function
+        // Global Theme Switching Helper Function
         window.setMaitriMood = window.setNikahMood = function(mood) {
             localStorage.setItem('maitri_theme', mood);
-            localStorage.setItem('nikah_theme', mood);
-            localStorage.setItem('theme', (mood === 'light' || mood === 'sand') ? 'light' : 'dark');
-            document.documentElement.classList.remove('dark', 'theme-emerald', 'theme-sand');
+            localStorage.setItem('theme', mood === 'dark' ? 'dark' : 'light');
+            document.documentElement.classList.remove('dark');
             if (mood === 'dark') {
                 document.documentElement.classList.add('dark');
-            } else if (mood === 'emerald') {
-                document.documentElement.classList.add('dark', 'theme-emerald');
-            } else if (mood === 'sand') {
-                document.documentElement.classList.add('theme-sand');
             }
             window.dispatchEvent(new CustomEvent('maitri-mood-changed', { detail: { mood } }));
-            window.dispatchEvent(new CustomEvent('nikah-mood-changed', { detail: { mood } }));
         };
 
         // Play gentle notification sound via Web Audio API
@@ -930,26 +657,25 @@
             setTimeout(() => recentToastSignatures.delete(toastKey), 4000);
 
             const toast = document.createElement('div');
-            toast.className = 'pointer-events-auto p-4 rounded-2xl bg-white dark:bg-slate-900 border border-emerald-400 dark:border-emerald-700 shadow-2xl flex items-start gap-3 transition-all duration-300 transform translate-y-3 opacity-0';
+            toast.className = 'pointer-events-auto p-4 rounded-[var(--radius-md)] bg-[var(--bg-surface)] border border-[var(--border-default)] shadow-lg flex items-start gap-3 transition-all duration-300 transform translate-y-3 opacity-0';
             
-            const icon = data.icon || '🔔';
+            const iconSvg = `<svg class="w-4 h-4 text-[var(--accent-primary)]" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0"/></svg>`;
             const title = data.title || 'New Notification';
             const message = data.message || '';
             const actionUrl = data.action_url || '';
 
             toast.innerHTML = `
-                <div class="w-9 h-9 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-lg shrink-0">
-                    ${icon}
+                <div class="w-8 h-8 rounded-[var(--radius-xs)] bg-[var(--accent-subtle)] text-[var(--accent-primary)] flex items-center justify-center shrink-0">
+                    ${iconSvg}
                 </div>
                 <div class="flex-1 min-w-0">
                     <div class="flex items-center gap-1.5">
-                        <h4 class="font-bold text-xs text-slate-900 dark:text-white truncate">${title}</h4>
-                        <span class="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+                        <h4 class="font-semibold text-xs text-[var(--text-primary)] truncate">${title}</h4>
                     </div>
-                    <p class="text-[11px] text-slate-600 dark:text-slate-300 mt-0.5 leading-snug line-clamp-2">${message}</p>
-                    ${actionUrl ? `<a href="${actionUrl}" class="inline-block text-[11px] font-bold text-emerald-600 dark:text-emerald-400 hover:underline mt-1.5">View details &rarr;</a>` : ''}
+                    <p class="text-[11px] text-[var(--text-secondary)] mt-0.5 leading-snug line-clamp-2">${message}</p>
+                    ${actionUrl ? `<a href="${actionUrl}" class="inline-block text-[11px] font-semibold text-[var(--accent-primary)] hover:underline mt-1.5">View details &rarr;</a>` : ''}
                 </div>
-                <button type="button" aria-label="Close" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-xs font-bold p-1 leading-none">&times;</button>
+                <button type="button" aria-label="Close" class="text-[var(--text-muted)] hover:text-[var(--text-primary)] text-sm p-1 leading-none">&times;</button>
             `;
 
             const closeBtn = toast.querySelector('button');
@@ -1088,3 +814,4 @@
     </script>
 </body>
 </html>
+

@@ -28,7 +28,7 @@
 
             <!-- Seeker Profile Preview -->
             <div class="flex flex-col sm:flex-row items-center gap-5 p-5 rounded-[4px] bg-[var(--bg-subtle)] border border-[var(--border-default)]">
-                <div class="relative w-20 h-20 rounded-[4px] overflow-hidden bg-[#141412] flex items-center justify-center text-3xl font-bold text-[#e0b84c] border border-[var(--border-default)] shrink-0">
+                <div class="relative w-20 h-20 rounded-[3px] overflow-hidden bg-[var(--bg-card)] flex items-center justify-center text-3xl font-serif font-bold text-[var(--saffron-gold)] border border-[var(--border-default)] shrink-0">
                     @if($link->seeker->profile?->primaryPhoto)
                         <img src="{{ $link->seeker->profile->primaryPhoto->displayUrl() }}" alt="{{ $link->seeker->name }}" class="w-full h-full object-cover" loading="lazy" decoding="async">
                     @else

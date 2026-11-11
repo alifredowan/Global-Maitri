@@ -9,35 +9,216 @@
 @source '../views/**/*.blade.php';
 
 @theme {
-    --font-sans: 'Outfit', 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
-    --color-rose-950: #4c0519;
-    --color-rose-900: #881337;
-    --color-rose-800: #9f1239;
-    --color-rose-700: #be123c;
-    --color-rose-600: #e11d48;
-    --color-rose-500: #f43f5e;
-    --color-rose-100: #ffe4e6;
-    --color-rose-50: #fff1f2;
+    --font-serif: 'Fraunces', 'Cormorant Garamond', Georgia, serif;
+    --font-sans: 'DM Sans', 'Source Sans 3', 'Inter', ui-sans-serif, system-ui, sans-serif;
 
-    --color-gold-900: #78350f;
-    --color-gold-700: #b45309;
-    --color-gold-600: #d97706;
-    --color-gold-500: #f59e0b;
-    --color-gold-400: #fbbf24;
-    --color-gold-100: #fef3c7;
-    --color-gold-50: #fffbeb;
+    /* Buddhist Color Symbolism Tokens in Tailwind Theme */
+    --color-primary: #1F4E79;
+    --color-primary-hover: #173C5E;
+    --color-primary-soft: #E6EEF6;
+
+    --color-accent: #C98A1B;
+    --color-accent-hover: #A97212;
+    --color-accent-soft: #FBF1DC;
+
+    --color-lotus: #D9779A;
+    --color-lotus-soft: #FBEAF1;
+
+    --color-blessing: #B3261E;
+
+    --color-ink-dark: #0E2A47;
+    --color-ink-darker: #091D33;
+
+    --color-bg: #FFFDF8;
+    --color-surface: #FFFFFF;
+    --color-surface-alt: #F7F3EA;
 }
 
 [x-cloak] {
     display: none !important;
 }
 
-/* Smooth UI & Mindful Transitions for Global Maitri */
+/* Calm, unhurried page transitions & core typography */
 html {
     scroll-behavior: smooth;
     -webkit-tap-highlight-color: transparent;
+    background-color: var(--color-bg);
+    color: var(--color-text);
 }
 
+body {
+    font-family: var(--font-sans);
+    font-size: 1rem; /* 16px standard body */
+    font-weight: 450;
+    line-height: 1.55;
+    color: var(--color-text);
+    letter-spacing: -0.01em;
+}
+
+@media (max-width: 640px) {
+    body {
+        font-size: 0.9375rem; /* 15px mobile */
+    }
+}
+
+:where(h1, h2, h3, h4, .font-heading, .font-serif) {
+    font-family: var(--font-serif);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+    font-feature-settings: "liga" 1, "calt" 1;
+}
+
+:where(h1):not([class*="text-"]) {
+    font-size: 2.25rem; /* 36px desktop */
+    line-height: 1.2;
+}
+@media (min-width: 1024px) {
+    :where(h1):not([class*="text-"]) {
+        font-size: 2.5rem; /* 40px */
+    }
+}
+@media (max-width: 640px) {
+    :where(h1):not([class*="text-"]) {
+        font-size: 1.875rem; /* 30px mobile */
+        line-height: 1.22;
+    }
+}
+
+:where(h2):not([class*="text-"]) {
+    font-size: 1.625rem; /* 26px desktop */
+    line-height: 1.25;
+}
+@media (max-width: 640px) {
+    :where(h2):not([class*="text-"]) {
+        font-size: 1.375rem; /* 22px mobile */
+    }
+}
+
+:where(h3):not([class*="text-"]) {
+    font-size: 1.25rem; /* 20px */
+    line-height: 1.3;
+}
+
+/* Buttons and form labels: weight 600, 14-15px */
+button, .btn, .btn-primary, .btn-secondary, label {
+    font-weight: 600;
+}
+
+/* =======================================================================
+ * BUTTON SYSTEM (Maitri blue primary, saffron on dark sections)
+ * ======================================================================= */
+.btn-primary {
+    background-color: var(--color-primary);
+    color: #FFFFFF !important;
+    border-radius: var(--radius-sm);
+    transition: background-color 0.18s ease-out, transform 0.1s ease-out;
+}
+.btn-primary:hover {
+    background-color: var(--color-primary-hover);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--color-primary) !important;
+    border: 1px solid var(--color-primary);
+    border-radius: var(--radius-sm);
+    transition: background-color 0.18s ease-out, border-color 0.18s ease-out, transform 0.1s ease-out;
+}
+.btn-secondary:hover {
+    background-color: var(--color-primary-soft);
+}
+
+/* =======================================================================
+ * SCOPED TOKEN OVERRIDE FOR DARK SECTIONS (.section--dark)
+ * Ink-dark (#0E2A47) background gradient to (#091D33), #FFFFFF headings,
+ * #DCE7F2 body, #A3BED6 muted text, saffron-gold link hovers
+ * ======================================================================= */
+.section--dark {
+    background-color: var(--color-ink-dark) !important;
+    color: #DCE7F2 !important;
+    --bg-canvas: var(--color-ink-dark) !important;
+    --bg-surface: #123354 !important;
+    --text-primary: #FFFFFF !important;
+    --text-secondary: #DCE7F2 !important;
+    --text-muted: #A3BED6 !important;
+    --border-default: rgba(220, 231, 242, 0.2) !important;
+    --border-subtle: rgba(220, 231, 242, 0.12) !important;
+}
+
+.section--dark h1,
+.section--dark h2,
+.section--dark h3,
+.section--dark h4,
+.section--dark .font-heading {
+    color: #FFFFFF !important;
+}
+
+.section--dark p,
+.section--dark li {
+    color: #DCE7F2;
+}
+
+.section--dark .text-secondary,
+.section--dark .text-muted,
+.section--dark [class*="text-slate-400"],
+.section--dark [class*="text-slate-300"],
+.section--dark [class*="text-gray-500"],
+.section--dark [class*="text-gray-400"] {
+    color: #A3BED6 !important;
+}
+
+/* Dark section button rules */
+.section--dark .btn-primary {
+    background-color: var(--color-accent) !important;
+    color: var(--color-ink-dark) !important;
+}
+.section--dark .btn-primary:hover {
+    background-color: var(--color-accent-hover) !important;
+}
+
+.section--dark .btn-secondary {
+    background-color: transparent !important;
+    color: #FFFFFF !important;
+    border: 1px solid rgba(255, 255, 255, 0.4) !important;
+}
+.section--dark .btn-secondary:hover {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.section--dark a:not(.btn-primary):not(.btn-secondary):not(.btn-accent):not([class*="bg-"]):not([class*="btn"]) {
+    color: #DCE7F2 !important;
+}
+
+.section--dark a:not(.btn-primary):not(.btn-secondary):not(.btn-accent):not([class*="bg-"]):not([class*="btn"]):hover {
+    color: var(--color-accent) !important;
+}
+
+/* Subtle, tactile paper texture canvas */
+.paper-canvas {
+    background-color: var(--color-bg);
+    background-image: radial-gradient(rgba(31, 78, 121, 0.035) 1px, transparent 1px);
+    background-size: 24px 24px;
+}
+
+/* Monograph Card: grounded, 1px warm border, soft shadow */
+.card-monograph,
+.card-ledger {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    transition: border-color 0.22s ease-out, transform 0.22s ease-out;
+}
+
+@media (hover: hover) {
+    .card-monograph:hover,
+    .card-ledger:hover {
+        border-color: var(--color-primary);
+        transform: translateY(-2px);
+    }
+}
+
+/* Calm, respectful scrollbar */
 ::-webkit-scrollbar {
     width: 6px;
     height: 6px;
@@ -46,149 +227,44 @@ html {
     background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-    background: #cbd5e1;
+    background: #D5CFBF;
     border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-    background: #e11d48;
+    background: #B8B0A0;
 }
 .dark ::-webkit-scrollbar-thumb {
-    background: #334155;
+    background: #1C304A;
 }
 .dark ::-webkit-scrollbar-thumb:hover {
-    background: #f43f5e;
+    background: #2D4C75;
 }
 
-.smooth-card {
-    transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease;
-}
-.smooth-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 16px 32px -10px rgba(225, 29, 72, 0.16), 0 4px 10px -2px rgba(0, 0, 0, 0.04);
-}
-.dark .smooth-card:hover {
-    box-shadow: 0 16px 32px -10px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(244, 63, 94, 0.25);
+/* Botanical fine-line dividers */
+.botanical-rule {
+    position: relative;
+    text-align: center;
+    border-top: 1px solid var(--color-border);
 }
 
-.smooth-badge {
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+/* Links: blue, underlined on hover */
+a {
+    transition: color 0.18s ease-out;
 }
 
-.lotus-pattern {
-    background-color: #881337;
-    background-image: radial-gradient(#f43f5e 0.75px, transparent 0.75px), radial-gradient(#fb7185 0.75px, #881337 0.75px);
-    background-size: 30px 30px;
-    background-position: 0 0, 15px 15px;
+/* Accessible Focus Ring: 2px saffron outline with 2px offset (visible in light and dark) */
+:focus-visible {
+    outline: 2px solid var(--color-accent) !important;
+    outline-offset: 2px !important;
+    box-shadow: none !important;
 }
 
-.lotus-pattern-light {
-    background-color: #fdf2f8;
-    background-image: radial-gradient(#fbcfe8 0.75px, transparent 0.75px), radial-gradient(#fce7f3 0.75px, #fdf2f8 0.75px);
-    background-size: 24px 24px;
-    background-position: 0 0, 12px 12px;
-}
-
-/* ==========================================================================
-   4 MINDFUL MOODS (THEMES):
-   1. Lotus Dawn (Metta)      - Clean Slate, Lotus Pink & Rose
-   2. Bodhi Night (Shanti)    - Deep Midnight Slate (.dark)
-   3. Saffron Sangha (Dhamma) - Warm Saffron Gold & Burgundy (.theme-emerald)
-   4. Zen Sand (Mindfulness)  - Warm Parchment, Bamboo & Stone (.theme-sand)
-   ========================================================================== */
-
-/* 3. SAFFRON SANGHA MOOD */
-html.theme-emerald {
-    color-scheme: dark;
-}
-html.theme-emerald body {
-    background-color: #26130b !important;
-    color: #fef3c7 !important;
-}
-html.theme-emerald header.sticky {
-    background-color: rgba(43, 21, 12, 0.95) !important;
-    border-color: #5c2d18 !important;
-}
-html.theme-emerald aside {
-    background-color: #1f0e08 !important;
-    border-color: #5c2d18 !important;
-}
-html.theme-emerald .bg-white,
-html.theme-emerald .dark\:bg-slate-900,
-html.theme-emerald .bg-slate-900 {
-    background-color: #3b1b0e !important;
-    border-color: #69331c !important;
-}
-html.theme-emerald .bg-slate-50,
-html.theme-emerald .dark\:bg-slate-950,
-html.theme-emerald .bg-slate-950 {
-    background-color: #26130b !important;
-}
-html.theme-emerald .bg-slate-100,
-html.theme-emerald .dark\:bg-slate-800,
-html.theme-emerald .bg-slate-800 {
-    background-color: #4a2312 !important;
-    border-color: #78391f !important;
-}
-html.theme-emerald .border-slate-200,
-html.theme-emerald .border-slate-700,
-html.theme-emerald .border-slate-800,
-html.theme-emerald .dark\:border-slate-800,
-html.theme-emerald .dark\:border-slate-700 {
-    border-color: #69331c !important;
-}
-html.theme-emerald .text-slate-900,
-html.theme-emerald .dark\:text-white,
-html.theme-emerald .text-slate-800,
-html.theme-emerald .dark\:text-slate-100 {
-    color: #ffffff !important;
-}
-html.theme-emerald .text-slate-600,
-html.theme-emerald .text-slate-500,
-html.theme-emerald .text-slate-400,
-html.theme-emerald .dark\:text-slate-400,
-html.theme-emerald .dark\:text-slate-300 {
-    color: #fed7aa !important;
-}
-
-/* 4. ZEN SAND & PARCHMENT MOOD */
-html.theme-sand {
-    color-scheme: light;
-}
-html.theme-sand body {
-    background-color: #faf6ee !important;
-    color: #2b2016 !important;
-}
-html.theme-sand header.sticky {
-    background-color: rgba(255, 255, 255, 0.96) !important;
-    border-color: #e5dac7 !important;
-}
-html.theme-sand aside {
-    background-color: #211913 !important;
-    border-color: #382c23 !important;
-}
-html.theme-sand aside .text-slate-300 {
-    color: #d6c5b4 !important;
-}
-html.theme-sand .bg-white {
-    background-color: #ffffff !important;
-    border-color: #e6dbcb !important;
-}
-html.theme-sand .bg-slate-50 {
-    background-color: #faf6ee !important;
-}
-html.theme-sand .bg-slate-100 {
-    background-color: #f3ece0 !important;
-    border-color: #e3d7c5 !important;
-}
-html.theme-sand .border-slate-200,
-html.theme-sand .border-slate-100 {
-    border-color: #e6dbcb !important;
-}
-html.theme-sand .text-slate-900,
-html.theme-sand .text-slate-800 {
-    color: #241b13 !important;
-}
-html.theme-sand .text-slate-600 {
-    color: #5c4a3b !important;
+@media (prefers-reduced-motion: reduce) {
+    *, ::before, ::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+        transform: none !important;
+    }
 }
