@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'How It Works - Global Maitri | Mindful Buddhist Matrimonial Journey')
-@section('meta_description', 'See how Global Maitri guides serious Buddhist seekers from verified profiles and Dhamma-compatible matches to Family Representative guidance and a respectful path toward Mangala Vivaha.')
+@section('title', 'How It Works - Global Vivaha | Sacred Buddhist Matrimonial Journey')
+@section('meta_description', 'See how Global Vivaha guides serious Buddhist seekers from verified profiles and Dhamma-compatible matches to Family Representative guidance and a respectful path toward Mangala Vivaha.')
 @section('canonical_url', route('how-it-works'))
 @section('robots', 'index, follow')
 

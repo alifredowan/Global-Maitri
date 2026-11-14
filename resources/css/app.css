@@ -9,29 +9,33 @@
 @source '../views/**/*.blade.php';
 
 @theme {
-    --font-serif: 'Fraunces', 'Cormorant Garamond', Georgia, serif;
-    --font-sans: 'DM Sans', 'Source Sans 3', 'Inter', ui-sans-serif, system-ui, sans-serif;
+    --font-serif: 'Marcellus', Georgia, serif;
+    --font-sans: 'Source Sans 3', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
-    /* Buddhist Color Symbolism Tokens in Tailwind Theme */
-    --color-primary: #1F4E79;
-    --color-primary-hover: #173C5E;
-    --color-primary-soft: #E6EEF6;
+    /* Buddhist Sacred Vivaha Tokens in Tailwind Theme (Vaidurya & Serkhang) */
+    --color-primary: #17263C;
+    --color-primary-hover: #0F1B2C;
+    --color-primary-soft: #E8EEF5;
 
-    --color-accent: #C98A1B;
-    --color-accent-hover: #A97212;
-    --color-accent-soft: #FBF1DC;
+    --color-accent: #D49B35;
+    --color-accent-hover: #B88022;
+    --color-accent-soft: #FAF3E6;
 
-    --color-lotus: #D9779A;
-    --color-lotus-soft: #FBEAF1;
+    --color-jade: #1E4338;
+    --color-jade-hover: #16332A;
+    --color-jade-soft: #EAF2EE;
 
-    --color-blessing: #B3261E;
+    --color-lotus: #C95A70;
+    --color-lotus-soft: #F9ECF0;
 
-    --color-ink-dark: #0E2A47;
-    --color-ink-darker: #091D33;
+    --color-blessing: #1E4338;
 
-    --color-bg: #FFFDF8;
+    --color-ink-dark: #17263C;
+    --color-ink-darker: #0D1622;
+
+    --color-bg: #F5F3EC;
     --color-surface: #FFFFFF;
-    --color-surface-alt: #F7F3EA;
+    --color-surface-alt: #EDEAE0;
 }
 
 [x-cloak] {
@@ -227,17 +231,34 @@ button, .btn, .btn-primary, .btn-secondary, label {
     background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-    background: #D5CFBF;
+    background: #D5CEBD;
     border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-    background: #B8B0A0;
+    background: #D49B35;
 }
 .dark ::-webkit-scrollbar-thumb {
-    background: #1C304A;
+    background: #23354C;
 }
 .dark ::-webkit-scrollbar-thumb:hover {
-    background: #2D4C75;
+    background: #E8B458;
+}
+
+/* Authentic Vivaha Scroll Frame and Ornamentation */
+.vivaha-frame {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    position: relative;
+    box-shadow: 0 4px 20px -2px rgba(23, 38, 60, 0.05);
+}
+
+.vivaha-deckle {
+    background: linear-gradient(180deg, rgba(212, 155, 53, 0.08) 0%, transparent 100%), var(--color-bg);
+}
+
+.vivaha-seal {
+    box-shadow: inset 0 0 0 1px rgba(212, 155, 53, 0.3), 0 2px 8px rgba(23, 38, 60, 0.08);
 }
 
 /* Botanical fine-line dividers */

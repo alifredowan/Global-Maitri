@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'Privacy Policy & Data Governance - Global Maitri')
-@section('meta_description', 'Read Global Maitri’s privacy policy covering personal biodata, Lotus photo shield, Family Representative governance, horoscope privacy, and GDPR-aligned data protection.')
+@section('title', 'Privacy Policy & Data Governance - Global Vivaha')
+@section('meta_description', 'Read Global Vivaha’s privacy policy covering personal biodata, Lotus photo shield, Family Representative governance, horoscope privacy, and GDPR-aligned data protection.')
 @section('canonical_url', route('privacy'))
 @section('robots', 'index, follow')
 
@@ -21,7 +21,7 @@
                 Privacy Policy &amp; Data Governance
             </h1>
             <p class="text-sm sm:text-base text-[var(--text-secondary)] max-w-2xl mx-auto leading-relaxed">
-                At Global Maitri, safeguarding your personal biodata, Lotus Modesty privacy, horoscope records, and family honor is our highest ethical priority.
+                At Global Vivaha (formerly Global Maitri), safeguarding your personal biodata, Lotus Modesty privacy, horoscope records, and family honor is our highest ethical priority.
             </p>
             <div class="flex items-center justify-center gap-4 text-xs text-[var(--text-secondary)] pt-2 font-medium">
                 <span>Effective: November 2026</span>

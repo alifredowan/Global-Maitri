@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'Cookie Policy — Global Maitri')
-@section('meta_description', 'Learn how Global Maitri uses cookies and local storage responsibly to authenticate sessions, maintain security, and respect your privacy choices.')
+@section('title', 'Cookie Policy — Global Vivaha')
+@section('meta_description', 'Learn how Global Vivaha uses cookies and local storage responsibly to authenticate sessions, maintain security, and respect your privacy choices.')
 @section('canonical_url', route('cookies'))
 @section('robots', 'index, follow')
 

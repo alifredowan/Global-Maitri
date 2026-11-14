@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $targetUser->name }} - Buddhist Matrimonial Biodata | Global Maitri</title>
+    <title>{{ $targetUser->name }} - Buddhist Matrimonial Biodata | Global Vivaha</title>
 
-    <!-- Google Fonts: Fraunces, Cormorant Garamond, DM Sans -->
+    <!-- Google Fonts: Marcellus & Source Sans 3 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
 
     @vite(['resources/css/app.css'])
 
     <style>
-        body { font-family: 'DM Sans', system-ui, -apple-system, sans-serif; font-size: 17px; line-height: 1.6; color: var(--color-text); }
+        body { font-family: 'Source Sans 3', system-ui, -apple-system, sans-serif; font-size: 17px; line-height: 1.6; color: var(--color-text); }
         @media (max-width: 640px) { body { font-size: 16px; } }
-        .font-heading { font-family: 'Fraunces', 'Cormorant Garamond', Georgia, serif; font-weight: 700; }
-        .font-pali { font-family: 'Cormorant Garamond', Georgia, serif; letter-spacing: 0.04em; }
+        .font-heading { font-family: 'Marcellus', Georgia, serif; font-weight: 700; }
+        .font-pali { font-family: 'Marcellus', Georgia, serif; letter-spacing: 0.04em; }
 
         @media print {
             .no-print { display: none !important; }

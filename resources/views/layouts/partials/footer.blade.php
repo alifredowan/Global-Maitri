@@ -37,11 +37,11 @@
                 <a href="{{ route('landing') }}" class="inline-flex items-center gap-2.5 group">
                     <x-application-logo variant="badge" badge-class="w-8 h-8 group-hover:scale-105 transition" />
                     <span class="font-heading font-extrabold text-lg text-white tracking-tight">
-                        Global<span class="text-[var(--color-accent)]">Maitri</span>
+                        Global<span class="text-[var(--color-accent)]">Vivaha</span>
                     </span>
                 </a>
                 <p class="text-xs text-[var(--text-muted)]">
-                    Kindness first. Companionship for life.
+                    Kindness first. Companionship for life. Rooted in Metta &amp; Maitri.
                 </p>
             </div>
 
@@ -65,7 +65,7 @@
 
             <!-- Left: Copyright -->
             <p>
-                &copy; {{ date('Y') }} Global Maitri. All rights reserved.
+                &copy; {{ date('Y') }} Global Vivaha (formerly Global Maitri). All rights reserved.
             </p>
 
             <!-- Right: Privacy, Terms, Cookie Settings -->

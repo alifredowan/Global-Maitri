@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'Terms of Service & Metta Matrimonial Code - Global Maitri')
-@section('meta_description', 'Review the Global Maitri terms of service and matrimonial code covering sincere intentions, respectful conduct, Family Representative involvement, anti-dowry policy, and Mangala Vivaha commitments.')
+@section('title', 'Terms of Service & Metta Matrimonial Code - Global Vivaha')
+@section('meta_description', 'Review the Global Vivaha terms of service and matrimonial code covering sincere intentions, respectful conduct, Family Representative involvement, anti-dowry policy, and Mangala Vivaha commitments.')
 @section('canonical_url', route('terms'))
 @section('robots', 'index, follow')
 
@@ -21,7 +21,7 @@
                 Terms of Service &amp; Code of Conduct
             </h1>
             <p class="text-sm sm:text-base text-[var(--text-secondary)] max-w-2xl mx-auto leading-relaxed">
-                By entering Global Maitri, you commit to a matrimonial covenant grounded in sincere intention, loving-kindness (Metta), casteless equality, family involvement, and the pursuit of an auspicious lifelong union (Mangala Vivaha).
+                By entering Global Vivaha (formerly Global Maitri), you commit to a matrimonial covenant grounded in sincere intention, loving-kindness (Metta), casteless equality, family involvement, and the pursuit of an auspicious lifelong union (Mangala Vivaha).
             </p>
             <div class="flex items-center justify-center gap-4 text-xs text-[var(--text-secondary)] pt-2 font-medium">
                 <span>Last Updated: November 2026</span>

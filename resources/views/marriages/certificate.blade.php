@@ -3,18 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mangala Vivaha Certificate — {{ $marriage->groom->name }} & {{ $marriage->bride->name }} | Global Maitri</title>
+    <title>Mangala Vivaha Certificate — {{ $marriage->groom->name }} & {{ $marriage->bride->name }} | Global Vivaha</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600&family=DM+Sans:wght@400;500;600&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Great+Vibes&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Source+Sans+3:wght@400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
 
     @vite(['resources/css/app.css'])
 
     <style>
-        body { font-family: 'DM Sans', sans-serif; }
-        .font-cormorant { font-family: 'Cormorant Garamond', Georgia, serif; }
-        .font-heading { font-family: 'Fraunces', Georgia, serif; }
+        body { font-family: 'Source Sans 3', sans-serif; }
+        .font-heading { font-family: 'Marcellus', Georgia, serif; }
         .font-script { font-family: 'Great Vibes', cursive; }
 
         @media print {

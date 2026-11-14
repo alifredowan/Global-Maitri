@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'Contact & Safety — Global Maitri')
-@section('meta_description', 'Contact Global Maitri for account support, privacy requests, safety concerns, verification questions, and mindful matrimonial platform assistance.')
+@section('title', 'Contact & Safety — Global Vivaha')
+@section('meta_description', 'Contact Global Vivaha for account support, privacy requests, safety concerns, verification questions, and mindful matrimonial platform assistance.')
 @section('canonical_url', route('contact'))
 @section('robots', 'index, follow')
 

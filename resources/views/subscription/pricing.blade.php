@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'Single Marriage Pass • One-Time Payment Until Vivaha — Global Maitri')
-@section('meta_description', 'Compare Global Maitri membership plans and choose a one-time single marriage pass with matrimonial privileges until confirmed Mangala Vivaha.')
+@section('title', 'Single Marriage Pass • One-Time Payment Until Vivaha — Global Vivaha')
+@section('meta_description', 'Compare Global Vivaha membership plans and choose a one-time single marriage pass with matrimonial privileges until confirmed Mangala Vivaha.')
 @section('canonical_url', route('subscription.pricing'))
 @section('robots', 'index, follow')
 
@@ -19,7 +19,7 @@
                 Single Marriage Pass: Pay Once Until Mangala Vivaha
             </h1>
             <p class="text-sm sm:text-base text-[var(--text-secondary)] leading-relaxed">
-                Conventional dating apps profit from keeping people single with endless monthly subscriptions. Global Maitri aligns with your union: pay a single one-time pass fee, and your access remains active until your wedding blessing is celebrated.
+                Conventional dating apps profit from keeping people single with endless monthly subscriptions. Global Vivaha (formerly Global Maitri) aligns with your union: pay a single one-time pass fee, and your access remains active until your wedding blessing is celebrated.
             </p>
 
             <!-- Three Core Pillars -->

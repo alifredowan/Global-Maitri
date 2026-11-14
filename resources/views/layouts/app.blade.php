@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title', 'Global Maitri - Buddhist Matrimonial Platform')</title>
+    <title>@yield('title', 'Global Vivaha - Buddhist Matrimonial Platform')</title>
     <link rel="icon" href="{{ asset('favicon.svg') }}" type="image/svg+xml">
     <link rel="alternate icon" href="{{ asset('favicon.png') }}" type="image/png">
-    <link rel="apple-touch-icon" href="{{ asset('images/logo-emblem.png') }}">
-    <meta name="description" content="@yield('meta_description', 'Global Maitri is a Buddhist matrimonial platform for serious, marriage-oriented Buddhists across traditions, with verified profiles, family involvement, and mindful matchmaking.')">
+    <link rel="apple-touch-icon" href="{{ asset('favicon.svg') }}">
+    <meta name="description" content="@yield('meta_description', 'Global Vivaha is a mindful Buddhist matrimonial platform for serious, marriage-oriented Buddhists across traditions, with verified profiles, family involvement, and mindful matchmaking.')">
     <meta name="robots" content="@yield('robots', 'noindex, nofollow')">
     @hasSection('canonical_url')
         <link rel="canonical" href="{{ config('seo.url').(request()->getPathInfo() === '/' ? '/' : request()->getPathInfo()) }}">
@@ -21,14 +21,14 @@
                     [
                         '@type' => 'Organization',
                         '@id' => $seoSiteUrl.'/#organization',
-                        'name' => 'Global Maitri',
+                        'name' => 'Global Vivaha',
                         'url' => $seoSiteUrl.'/',
-                        'description' => 'A Buddhist matrimonial platform for serious, marriage-oriented Buddhists across traditions, with verified profiles, family involvement, and mindful matchmaking.',
+                        'description' => 'A sacred Buddhist matrimonial platform for serious, marriage-oriented Buddhists across traditions, with verified profiles, family involvement, and mindful matchmaking.',
                     ],
                     [
                         '@type' => 'WebSite',
                         '@id' => $seoSiteUrl.'/#website',
-                        'name' => 'Global Maitri',
+                        'name' => 'Global Vivaha',
                         'url' => $seoSiteUrl.'/',
                         'publisher' => ['@id' => $seoSiteUrl.'/#organization'],
                     ],
@@ -37,14 +37,14 @@
         @endphp
         <script type="application/ld+json">{!! json_encode($seoSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}</script>
     @endif
-    <meta property="og:title" content="@yield('title', 'Global Maitri - Buddhist Matrimonial Platform')">
-    <meta property="og:description" content="@yield('meta_description', 'Global Maitri is a Buddhist matrimonial platform for serious, marriage-oriented Buddhists across traditions, with verified profiles, family involvement, and mindful matchmaking.')">
+    <meta property="og:title" content="@yield('title', 'Global Vivaha - Buddhist Matrimonial Platform')">
+    <meta property="og:description" content="@yield('meta_description', 'Global Vivaha is a mindful Buddhist matrimonial platform for serious, marriage-oriented Buddhists across traditions, with verified profiles, family involvement, and mindful matchmaking.')">
     <meta property="og:type" content="website">
 
     <!-- Theme Initialization (Prevent FOUC: Light / Dark Supported) -->
     <script>
         (function() {
-            const savedTheme = localStorage.getItem('maitri_theme') || (localStorage.getItem('theme') === 'dark' ? 'dark' : 'light');
+            const savedTheme = localStorage.getItem('vivaha_theme') || localStorage.getItem('maitri_theme') || (localStorage.getItem('theme') === 'dark' ? 'dark' : 'light');
             document.documentElement.classList.remove('dark');
             if (savedTheme === 'dark') {
                 document.documentElement.classList.add('dark');
@@ -52,19 +52,19 @@
         })();
     </script>
 
-    <!-- Google Fonts: Fraunces & Cormorant Garamond (display), DM Sans (body) -->
+    <!-- Google Fonts: Marcellus (display) & Source Sans 3 (body) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400;1,9..40,500&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
 
     <!-- Vite Assets -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <style>
-        body { font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 16px; line-height: 1.55; }
+        body { font-family: 'Source Sans 3', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 16px; line-height: 1.55; }
         @media (max-width: 640px) { body { font-size: 15px; } }
-        :where(h1, h2, h3, h4, .font-heading) { font-family: 'Fraunces', 'Cormorant Garamond', Georgia, serif; font-weight: 700; line-height: 1.2; }
-        .font-serif-accent { font-family: 'Cormorant Garamond', Georgia, serif; }
+        :where(h1, h2, h3, h4, .font-heading) { font-family: 'Marcellus', Georgia, serif; font-weight: 700; line-height: 1.2; letter-spacing: -0.01em; }
+        .font-serif-accent { font-family: 'Marcellus', Georgia, serif; }
         .photo-blur {
             filter: blur(14px);
             transition: filter 0.3s ease;
@@ -72,7 +72,7 @@
         [x-cloak] { display: none !important; }
     </style>
 </head>
-<body class="h-full bg-[var(--bg-canvas)] text-[var(--text-primary)] antialiased selection:bg-[var(--accent-primary)] selection:text-white transition-colors duration-200"
+<body class="h-full bg-[var(--bg-canvas)] text-[var(--text-primary)] antialiased selection:bg-[var(--color-primary)] selection:text-[var(--color-bg)] transition-colors duration-200"
       x-data="{
           sidebarOpen: (function() {
               try { localStorage.removeItem('sidebar_open'); } catch(e){}
@@ -143,9 +143,9 @@
                         <x-application-logo variant="badge" badge-class="w-10 h-10" />
                         <div>
                             <span class="font-heading font-extrabold text-lg text-white tracking-tight flex items-center gap-1">
-                                Global<span class="text-[var(--accent-primary)]">Maitri</span>
+                                Global<span class="text-[var(--color-accent)]">Vivaha</span>
                             </span>
-                            <span class="text-[10px] font-bold uppercase tracking-wider text-[var(--accent-primary)] block -mt-0.5">
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-[var(--color-accent)] block -mt-0.5">
                                 {{ Auth::user()->isSuperAdmin() ? 'Super Admin' : (Auth::user()->isModerator() ? 'Staff' : (Auth::user()->isMonkAdvisor() ? 'Monk / Sangha Advisor' : (Auth::user()->isFamilyRep() ? 'Family Representative' : 'Candidate Seeker'))) }}
                             </span>
                         </div>
@@ -186,11 +186,11 @@
                     <button type="button"
                             @click="toggleSidebar()"
                             class="flex items-center gap-3 group flex-1 min-w-0 text-left cursor-pointer focus:outline-none"
-                            title="Open / Close Sidebar (Global Maitri Logo)">
+                            title="Open / Close Sidebar (Global Maitri Logo) • Global Vivaha">
                         <x-application-logo variant="badge" badge-class="w-10 h-10 group-hover:scale-105" />
                         <div>
-                            <div class="font-heading font-extrabold text-base text-white tracking-tight flex items-center gap-1 group-hover:text-[var(--accent-primary)] transition">
-                                Global<span class="text-[var(--accent-primary)]">Maitri</span>
+                            <div class="font-heading font-extrabold text-base text-white tracking-tight flex items-center gap-1 group-hover:text-[var(--color-accent)] transition">
+                                Global<span class="text-[var(--color-accent)]">Vivaha</span>
                             </div>
                             <div class="flex items-center gap-1.5 mt-0.5">
                                 <span class="inline-block w-2 h-2 rounded-full bg-[var(--accent-primary)] animate-pulse"></span>
@@ -255,14 +255,14 @@
                             </svg>
                         </button>
 
-                        <!-- Global Maitri Brand Logo & Name (Shown when sidebar is collapsed, or on mobile) -->
+                        <!-- Global Vivaha Brand Logo & Name (Shown when sidebar is collapsed, or on mobile) -->
                         <div @click="toggleSidebar()"
                              x-show="!sidebarOpen || window.innerWidth < 1024"
                              class="flex items-center gap-2.5 cursor-pointer select-none group"
-                             title="Open / Close Sidebar (Global Maitri Logo)">
+                             title="Open / Close Sidebar (Global Maitri Logo) • Global Vivaha">
                             <x-application-logo variant="badge" badge-class="w-9 h-9 group-hover:scale-105" />
                             <span class="font-heading font-extrabold text-base tracking-tight text-[var(--color-primary)] group-hover:text-[var(--color-primary-hover)] transition">
-                                Global<span class="text-[var(--color-accent)]">Maitri</span>
+                                Global<span class="text-[var(--color-accent)]">Vivaha</span>
                             </span>
                         </div>
 

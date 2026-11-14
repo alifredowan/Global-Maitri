@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'About Us — Global Maitri | Mindful Buddhist Matrimonial Platform')
-@section('meta_description', 'Learn how Global Maitri supports mindful Buddhist matchmaking through verified identities, family involvement, Lotus privacy, Dhamma compatibility, and a lifelong Mangala Vivaha commitment.')
+@section('title', 'About Us — Global Vivaha | Sacred Buddhist Matrimonial Sanctuary')
+@section('meta_description', 'Learn how Global Vivaha supports mindful Buddhist matchmaking through verified identities, family involvement, Lotus privacy, Dhamma compatibility, and a lifelong Mangala Vivaha commitment.')
 @section('canonical_url', route('about'))
 @section('robots', 'index, follow')
 
@@ -19,7 +19,7 @@
                 Built for Mangala Vivaha. Grounded in Dhamma &amp; Metta.
             </h1>
             <p class="text-xs sm:text-sm text-[var(--text-secondary)] max-w-2xl leading-relaxed">
-                Global Maitri was founded to offer an alternative to commercial matchmaking and superficial swiping apps. We provide a calm, respectful sanctuary for Buddhist seekers and their families to seek genuine lifelong companionship rooted in shared Dhamma values.
+                Global Vivaha (formerly Global Maitri) was founded to offer an authentic alternative to commercial matchmaking and superficial swiping apps. We provide a calm, respectful sanctuary for Buddhist seekers and their families to seek genuine lifelong companionship rooted in shared Dhamma values.
             </p>
         </div>
 

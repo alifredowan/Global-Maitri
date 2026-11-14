@@ -1,778 +1,414 @@
 @extends('layouts.app')
 
-@section('title', 'Global Maitri — Buddhist Matrimonial Platform | Kindness first. Companionship for life.')
-@section('meta_description', 'A calm Buddhist matrimonial space for serious marriage, with verified identities, family representative support, photo privacy controls, and shared Dhamma values.')
+@section('title', 'Global Vivaha — Sacred Buddhist Matrimony | Kindness first. Companionship for life.')
+@section('meta_description', 'A mindful, casteless Buddhist matrimonial sanctuary for serious marriage seekers and families worldwide. Verified identities, Dhamma compatibility, and mutual modesty.')
 @section('canonical_url', route('landing'))
 @section('robots', 'index, follow')
 
 @section('content')
-<div class="space-y-12 sm:space-y-16 pt-4 pb-0">
+<div class="space-y-16 sm:space-y-24 pt-6 sm:pt-10 pb-16">
 
     <!-- ================================================================= -->
-    <!-- 1. HERO SECTION: BOLD HEADLINE, SCANNABLE ACTIONS, PROFILE CARDS  -->
+    <!-- 1. SACRED FIRST VIEWPORT: MASTHEAD & WORKING DISCOVERY CHARTER   -->
     <!-- ================================================================= -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="relative rounded-[var(--radius-lg)] bg-[var(--bg-surface)] border border-[var(--border-default)] p-6 sm:p-10 lg:p-12 shadow-xs overflow-hidden">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-
-                <!-- Left Column: Core Headline, Microcopy, Primary CTA -->
-                <div class="lg:col-span-7 space-y-5 text-left">
-                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-[var(--radius-xs)] bg-[var(--accent-subtle)] border border-[var(--border-default)] text-[var(--accent-text)] text-xs font-semibold">
-                        <span class="inline-block w-1.5 h-1.5 rounded-full bg-[var(--accent-primary)]"></span>
-                        <span>For Buddhist families &amp; seekers</span>
-                    </div>
-
-                    <h1 class="font-heading text-2xl sm:text-3xl lg:text-[2.5rem] font-bold text-[var(--text-primary)] tracking-tight leading-[1.2]">
-                        A quiet place to find your Buddhist partner.
-                    </h1>
-
-                    <p class="text-sm sm:text-base text-[var(--text-secondary)] leading-relaxed max-w-xl">
-                        Thoughtful matchmaking with verified profiles, family blessings, and mutual photo privacy.
-                    </p>
-
-                    <!-- Hero Actions (48px high, clear hierarchy) -->
-                    <div class="pt-2 flex flex-wrap items-center gap-3">
-                        <a href="{{ route('register') }}"
-                           class="btn-primary min-h-[48px] px-7 inline-flex items-center justify-center font-semibold text-sm rounded-[var(--radius-sm)] shadow-xs transition active:scale-[0.98]">
-                            Create free profile
-                        </a>
-                        <a href="#how-it-works"
-                           class="btn-secondary min-h-[48px] px-6 inline-flex items-center justify-center font-semibold text-sm rounded-[var(--radius-sm)] transition active:scale-[0.98]">
-                            How it works
-                        </a>
-                    </div>
-
-                    <!-- Trust Chips & Real Community Numbers -->
-                    <div class="pt-3 border-t border-[var(--border-subtle)] flex flex-wrap items-center gap-4 text-xs text-[var(--text-secondary)]">
-                        <div class="flex items-center gap-1.5 font-medium">
-                            <svg class="w-4 h-4 text-[var(--color-accent)]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg>
-                            <span>Verified profiles</span>
-                        </div>
-                        <div class="flex items-center gap-1.5 font-medium">
-                            <svg class="w-4 h-4 text-[var(--color-accent)]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path stroke-linecap="round" stroke-linejoin="round" d="M22 21v-2a4 4 0 00-3-3.87"/><path stroke-linecap="round" stroke-linejoin="round" d="M16 3.13a4 4 0 010 7.75"/></svg>
-                            <span>Family approval</span>
-                        </div>
-                        <div class="flex items-center gap-1.5 font-medium">
-                            <svg class="w-4 h-4 text-[var(--color-accent)]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path stroke-linecap="round" stroke-linejoin="round" d="M7 11V7a5 5 0 0110 0v4"/></svg>
-                            <span>Photos stay private</span>
-                        </div>
-                    </div>
-
-                    <p class="text-[11px] text-[var(--text-muted)] italic">
-                        {{ $stats['verified_profiles'] }} verified candidates &bull; Family members can join free.
-                    </p>
-                </div>
-
-                <!-- Right Column: Visual Composition of Sample Profile Cards -->
-                <div class="lg:col-span-5 relative">
-                    <div class="relative space-y-3">
-
-                        <!-- Main Sample Card -->
-                        <div class="rounded-[var(--radius-md)] bg-[var(--color-surface)] border border-[var(--color-border)] p-4 shadow-sm hover:-translate-y-0.5 transition duration-200">
-                            <div class="flex items-center gap-3">
-                                <div class="relative w-14 h-14 rounded-full bg-[var(--color-primary-soft)] border border-[var(--color-border)] flex items-center justify-center overflow-hidden shrink-0">
-                                    <span class="font-heading font-bold text-sm text-[var(--color-primary)]">DP</span>
-                                    <div class="absolute inset-0 backdrop-blur-[2px] bg-black/10 flex items-center justify-center">
-                                        <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path stroke-linecap="round" stroke-linejoin="round" d="M7 11V7a5 5 0 0110 0v4"/></svg>
-                                    </div>
-                                </div>
-                                <div class="min-w-0 flex-1">
-                                    <div class="flex items-center gap-2">
-                                        <h3 class="font-heading font-bold text-sm text-[var(--text-primary)]">Dilini, 28</h3>
-                                        <span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[10px] font-semibold bg-[var(--color-primary-soft)] text-[var(--color-primary)] border border-[var(--color-primary)]/20">
-                                            <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
-                                            Verified
-                                        </span>
-                                    </div>
-                                    <p class="text-xs text-[var(--text-secondary)] truncate">Theravada &bull; Colombo &bull; Architect</p>
-                                    <div class="flex items-center gap-1.5 mt-1 text-[11px] text-[var(--color-primary)] font-medium">
-                                        <span class="inline-block w-2.5 h-2.5 rounded-full bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)]"></span>
-                                        <span>94% Dhamma compatibility</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Secondary Sample Card -->
-                        <div class="rounded-[var(--radius-md)] bg-[var(--color-surface)] border border-[var(--color-border)] p-4 shadow-sm hover:-translate-y-0.5 transition duration-200 ml-4 sm:ml-6">
-                            <div class="flex items-center gap-3">
-                                <div class="relative w-14 h-14 rounded-full bg-[var(--color-primary-soft)] border border-[var(--color-border)] flex items-center justify-center overflow-hidden shrink-0">
-                                    <span class="font-heading font-bold text-sm text-[var(--color-primary)]">AK</span>
-                                    <div class="absolute inset-0 backdrop-blur-[2px] bg-black/10 flex items-center justify-center">
-                                        <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path stroke-linecap="round" stroke-linejoin="round" d="M7 11V7a5 5 0 0110 0v4"/></svg>
-                                    </div>
-                                </div>
-                                <div class="min-w-0 flex-1">
-                                    <div class="flex items-center gap-2">
-                                        <h3 class="font-heading font-bold text-sm text-[var(--text-primary)]">Aung, 31</h3>
-                                        <span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[10px] font-semibold bg-[var(--color-primary-soft)] text-[var(--color-primary)] border border-[var(--color-primary)]/20">
-                                            <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
-                                            Verified
-                                        </span>
-                                    </div>
-                                    <p class="text-xs text-[var(--text-secondary)] truncate">Theravada &bull; Yangon &bull; Software Engineer</p>
-                                    <div class="flex items-center gap-1.5 mt-1 text-[11px] text-[var(--color-primary)] font-medium">
-                                        <span class="inline-block w-2.5 h-2.5 rounded-full bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)]"></span>
-                                        <span>91% Dhamma compatibility</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
+        <div class="vivaha-frame relative overflow-hidden rounded-[16px] bg-[var(--color-surface)] border border-[var(--color-border)] p-6 sm:p-12 lg:p-16 vivaha-seal">
+            
+            {{-- Auspicious Background Watermark (Eternal Knot & Lotus) --}}
+            <div class="absolute -top-16 -right-16 w-80 h-80 sm:w-96 sm:h-96 text-[var(--color-accent)] opacity-[0.04] pointer-events-none" aria-hidden="true">
+                <svg viewBox="0 0 100 100" fill="currentColor">
+                    <circle cx="50" cy="50" r="45" stroke="currentColor" stroke-width="2" fill="none" stroke-dasharray="2 3"/>
+                    <path d="M50 15 C45 28 42 40 50 60 C58 40 55 28 50 15 Z"/>
+                    <path d="M50 30 C35 38 30 50 42 62 C46 50 48 40 50 30 Z"/>
+                    <path d="M50 30 C65 38 70 50 58 62 C54 50 52 40 50 30 Z"/>
+                    <path d="M38 55 L50 67 L62 55 L70 63 L50 83 L30 63 Z" fill="none" stroke="currentColor" stroke-width="3"/>
+                </svg>
             </div>
-        </div>
-    </section>
 
-    <!-- ================================================================= -->
-    <!-- 2. VALUES & ETHOS: EDITORIAL TILES (NO WALL OF TEXT)              -->
-    <!-- ================================================================= -->
-    <section class="border-y border-[var(--border-default)] bg-[var(--bg-subtle)] py-10 sm:py-14">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
-            <div class="max-w-2xl text-left space-y-1">
-                <p class="text-xs font-semibold uppercase tracking-wider text-[var(--accent-primary)]">Metta &bull; Loving-kindness</p>
-                <h2 class="font-heading text-2xl sm:text-3xl font-bold text-[var(--text-primary)]">
-                    Companionship rooted in kindness.
-                </h2>
-                <p class="text-xs sm:text-sm text-[var(--text-secondary)]">
-                    A householder union guided by patience, mutual respect, and family blessings.
+            <div class="max-w-3xl mx-auto text-center space-y-6">
+
+                <!-- Auspicious Invocation -->
+                <div class="inline-flex items-center gap-2.5 px-3.5 py-1 rounded-full bg-[var(--color-primary-soft)] border border-[var(--color-border)] text-xs font-semibold text-[var(--color-primary)]">
+                    <span class="w-1.5 h-1.5 rounded-full bg-[var(--color-accent)]"></span>
+                    <span>Namo Buddhaya • Sacred Buddhist Matrimony</span>
+                </div>
+
+                <!-- Main Purposeful Headline (Marcellus, Unhurried, Dignified) -->
+                <h1 class="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-[var(--text-primary)] leading-[1.18] tracking-tight">
+                    A sacred sanctuary for lifelong Buddhist companionship.
+                </h1>
+
+                <!-- Body Narrative (65-75ch Measure) -->
+                <p class="text-base sm:text-lg text-[var(--text-secondary)] leading-relaxed max-w-2xl mx-auto font-sans font-normal">
+                    Dedicated to earnest seekers and families seeking an auspicious, lifelong union (<em>Mangala Vivaha</em>). Built on loving-kindness (<em>Metta &amp; Maitri</em>), Dhamma compatibility, family representative guidance, and complete mutual modesty.
                 </p>
-            </div>
 
-            <!-- 4 Tactile Feature Tiles (Monoline Icons + 3-4 Word Labels) -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                <div class="rounded-[var(--radius-md)] bg-[var(--bg-surface)] border border-[var(--border-default)] p-5 space-y-2 hover:-translate-y-0.5 transition duration-200">
-                    <div class="w-8 h-8 rounded-[var(--radius-xs)] bg-[var(--accent-subtle)] text-[var(--accent-primary)] flex items-center justify-center">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg>
+                <!-- Primary Action Cluster -->
+                <div class="pt-2 flex flex-wrap items-center justify-center gap-3 sm:gap-4">
+                    <a href="{{ route('register') }}"
+                       class="min-h-[50px] px-8 inline-flex items-center justify-center font-serif font-bold text-base rounded-[6px] bg-[var(--color-primary)] hover:bg-[var(--color-primary-hover)] text-white shadow-xs transition duration-200 active:scale-[0.98]">
+                        Begin your journey
+                    </a>
+                    <a href="{{ route('discovery.index') }}"
+                       class="min-h-[50px] px-7 inline-flex items-center justify-center font-serif font-bold text-base rounded-[6px] bg-[var(--color-surface-alt)] hover:bg-[var(--color-border)] text-[var(--text-primary)] border border-[var(--color-border)] transition duration-200 active:scale-[0.98]">
+                        Explore verified biodata
+                    </a>
+                </div>
+
+                <!-- Trust Signals & Community Assurance -->
+                <div class="pt-6 border-t border-[var(--color-border)] flex flex-wrap items-center justify-center gap-6 text-xs text-[var(--text-secondary)] font-medium">
+                    <div class="flex items-center gap-2">
+                        <svg class="w-4 h-4 text-[var(--color-accent)] shrink-0" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg>
+                        <span>{{ $stats['verified_profiles'] }} Verified Seekers</span>
                     </div>
-                    <h3 class="font-heading font-semibold text-sm text-[var(--text-primary)]">Verified seekers only</h3>
-                    <p class="text-xs text-[var(--text-secondary)] leading-relaxed">
-                        Every profile requires genuine identity verification.
-                    </p>
-                </div>
-
-                <div class="rounded-[var(--radius-md)] bg-[var(--bg-surface)] border border-[var(--border-default)] p-5 space-y-2 hover:-translate-y-0.5 transition duration-200">
-                    <div class="w-8 h-8 rounded-[var(--radius-xs)] bg-[var(--accent-subtle)] text-[var(--accent-primary)] flex items-center justify-center">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path stroke-linecap="round" stroke-linejoin="round" d="M7 11V7a5 5 0 0110 0v4"/></svg>
+                    <div class="flex items-center gap-2">
+                        <svg class="w-4 h-4 text-[var(--color-accent)] shrink-0" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path stroke-linecap="round" stroke-linejoin="round" d="M22 21v-2a4 4 0 00-3-3.87"/><path stroke-linecap="round" stroke-linejoin="round" d="M16 3.13a4 4 0 010 7.75"/></svg>
+                        <span>Kalyāṇa-Mitta Family Blessings</span>
                     </div>
-                    <h3 class="font-heading font-semibold text-sm text-[var(--text-primary)]">Protected photos</h3>
-                    <p class="text-xs text-[var(--text-secondary)] leading-relaxed">
-                        Photos stay private until you both agree to connect.
-                    </p>
-                </div>
-
-                <div class="rounded-[var(--radius-md)] bg-[var(--bg-surface)] border border-[var(--border-default)] p-5 space-y-2 hover:-translate-y-0.5 transition duration-200">
-                    <div class="w-8 h-8 rounded-[var(--radius-xs)] bg-[var(--accent-subtle)] text-[var(--accent-primary)] flex items-center justify-center">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path stroke-linecap="round" stroke-linejoin="round" d="M22 21v-2a4 4 0 00-3-3.87"/><path stroke-linecap="round" stroke-linejoin="round" d="M16 3.13a4 4 0 010 7.75"/></svg>
+                    <div class="flex items-center gap-2">
+                        <svg class="w-4 h-4 text-[var(--color-accent)] shrink-0" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path stroke-linecap="round" stroke-linejoin="round" d="M7 11V7a5 5 0 0110 0v4"/></svg>
+                        <span>Lotus Modesty Veil</span>
                     </div>
-                    <h3 class="font-heading font-semibold text-sm text-[var(--text-primary)]">Family representative support</h3>
-                    <p class="text-xs text-[var(--text-secondary)] leading-relaxed">
-                        Parents and trusted elders join free to advise.
-                    </p>
-                </div>
-
-                <div class="rounded-[var(--radius-md)] bg-[var(--bg-surface)] border border-[var(--border-default)] p-5 space-y-2 hover:-translate-y-0.5 transition duration-200">
-                    <div class="w-8 h-8 rounded-[var(--radius-xs)] bg-[var(--accent-subtle)] text-[var(--accent-primary)] flex items-center justify-center">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    <div class="flex items-center gap-2">
+                        <svg class="w-4 h-4 text-[var(--color-accent)] shrink-0" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        <span>Single Marriage Pass • No Monthly Traps</span>
                     </div>
-                    <h3 class="font-heading font-semibold text-sm text-[var(--text-primary)]">Anti-dowry commitment</h3>
-                    <p class="text-xs text-[var(--text-secondary)] leading-relaxed">
-                        Strict policy upholding mutual dignity and equality.
-                    </p>
                 </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- ================================================================= -->
-    <!-- 3. HOW IT WORKS: A GENTLY FLOWING HORIZONTAL PATH (7 STEPS)       -->
-    <!-- ================================================================= -->
-    <section id="how-it-works" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8">
-        <div class="max-w-2xl text-left space-y-1">
-            <p class="text-xs font-semibold uppercase tracking-wider text-[var(--accent-primary)]">The steps</p>
-            <h2 class="font-heading text-2xl sm:text-3xl font-bold text-[var(--text-primary)]">
-                A calm path to marriage.
-            </h2>
-            <p class="text-xs sm:text-sm text-[var(--text-secondary)]">
-                Every step gives you and your family clarity without pressure.
-            </p>
-        </div>
-
-        <!-- Horizontal Flowing Path: 7 Columns Across Desktop, Responsive Grid -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3 sm:gap-3.5">
-
-            <!-- Step 1: Profile -->
-            <div class="rounded-[var(--radius-md)] bg-[var(--bg-surface)] border border-[var(--border-default)] p-4 flex flex-col justify-between hover:-translate-y-1 hover:border-[var(--accent-primary)] hover:shadow-xs transition duration-200 group">
-                <div>
-                    <div class="flex items-center justify-between mb-2.5">
-                        <span class="flex h-7 w-7 items-center justify-center rounded-full bg-[var(--accent-subtle)] border border-[var(--border-default)] text-xs font-bold text-[var(--accent-primary)] group-hover:scale-105 transition">
-                            1
-                        </span>
-                        <span class="text-[10px] font-semibold text-[var(--text-muted)] uppercase tracking-wider">01</span>
-                    </div>
-                    <h3 class="font-heading font-bold text-sm text-[var(--text-primary)] leading-tight">Profile</h3>
-                    <p class="text-[11px] text-[var(--text-secondary)] mt-1.5 leading-relaxed">Complete biodata and private photos.</p>
-                </div>
             </div>
 
-            <!-- Step 2: Practice -->
-            <div class="rounded-[var(--radius-md)] bg-[var(--bg-surface)] border border-[var(--border-default)] p-4 flex flex-col justify-between hover:-translate-y-1 hover:border-[var(--accent-primary)] hover:shadow-xs transition duration-200 group">
-                <div>
-                    <div class="flex items-center justify-between mb-2.5">
-                        <span class="flex h-7 w-7 items-center justify-center rounded-full bg-[var(--accent-subtle)] border border-[var(--border-default)] text-xs font-bold text-[var(--accent-primary)] group-hover:scale-105 transition">
-                            2
-                        </span>
-                        <span class="text-[10px] font-semibold text-[var(--text-muted)] uppercase tracking-wider">02</span>
-                    </div>
-                    <h3 class="font-heading font-bold text-sm text-[var(--text-primary)] leading-tight">Practice</h3>
-                    <p class="text-[11px] text-[var(--text-secondary)] mt-1.5 leading-relaxed">Share tradition and meditation rhythm.</p>
-                </div>
-            </div>
-
-            <!-- Step 3: Discover -->
-            <div class="rounded-[var(--radius-md)] bg-[var(--bg-surface)] border border-[var(--border-default)] p-4 flex flex-col justify-between hover:-translate-y-1 hover:border-[var(--accent-primary)] hover:shadow-xs transition duration-200 group">
-                <div>
-                    <div class="flex items-center justify-between mb-2.5">
-                        <span class="flex h-7 w-7 items-center justify-center rounded-full bg-[var(--accent-subtle)] border border-[var(--border-default)] text-xs font-bold text-[var(--accent-primary)] group-hover:scale-105 transition">
-                            3
-                        </span>
-                        <span class="text-[10px] font-semibold text-[var(--text-muted)] uppercase tracking-wider">03</span>
-                    </div>
-                    <h3 class="font-heading font-bold text-sm text-[var(--text-primary)] leading-tight">Discover</h3>
-                    <p class="text-[11px] text-[var(--text-secondary)] mt-1.5 leading-relaxed">Filter verified candidates worldwide.</p>
-                </div>
-            </div>
-
-            <!-- Step 4: Interest -->
-            <div class="rounded-[var(--radius-md)] bg-[var(--bg-surface)] border border-[var(--border-default)] p-4 flex flex-col justify-between hover:-translate-y-1 hover:border-[var(--accent-primary)] hover:shadow-xs transition duration-200 group">
-                <div>
-                    <div class="flex items-center justify-between mb-2.5">
-                        <span class="flex h-7 w-7 items-center justify-center rounded-full bg-[var(--accent-subtle)] border border-[var(--border-default)] text-xs font-bold text-[var(--accent-primary)] group-hover:scale-105 transition">
-                            4
-                        </span>
-                        <span class="text-[10px] font-semibold text-[var(--text-muted)] uppercase tracking-wider">04</span>
-                    </div>
-                    <h3 class="font-heading font-bold text-sm text-[var(--text-primary)] leading-tight">Interest</h3>
-                    <p class="text-[11px] text-[var(--text-secondary)] mt-1.5 leading-relaxed">Send quiet connection requests.</p>
-                </div>
-            </div>
-
-            <!-- Step 5: Family approval -->
-            <div class="rounded-[var(--radius-md)] bg-[var(--bg-surface)] border border-[var(--border-default)] p-4 flex flex-col justify-between hover:-translate-y-1 hover:border-[var(--accent-primary)] hover:shadow-xs transition duration-200 group">
-                <div>
-                    <div class="flex items-center justify-between mb-2.5">
-                        <span class="flex h-7 w-7 items-center justify-center rounded-full bg-[var(--accent-subtle)] border border-[var(--border-default)] text-xs font-bold text-[var(--accent-primary)] group-hover:scale-105 transition">
-                            5
-                        </span>
-                        <span class="text-[10px] font-semibold text-[var(--text-muted)] uppercase tracking-wider">05</span>
-                    </div>
-                    <h3 class="font-heading font-bold text-sm text-[var(--text-primary)] leading-tight">Family approval</h3>
-                    <p class="text-[11px] text-[var(--text-secondary)] mt-1.5 leading-relaxed">Parents review suitors first.</p>
-                </div>
-            </div>
-
-            <!-- Step 6: Chat -->
-            <div class="rounded-[var(--radius-md)] bg-[var(--bg-surface)] border border-[var(--border-default)] p-4 flex flex-col justify-between hover:-translate-y-1 hover:border-[var(--accent-primary)] hover:shadow-xs transition duration-200 group">
-                <div>
-                    <div class="flex items-center justify-between mb-2.5">
-                        <span class="flex h-7 w-7 items-center justify-center rounded-full bg-[var(--accent-subtle)] border border-[var(--border-default)] text-xs font-bold text-[var(--accent-primary)] group-hover:scale-105 transition">
-                            6
-                        </span>
-                        <span class="text-[10px] font-semibold text-[var(--text-muted)] uppercase tracking-wider">06</span>
-                    </div>
-                    <h3 class="font-heading font-bold text-sm text-[var(--text-primary)] leading-tight">Chat</h3>
-                    <p class="text-[11px] text-[var(--text-secondary)] mt-1.5 leading-relaxed">Chaperoned or direct messages.</p>
-                </div>
-            </div>
-
-            <!-- Step 7: Wedding -->
-            <div class="rounded-[var(--radius-md)] bg-[var(--color-surface)] border-2 border-[var(--color-accent)] p-4 flex flex-col justify-between hover:-translate-y-1 hover:border-[var(--color-accent)] hover:shadow-xs transition duration-200 group bg-[var(--color-accent-soft)]">
-                <div>
-                    <div class="flex items-center justify-between mb-2.5">
-                        <span class="flex h-7 w-7 items-center justify-center rounded-full bg-[var(--color-accent)] text-[var(--color-ink-dark)] text-xs font-bold shadow-2xs group-hover:scale-105 transition">
-                            7
-                        </span>
-                        <span class="text-[10px] font-bold text-[var(--color-accent)] uppercase tracking-wider">Milestone</span>
-                    </div>
-                    <h3 class="font-heading font-bold text-sm text-[var(--text-primary)] leading-tight flex items-center gap-1.5">
-                        <span>Wedding</span>
-                    </h3>
-                    <p class="text-[11px] text-[var(--text-secondary)] mt-1.5 leading-relaxed">Mangala Vivaha milestone blessing.</p>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- ================================================================= -->
-    <!-- 4. FEATURES AS VISUALS: MOCK PRODUCT SCREENS (1 LINE EACH)        -->
-    <!-- ================================================================= -->
-    <section class="border-y border-[var(--color-border)] bg-[var(--color-lotus-soft)] py-10 sm:py-14"
-             x-data="{ activeFeature: 'profile' }">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
-            <div class="max-w-2xl text-left space-y-1">
-                <p class="text-xs font-semibold uppercase tracking-wider text-[var(--color-primary)]">Core features</p>
-                <h2 class="font-heading text-2xl sm:text-3xl font-bold text-[var(--text-primary)]">
-                    Designed with your family in mind.
-                </h2>
-                <p class="text-xs sm:text-sm text-[var(--text-secondary)]">
-                    Thoughtful tools built for privacy, family respect, and genuine conversations.
-                </p>
-            </div>
-
-            <!-- Tab Buttons -->
-            <div class="flex flex-wrap gap-2 border-b border-[var(--border-default)] pb-3">
-                <button type="button"
-                        @click="activeFeature = 'profile'"
-                        :class="activeFeature === 'profile' ? 'bg-[var(--color-primary)] text-white shadow-2xs' : 'bg-[var(--color-surface)] text-[var(--text-secondary)] border border-[var(--border-default)] hover:bg-[var(--color-surface-alt)]'"
-                        class="px-4 py-2 rounded-[var(--radius-xs)] text-xs font-semibold transition cursor-pointer">
-                    Profile privacy
-                </button>
-                <button type="button"
-                        @click="activeFeature = 'family'"
-                        :class="activeFeature === 'family' ? 'bg-[var(--color-primary)] text-white shadow-2xs' : 'bg-[var(--color-surface)] text-[var(--text-secondary)] border border-[var(--border-default)] hover:bg-[var(--color-surface-alt)]'"
-                        class="px-4 py-2 rounded-[var(--radius-xs)] text-xs font-semibold transition cursor-pointer">
-                    Family dashboard
-                </button>
-                <button type="button"
-                        @click="activeFeature = 'chat'"
-                        :class="activeFeature === 'chat' ? 'bg-[var(--color-primary)] text-white shadow-2xs' : 'bg-[var(--color-surface)] text-[var(--text-secondary)] border border-[var(--border-default)] hover:bg-[var(--color-surface-alt)]'"
-                        class="px-4 py-2 rounded-[var(--radius-xs)] text-xs font-semibold transition cursor-pointer">
-                    Chaperoned chat
-                </button>
-            </div>
-
-            <!-- Feature Card 1: Profile Privacy -->
-            <div x-show="activeFeature === 'profile'"
-                 x-transition:enter="transition ease-out duration-200"
-                 x-transition:enter-start="opacity-0 translate-y-1"
-                 x-transition:enter-end="opacity-100 translate-y-0"
-                 class="rounded-[var(--radius-md)] bg-[var(--bg-surface)] border border-[var(--border-default)] p-6 space-y-4">
-                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                    <div class="space-y-1">
-                        <span class="text-[10px] font-bold uppercase tracking-wider text-[var(--accent-primary)]">Mock profile screen</span>
-                        <h3 class="font-heading text-lg font-bold text-[var(--text-primary)]">Soft Photo Veil</h3>
-                        <p class="text-xs text-[var(--text-secondary)]">Photos stay private until both sides agree.</p>
-                    </div>
-                    <span class="px-2.5 py-1 rounded-[var(--radius-xs)] text-xs font-semibold bg-[var(--accent-subtle)] text-[var(--accent-primary)] border border-[var(--border-default)]">
-                        Mutual Consent Only
-                    </span>
-                </div>
-                <div class="rounded border border-[var(--border-subtle)] bg-[var(--bg-subtle)] p-4 flex items-center justify-between text-xs text-[var(--text-secondary)]">
-                    <span>Photo visibility: <strong>Protected</strong></span>
-                    <span>Tradition: <strong>Theravada</strong></span>
-                    <span>Match: <strong>94% Dhamma score</strong></span>
-                </div>
-            </div>
-
-            <!-- Feature Card 2: Family Dashboard -->
-            <div x-show="activeFeature === 'family'"
-                 x-transition:enter="transition ease-out duration-200"
-                 x-transition:enter-start="opacity-0 translate-y-1"
-                 x-transition:enter-end="opacity-100 translate-y-0"
-                 class="rounded-[var(--radius-md)] bg-[var(--bg-surface)] border border-[var(--border-default)] p-6 space-y-4">
-                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                    <div class="space-y-1">
-                        <span class="text-[10px] font-bold uppercase tracking-wider text-[var(--accent-primary)]">Family representative view</span>
-                        <h3 class="font-heading text-lg font-bold text-[var(--text-primary)]">Parental Review Space</h3>
-                        <p class="text-xs text-[var(--text-secondary)]">Parents and elders review suitors on their own free dashboard.</p>
-                    </div>
-                    <span class="px-2.5 py-1 rounded-[var(--radius-xs)] text-xs font-semibold bg-[var(--color-primary-soft)] text-[var(--color-primary)] border border-[var(--color-primary)]/20">
-                        Free Family Account
-                    </span>
-                </div>
-                <div class="rounded border border-[var(--border-subtle)] bg-[var(--bg-subtle)] p-4 flex items-center justify-between text-xs text-[var(--text-secondary)]">
-                    <span>Linked seeker: <strong>Dilini</strong></span>
-                    <span>Proposals awaiting review: <strong>1 suitor</strong></span>
-                    <span>Action: <strong>Review &amp; Bless</strong></span>
-                </div>
-            </div>
-
-            <!-- Feature Card 3: Chaperoned Chat -->
-            <div x-show="activeFeature === 'chat'"
-                 x-transition:enter="transition ease-out duration-200"
-                 x-transition:enter-start="opacity-0 translate-y-1"
-                 x-transition:enter-end="opacity-100 translate-y-0"
-                 class="rounded-[var(--radius-md)] bg-[var(--bg-surface)] border border-[var(--border-default)] p-6 space-y-4">
-                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                    <div class="space-y-1">
-                        <span class="text-[10px] font-bold uppercase tracking-wider text-[var(--accent-primary)]">Respectful messaging</span>
-                        <h3 class="font-heading text-lg font-bold text-[var(--text-primary)]">Contact Info Shield</h3>
-                        <p class="text-xs text-[var(--text-secondary)]">Direct conversations open only after mutual consent and family blessing.</p>
-                    </div>
-                    <span class="px-2.5 py-1 rounded-[var(--radius-xs)] text-xs font-semibold bg-[var(--color-accent-soft)] text-[var(--color-accent)] border border-[var(--color-accent)]/30">
-                        Shield Active
-                    </span>
-                </div>
-                <div class="rounded border border-[var(--border-subtle)] bg-[var(--bg-subtle)] p-4 flex items-center justify-between text-xs text-[var(--text-secondary)]">
-                    <span>Safety: <strong>Verified phone/email hidden</strong></span>
-                    <span>Mode: <strong>Chaperone optional</strong></span>
-                    <span>Status: <strong>Active conversation</strong></span>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- ================================================================= -->
-    <!-- 5. RECENT CANDIDATES: SCANNABLE PROFILE CARDS                     -->
-    <!-- ================================================================= -->
-    @if($recentProfiles->isNotEmpty())
-        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
-            <div class="flex items-center justify-between border-b border-[var(--border-default)] pb-3">
-                <div class="space-y-0.5">
-                    <h2 class="font-heading text-xl sm:text-2xl font-bold text-[var(--text-primary)]">Verified candidates</h2>
-                    <p class="text-xs text-[var(--text-secondary)]">Serious seekers ready for lifelong companionship.</p>
-                </div>
-                <a href="{{ route('discovery.index') }}" class="text-xs font-semibold text-[var(--accent-primary)] hover:underline">
-                    Browse all &rarr;
-                </a>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-                @foreach($recentProfiles as $profile)
-                    @php
-                        $loc = collect([$profile->city, $profile->country])->filter()->implode(', ');
-                    @endphp
-                    <article class="rounded-[var(--radius-md)] bg-[var(--bg-surface)] border border-[var(--border-default)] overflow-hidden shadow-xs hover:-translate-y-0.5 transition duration-200 flex flex-col justify-between">
+            <!-- Working Search & Discovery Vessel Directly in the Viewport -->
+            <div class="mt-10 sm:mt-12 pt-8 border-t border-[var(--color-border)]/80">
+                <form action="{{ route('discovery.index') }}" method="GET" class="bg-[var(--color-surface-alt)] border border-[var(--color-border)] p-4 sm:p-5 rounded-[10px] shadow-xs">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 items-end">
+                        
+                        <!-- Buddhist Tradition -->
                         <div>
-                            <!-- Photo with Privacy Veil -->
-                            <div class="relative h-48 bg-[var(--bg-subtle)] flex items-center justify-center overflow-hidden border-b border-[var(--border-subtle)]">
+                            <label for="search-tradition" class="block text-xs font-semibold uppercase tracking-wider text-[var(--text-secondary)] mb-1.5">
+                                Buddhist Tradition
+                            </label>
+                            <select id="search-tradition" name="tradition" class="w-full bg-[var(--color-surface)] border border-[var(--color-border)] rounded-[6px] px-3 py-2.5 text-sm text-[var(--text-primary)] focus:outline-none focus:ring-1 focus:ring-[var(--color-accent)]">
+                                <option value="">All Sacred Traditions</option>
+                                <option value="Theravada">Theravada Tradition</option>
+                                <option value="Mahayana">Mahayana Tradition</option>
+                                <option value="Vajrayana">Vajrayana Tradition</option>
+                                <option value="Zen">Zen / Chan Practice</option>
+                                <option value="Secular">Secular / Mindful Buddhist</option>
+                            </select>
+                        </div>
+
+                        <!-- Country of Residence -->
+                        <div>
+                            <label for="search-country" class="block text-xs font-semibold uppercase tracking-wider text-[var(--text-secondary)] mb-1.5">
+                                Region / Country
+                            </label>
+                            <select id="search-country" name="country" class="w-full bg-[var(--color-surface)] border border-[var(--color-border)] rounded-[6px] px-3 py-2.5 text-sm text-[var(--text-primary)] focus:outline-none focus:ring-1 focus:ring-[var(--color-accent)]">
+                                <option value="">Worldwide Diaspora</option>
+                                <option value="Sri Lanka">Sri Lanka</option>
+                                <option value="Thailand">Thailand</option>
+                                <option value="Myanmar">Myanmar</option>
+                                <option value="Nepal">Nepal</option>
+                                <option value="India">India</option>
+                                <option value="Bangladesh">Bangladesh</option>
+                                <option value="United States">United States</option>
+                                <option value="United Kingdom">United Kingdom</option>
+                                <option value="Australia">Australia</option>
+                                <option value="Canada">Canada</option>
+                            </select>
+                        </div>
+
+                        <!-- Dhamma Practice Filter -->
+                        <div>
+                            <label for="search-practice" class="block text-xs font-semibold uppercase tracking-wider text-[var(--text-secondary)] mb-1.5">
+                                Spiritual Dedication
+                            </label>
+                            <select id="search-practice" name="practice_level" class="w-full bg-[var(--color-surface)] border border-[var(--color-border)] rounded-[6px] px-3 py-2.5 text-sm text-[var(--text-primary)] focus:outline-none focus:ring-1 focus:ring-[var(--color-accent)]">
+                                <option value="">Any Practice Observance</option>
+                                <option value="daily_meditation">Daily Meditation Practitioner</option>
+                                <option value="five_precepts">Panca Sila (Five Precepts) Observer</option>
+                                <option value="temple_uposatha">Uposatha &amp; Temple Active</option>
+                                <option value="vegetarian">Mindful Vegetarian / Ahimsa</option>
+                            </select>
+                        </div>
+
+                        <!-- Search Button -->
+                        <div>
+                            <button type="submit"
+                                    class="w-full min-h-[44px] px-5 inline-flex items-center justify-center font-serif font-bold text-sm rounded-[6px] bg-[var(--color-primary)] hover:bg-[var(--color-primary-hover)] text-white transition duration-200">
+                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+                                Search Biodata
+                            </button>
+                        </div>
+
+                    </div>
+                </form>
+
+                <!-- Representative Pathway Link -->
+                <div class="mt-3 text-center">
+                    <span class="text-xs text-[var(--text-secondary)]">
+                        Acting as a parent, elder, or guardian?
+                        <a href="{{ route('register') }}?role=wali" class="text-[var(--color-primary)] font-semibold underline hover:text-[var(--color-accent-hover)] transition">
+                            Register as a Kalyāṇa-Mitta Family Mentor (100% Free)
+                        </a>
+                    </span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- 2. FOUR SACRED PILLARS OF GLOBAL VIVAHA (EDITORIAL CHRONICLE)    -->
+    <!-- ================================================================= -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="space-y-10">
+
+            <div class="max-w-2xl space-y-2">
+                <h2 class="font-heading text-2xl sm:text-3xl font-bold text-[var(--text-primary)]">
+                    Principles of an auspicious marriage.
+                </h2>
+                <p class="text-sm sm:text-base text-[var(--text-secondary)] leading-relaxed">
+                    Designed from first principles for lifelong companionship rather than casual amusement or commercial exploitation.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+
+                <!-- Pillar 1: Dhamma-Weighted Compatibility -->
+                <div class="vivaha-frame p-6 sm:p-8 rounded-[12px] space-y-3 bg-[var(--color-surface)] border border-[var(--color-border)]">
+                    <div class="w-10 h-10 rounded-[8px] bg-[var(--color-primary-soft)] text-[var(--color-primary)] flex items-center justify-center">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v18m-9-9h18M5.636 5.636l12.728 12.728M18.364 5.636L5.636 18.364"/></svg>
+                    </div>
+                    <h3 class="font-heading font-bold text-lg text-[var(--text-primary)]">
+                        Dhamma-Weighted Compatibility
+                    </h3>
+                    <p class="text-sm text-[var(--text-secondary)] leading-relaxed">
+                        Match resonance is evaluated on spiritual dedication, daily meditation, adherence to the Five Precepts (<em>Panca Sila</em>), and mindful lifestyle—aligning couples on values that endure for life.
+                    </p>
+                </div>
+
+                <!-- Pillar 2: Kalyāṇa-Mitta Family Support -->
+                <div class="vivaha-frame p-6 sm:p-8 rounded-[12px] space-y-3 bg-[var(--color-surface)] border border-[var(--color-border)]">
+                    <div class="w-10 h-10 rounded-[8px] bg-[var(--color-accent-soft)] text-[var(--color-accent-hover)] flex items-center justify-center">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z"/></svg>
+                    </div>
+                    <h3 class="font-heading font-bold text-lg text-[var(--text-primary)]">
+                        Kalyāṇa-Mitta Family Mentorship
+                    </h3>
+                    <p class="text-sm text-[var(--text-secondary)] leading-relaxed">
+                        Parents, respected elders, and trusted family mentors can participate with complete honor through a dedicated, free console to review proposals, bless suitors, and counsel candidates.
+                    </p>
+                </div>
+
+                <!-- Pillar 3: Lotus Privacy Shield -->
+                <div class="vivaha-frame p-6 sm:p-8 rounded-[12px] space-y-3 bg-[var(--color-surface)] border border-[var(--color-border)]">
+                    <div class="w-10 h-10 rounded-[8px] bg-[var(--color-lotus-soft)] text-[var(--color-primary)] flex items-center justify-center">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"/></svg>
+                    </div>
+                    <h3 class="font-heading font-bold text-lg text-[var(--text-primary)]">
+                        Lotus Privacy Shield
+                    </h3>
+                    <p class="text-sm text-[var(--text-secondary)] leading-relaxed">
+                        Portraits are softly blurred server-side and contact details stay completely masked until mutual interest and explicit photo release are verified by both candidates.
+                    </p>
+                </div>
+
+                <!-- Pillar 4: Single Marriage Pass -->
+                <div class="vivaha-frame p-6 sm:p-8 rounded-[12px] space-y-3 bg-[var(--color-surface)] border border-[var(--color-border)]">
+                    <div class="w-10 h-10 rounded-[8px] bg-[var(--color-primary-soft)] text-[var(--color-primary)] flex items-center justify-center">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 14.25l6-6m4.5-3.493V21.75l-3.75-1.5-3.75 1.5-3.75-1.5-3.75 1.5V4.257c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0c1.1.128 1.907 1.077 1.907 2.185z"/></svg>
+                    </div>
+                    <h3 class="font-heading font-bold text-lg text-[var(--text-primary)]">
+                        Single Marriage Pass • No Recurring Traps
+                    </h3>
+                    <p class="text-sm text-[var(--text-secondary)] leading-relaxed">
+                        Commercial dating sites profit from keeping members single with endless monthly subscriptions. Global Vivaha charges a single, one-time pass fee that remains active until your wedding celebration.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- 3. FEATURED SEEKER BIODATA SCROLL                                 -->
+    <!-- ================================================================= -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="space-y-8">
+
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+                <div class="space-y-1">
+                    <h2 class="font-heading text-2xl sm:text-3xl font-bold text-[var(--text-primary)]">
+                        Recent verified biodata.
+                    </h2>
+                    <p class="text-sm text-[var(--text-secondary)]">
+                        Every profile verified with national ID and spiritual commitments.
+                    </p>
+                </div>
+                <div>
+                    <a href="{{ route('discovery.index') }}" class="font-serif font-bold text-sm text-[var(--color-primary)] hover:text-[var(--color-accent-hover)] transition inline-flex items-center gap-1.5">
+                        <span>View all candidate profiles</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Profile Cards Display -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                @forelse($recentProfiles as $profile)
+                    <div class="vivaha-frame rounded-[12px] bg-[var(--color-surface)] border border-[var(--color-border)] p-5 space-y-4 hover:-translate-y-1 transition duration-200">
+                        
+                        <!-- Top Row: Avatar & Verified Badge -->
+                        <div class="flex items-center gap-3">
+                            <div class="relative w-14 h-14 rounded-full bg-[var(--color-primary-soft)] border border-[var(--color-border)] flex items-center justify-center overflow-hidden shrink-0">
                                 @if($profile->primaryPhoto)
-                                    <img src="{{ $profile->primaryPhoto->displayUrl() }}" alt="{{ $profile->user->name }}" class="w-full h-full object-cover filter blur-[6px] scale-105" loading="lazy">
+                                    <img src="{{ route('photos.view', $profile->primaryPhoto) }}" alt="{{ $profile->user->name }}" class="w-full h-full object-cover photo-blur">
                                 @else
-                                    <div class="w-12 h-12 rounded-full bg-[var(--bg-surface)] border border-[var(--border-default)] flex items-center justify-center font-heading text-base font-bold text-[var(--accent-primary)]">
-                                        {{ strtoupper(substr($profile->user->name, 0, 1)) }}
-                                    </div>
+                                    <span class="font-serif font-bold text-base text-[var(--color-primary)]">
+                                        {{ strtoupper(substr($profile->user->name, 0, 2)) }}
+                                    </span>
                                 @endif
-                                <div class="absolute bottom-2 inset-x-2 px-2 py-1 rounded bg-black/60 backdrop-blur-xs text-white text-[10px] flex items-center justify-between">
-                                    <span>Private photo</span>
+                                <div class="absolute inset-0 bg-black/15 backdrop-blur-[1px] flex items-center justify-center" title="Lotus Privacy Shield Active">
+                                    <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+                                </div>
+                            </div>
+                            <div class="min-w-0 flex-1">
+                                <div class="flex items-center gap-1.5">
+                                    <h3 class="font-heading font-bold text-base text-[var(--text-primary)] truncate">
+                                        {{ $profile->user->name }}
+                                    </h3>
                                     @if($profile->user->is_verified)
-                                        <span class="inline-flex items-center gap-0.5 text-[var(--color-primary)] font-semibold"><svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>Verified</span>
+                                        <svg class="w-4 h-4 text-[var(--color-accent)] shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
                                     @endif
                                 </div>
-                            </div>
-
-                            <!-- Details -->
-                            <div class="p-4 space-y-1.5">
-                                <p class="text-[10px] font-semibold uppercase tracking-wider text-[var(--accent-primary)]">
-                                    {{ ucfirst(str_replace('_', ' ', $profile->tradition ?? 'Buddhist')) }}
+                                <p class="text-xs text-[var(--text-secondary)]">
+                                    {{ $profile->age ? $profile->age.' yrs' : 'Adult' }} • {{ $profile->country_of_residence ?? 'Worldwide' }}
                                 </p>
-                                <h3 class="font-heading text-base font-bold text-[var(--text-primary)] truncate">
-                                    {{ $profile->user->name }}, {{ $profile->user->age }}
-                                </h3>
-                                <p class="text-xs text-[var(--text-secondary)] truncate">
-                                    {{ $profile->occupation ?: 'Professional' }}{{ $loc ? ' &bull; ' . $loc : '' }}
-                                </p>
-                                @if($profile->about_me)
-                                    <p class="text-xs text-[var(--text-muted)] line-clamp-2 italic pt-1">
-                                        &ldquo;{{ Str::limit($profile->about_me, 70) }}&rdquo;
-                                    </p>
-                                @endif
                             </div>
                         </div>
 
-                        <div class="p-4 pt-0">
-                            <a href="{{ route('discovery.show', $profile->user_id) }}" class="btn-secondary w-full text-center text-xs !py-2 block">
-                                View profile &rarr;
+                        <!-- Biodata Summary -->
+                        <div class="space-y-1.5 text-xs text-[var(--text-secondary)] border-t border-b border-[var(--color-border)] py-2.5">
+                            <div class="flex justify-between">
+                                <span class="text-[var(--text-muted)]">Tradition:</span>
+                                <span class="font-semibold text-[var(--text-primary)]">{{ $profile->buddhist_tradition ?? 'Buddhist' }}</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-[var(--text-muted)]">Profession:</span>
+                                <span class="font-semibold text-[var(--text-primary)] truncate max-w-[130px]">{{ $profile->profession ?? 'Professional' }}</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-[var(--text-muted)]">Precepts:</span>
+                                <span class="font-semibold text-[var(--color-accent-hover)]">Panca Sila Observer</span>
+                            </div>
+                        </div>
+
+                        <!-- Action Link -->
+                        <div>
+                            <a href="{{ route('profile.show', $profile->user_id) }}"
+                               class="w-full min-h-[38px] px-4 inline-flex items-center justify-center font-serif font-bold text-xs rounded-[6px] bg-[var(--color-surface-alt)] hover:bg-[var(--color-primary)] hover:text-white text-[var(--color-primary)] border border-[var(--color-border)] transition duration-200">
+                                View Mindful Biodata
                             </a>
                         </div>
-                    </article>
-                @endforeach
+
+                    </div>
+                @empty
+                    <div class="col-span-full vivaha-frame p-8 text-center text-sm text-[var(--text-secondary)]">
+                        Biodata profiles are actively being verified. Register your profile to be blessed among the first seekers.
+                    </div>
+                @endforelse
             </div>
-        </section>
-    @endif
+
+        </div>
+    </section>
 
     <!-- ================================================================= -->
-    <!-- 6. SUCCESS STORIES: REAL VISUAL COUPLE CARDS                      -->
+    <!-- 4. SINGLE MARRIAGE PASS CHARTER (PRICING INTEGRITY)               -->
     <!-- ================================================================= -->
-    <section id="stories" class="border-y border-[var(--color-border)] bg-[var(--color-accent-soft)] py-10 sm:py-14">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
-            <div class="max-w-2xl text-left space-y-1">
-                <p class="text-xs font-semibold uppercase tracking-wider text-[var(--accent-primary)]">Real stories</p>
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" id="pricing-charter">
+        <div class="vivaha-frame rounded-[16px] bg-[var(--color-surface)] border border-[var(--color-border)] p-6 sm:p-12 space-y-10">
+
+            <div class="text-center max-w-2xl mx-auto space-y-2">
                 <h2 class="font-heading text-2xl sm:text-3xl font-bold text-[var(--text-primary)]">
-                    Couples who met with patience.
+                    Single Marriage Pass • One-Time Blessing
                 </h2>
-                <p class="text-xs sm:text-sm text-[var(--text-secondary)]">
-                    Real marriages blessed by families across the global Buddhist diaspora.
+                <p class="text-sm sm:text-base text-[var(--text-secondary)]">
+                    Conventional dating platforms profit when users stay single. Global Vivaha aligns solely with your union: pay once, remain fully blessed until marriage.
                 </p>
             </div>
 
-            <!-- Couple Cards Grid (Horizontal scroll on mobile) -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+            <!-- Pricing Tier Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
-                <!-- Story 1 -->
-                <article class="rounded-[var(--radius-md)] bg-[var(--bg-surface)] border border-[var(--border-default)] p-5 space-y-3 flex flex-col justify-between hover:-translate-y-0.5 transition duration-200">
-                    <div class="space-y-2">
-                        <div class="flex items-center justify-between border-b border-[var(--border-subtle)] pb-2">
-                            <div>
-                                <h3 class="font-heading font-bold text-sm text-[var(--text-primary)]">Anoma &amp; Dipankar</h3>
-                                <p class="text-[11px] text-[var(--text-muted)]">Chittagong, Bangladesh</p>
-                            </div>
-                            <span class="text-[10px] font-semibold px-2 py-0.5 rounded bg-[var(--bg-subtle)] text-[var(--text-secondary)] border border-[var(--border-default)]">
-                                Married Nov 2024
-                            </span>
-                        </div>
-                        <p class="text-xs text-[var(--text-secondary)] leading-relaxed">
-                            &ldquo;Our parents spoke first through the family representative dashboard. Global Maitri made our introduction feel unhurried and dignified.&rdquo;
-                        </p>
-                    </div>
-                    <p class="text-[11px] text-[var(--accent-primary)] font-serif-accent italic">
-                        Theravada &bull; Barua Buddhist tradition
-                    </p>
-                </article>
-
-                <!-- Story 2 -->
-                <article class="rounded-[var(--radius-md)] bg-[var(--bg-surface)] border border-[var(--border-default)] p-5 space-y-3 flex flex-col justify-between hover:-translate-y-0.5 transition duration-200">
-                    <div class="space-y-2">
-                        <div class="flex items-center justify-between border-b border-[var(--border-subtle)] pb-2">
-                            <div>
-                                <h3 class="font-heading font-bold text-sm text-[var(--text-primary)]">Sujata &amp; Piyadasa</h3>
-                                <p class="text-[11px] text-[var(--text-muted)]">Colombo &amp; Sydney</p>
-                            </div>
-                            <span class="text-[10px] font-semibold px-2 py-0.5 rounded bg-[var(--bg-subtle)] text-[var(--text-secondary)] border border-[var(--border-default)]">
-                                Married Feb 2025
-                            </span>
-                        </div>
-                        <p class="text-xs text-[var(--text-secondary)] leading-relaxed">
-                            &ldquo;The family dashboard let Sujata's mother in Kandy stay involved without any awkwardness. We are deeply grateful for this kind space.&rdquo;
-                        </p>
-                    </div>
-                    <p class="text-[11px] text-[var(--accent-primary)] font-serif-accent italic">
-                        Theravada &bull; Sinhalese diaspora
-                    </p>
-                </article>
-
-                <!-- Story 3 -->
-                <article class="rounded-[var(--radius-md)] bg-[var(--bg-surface)] border border-[var(--border-default)] p-5 space-y-3 flex flex-col justify-between hover:-translate-y-0.5 transition duration-200">
-                    <div class="space-y-2">
-                        <div class="flex items-center justify-between border-b border-[var(--border-subtle)] pb-2">
-                            <div>
-                                <h3 class="font-heading font-bold text-sm text-[var(--text-primary)]">Thida &amp; Kyaw</h3>
-                                <p class="text-[11px] text-[var(--text-muted)]">Yangon &amp; Bangkok</p>
-                            </div>
-                            <span class="text-[10px] font-semibold px-2 py-0.5 rounded bg-[var(--bg-subtle)] text-[var(--text-secondary)] border border-[var(--border-default)]">
-                                Married Oct 2024
-                            </span>
-                        </div>
-                        <p class="text-xs text-[var(--text-secondary)] leading-relaxed">
-                            &ldquo;Our photos remained private until we had spoken for several weeks. May all seekers find such companionship.&rdquo;
-                        </p>
-                    </div>
-                    <p class="text-[11px] text-[var(--accent-primary)] font-serif-accent italic">
-                        Theravada &bull; Myanmar &amp; Thai community
-                    </p>
-                </article>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- ================================================================= -->
-    <!-- 7. FAIR PRICING: SINGLE MARRIAGE PASS (NEVER MONTHLY BILLING)     -->
-    <!-- ================================================================= -->
-    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
-        <div class="max-w-2xl text-left space-y-1">
-            <p class="text-xs font-semibold uppercase tracking-wider text-[var(--accent-primary)]">Fair pricing</p>
-            <h2 class="font-heading text-2xl sm:text-3xl font-bold text-[var(--text-primary)]">
-                Single Marriage Pass.
-            </h2>
-            <p class="text-xs sm:text-sm text-[var(--text-secondary)]">
-                Pay once, active until your wedding blessing. Never monthly subscriptions.
-            </p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-5 items-stretch">
-            @foreach($plans as $plan)
-                @php
-                    $isFree = $plan->isFree();
-                    $isPopular = (bool) $plan->is_popular;
-                @endphp
-                <div class="rounded-[var(--radius-md)] p-6 {{ $isPopular ? 'border-2 border-[var(--accent-primary)] bg-[var(--bg-surface)] shadow-sm' : 'border border-[var(--border-default)] bg-[var(--bg-subtle)]' }} flex flex-col justify-between">
-                    <div>
-                        <span class="text-[10px] font-semibold uppercase tracking-wider {{ $isFree ? 'text-[var(--text-muted)]' : 'text-[var(--accent-primary)]' }}">
-                            {{ $isFree ? 'Free Forever' : ($isPopular ? 'Most Chosen' : 'Extended Support') }}
-                        </span>
-
-                        <h3 class="font-heading text-base font-bold text-[var(--text-primary)] mt-1">{{ $plan->name }}</h3>
-                        <p class="text-xs text-[var(--text-secondary)] mt-0.5">{{ $plan->description }}</p>
-
-                        <div class="my-4 border-y border-[var(--border-subtle)] py-3">
-                            @if($isFree)
-                                <div class="flex items-baseline gap-1">
-                                    <span class="font-heading text-2xl font-bold text-[var(--text-primary)]">$0</span>
-                                    <span class="text-xs text-[var(--text-muted)]">forever free</span>
-                                </div>
-                            @else
-                                <div class="flex items-baseline gap-2">
-                                    <span class="font-heading text-2xl font-bold text-[var(--text-primary)]">${{ number_format($plan->monthly_price, 2) }}</span>
-                                    <span class="text-[10px] font-semibold px-2 py-0.5 rounded bg-[var(--accent-subtle)] text-[var(--accent-primary)] border border-[var(--border-default)]">
-                                        Pay 1-Time
-                                    </span>
-                                </div>
-                                <p class="text-[11px] text-[var(--text-muted)] mt-1">
-                                    Active Until Confirmed Mangala Vivaha. No recurring deductions.
-                                </p>
-                            @endif
-                        </div>
-
-                        <ul class="space-y-1.5 text-xs text-[var(--text-secondary)]">
-                            <li class="flex items-center gap-2">
-                                <svg class="w-3.5 h-3.5 text-[var(--accent-primary)] shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-                                <span>{{ $plan->isUnlimitedViews() ? 'Unlimited profile views' : $plan->daily_profile_views . ' daily views' }}</span>
-                            </li>
-                            <li class="flex items-center gap-2">
-                                <svg class="w-3.5 h-3.5 text-[var(--accent-primary)] shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-                                <span>Family representative support</span>
-                            </li>
-                            <li class="flex items-center gap-2">
-                                <svg class="w-3.5 h-3.5 text-[var(--accent-primary)] shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-                                <span>Default photo privacy</span>
-                            </li>
+                <!-- Tier 1: Free Seeker Introduction -->
+                <div class="rounded-[12px] bg-[var(--color-surface-alt)] border border-[var(--color-border)] p-6 space-y-5 flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <h3 class="font-heading font-bold text-lg text-[var(--text-primary)]">Free Seeker</h3>
+                        <p class="text-xs text-[var(--text-secondary)]">Complete biodata setup, verified badge, and receiving matrimonial proposals.</p>
+                        <div class="text-2xl font-bold font-serif text-[var(--text-primary)]">$0 <span class="text-xs font-normal text-[var(--text-muted)] font-sans">Forever</span></div>
+                        <ul class="text-xs text-[var(--text-secondary)] space-y-2 pt-2">
+                            <li class="flex items-center gap-2">✓ Verified seeker badge</li>
+                            <li class="flex items-center gap-2">✓ Lotus photo privacy veil</li>
+                            <li class="flex items-center gap-2">✓ Receive proposal requests</li>
+                            <li class="flex items-center gap-2">✓ 1 proposal dispatch per week</li>
                         </ul>
                     </div>
-
-                    <div class="mt-5 pt-3 border-t border-[var(--border-subtle)]">
-                        @if($isFree)
-                            <a href="{{ route('register') }}" class="btn-secondary w-full text-center text-xs !py-2 block">
-                                Create free profile
-                            </a>
-                        @else
-                            <a href="{{ route('subscription.checkout', $plan->slug) }}" class="btn-primary w-full text-center text-xs !py-2 block">
-                                Choose {{ trim(Str::before($plan->name, '(')) ?: $plan->name }} &rarr;
-                            </a>
-                        @endif
+                    <div>
+                        <a href="{{ route('register') }}" class="w-full min-h-[42px] inline-flex items-center justify-center font-serif font-bold text-xs rounded-[6px] bg-[var(--color-surface)] text-[var(--text-primary)] border border-[var(--color-border)] hover:bg-[var(--color-border)] transition">
+                            Create Free Profile
+                        </a>
                     </div>
                 </div>
-            @endforeach
-        </div>
-    </section>
 
-    <!-- ================================================================= -->
-    <!-- 8. COMMON QUESTIONS (FAQ)                                         -->
-    <!-- ================================================================= -->
-    <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6" x-data="{ activeFaq: null }">
-        <div class="text-left space-y-1">
-            <p class="text-xs font-semibold uppercase tracking-wider text-[var(--accent-primary)]">Questions</p>
-            <h2 class="font-heading text-2xl sm:text-3xl font-bold text-[var(--text-primary)]">
-                Clear answers to common questions.
-            </h2>
-        </div>
-
-        <div class="space-y-2.5">
-            <div class="rounded-[var(--radius-md)] bg-[var(--bg-surface)] border border-[var(--border-default)] overflow-hidden">
-                <button type="button"
-                        @click="activeFaq = (activeFaq === 1 ? null : 1)"
-                        class="w-full p-4 text-left font-semibold text-xs sm:text-sm text-[var(--text-primary)] flex items-center justify-between gap-4 cursor-pointer">
-                    <span>How does the Family Representative system work?</span>
-                    <span class="text-[var(--text-muted)] text-sm transition transform" :class="activeFaq === 1 ? 'rotate-180' : ''">&darr;</span>
-                </button>
-                <div x-show="activeFaq === 1" x-collapse class="px-4 pb-4 text-xs text-[var(--text-secondary)] leading-relaxed border-t border-[var(--border-subtle)] pt-3">
-                    Candidates can link a parent or elder. Representatives get their own free dashboard to review proposals and give blessings.
+                <!-- Tier 2: Single Marriage Pass (Featured) -->
+                <div class="rounded-[12px] bg-[var(--color-surface)] border-2 border-[var(--color-accent)] p-6 space-y-5 flex flex-col justify-between shadow-md relative">
+                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full bg-[var(--color-accent)] text-white text-[10px] font-bold uppercase tracking-wider">
+                        Most Auspicious Choice
+                    </div>
+                    <div class="space-y-3">
+                        <h3 class="font-heading font-bold text-lg text-[var(--color-primary)]">Single Marriage Pass</h3>
+                        <p class="text-xs text-[var(--text-secondary)]">Full matrimonial privileges until your confirmed wedding milestone blessing.</p>
+                        <div class="text-2xl font-bold font-serif text-[var(--color-primary)]">$29 <span class="text-xs font-normal text-[var(--text-muted)] font-sans">One-Time Fee Only</span></div>
+                        <ul class="text-xs text-[var(--text-secondary)] space-y-2 pt-2">
+                            <li class="flex items-center gap-2">✓ Unlimited proposal dispatches</li>
+                            <li class="flex items-center gap-2">✓ Priority Dhamma compatibility rank</li>
+                            <li class="flex items-center gap-2">✓ Direct real-time conversation access</li>
+                            <li class="flex items-center gap-2">✓ Valid until confirmed Vivaha</li>
+                            <li class="flex items-center gap-2">✓ <strong>No auto-billing or recurring fees</strong></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <a href="{{ route('subscription.pricing') }}" class="w-full min-h-[42px] inline-flex items-center justify-center font-serif font-bold text-xs rounded-[6px] bg-[var(--color-primary)] text-white hover:bg-[var(--color-primary-hover)] transition">
+                            Select Marriage Pass
+                        </a>
+                    </div>
                 </div>
-            </div>
 
-            <div class="rounded-[var(--radius-md)] bg-[var(--bg-surface)] border border-[var(--border-default)] overflow-hidden">
-                <button type="button"
-                        @click="activeFaq = (activeFaq === 2 ? null : 2)"
-                        class="w-full p-4 text-left font-semibold text-xs sm:text-sm text-[var(--text-primary)] flex items-center justify-between gap-4 cursor-pointer">
-                    <span>Are photos visible to the public or searchable?</span>
-                    <span class="text-[var(--text-muted)] text-sm transition transform" :class="activeFaq === 2 ? 'rotate-180' : ''">&darr;</span>
-                </button>
-                <div x-show="activeFaq === 2" x-collapse class="px-4 pb-4 text-xs text-[var(--text-secondary)] leading-relaxed border-t border-[var(--border-subtle)] pt-3">
-                    No. Photos are blurred by default and only become visible after mutual agreement. They are never indexed by search engines.
+                <!-- Tier 3: Kalyāṇa-Mitta Family Mentor -->
+                <div class="rounded-[12px] bg-[var(--color-surface-alt)] border border-[var(--color-border)] p-6 space-y-5 flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <h3 class="font-heading font-bold text-lg text-[var(--text-primary)]">Family Representative</h3>
+                        <p class="text-xs text-[var(--text-secondary)]">Dedicated mentor console for parents and guardians to guide and bless suitors.</p>
+                        <div class="text-2xl font-bold font-serif text-[var(--text-primary)]">Free <span class="text-xs font-normal text-[var(--text-muted)] font-sans">100% Complimentary</span></div>
+                        <ul class="text-xs text-[var(--text-secondary)] space-y-2 pt-2">
+                            <li class="flex items-center gap-2">✓ Link candidate son/daughter/ward</li>
+                            <li class="flex items-center gap-2">✓ Collaborative proposal reviews</li>
+                            <li class="flex items-center gap-2">✓ Family representative badge</li>
+                            <li class="flex items-center gap-2">✓ Elder consultation guidance</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <a href="{{ route('register') }}?role=wali" class="w-full min-h-[42px] inline-flex items-center justify-center font-serif font-bold text-xs rounded-[6px] bg-[var(--color-surface)] text-[var(--text-primary)] border border-[var(--color-border)] hover:bg-[var(--color-border)] transition">
+                            Register as Family Mentor
+                        </a>
+                    </div>
                 </div>
+
             </div>
 
-            <div class="rounded-[var(--radius-md)] bg-[var(--bg-surface)] border border-[var(--border-default)] overflow-hidden">
-                <button type="button"
-                        @click="activeFaq = (activeFaq === 3 ? null : 3)"
-                        class="w-full p-4 text-left font-semibold text-xs sm:text-sm text-[var(--text-primary)] flex items-center justify-between gap-4 cursor-pointer">
-                    <span>Is there any caste filter on Global Maitri?</span>
-                    <span class="text-[var(--text-muted)] text-sm transition transform" :class="activeFaq === 3 ? 'rotate-180' : ''">&darr;</span>
-                </button>
-                <div x-show="activeFaq === 3" x-collapse class="px-4 pb-4 text-xs text-[var(--text-secondary)] leading-relaxed border-t border-[var(--border-subtle)] pt-3">
-                    No. Caste is completely eliminated in accordance with the Buddha's teachings on universal equality.
-                </div>
-            </div>
-
-            <div class="rounded-[var(--radius-md)] bg-[var(--bg-surface)] border border-[var(--border-default)] overflow-hidden">
-                <button type="button"
-                        @click="activeFaq = (activeFaq === 4 ? null : 4)"
-                        class="w-full p-4 text-left font-semibold text-xs sm:text-sm text-[var(--text-primary)] flex items-center justify-between gap-4 cursor-pointer">
-                    <span>What is the Single Marriage Pass?</span>
-                    <span class="text-[var(--text-muted)] text-sm transition transform" :class="activeFaq === 4 ? 'rotate-180' : ''">&darr;</span>
-                </button>
-                <div x-show="activeFaq === 4" x-collapse class="px-4 pb-4 text-xs text-[var(--text-secondary)] leading-relaxed border-t border-[var(--border-subtle)] pt-3">
-                    A one-time pass that stays active until your wedding blessing. Zero monthly fees or automatic renewals.
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ================================================================= -->
-    <!-- 9. CLOSING CTA BAND (SEAMLESS WITH FOOTER, NO GAP)                -->
-    <!-- ================================================================= -->
-    <section class="section--dark relative overflow-hidden text-center border-t border-[var(--color-border)]/30 py-10 sm:py-14"
-             style="background: linear-gradient(135deg, var(--color-ink-dark) 0%, var(--color-ink-darker) 100%); margin-bottom: 0;">
-
-        <!-- Low-opacity (6-8%) Lotus Line-Art in Corner (White Strokes on Dark) -->
-        <div class="absolute right-0 bottom-0 pointer-events-none opacity-[0.07] text-white translate-x-4 translate-y-4" aria-hidden="true">
-            <svg class="w-48 h-48 sm:w-64 sm:h-64" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.2">
-                <path d="M50 20 C46 36 44 48 50 68 C56 48 54 36 50 20 Z"/>
-                <path d="M50 34 C36 42 32 54 44 67 C48 55 49 44 50 34 Z"/>
-                <path d="M50 34 C64 42 68 54 56 67 C52 55 51 44 50 34 Z"/>
-                <path d="M46 48 C28 50 22 64 36 72 C42 64 45 56 46 48 Z"/>
-                <path d="M54 48 C72 50 78 64 64 72 C58 64 55 56 54 48 Z"/>
-                <path d="M26 72 C36 78 64 78 74 72 C68 82 32 82 26 72 Z"/>
-            </svg>
-        </div>
-
-        <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-5">
-            <h2 class="font-heading text-2xl sm:text-4xl font-bold text-white tracking-tight">
-                Kindness first. Companionship for life.
-            </h2>
-
-            <!-- 3 Trust Chips -->
-            <div class="flex flex-wrap items-center justify-center gap-2.5 pt-1">
-                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-[var(--radius-xs)] bg-white/10 text-xs font-medium text-[var(--text-secondary)] border border-white/15">
-                    <svg class="w-3.5 h-3.5 text-[var(--color-accent)]" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg>
-                    Verified profiles
-                </span>
-                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-[var(--radius-xs)] bg-white/10 text-xs font-medium text-[var(--text-secondary)] border border-white/15">
-                    <svg class="w-3.5 h-3.5 text-[var(--color-accent)]" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path stroke-linecap="round" stroke-linejoin="round" d="M22 21v-2a4 4 0 00-3-3.87"/><path stroke-linecap="round" stroke-linejoin="round" d="M16 3.13a4 4 0 010 7.75"/></svg>
-                    Family approval
-                </span>
-                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-[var(--radius-xs)] bg-white/10 text-xs font-medium text-[var(--text-secondary)] border border-white/15">
-                    <svg class="w-3.5 h-3.5 text-[var(--color-accent)]" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path stroke-linecap="round" stroke-linejoin="round" d="M7 11V7a5 5 0 0110 0v4"/></svg>
-                    Photos stay private
-                </span>
-            </div>
-
-            <p class="text-xs sm:text-sm text-[var(--text-secondary)] max-w-lg mx-auto">
-                No rush. Take your time to discover someone whose presence brings peace to your home.
-            </p>
-
-            <!-- Saffron-Gold Primary Button (48px) & Transparent Secondary Button (48px) -->
-            <div class="pt-2 flex flex-wrap items-center justify-center gap-3">
-                <a href="{{ route('register') }}"
-                   class="btn-primary min-h-[48px] px-8 inline-flex items-center justify-center font-semibold text-sm rounded-[var(--radius-sm)] shadow-xs transition active:scale-[0.98]">
-                    Create free profile
-                </a>
-                <a href="{{ route('how-it-works') }}"
-                   class="btn-secondary min-h-[48px] px-7 inline-flex items-center justify-center font-semibold text-sm rounded-[var(--radius-sm)] transition active:scale-[0.98]">
-                    How it works
-                </a>
-            </div>
-
-            <p class="text-[11px] text-[var(--text-muted)] italic pt-2">
-                &ldquo;Sabbe satta bhavantu sukhitatta &bull; May you be happy and well.&rdquo;
-            </p>
         </div>
     </section>
 
 </div>
 @endsection
-

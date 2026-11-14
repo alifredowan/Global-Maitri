@@ -1,12 +1,17 @@
 /**
- * Buddhist Color Symbolism Brand & Theme Tokens — Global Maitri
+ * Buddhist Sacred Vivaha Brand & Theme Tokens — Global Vivaha
+ *
+ * PALETTE: Vaidurya & Serkhang (Sacred Lapis Lazuli Indigo & Gilded Amber Gold)
  *
  * COLOR MEANING & DESIGN LOGIC:
- * - Blue = Maitri, loving-kindness (matches brand name). Primary color.
- * - Saffron/gold = monastic robes, wisdom, enlightenment. Accent color.
- * - Lotus pink = the lotus, purity of heart. Soft secondary tint.
- * - White/ivory = purity. Main background color.
- * - Crimson = blessings. Tiny accents only.
+ * - Vaidurya (Lapis Lazuli Indigo): Sacred Buddhist Medicine Buddha & wisdom lapis hue,
+ *   representing depth, commitment, clarity, and everlasting celestial vows. Primary brand anchor.
+ * - Serkhang (Gilded Amber Gold): Monastic monastery gold, auspicious Ashtamangala knot,
+ *   representing warmth, prosperity, illumination, and honor. Noble accent.
+ * - Forest Monastery Jade: The tranquility of Bodhi groves and sacred stupas. Grounding balance.
+ * - Lotus Coral: Pure heart, tender devotion (Metta), sacred petal accent.
+ * - Warm Mineral Chalk: Unbleached Himalayan stone paper / organic mineral ground.
+ * - Slate Lapis Ink: Grounded, high-contrast typography.
  *
  * All components consume these tokens; no hardcoded hex in templates.
  */
@@ -15,43 +20,45 @@
   /* =======================================================================
    * 1. CORE BUDDHIST PALETTE TOKENS (LIGHT MODE)
    * ======================================================================= */
-  --color-primary: #1F4E79;        /* Maitri blue (primary action, brand) */
-  --color-primary-hover: #173C5E;
-  --color-primary-soft: #E6EEF6;
+  --color-primary: #17263C;        /* Sacred Lapis Lazuli Indigo */
+  --color-primary-hover: #0F1B2C;
+  --color-primary-soft: #E8EEF5;
 
-  --color-ink-dark: #0E2A47;       /* Dark sections, footer, CTA band */
-  --color-ink-darker: #091D33;
+  --color-accent: #D49B35;         /* Serkhang Gilded Amber Gold */
+  --color-accent-hover: #B88022;
+  --color-accent-soft: #FAF3E6;
 
-  --color-accent: #C98A1B;         /* Saffron-gold (monastic robes, wisdom) */
-  --color-accent-hover: #A97212;
-  --color-accent-soft: #FBF1DC;
+  --color-jade: #1E4338;           /* Forest Monastery Jade */
+  --color-jade-hover: #16332A;
+  --color-jade-soft: #EAF2EE;
 
-  --color-lotus: #D9779A;          /* Lotus pink (illustrations & highlights, not body text) */
-  --color-lotus-soft: #FBEAF1;
+  --color-lotus: #C95A70;          /* Lotus Coral */
+  --color-lotus-soft: #F9ECF0;
 
-  --color-blessing: #B3261E;       /* Crimson (blessings, unread badges) */
+  --color-ink-dark: #17263C;       /* Grounded Lapis Slate Ink */
+  --color-ink-darker: #0D1622;
 
-  --color-bg: #FFFDF8;             /* Warm white (pure rice-paper/ivory base) */
+  --color-bg: #F5F3EC;             /* Warm Mineral Chalk */
   --color-surface: #FFFFFF;        /* Crisp card surface */
-  --color-surface-alt: #F7F3EA;    /* Muted warm sand */
+  --color-surface-alt: #EDEAE0;    /* Muted warm mineral sand scroll parchment */
 
-  --color-text: #1A1A1A;           /* Deep ink text */
-  --color-text-muted: #4B5563;     /* Muted body text */
-  --color-border: #E5DFD0;         /* Warm hairline border */
+  --color-text: #17263C;           /* Lapis Ink */
+  --color-text-muted: #536277;     /* Slate Indigo Muted */
+  --color-border: #DCD7C9;         /* Hairline mineral chalk border */
 
   /* Semantic status colors (disciplined, accessible) */
-  --color-success: #1E7F4F;
-  --color-success-bg: #EAF6F0;
-  --color-success-border: #BFE3D1;
-  --color-warning: #A15C00;
-  --color-warning-bg: #FDF6EB;
-  --color-warning-border: #F3DCB4;
-  --color-danger: #B3261E;
-  --color-danger-bg: #FDEEED;
-  --color-danger-border: #F4C4C1;
-  --color-info: var(--color-primary);
-  --color-info-bg: var(--color-primary-soft);
-  --color-info-border: #B6D2EC;
+  --color-success: #1E4338;
+  --color-success-bg: #EAF2EE;
+  --color-success-border: #C4DBD1;
+  --color-warning: #B88022;
+  --color-warning-bg: #FAF3E6;
+  --color-warning-border: #EED6AB;
+  --color-danger: #A32A3E;
+  --color-danger-bg: #FBEBED;
+  --color-danger-border: #F3BAC4;
+  --color-info: #17263C;
+  --color-info-bg: #E8EEF5;
+  --color-info-border: #C9D9E9;
 
   /* =======================================================================
    * 2. BACKWARD-COMPATIBLE SYSTEM MAPPINGS
@@ -61,32 +68,32 @@
   --bg-card: var(--color-surface);
   --bg-subtle: var(--color-surface-alt);
   --bg-muted: var(--color-surface-alt);
-  --bg-inset: #EDE7DC;
+  --bg-inset: #E5E1D4;
 
   --text-primary: var(--color-text);
   --text-secondary: var(--color-text-muted);
   --text-muted: var(--color-text-muted);
   --text-inverse: #FFFFFF;
 
-  --border-subtle: #ECE6D8;
+  --border-subtle: #E8E4D8;
   --border-default: var(--color-border);
-  --border-strong: #CEC4AF;
+  --border-strong: #C4BDAA;
 
   --accent-primary: var(--color-primary);
   --accent-hover: var(--color-primary-hover);
-  --accent-active: #122F4B;
+  --accent-active: #0A121D;
   --accent-subtle: var(--color-primary-soft);
-  --accent-subtle-hover: #D7E5F3;
-  --accent-border: #B6D2EC;
+  --accent-subtle-hover: #D8E4F0;
+  --accent-border: #C9D9E9;
   --accent-text: var(--color-primary);
   --accent-contrast: #FFFFFF;
 
   --saffron-gold: var(--color-accent);
   --secondary-primary: var(--color-accent);
   --secondary-hover: var(--color-accent-hover);
-  --secondary-active: #8A5B0D;
+  --secondary-active: #9A6916;
   --secondary-subtle: var(--color-accent-soft);
-  --secondary-border: #ECD5A5;
+  --secondary-border: #E8CF9F;
   --secondary-text: var(--color-accent-hover);
 
   /* Radii */
@@ -96,83 +103,69 @@
   --radius-lg: 14px;
   --radius-pill: 9999px;
 
-  /* Focus ring: 2px saffron outline with 2px offset */
+  /* Focus ring: 2px amber outline with 2px offset */
   --focus-ring: 0 0 0 2px var(--color-surface), 0 0 0 4px var(--color-accent);
   --focus-ring-offset: 2px;
 }
 
 /* =======================================================================
- * 3. DARK THEME TOKENS
+ * 3. DARK THEME TOKENS (Vaidurya Night Sanctuary)
  * ======================================================================= */
 .dark {
-  --color-bg: #0B1624;
-  --color-surface: #12233A;
-  --color-surface-alt: #172C47;
-  --color-text: #F2F2F2;
-  --color-text-muted: #B8C4D3;
-  --color-border: #243B5A;
+  --color-bg: #0D1622;             /* Deep Himalayan Night Sky */
+  --color-surface: #142030;        /* Deep Lapis Lacquer */
+  --color-surface-alt: #1C2B3E;    /* Muted Night Indigo */
 
-  --color-primary: #6FA3D8;        /* Lighter blue for dark background contrast */
-  --color-primary-hover: #8BB7E5;
-  --color-primary-soft: #152A42;
+  --color-primary: #7FAAE0;        /* Luminous Celestial Lapis */
+  --color-primary-hover: #8CB3E5;
+  --color-primary-soft: #1A283B;
 
-  --color-ink-dark: #0B1624;
-  --color-ink-darker: #060D17;
+  --color-ink-dark: #070B11;
+  --color-ink-darker: #04070B;
 
-  --color-accent: #E2B04F;         /* Lighter saffron for dark background */
-  --color-accent-hover: #F0C46A;
-  --color-accent-soft: #2F2715;
+  --color-accent: #E8B458;         /* Serkhang Butterlamp Gold */
+  --color-accent-hover: #F0C26F;
+  --color-accent-soft: #312716;
 
-  --color-lotus: #E6A0BC;
-  --color-lotus-soft: #351D28;
+  --color-jade: #4EA58B;
+  --color-jade-hover: #61B79E;
+  --color-jade-soft: #152E26;
 
-  --color-blessing: #E0534C;
+  --color-lotus: #E28095;
+  --color-lotus-soft: #381F27;
 
-  --color-success: #3EB378;
-  --color-success-bg: #0E291C;
-  --color-success-border: #1C5438;
-  --color-warning: #E2B04F;
-  --color-warning-bg: #2B210C;
-  --color-warning-border: #5C4316;
-  --color-danger: #E0534C;
-  --color-danger-bg: #2D1414;
-  --color-danger-border: #5A2727;
-  --color-info: var(--color-primary);
-  --color-info-bg: var(--color-primary-soft);
-  --color-info-border: #26466B;
+  --color-text: #F5F3EC;           /* Warm Mineral White */
+  --color-text-muted: #9BAFC4;     /* Slate Indigo Muted */
+  --color-border: #23354C;         /* Deep Lapis Border */
+
+  --border-subtle: #1B2A3E;
+  --border-default: var(--color-border);
+  --border-strong: #354D6C;
 
   --bg-canvas: var(--color-bg);
   --bg-surface: var(--color-surface);
   --bg-card: var(--color-surface);
   --bg-subtle: var(--color-surface-alt);
   --bg-muted: var(--color-surface-alt);
-  --bg-inset: #09131F;
+  --bg-inset: #09101A;
 
   --text-primary: var(--color-text);
   --text-secondary: var(--color-text-muted);
   --text-muted: var(--color-text-muted);
-  --text-inverse: #0B1624;
-
-  --border-subtle: #1C304A;
-  --border-default: var(--color-border);
-  --border-strong: #3A5B87;
 
   --accent-primary: var(--color-primary);
   --accent-hover: var(--color-primary-hover);
-  --accent-active: #4F86BE;
+  --accent-active: #9EC0EB;
   --accent-subtle: var(--color-primary-soft);
-  --accent-subtle-hover: #1D3A5C;
-  --accent-border: #26466B;
+  --accent-subtle-hover: #23364F;
+  --accent-border: #2F496B;
   --accent-text: var(--color-primary);
-  --accent-contrast: #0B1624;
 
-  --saffron-gold: var(--color-accent);
   --secondary-primary: var(--color-accent);
   --secondary-hover: var(--color-accent-hover);
-  --secondary-active: #C98A1B;
   --secondary-subtle: var(--color-accent-soft);
-  --secondary-border: #4D3D1D;
-  --secondary-text: var(--color-accent);
+  --secondary-border: #5A431F;
+  --secondary-text: var(--color-accent-hover);
 
   --focus-ring: 0 0 0 2px var(--color-surface), 0 0 0 4px var(--color-accent);
 }
